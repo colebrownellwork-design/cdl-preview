@@ -897,7 +897,23 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
     let paused = false, t0 = performance.now();
     el.addEventListener('mouseenter', () => paused = true); el.addEventListener('mouseleave', () => { paused = false; t0 = performance.now() - phase * 1000; });
     let phase = 0;
-    (function sway(now){ if (!reduce && !isStatic && !paused) { phase = (now - t0) / 1000; g.pointOfView({ lat: home.lat + Math.sin(phase / 9) * 4, lng: home.lng + Math.sin(phase / 14) * 22, altitude: home.altitude }, 0); } requestAnimationFrame(sway); })(t0);
+    // the U.S. stays semi-centred at all times: a small sway while idle, and a fence on how far a drag can take it
+    const fence = { lat: [14, 46], lng: [home.lng - 28, home.lng + 28] };
+    const clamp = (v, [a, b]) => Math.max(a, Math.min(b, v));
+    (function sway(now){
+      if (!reduce && !isStatic) {
+        const cur = g.pointOfView();
+        if (paused) { // user is looking or dragging: let them, but keep the U.S. in frame
+          const lat = clamp(cur.lat, fence.lat), lng = clamp(cur.lng, fence.lng);
+          if (lat !== cur.lat || lng !== cur.lng) g.pointOfView({ lat, lng, altitude: home.altitude }, 0);
+        } else { // idle: ease toward a slow sway around home
+          phase = (now - t0) / 1000;
+          const tgt = { lat: home.lat + Math.sin(phase / 9) * 3, lng: home.lng + Math.sin(phase / 14) * 12 };
+          g.pointOfView({ lat: cur.lat + (tgt.lat - cur.lat) * .06, lng: cur.lng + (tgt.lng - cur.lng) * .06, altitude: home.altitude }, 0);
+        }
+      }
+      requestAnimationFrame(sway);
+    })(t0);
     addEventListener('resize', () => g.width(w()).height(h()));
     const pp = qs.get('port'); if (pp !== null) { mouse = { x: stage.clientWidth * .52, y: stage.clientHeight * .42 }; showPort(US[+pp]); }
   })();
