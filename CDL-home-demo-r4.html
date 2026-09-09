@@ -229,9 +229,15 @@ main { position: relative; }
 .spine .ship .vessel { filter: drop-shadow(0 1.5px 1.5px rgba(21,44,73,.28)); }
 .spine .spine-wake { fill: none; stroke: rgba(174,187,208,.55); stroke-width: 10; stroke-linecap: round; filter: blur(2px); opacity: 0; transition: opacity .4s var(--ease); }
 .spine .ship.moving ~ .spine-wake, .spine .spine-wake.on { opacity: 1; }
-.spine .port { fill: var(--indigo); }
+.spine .port rect { fill: var(--light-gray-blue); }
 @media (max-width: 1180px) { .spine { display: none; } }
 
+
+
+/* route lane: on wide screens the chapters after the hero leave the left margin to the shipping line */
+@media (min-width: 1181px) { main > section:not(.hero) > .shell, main > section:not(.hero) .band > .shell { padding-left: 132px; } .routes .shell { padding-left: 132px; } }
+.spine .node text { transition: fill .4s var(--ease), opacity .25s var(--ease); }
+.spine .node.clear text { opacity: 0; }
 
 /* live counters */
 .live { padding: 0 0 96px; }
@@ -863,15 +869,15 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
     function build() {
       const mr = main.getBoundingClientRect(); const W = main.clientWidth, H = main.scrollHeight; svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
       const x = Math.max(28, (W - 1360) / 2 + 6);
-      stops = [...main.querySelectorAll('[data-chapter]')].map(s => { const r = s.getBoundingClientRect(); const isHero = s.id === 'hero'; return { el: s, n: s.dataset.chapter, label: s.dataset.chapterLabel, x, y: r.top - mr.top + (s.id === 'routes' ? 120 : -22), hero: false }; });
+      stops = [...main.querySelectorAll('[data-chapter]')].map(s => { const r = s.getBoundingClientRect(); const isHero = s.id === 'hero'; return { el: s, n: s.dataset.chapter, label: s.dataset.chapterLabel, x, y: r.top - mr.top + (s.id === 'routes' ? 150 : -22), hero: false }; });
       if (stops.length < 2) return;
       let d = `M ${stops[0].x},${stops[0].y - 30} L ${stops[0].x},${stops[0].y}`;
       for (let i = 1; i < stops.length; i++) { const a = stops[i - 1], b = stops[i]; const bend = 34 * (i % 2 ? 1 : -1); const my = (a.y + b.y) / 2; d += ` C ${a.x + bend},${a.y + (b.y - a.y) * .35} ${b.x + bend},${my + (b.y - a.y) * .15} ${b.x},${b.y}`; }
       const last = stops[stops.length - 1]; d += ` L ${last.x},${last.y + 60}`;
       base.setAttribute('d', d); prog.setAttribute('d', d); total = prog.getTotalLength(); prog.style.strokeDasharray = total; prog.style.strokeDashoffset = total;
       nodesG.innerHTML = ''; stops.forEach(s => { const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'node' + (s.hero ? ' hero' : '')); g.setAttribute('transform', `translate(${s.x},${s.y})`);
-        g.innerHTML = `<circle class="dot" r="8"/><text x="20" y="4">${s.label}</text>`; nodesG.appendChild(g); s.g = g; });
-      const port = document.createElementNS(NS, 'circle'); port.setAttribute('class', 'port'); port.setAttribute('r', 4); port.setAttribute('cx', stops[0].x); port.setAttribute('cy', stops[0].y - 30); nodesG.appendChild(port);
+        g.innerHTML = `<circle class="dot" r="8"/><text x="30" y="-14">${s.label}</text>`; nodesG.appendChild(g); s.g = g; });
+      const port = document.createElementNS(NS, 'g'); port.setAttribute('class', 'port'); port.setAttribute('transform', `translate(${stops[0].x},${stops[0].y - 30})`); port.innerHTML = '<rect x="-26" y="-74" width="52" height="8" rx="2"/><rect x="-3" y="-66" width="6" height="26" rx="1"/>'; nodesG.appendChild(port);
       update(true);
     }
     function lenAt(y) { // path length at a given page y (search along the path)
@@ -883,11 +889,11 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
       target = Math.max(0, Math.min(total, lenAt(focusY)));
       if (isStatic) target = total * (qs.get('spine') ? +qs.get('spine') : .42);
       if (snap || reduce || isStatic) shown = target; else { const gap = target - shown; const step = Math.sign(gap) * Math.min(Math.abs(gap) * .06 + 1.2, 7); shown = Math.abs(gap) < 1.2 ? target : shown + step; }
-      prog.style.strokeDashoffset = total - shown; ship.style.opacity = shown > 2 ? 1 : 0;
+      prog.style.strokeDashoffset = total - shown; ship.style.opacity = 1;
       const pt = prog.getPointAtLength(shown), p2 = prog.getPointAtLength(Math.min(total, shown + 6)); const ang = Math.atan2(p2.y - pt.y, p2.x - pt.x) * 180 / Math.PI; const now = performance.now() / 1000; const bob = (reduce || isStatic) ? 0 : Math.sin(now * 1.6) * 2.2, sway = (reduce || isStatic) ? 0 : Math.sin(now * 1.1) * 1.4; ship.setAttribute('transform', `translate(${pt.x + sway},${pt.y}) rotate(${ang + bob})`); const moving = Math.abs(target - shown) > 1.5; ship.classList.toggle('moving', moving); wake.classList.toggle('on', moving);
       // wake: a short fading trail behind the ship along the route it just covered
       const wl = Math.min(shown, 90); wake.setAttribute('d', prog.getAttribute('d')); wake.style.strokeDasharray = `${wl} ${total}`; wake.style.strokeDashoffset = -(shown - wl);
-      stops.forEach(s => s.g && s.g.classList.toggle('on', pt.y >= s.y - 2));
+      stops.forEach(s => { if (!s.g) return; s.g.classList.toggle('on', pt.y >= s.y - 2); s.g.classList.toggle('clear', Math.abs(pt.y - s.y) < 96); });
     }
     build(); new ResizeObserver(() => build()).observe(main); if (document.fonts && document.fonts.ready) document.fonts.ready.then(build); addEventListener('load', build);
     if (reduce || isStatic) { addEventListener('scroll', () => update(true), { passive: true }); update(true); }
