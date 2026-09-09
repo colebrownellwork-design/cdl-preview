@@ -329,11 +329,11 @@ img.skel-src.on { opacity: 1; }
 .skel-globe.off { opacity: 0; }
 .skel-wall { position: absolute; inset: 0; z-index: 4; display: flex; justify-content: center; gap: 24px; padding: 0 32px; background: var(--ground); transition: opacity .45s var(--ease); pointer-events: none; }
 .skel-wall.off { opacity: 0; }
-.skel-wall .col { width: 320px; display: flex; flex-direction: column; gap: 24px; }
+.skel-wall .skel-col { width: 320px; display: flex; flex-direction: column; gap: 24px; }
 .skel-wall .skel-lines { position: static; border-radius: 24px; border: 1px solid var(--line); padding: 30px; min-height: 180px; box-shadow: var(--shadow-card); }
 .ring.skel { background: var(--card-2) !important; border-color: transparent !important; }
 .ring.skel svg { opacity: 0; }
-@media (max-width: 720px) { .skel-wall .col:nth-child(n+2) { display: none; } }
+@media (max-width: 720px) { .skel-wall .skel-col:nth-child(n+2) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .skel::after, .skel-lines i::after, .skel-num::after, .skel-globe::after { animation: none; } }
 </style>
 </head>
@@ -687,7 +687,7 @@ img.skel-src.on { opacity: 1; }
     document.querySelectorAll('.steps li, .inside li, .ways li, .ports-legend li, .plan li, .cmp-row').forEach(li => lineSkel(li, '<i class="h20 w80"></i>', '12px 0'));
     document.querySelectorAll('.book').forEach(b => { const sk = document.createElement('div'); sk.className = 'skel'; sk.style.cssText = 'position:absolute;inset:0;border-radius:10px;z-index:5;transition:opacity .4s var(--ease)'; b.appendChild(sk); if (!freeze) setTimeout(() => { sk.style.opacity = 0; setTimeout(() => sk.remove(), 400); }, 700); });
     document.querySelectorAll('.node .ring, .stat, .lv, .unsure, .still, .gate, .callout').forEach(el => { if (el.classList.contains('ring')) { el.classList.add('skel'); if (!freeze) setTimeout(() => el.classList.remove('skel'), 500 + Math.random() * 300); } });
-    document.querySelectorAll('.wall').forEach(w => { const sk = document.createElement('div'); sk.className = 'skel-wall'; sk.innerHTML = Array.from({ length: 3 }, () => '<div class="col"><div class="skel-lines"><i class="w80"></i><i></i><i class="w60"></i><i class="w40"></i></div><div class="skel-lines"><i class="w80"></i><i></i><i class="w60"></i><i class="w40"></i></div></div>').join(''); w.parentElement.style.position = 'relative'; w.parentElement.appendChild(sk); if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 500); }, 900); });
+    document.querySelectorAll('.wall').forEach(w => { const sk = document.createElement('div'); sk.className = 'skel-wall'; sk.innerHTML = Array.from({ length: 3 }, () => '<div class="skel-col"><div class="skel-lines"><i class="w80"></i><i></i><i class="w60"></i><i class="w40"></i></div><div class="skel-lines"><i class="w80"></i><i></i><i class="w60"></i><i class="w40"></i></div></div>').join(''); w.parentElement.style.position = 'relative'; w.parentElement.appendChild(sk); if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 500); }, 900); });
     // the globe: a dotted disc until the real one has drawn
     const gl = document.getElementById('globe'); if (gl) { const sg = document.createElement('div'); sg.className = 'skel-globe'; gl.parentElement.appendChild(sg); window.__globeSkeleton = sg; if (!freeze) setTimeout(() => { sg.classList.add('off'); setTimeout(() => sg.remove(), 600); }, 2200); }
     // form cards: fields show as lines for a beat
