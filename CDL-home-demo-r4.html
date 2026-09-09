@@ -225,10 +225,10 @@ main { position: relative; }
 .spine .node text { font-family: var(--font-sans); font-size: 12px; font-weight: 600; fill: var(--muted-2); transition: fill .4s var(--ease); }
 .spine .node.on circle.dot { fill: var(--coral); stroke: var(--coral); }
 .spine .node.on text { fill: var(--text); }
-.spine .ship .hull { fill: var(--coral); transition: transform .3s var(--ease); }
-.spine .spine-wake { fill: none; stroke: rgba(240,77,77,.35); stroke-width: 7; stroke-linecap: round; filter: blur(2px); opacity: 0; transition: opacity .4s var(--ease); }
+.spine .ship .shadow { fill: rgba(21,44,73,.28); }
+.spine .ship .vessel { filter: drop-shadow(0 2px 2px rgba(21,44,73,.25)); }
+.spine .spine-wake { fill: none; stroke: rgba(174,187,208,.55); stroke-width: 10; stroke-linecap: round; filter: blur(2px); opacity: 0; transition: opacity .4s var(--ease); }
 .spine .ship.moving ~ .spine-wake, .spine .spine-wake.on { opacity: 1; }
-.spine .ship .halo { fill: rgba(240,77,77,.14); }
 .spine .port { fill: var(--indigo); }
 @media (max-width: 1180px) { .spine { display: none; } }
 
@@ -439,7 +439,7 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 
 <main id="main">
 
-<svg class="spine" id="spine" aria-hidden="true"><path class="spine-base" id="spineBase"/><path class="spine-prog" id="spineProg"/><path class="spine-wake" id="spineWake"/><g id="spineNodes"></g><g class="ship" id="ship"><circle class="halo" r="16"/><g class="hull" transform="translate(-14,-8)"><path d="M2 10 L26 10 L23 15 L5 15 Z"/><rect x="6" y="4" width="4" height="6" rx=".5"/><rect x="11" y="3" width="4" height="7" rx=".5"/><rect x="16" y="5" width="4" height="5" rx=".5"/><rect x="21" y="1" width="3" height="9" rx=".5"/></g></g></svg>
+<svg class="spine" id="spine" aria-hidden="true"><path class="spine-base" id="spineBase"/><path class="spine-prog" id="spineProg"/><path class="spine-wake" id="spineWake"/><g id="spineNodes"></g><defs><filter id="shipShadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter></defs><g class="ship" id="ship"><ellipse class="shadow" cx="6" cy="10" rx="62" ry="22" filter="url(#shipShadow)"/><image class="vessel" href="photography/ship-marker.png" width="128" height="115" x="-64" y="-57.5"/></g></svg>
 
 <!-- 01 HERO -->
 <section class="hero" id="hero" data-frame="01-hero">
@@ -884,7 +884,7 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
       if (isStatic) target = total * (qs.get('spine') ? +qs.get('spine') : .42);
       if (snap || reduce || isStatic) shown = target; else { const gap = target - shown; const step = Math.sign(gap) * Math.min(Math.abs(gap) * .06 + 1.2, 7); shown = Math.abs(gap) < 1.2 ? target : shown + step; }
       prog.style.strokeDashoffset = total - shown; ship.style.opacity = shown > 2 ? 1 : 0;
-      const pt = prog.getPointAtLength(shown), p2 = prog.getPointAtLength(Math.min(total, shown + 6)); const ang = Math.atan2(p2.y - pt.y, p2.x - pt.x) * 180 / Math.PI - 90; const now = performance.now() / 1000; const bob = (reduce || isStatic) ? 0 : Math.sin(now * 1.6) * 2.2, sway = (reduce || isStatic) ? 0 : Math.sin(now * 1.1) * 1.4; ship.setAttribute('transform', `translate(${pt.x + sway},${pt.y}) rotate(${ang + bob})`); const moving = Math.abs(target - shown) > 1.5; ship.classList.toggle('moving', moving); wake.classList.toggle('on', moving);
+      const pt = prog.getPointAtLength(shown), p2 = prog.getPointAtLength(Math.min(total, shown + 6)); const ang = Math.atan2(p2.y - pt.y, p2.x - pt.x) * 180 / Math.PI - 37; const now = performance.now() / 1000; const bob = (reduce || isStatic) ? 0 : Math.sin(now * 1.6) * 2.2, sway = (reduce || isStatic) ? 0 : Math.sin(now * 1.1) * 1.4; ship.setAttribute('transform', `translate(${pt.x + sway},${pt.y}) rotate(${ang + bob})`); const moving = Math.abs(target - shown) > 1.5; ship.classList.toggle('moving', moving); wake.classList.toggle('on', moving);
       // wake: a short fading trail behind the ship along the route it just covered
       const wl = Math.min(shown, 90); wake.setAttribute('d', prog.getAttribute('d')); wake.style.strokeDasharray = `${wl} ${total}`; wake.style.strokeDashoffset = -(shown - wl);
       stops.forEach(s => s.g && s.g.classList.toggle('on', pt.y >= s.y - 2));
