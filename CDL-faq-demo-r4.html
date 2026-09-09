@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customs Data Lock · Questions, answered in the first sentence</title>
+<script>document.documentElement.className += ' js';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* CDL FAQ, round 4 (Sana baseline), 2026-09-09. Same system as CDL-home-demo-r4.html. */
+:root {
+  --indigo: #1D395B; --gray-blue: #4878A0; --coral: #F04D4D; --light-gray-blue: #AEBBD0; --white: #fff;
+  --ground: #F4F4F2; --card: #FFFFFF; --card-2: #ECECE9; --deep: #152C49;
+  --line: #E3E3DF; --text: #1D395B; --muted: #6B7280; --muted-2: #9AA1AB; --text-data: #D8E2F0;
+  --r-card: 24px; --r-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(20,30,50,.04), 0 12px 32px -12px rgba(20,30,50,.10);
+  --font-sans: "Geist", "Segoe UI", Arial, sans-serif;
+  --font-mono: "Geist Mono", Consolas, "Courier New", monospace;
+  --ease: cubic-bezier(.4,0,.2,1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: var(--ground); }
+body { font-family: var(--font-sans); color: var(--text); background: var(--ground); font-size: 16px; line-height: 25px; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { color: var(--text); font-weight: 600; letter-spacing: -0.03em; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+button, input { font: inherit; }
+:focus-visible { outline: 2px solid var(--gray-blue); outline-offset: 3px; border-radius: 6px; }
+.skip { position: absolute; left: -9999px; top: 0; z-index: 100; background: var(--indigo); color: #fff; padding: 10px 16px; border-radius: 6px; }
+.skip:focus { left: 16px; top: 16px; }
+.shell { max-width: 1360px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 720px) { .shell { padding: 0 16px; } }
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.js .rise > .w { display: inline-block; opacity: 0; filter: blur(6px); transform: translateY(.3em); transition: opacity .6s var(--ease), transform .6s var(--ease), filter .6s var(--ease); }
+.js .rise.in > .w { opacity: 1; filter: blur(0); transform: none; }
+@media (prefers-reduced-motion: reduce) { *:not(.keep-motion) { animation-duration: .001ms !important; transition-duration: .001ms !important; } html { scroll-behavior: auto; } }
+
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: var(--r-pill); font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid transparent; cursor: pointer; white-space: nowrap; transition: transform .08s ease, background-color .15s ease; }
+.pill-lg { height: 52px; padding: 0 26px; font-size: 16px; }
+.pill-sm { height: 36px; padding: 0 16px; font-size: 14px; }
+.pill-dark { background: var(--indigo); color: var(--white); } .pill-dark:hover { background: var(--deep); transform: translateY(-1px); }
+.pill-coral { background: var(--coral); color: var(--white); } .pill-coral:hover { background: #DC4040; transform: translateY(-1px); }
+.pill-light { background: var(--white); color: var(--text); border-color: var(--line); } .pill-light:hover { background: var(--card-2); transform: translateY(-1px); }
+.tlink { font-size: 15px; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--light-gray-blue); }
+.tlink:hover { text-decoration-color: var(--indigo); }
+
+.topbar { position: sticky; top: 0; z-index: 50; background: rgba(244,244,242,.86); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
+.topbar.stuck { border-bottom-color: var(--line); }
+.nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 68px; gap: 16px; }
+.nav-logo { height: 24px; width: auto; display: block; }
+.nav-links { display: flex; gap: 2px; justify-content: center; }
+.nav-links a { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); color: var(--text); transition: background-color .15s ease; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { background: var(--card-2); }
+.nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+.nav-login { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); } .nav-login:hover { background: var(--card-2); }
+.nav-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--white); color: var(--text); align-items: center; justify-content: center; cursor: pointer; }
+@media (max-width: 960px) {
+  .nav-in { grid-template-columns: auto 1fr auto; height: auto; padding: 10px 0; gap: 10px; }
+  .nav-links { display: none; order: 4; } .nav-toggle { display: inline-flex; order: 3; } .nav-right { order: 2; } .nav-login { display: none; } .nav-logo { height: 21px; }
+  .topbar.open .nav-links { display: flex; flex-direction: column; align-items: stretch; grid-column: 1 / -1; padding: 8px 0 12px; border-top: 1px solid var(--line); }
+  .topbar.open .nav-links a { padding: 12px 8px; }
+}
+
+/* hero */
+.hero { padding: 72px 0 56px; text-align: center; }
+.hero h1 { font-size: 72px; line-height: 76px; letter-spacing: -0.045em; font-weight: 600; max-width: 900px; margin: 0 auto; }
+.hero .sub { font-size: 20px; line-height: 30px; color: var(--muted); max-width: 560px; margin: 20px auto 0; }
+.jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 30px; }
+.jump a { text-decoration: none; }
+@media (max-width: 960px) { .hero h1 { font-size: 44px; line-height: 48px; } }
+
+/* layout */
+.faq-wrap { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 64px; align-items: start; padding-bottom: 40px; }
+.side { position: sticky; top: 92px; }
+.side h2 { font-size: 26px; line-height: 32px; letter-spacing: -0.03em; }
+.side p { color: var(--muted); font-size: 15px; line-height: 23px; margin-top: 10px; }
+.side .pill { margin-top: 18px; }
+.side .cats { list-style: none; margin-top: 28px; border-top: 1px solid var(--line); }
+.side .cats a { display: block; padding: 11px 0; border-bottom: 1px solid var(--line); text-decoration: none; font-size: 15px; color: var(--muted); }
+.side .cats a:hover, .side .cats a.on { color: var(--text); font-weight: 500; }
+.group { margin-bottom: 56px; scroll-margin-top: 92px; }
+.group h2 { font-size: 15px; font-weight: 500; color: var(--coral); margin-bottom: 8px; }
+.group details { border-top: 1px solid var(--line); position: relative; }
+.group details:last-child { border-bottom: 1px solid var(--line); }
+.group details::before { content: ""; position: absolute; left: 0; top: -1px; width: 0; height: 2px; background: var(--coral); transition: width .3s var(--ease); }
+.group details[open]::before { width: 100%; }
+.group summary { list-style: none; cursor: pointer; padding: 20px 0; font-size: 20px; line-height: 28px; font-weight: 500; display: flex; justify-content: space-between; align-items: center; gap: 24px; letter-spacing: -0.015em; }
+.group summary::-webkit-details-marker { display: none; }
+.group summary::after { content: "+"; color: var(--muted-2); font-size: 24px; font-weight: 400; flex: none; }
+.group details[open] summary::after { content: "–"; }
+.group .a { color: var(--muted); font-size: 17px; line-height: 27px; padding: 0 0 24px; max-width: 680px; }
+.group .a b { color: var(--text); font-weight: 500; }
+@media (max-width: 960px) { .faq-wrap { grid-template-columns: 1fr; gap: 32px; } .side { position: static; } .side .cats { display: none; } .group summary { font-size: 18px; line-height: 26px; } }
+
+/* still card */
+.still { max-width: 860px; margin: 24px auto 0; background: var(--indigo); color: var(--white); border-radius: var(--r-card); padding: 34px 40px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.still h3 { color: var(--white); font-size: 24px; line-height: 30px; letter-spacing: -0.025em; }
+.still p { color: var(--text-data); font-size: 15px; margin-top: 4px; }
+.still .pill-light { border-color: transparent; }
+@media (max-width: 640px) { .still { padding: 24px 20px; } }
+
+.closing { padding: 100px 0 110px; text-align: center; }
+.closing h2 { font-size: 56px; line-height: 60px; letter-spacing: -0.04em; max-width: 760px; margin: 0 auto; }
+.closing p { color: var(--muted); font-size: 18px; line-height: 28px; max-width: 520px; margin: 18px auto 30px; }
+@media (max-width: 720px) { .closing h2 { font-size: 38px; line-height: 42px; } }
+
+.foot { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; }
+.foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
+.foot .logo { height: 22px; width: auto; margin-bottom: 14px; }
+.foot p { color: var(--muted); max-width: 320px; line-height: 22px; }
+.foot h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.foot ul { list-style: none; } .foot li { margin-bottom: 8px; }
+.foot li a { text-decoration: none; color: var(--muted); } .foot li a:hover { color: var(--text); }
+.foot .legal { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 12.5px; color: var(--muted-2); }
+@media (max-width: 860px) { .foot-in { grid-template-columns: 1fr 1fr; } }
+body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { display: none !important; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar" id="topbar">
+  <div class="shell nav-in">
+    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="CDL-home-demo-r4.html#how">How it works</a>
+      <a href="CDL-home-demo-r4.html#stakes">Why it matters</a>
+      <a href="CDL-data-demo-r4.html">Resources</a>
+      <a href="CDL-pricing-demo-r4.html">Pricing</a>
+      <a href="#" aria-current="page">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-login" href="#">Log in</a>
+      <a class="pill pill-sm pill-coral" href="CDL-check-demo-r4.html">Free Exposure Check</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="hero" data-frame="01-hero">
+  <div class="shell">
+    <h1 class="rise" id="h1"><span class="w">Answered</span> <span class="w">in</span> <span class="w">the</span> <span class="w">first</span> <span class="w">sentence.</span></h1>
+    <p class="sub reveal">If something is missing, ask a person. The contact form reaches us directly.</p>
+    <div class="jump reveal">
+      <a class="pill pill-sm pill-light" href="#how">How it works</a>
+      <a class="pill pill-sm pill-light" href="#privacy">Privacy and confidentiality</a>
+      <a class="pill pill-sm pill-light" href="#coverage">Coverage and quotes</a>
+      <a class="pill pill-sm pill-light" href="#brokers">For brokers and counsel</a>
+    </div>
+  </div>
+</section>
+
+<section id="questions" data-frame="02-questions">
+  <div class="shell faq-wrap">
+    <aside class="side reveal">
+      <h2>The fastest answer is your own name.</h2>
+      <p>Search your company on ImportYeti. That is what your competitors see. The Free Exposure Check does the same across 18+ platforms and sends you the result.</p>
+      <a class="pill pill-dark" href="CDL-check-demo-r4.html">See your exposure</a>
+      <ul class="cats" id="cats">
+        <li><a href="#how" class="on">How it works</a></li>
+        <li><a href="#privacy">Privacy and confidentiality</a></li>
+        <li><a href="#coverage">Coverage and quotes</a></li>
+        <li><a href="#brokers">For brokers and counsel</a></li>
+      </ul>
+    </aside>
+
+    <div class="reveal">
+      <div class="group" id="how">
+        <h2>How it works</h2>
+        <details open><summary>What does Customs Data Lock do?</summary><div class="a">We stop your future shipment records from being published on public trade platforms. We put a federal confidentiality protection in place on your behalf, maintain it, and check the platforms every month to make sure it holds.</div></details>
+        <details><summary>Is my shipment data really public?</summary><div class="a">Yes. U.S. import records are public by default and get republished by platforms like ImportYeti, Panjiva and Import Genius. Anyone can search your company name and see your suppliers, volumes, product details and shipping patterns.</div></details>
+        <details><summary>Does this remove data that is already out there?</summary><div class="a">No, and anyone who tells you otherwise is overpromising. Past records stay where they are. We stop every future shipment from being published, which is what protects your suppliers, volumes and sourcing strategy from here on.</div></details>
+        <details><summary>How fast does protection start?</summary><div class="a">Confirmation typically arrives within 24 hours. Once active, new shipments stop appearing on public platforms.</div></details>
+        <details><summary>Does my broker or freight forwarder need to change anything?</summary><div class="a">No. Nothing about how you ship changes. We work in the background while you keep operating exactly as you do today.</div></details>
+        <details><summary>How do I know it is working?</summary><div class="a">Every month we check 18+ public platforms for anything new under your names and send you the result. You can also check for yourself: search your company name and watch the new records stop.</div></details>
+      </div>
+
+      <div class="group" id="privacy">
+        <h2>Privacy and confidentiality</h2>
+        <details><summary>Is this legal?</summary><div class="a">Completely. Confidentiality is a protection available to importers, and we handle the entire process on your behalf. Nothing about it affects your compliance standing.</div></details>
+        <details><summary>What information gets protected?</summary><div class="a">Your supplier and factory names, shipment quantities and weights, product descriptions, ports, carrier and vessel names, container numbers and arrival dates. In short, everything a competitor would want to read.</div></details>
+        <details><summary>What do you need from me?</summary><div class="a">Your company and entity names exactly as they appear on your customs filings. That is it. We handle everything else and confirm when protection is active.</div></details>
+        <details><summary>What do you do with my information?</summary><div class="a">We use it to put your protection in place and to monitor for your names, and for nothing else. We never share it, never sell it, and our own site runs without chat widgets, tracking pixels or cookie banners.</div></details>
+        <details><summary>Are international shipments covered?</summary><div class="a">We protect U.S. import data only. That is where the public exposure problem lives for American importers.</div></details>
+      </div>
+
+      <div class="group" id="coverage">
+        <h2>Coverage and quotes</h2>
+        <details><summary>Why is there no price list?</summary><div class="a">Because coverage is scoped to your legal entities, and no two importers have the same set. You are only ever covered for, and billed for, the entities you actually have. <b>Most quotes are turned around the same day.</b></div></details>
+        <details><summary>What counts as an entity?</summary><div class="a">Every legal name your shipments arrive under. If you import under one company name, that is one entity. If you use several LLCs, brands or DBAs on customs filings, each one is an entity and each one is protected.</div></details>
+        <details><summary>What about misspellings and name variations?</summary><div class="a">Always covered, at no extra cost, on every plan. A forwarder's misspelling is still your record, so capping variations would leave exactly those records exposed.</div></details>
+        <details><summary>Can I add entities later?</summary><div class="a">Yes. Adding an entity moves you to the plan that fits, and renewal dates line up so nothing lapses in between. A new brand or LLC never has to ship exposed.</div></details>
+        <details><summary>What happens at renewal?</summary><div class="a">Protection renews automatically, so coverage never lapses. You are billed once a year and can review or change your plan at any time.</div></details>
+        <details><summary>Can I cancel?</summary><div class="a">Yes, at any time. Keep in mind that once protection ends, your future shipment records begin appearing publicly again, usually within weeks.</div></details>
+      </div>
+
+      <div class="group" id="brokers">
+        <h2>For brokers and counsel</h2>
+        <details><summary>I am a customs broker. Can I bring this to my clients?</summary><div class="a">Yes, and many of our customers arrive that way. Nothing about your filing relationship changes, and we can run the Free Exposure Check on any client you name so the conversation starts with their real record.</div></details>
+        <details><summary>Can our counsel review the protection before we commit?</summary><div class="a">Of course. We will walk your counsel through exactly what is put in place, what it covers, and what it does not, in plain language. Multi-Entity and Enterprise proposals include a vendor pack for procurement and legal review.</div></details>
+        <details><summary>Will you sign an NDA?</summary><div class="a">Yes. Confidentiality is the product, so we are comfortable with yours or ours.</div></details>
+        <details><summary>Do you work with groups that import under many names?</summary><div class="a">Yes. Enterprise coverage starts with a scope call and a signed-off entity map across the whole group, then one proposal on an annual agreement.</div></details>
+      </div>
+
+      <div class="still">
+        <div><h3>Still have a question?</h3><p>Ask a person. You hear back from someone at Customs Data Lock, not a sequence.</p></div>
+        <a class="pill pill-light" href="CDL-data-demo-r4.html#contact">Contact us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="cta" data-frame="03-closing">
+  <div class="shell">
+    <h2 class="reveal">See what your competitors can see.</h2>
+    <p class="reveal">One business day, no obligation. Your quote comes back with the results.</p>
+    <a class="pill pill-lg pill-coral reveal" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="footer" data-frame="04-footer">
+  <div class="shell">
+    <div class="foot-in">
+      <div><img class="logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"><p>Your shipment records stop appearing on public trade platforms.</p></div>
+      <div><h4>Product</h4><ul><li><a href="CDL-home-demo-r4.html#how">How it works</a></li><li><a href="CDL-check-demo-r4.html">Free Exposure Check</a></li><li><a href="CDL-pricing-demo-r4.html">Pricing</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="CDL-testimonials-demo-r4.html">Stories</a></li><li><a href="#">Blog</a></li><li><a href="CDL-faq-demo-r4.html">FAQ</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="CDL-data-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Customs Data Lock LLC</span><span>Privacy practiced on this site: no chat widgets, no tracking pixels, no cookie banners to dismiss.</span></div>
+  </div>
+</footer>
+
+<script type="application/ld+json" id="faqld"></script>
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vh = () => innerHeight || document.documentElement.clientHeight;
+  const inView = (el, frac=0.9) => { const r = el.getBoundingClientRect(); return r.top < vh()*frac && r.bottom > 0; };
+  function onScroll(fn){ fn(); addEventListener('scroll', fn, {passive:true}); addEventListener('resize', fn, {passive:true}); }
+  const qs = new URLSearchParams(location.search);
+  const only = qs.get('only'); const isStatic = qs.has('static') || !!only;
+  if (only) { document.body.dataset.only = only; const el = document.getElementById(only); if (el) el.classList.add('keep'); if (only === 'hero') document.getElementById('topbar').classList.add('keep'); }
+  const reveals = [...document.querySelectorAll('.reveal')];
+  if (reduce || isStatic) reveals.forEach(e => e.classList.add('in'));
+  else onScroll(() => reveals.forEach(e => { if (!e.classList.contains('in') && inView(e, 0.92)) e.classList.add('in'); }));
+  const h1 = document.getElementById('h1');
+  if (h1) { h1.querySelectorAll('.w').forEach((w, i) => w.style.transitionDelay = (i * 60) + 'ms'); setTimeout(() => h1.classList.add('in'), 40); if (isStatic) h1.classList.add('in'); }
+  setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
+  const bar = document.getElementById('topbar');
+  onScroll(() => bar.classList.toggle('stuck', scrollY > 4));
+  const tog = document.getElementById('navToggle');
+  tog.addEventListener('click', () => { const open = bar.classList.toggle('open'); tog.setAttribute('aria-expanded', open); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && bar.classList.contains('open')) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('click', e => { if (bar.classList.contains('open') && !bar.contains(e.target)) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
+
+  // one open per group
+  document.querySelectorAll('.group').forEach(g => g.querySelectorAll('details').forEach(d => d.addEventListener('toggle', () => { if (d.open) g.querySelectorAll('details').forEach(o => { if (o !== d) o.open = false; }); })));
+  // side nav highlight
+  const groups = [...document.querySelectorAll('.group')]; const links = [...document.querySelectorAll('#cats a')];
+  onScroll(() => { let cur = groups[0]; groups.forEach(g => { if (g.getBoundingClientRect().top < vh() * 0.35) cur = g; }); links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + cur.id)); });
+  // FAQPage JSON-LD from the DOM (feeds AI search)
+  const items = [...document.querySelectorAll('.group details')].map(d => ({ '@type': 'Question', name: d.querySelector('summary').textContent.trim(), acceptedAnswer: { '@type': 'Answer', text: d.querySelector('.a').textContent.trim() } }));
+  document.getElementById('faqld').textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: items });
+  if (qs.get('open') === 'all') document.querySelectorAll('.group details').forEach(d => d.open = true);
+})();
+</script>
+</body>
+</html>

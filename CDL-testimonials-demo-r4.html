@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customs Data Lock · Names withheld. Results verified.</title>
+<meta name="description" content="What importers say about Customs Data Lock. Every quote is real. Every name is withheld at the customer's request, which is the point.">
+<script>document.documentElement.className += ' js';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* Shared r4 system (Sana baseline). Source: CDL-home-demo-r4.html */
+:root {
+  --indigo: #1D395B; --gray-blue: #4878A0; --coral: #F04D4D; --light-gray-blue: #AEBBD0; --white: #fff;
+  --ground: #F4F4F2; --card: #FFFFFF; --card-2: #ECECE9; --deep: #152C49;
+  --line: #E3E3DF; --text: #1D395B; --muted: #6B7280; --muted-2: #9AA1AB; --text-data: #D8E2F0;
+  --r-card: 24px; --r-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(20,30,50,.04), 0 12px 32px -12px rgba(20,30,50,.10);
+  --font-sans: "Geist", "Segoe UI", Arial, sans-serif;
+  --font-mono: "Geist Mono", Consolas, "Courier New", monospace;
+  --ease: cubic-bezier(.4,0,.2,1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: var(--ground); }
+body { font-family: var(--font-sans); color: var(--text); background: var(--ground); font-size: 16px; line-height: 25px; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { color: var(--text); font-weight: 600; letter-spacing: -0.03em; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+button, input { font: inherit; }
+:focus-visible { outline: 2px solid var(--gray-blue); outline-offset: 3px; border-radius: 6px; }
+.skip { position: absolute; left: -9999px; top: 0; z-index: 100; background: var(--indigo); color: #fff; padding: 10px 16px; border-radius: 6px; }
+.skip:focus { left: 16px; top: 16px; }
+.shell { max-width: 1360px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 720px) { .shell { padding: 0 16px; } }
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.js .rise > .w { display: inline-block; opacity: 0; filter: blur(6px); transform: translateY(.3em); transition: opacity .6s var(--ease), transform .6s var(--ease), filter .6s var(--ease); }
+.js .rise.in > .w { opacity: 1; filter: blur(0); transform: none; }
+@media (prefers-reduced-motion: reduce) { *:not(.keep-motion) { animation-duration: .001ms !important; transition-duration: .001ms !important; } html { scroll-behavior: auto; } }
+
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: var(--r-pill); font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid transparent; cursor: pointer; white-space: nowrap; transition: transform .08s ease, background-color .15s ease; }
+.pill-lg { height: 52px; padding: 0 26px; font-size: 16px; }
+.pill-sm { height: 36px; padding: 0 16px; font-size: 14px; }
+.pill-dark { background: var(--indigo); color: var(--white); } .pill-dark:hover { background: var(--deep); transform: translateY(-1px); }
+.pill-coral { background: var(--coral); color: var(--white); } .pill-coral:hover { background: #DC4040; transform: translateY(-1px); }
+.pill-light { background: var(--white); color: var(--text); border-color: var(--line); } .pill-light:hover { background: var(--card-2); transform: translateY(-1px); }
+.tlink { font-size: 15px; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--light-gray-blue); }
+.tlink:hover { text-decoration-color: var(--indigo); }
+
+.topbar { position: sticky; top: 0; z-index: 50; background: rgba(244,244,242,.86); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
+.topbar.stuck { border-bottom-color: var(--line); }
+.nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 68px; gap: 16px; }
+.nav-logo { height: 24px; width: auto; display: block; }
+.nav-links { display: flex; gap: 2px; justify-content: center; }
+.nav-links a { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); color: var(--text); transition: background-color .15s ease; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { background: var(--card-2); }
+.nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+.nav-login { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); } .nav-login:hover { background: var(--card-2); }
+.nav-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--white); color: var(--text); align-items: center; justify-content: center; cursor: pointer; }
+@media (max-width: 960px) {
+  .nav-in { grid-template-columns: auto 1fr auto; height: auto; padding: 10px 0; gap: 10px; }
+  .nav-links { display: none; order: 4; } .nav-toggle { display: inline-flex; order: 3; } .nav-right { order: 2; } .nav-login { display: none; } .nav-logo { height: 21px; }
+  .topbar.open .nav-links { display: flex; flex-direction: column; align-items: stretch; grid-column: 1 / -1; padding: 8px 0 12px; border-top: 1px solid var(--line); }
+  .topbar.open .nav-links a { padding: 12px 8px; }
+}
+
+.closing { padding: 100px 0 110px; text-align: center; }
+.closing h2 { font-size: 56px; line-height: 60px; letter-spacing: -0.04em; max-width: 760px; margin: 0 auto; }
+.closing p { color: var(--muted); font-size: 18px; line-height: 28px; max-width: 520px; margin: 18px auto 30px; }
+@media (max-width: 720px) { .closing h2 { font-size: 38px; line-height: 42px; } }
+
+.foot { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; }
+.foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
+.foot .logo { height: 22px; width: auto; margin-bottom: 14px; }
+.foot p { color: var(--muted); max-width: 320px; line-height: 22px; }
+.foot h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.foot ul { list-style: none; } .foot li { margin-bottom: 8px; }
+.foot li a { text-decoration: none; color: var(--muted); } .foot li a:hover { color: var(--text); }
+.foot .legal { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 12.5px; color: var(--muted-2); }
+@media (max-width: 860px) { .foot-in { grid-template-columns: 1fr 1fr; } }
+body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { display: none !important; }
+
+
+/* hero */
+.hero { padding: 72px 0 24px; text-align: center; }
+.badge { display: inline-block; border: 1px solid var(--line); background: var(--white); border-radius: var(--r-pill); padding: 6px 14px; font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 20px; }
+.hero h1 { font-size: 72px; line-height: 76px; letter-spacing: -0.045em; font-weight: 600; max-width: 860px; margin: 0 auto; }
+.hero .sub { font-size: 19px; line-height: 29px; color: var(--muted); max-width: 560px; margin: 18px auto 0; }
+@media (max-width: 960px) { .hero h1 { font-size: 44px; line-height: 48px; } }
+
+/* vertical marquee columns (port of testimonials-6: three InfiniteSliders, direction vertical, speeds 30 / 50 / 35, half speed on hover, top and bottom mask) */
+.wall { max-width: 1080px; margin: 40px auto 0; height: 640px; display: flex; justify-content: center; gap: 24px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent); mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent); }
+.col { width: 320px; flex: none; overflow: hidden; }
+.col .track { display: flex; flex-direction: column; gap: 24px; will-change: transform; }
+.col.c2 { display: none; } .col.c3 { display: none; }
+@media (min-width: 720px) { .col.c2 { display: block; } }
+@media (min-width: 1080px) { .col.c3 { display: block; } }
+.t { background: var(--white); border: 1px solid var(--line); border-radius: 24px; padding: 30px 30px 26px; box-shadow: var(--shadow-card); }
+.t blockquote { font-size: 17px; line-height: 27px; color: var(--text); letter-spacing: -0.01em; }
+.t figcaption { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+.t .av { width: 36px; height: 36px; border-radius: 50%; background: var(--card-2); color: var(--text); display: inline-flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 600; letter-spacing: .02em; flex: none; }
+.t cite { font-style: normal; font-weight: 500; font-size: 15px; line-height: 20px; display: block; letter-spacing: -0.01em; }
+.t span { display: block; font-size: 13.5px; line-height: 19px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .wall { height: auto; -webkit-mask-image: none; mask-image: none; } .col { overflow: visible; } .col .track > .dup { display: none; } }
+
+/* why anonymous */
+.why { max-width: 760px; margin: 56px auto 0; text-align: center; }
+.why h2 { font-size: 32px; line-height: 38px; letter-spacing: -0.035em; }
+.why p { color: var(--muted); font-size: 17px; line-height: 27px; margin-top: 12px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 860px; margin: 48px auto 0; text-align: center; }
+.stat .n { font-size: 40px; line-height: 44px; font-weight: 600; letter-spacing: -0.04em; }
+.stat .l { font-size: 14px; color: var(--muted); margin-top: 6px; }
+@media (max-width: 720px) { .stats { grid-template-columns: 1fr; gap: 20px; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar" id="topbar">
+  <div class="shell nav-in">
+    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="CDL-home-demo-r4.html#how">How it works</a>
+      <a href="CDL-home-demo-r4.html#stakes">Why it matters</a>
+      <a href="CDL-data-demo-r4.html">Resources</a>
+      <a href="CDL-pricing-demo-r4.html">Pricing</a>
+      <a href="#">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-login" href="#">Log in</a>
+      <a class="pill pill-sm pill-coral" href="CDL-check-demo-r4.html">Free Exposure Check</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="hero" data-frame="01-hero">
+  <div class="shell">
+    <div class="badge reveal">From clients</div>
+    <h1 class="rise" id="h1"><span class="w">Names</span> <span class="w">withheld.</span> <span class="w">Results</span> <span class="w">verified.</span></h1>
+    <p class="sub reveal">Every quote below is real. Every name is withheld at the customer's request, which is exactly what they pay us for.</p>
+  </div>
+
+  <div class="shell">
+    <div class="wall reveal" id="wall" aria-label="What clients say">
+      <div class="col c1" data-speed="30"><div class="track" id="col1"></div></div>
+      <div class="col c2" data-speed="50"><div class="track" id="col2"></div></div>
+      <div class="col c3" data-speed="35"><div class="track" id="col3"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="why" data-frame="02-why" style="padding-top: 40px;">
+  <div class="shell">
+    <div class="why reveal">
+      <h2>Why nobody is named.</h2>
+      <p>Confidentiality is the product. A customer who let us print their name next to their supplier story would be undoing the thing they bought. So we print the role, the industry, and the result.</p>
+    </div>
+    <div class="stats">
+      <div class="stat reveal"><div class="n"><span class="countup" data-count="15000">0</span>+</div><div class="l">shipments protected</div></div>
+      <div class="stat reveal"><div class="n"><span class="countup" data-count="18">0</span>+</div><div class="l">platforms checked every month</div></div>
+      <div class="stat reveal"><div class="n"><span class="countup" data-count="10">0</span>+ years</div><div class="l">of customs experience</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="cta" data-frame="03-closing">
+  <div class="shell">
+    <h2 class="reveal">See what your competitors can see.</h2>
+    <p class="reveal">One business day, no obligation. Your quote comes back with the results.</p>
+    <a class="pill pill-lg pill-coral reveal" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a>
+  </div>
+</section>
+
+</main>
+<footer class="foot" id="footer" data-frame="04-footer">
+  <div class="shell">
+    <div class="foot-in">
+      <div><img class="logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"><p>Your shipment records stop appearing on public trade platforms.</p></div>
+      <div><h4>Product</h4><ul><li><a href="CDL-home-demo-r4.html#how">How it works</a></li><li><a href="CDL-check-demo-r4.html">Free Exposure Check</a></li><li><a href="CDL-pricing-demo-r4.html">Pricing</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="CDL-testimonials-demo-r4.html">Stories</a></li><li><a href="#">Blog</a></li><li><a href="CDL-faq-demo-r4.html">FAQ</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="CDL-data-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Customs Data Lock LLC</span><span>Privacy practiced on this site: no chat widgets, no tracking pixels, no cookie banners to dismiss.</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vh = () => innerHeight || document.documentElement.clientHeight;
+  const inView = (el, frac=0.9) => { const r = el.getBoundingClientRect(); return r.top < vh()*frac && r.bottom > 0; };
+  function onScroll(fn){ fn(); addEventListener('scroll', fn, {passive:true}); addEventListener('resize', fn, {passive:true}); }
+  const qs = new URLSearchParams(location.search);
+  const only = qs.get('only'); const isStatic = qs.has('static') || !!only;
+  if (only) { document.body.dataset.only = only; const el = document.getElementById(only); if (el) el.classList.add('keep'); if (only === 'hero') document.getElementById('topbar').classList.add('keep'); }
+  const reveals = [...document.querySelectorAll('.reveal')];
+  if (reduce || isStatic) reveals.forEach(e => e.classList.add('in'));
+  else onScroll(() => reveals.forEach(e => { if (!e.classList.contains('in') && inView(e, 0.92)) e.classList.add('in'); }));
+  const h1 = document.getElementById('h1');
+  if (h1) { h1.querySelectorAll('.w').forEach((w, i) => w.style.transitionDelay = (i * 60) + 'ms'); setTimeout(() => h1.classList.add('in'), 40); if (isStatic) h1.classList.add('in'); }
+  setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
+  const bar = document.getElementById('topbar');
+  onScroll(() => bar.classList.toggle('stuck', scrollY > 4));
+  const tog = document.getElementById('navToggle');
+  tog.addEventListener('click', () => { const open = bar.classList.toggle('open'); tog.setAttribute('aria-expanded', open); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && bar.classList.contains('open')) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('click', e => { if (bar.classList.contains('open') && !bar.contains(e.target)) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
+  // data: anonymized. Initials are the role, never a person.
+  const T = [
+    { q: 'We searched our own name and found our whole factory list. Ninety days later there was nothing new to find. That silence is worth every penny.', i: 'VP', r: 'VP of Operations', c: 'Consumer electronics importer' },
+    { q: 'Our biggest competitor stopped showing up at our suppliers. That is not a coincidence.', i: 'FD', r: 'Founder', c: 'Home goods brand' },
+    { q: 'Setup took one email. We never touched our broker and never changed a single process.', i: 'LM', r: 'Logistics Manager', c: 'Beverage company' },
+    { q: 'I used to dread launch season because the records leaked our timing. Last drop, nobody saw it coming.', i: 'CE', r: 'CEO', c: 'Apparel brand' },
+    { q: 'Three entities, one renewal, zero thinking about it. Exactly what we wanted.', i: 'CF', r: 'CFO', c: 'Auto parts distributor' },
+    { q: 'The quote came back the next morning. One number, and no surprises since.', i: 'OW', r: 'Owner', c: 'Specialty foods importer' },
+    { q: 'They told us up front what they could not do. That honesty is why we signed.', i: 'CO', r: 'COO', c: 'Electronics accessories brand' },
+    { q: 'We found our shipment history on a public site the same week a competitor emailed our supplier. Never again.', i: 'SC', r: 'Supply Chain Manager', c: 'Outdoor equipment brand' },
+    { q: 'Renewal is automatic and the reports give me something to show the board. Quiet, and provable.', i: 'LM', r: 'Logistics Manager', c: 'Consumer goods importer' },
+  ];
+  const card = t => `<figure class="t"><blockquote>“${t.q}”</blockquote><figcaption><span class="av" aria-hidden="true">${t.i}</span><div><cite>${t.r}</cite><span>${t.c}</span></div></figcaption></figure>`;
+  const cols = [T.slice(0, 3), T.slice(3, 6), T.slice(6, 9)];
+  cols.forEach((list, i) => { const el = document.getElementById('col' + (i + 1)); const html = list.map(card).join(''); el.innerHTML = html + list.map(card).join('').replace(/<figure class="t"/g, '<figure class="t dup" aria-hidden="true"'); });
+
+  // JS-driven vertical marquee: smooth speed change on hover (a CSS duration change would jump)
+  const tracks = [...document.querySelectorAll('.col')].map(col => ({ col, track: col.querySelector('.track'), y: 0, base: +col.dataset.speed, speed: +col.dataset.speed, half: 0 }));
+  const measure = () => tracks.forEach(t => { t.half = t.track.scrollHeight / 2 + 12; });
+  measure(); addEventListener('resize', measure); if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  tracks.forEach(t => { t.col.addEventListener('mouseenter', () => t.speed = t.base / 2); t.col.addEventListener('mouseleave', () => t.speed = t.base); });
+  let last = performance.now();
+  function tick(now) { const dt = Math.min((now - last) / 1000, .05); last = now; tracks.forEach(t => { if (getComputedStyle(t.col).display === 'none') return; t.y += t.speed * dt; if (t.half && t.y >= t.half) t.y -= t.half; t.track.style.transform = `translate3d(0, ${-t.y}px, 0)`; }); requestAnimationFrame(tick); }
+  if (!reduce && !isStatic) requestAnimationFrame(tick);
+  if (isStatic) tracks.forEach((t, i) => { t.track.style.transform = `translate3d(0, ${-[40, 160, 90][i]}px, 0)`; });
+
+  const fmt = n => n.toLocaleString('en-US');
+  const counts = [...document.querySelectorAll('.countup')];
+  const run = el => { const t = +el.dataset.count; if (reduce) { el.textContent = fmt(t); return; } const s = performance.now(); (function step(n){ const p = Math.min((n - s) / 1100, 1); el.textContent = fmt(Math.round((1 - Math.pow(1 - p, 3)) * t)); if (p < 1) requestAnimationFrame(step); })(performance.now()); };
+  const done = new Set();
+  if (reduce || isStatic) counts.forEach(e => e.textContent = fmt(+e.dataset.count));
+  else onScroll(() => counts.forEach(e => { if (!done.has(e) && inView(e, 0.85)) { done.add(e); run(e); } }));
+})();
+</script>
+</body>
+</html>

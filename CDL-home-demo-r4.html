@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Customs Data Lock · Your supply chain is public. We make it private.</title>
+<script>document.documentElement.className += ' js';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* CDL homepage, round 4 (Sana baseline), 2026-09-08. Tokens from 04-site globals.css; the ground is warmed to Sana's off-white. */
+:root {
+  --indigo: #1D395B; --gray-blue: #4878A0; --coral: #F04D4D; --light-gray-blue: #AEBBD0; --black: #0A1217; --white: #fff;
+  --ground: #F4F4F2; --card: #FFFFFF; --card-2: #ECECE9; --deep: #152C49;
+  --line: #E3E3DF; --text: #1D395B; --muted: #6B7280; --muted-2: #9AA1AB; --text-data: #D8E2F0; --dark-muted: #AEBBD0;
+  --confirmed: #2F855A;
+  --r-card: 24px; --r-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(20,30,50,.04), 0 12px 32px -12px rgba(20,30,50,.10);
+  --shadow-float: 0 2px 4px rgba(16,32,56,.08), 0 24px 48px -16px rgba(16,32,56,.30);
+  --font-sans: "Geist", "Segoe UI", Arial, sans-serif;
+  --font-mono: "Geist Mono", Consolas, "Courier New", monospace;
+  --ease: cubic-bezier(.4,0,.2,1);
+  color-scheme: light;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; background: var(--ground); }
+body { font-family: var(--font-sans); color: var(--text); background: var(--ground); font-size: 16px; line-height: 25px; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { color: var(--text); font-weight: 600; letter-spacing: -0.03em; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+button, input { font: inherit; }
+:focus-visible { outline: 2px solid var(--gray-blue); outline-offset: 3px; border-radius: 6px; }
+.skip { position: absolute; left: -9999px; top: 0; z-index: 100; background: var(--indigo); color: #fff; padding: 10px 16px; border-radius: 6px; }
+.skip:focus { left: 16px; top: 16px; }
+.shell { max-width: 1360px; margin: 0 auto; padding: 0 32px; }
+.narrow { max-width: 760px; margin: 0 auto; }
+@media (max-width: 720px) { .shell { padding: 0 16px; } }
+.muted { color: var(--muted); }
+.center { text-align: center; }
+.sec { padding: 96px 0; }
+.sec-h { font-size: 44px; line-height: 50px; letter-spacing: -0.035em; font-weight: 600; }
+.sec-p { font-size: 17px; line-height: 27px; color: var(--muted); max-width: 560px; margin-top: 14px; }
+.center .sec-p { margin-left: auto; margin-right: auto; }
+.eyebrow { font-size: 13px; color: var(--muted); margin-bottom: 14px; font-weight: 500; }
+.pop { color: var(--coral); }
+
+/* motion */
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.js .rise > .w { display: inline-block; opacity: 0; filter: blur(6px); transform: translateY(.3em); transition: opacity .6s var(--ease), transform .6s var(--ease), filter .6s var(--ease); }
+.js .rise.in > .w { opacity: 1; filter: blur(0); transform: none; }
+@media (prefers-reduced-motion: reduce) { *:not(.keep-motion) { animation-duration: .001ms !important; transition-duration: .001ms !important; } html { scroll-behavior: auto; } }
+
+/* pills */
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: var(--r-pill); font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid transparent; cursor: pointer; white-space: nowrap; transition: transform .08s ease, background-color .15s ease, box-shadow .15s ease; }
+.pill-lg { height: 52px; padding: 0 26px; font-size: 16px; }
+.pill-sm { height: 36px; padding: 0 16px; font-size: 14px; }
+.pill-dark { background: var(--indigo); color: var(--white); }
+.pill-dark:hover { background: var(--deep); transform: translateY(-1px); }
+.pill-coral { background: var(--coral); color: var(--white); }
+.pill-coral:hover { background: #DC4040; transform: translateY(-1px); }
+.pill-light { background: var(--white); color: var(--text); border-color: var(--line); }
+.pill-light:hover { background: var(--card-2); transform: translateY(-1px); }
+.pill-ghost { background: rgba(255,255,255,.14); color: var(--white); border-color: rgba(255,255,255,.28); backdrop-filter: blur(6px); }
+.pill-ghost:hover { background: rgba(255,255,255,.22); }
+.tlink { font-size: 15px; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--light-gray-blue); }
+.tlink:hover { text-decoration-color: var(--indigo); }
+
+/* nav */
+.topbar { position: sticky; top: 0; z-index: 50; background: rgba(244,244,242,.86); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
+.topbar.stuck { border-bottom-color: var(--line); }
+.nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 68px; gap: 16px; }
+.nav-logo { height: 24px; width: auto; display: block; }
+.nav-links { display: flex; gap: 2px; justify-content: center; }
+.nav-links a { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); color: var(--text); transition: background-color .15s ease; }
+.nav-links a:hover { background: var(--card-2); }
+.nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+.nav-login { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); }
+.nav-login:hover { background: var(--card-2); }
+.nav-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--white); color: var(--text); align-items: center; justify-content: center; cursor: pointer; }
+@media (max-width: 960px) {
+  .nav-in { grid-template-columns: auto 1fr auto; height: auto; padding: 10px 0; gap: 10px; }
+  .nav-links { display: none; order: 4; }
+  .nav-toggle { display: inline-flex; order: 3; }
+  .nav-right { order: 2; }
+  .nav-login { display: none; }
+  .nav-logo { height: 21px; }
+  .topbar.open .nav-links { display: flex; flex-direction: column; align-items: stretch; grid-column: 1 / -1; padding: 8px 0 12px; border-top: 1px solid var(--line); }
+  .topbar.open .nav-links a { padding: 12px 8px; }
+}
+
+/* hero */
+.hero { padding: 72px 0 40px; text-align: center; }
+.hero h1 { font-size: 84px; line-height: 88px; letter-spacing: -0.045em; font-weight: 600; max-width: 1000px; margin: 0 auto; }
+.hero .sub { font-size: 20px; line-height: 30px; color: var(--muted); max-width: 640px; margin: 22px auto 0; }
+.hero .sub b { color: var(--text); font-weight: 500; }
+.check { display: flex; gap: 8px; max-width: 620px; margin: 34px auto 0; background: var(--white); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 6px 6px 6px 8px; box-shadow: var(--shadow-card); }
+.check input { flex: 1; min-width: 0; height: 44px; padding: 0 16px; border: 0; background: transparent; font-size: 16px; color: var(--text); border-radius: var(--r-pill); }
+.check input::placeholder { color: var(--muted-2); }
+.check input:focus { outline: none; }
+.check:focus-within { border-color: var(--gray-blue); box-shadow: 0 0 0 4px rgba(72,120,160,.15); }
+.check-note { margin-top: 14px; font-size: 14px; color: var(--muted); }
+.pstrip { position: relative; margin: 44px auto 8px; max-width: 1180px; overflow: hidden; padding: 10px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+.ptrack { display: flex; align-items: center; gap: 56px; width: max-content; will-change: transform; }
+.pl { display: inline-flex; align-items: center; gap: 10px; height: 44px; color: var(--c); font-weight: 600; font-size: 22px; letter-spacing: -0.02em; white-space: nowrap; cursor: default; transition: filter .5s var(--ease), opacity .5s var(--ease), transform .5s var(--ease); }
+.pl img { height: 34px; width: auto; display: block; }
+.pl img.wide { height: 30px; }
+.pl b { font-weight: 600; }
+.pl.more { color: var(--muted-2); font-size: 15px; font-weight: 500; }
+.pstrip.hovering .pl:not(.on) { filter: grayscale(1); opacity: .32; }
+.pstrip.hovering .pl.on { transform: scale(1.06); }
+@media (max-width: 960px) { .hero h1 { font-size: 52px; line-height: 56px; } .check { flex-direction: column; border-radius: 26px; padding: 8px; } .check .pill { width: 100%; } .platforms { gap: 8px 22px; } .platforms b { font-size: 17px; } }
+
+
+/* full-bleed photo hero variant (?hero=photo&img=cranes|bluehour|warehouse|ship) */
+.hero.full { position: relative; padding: 0; margin-bottom: 0; }
+.hero.full .bleed { position: relative; min-height: 720px; display: flex; align-items: flex-end; overflow: hidden; background: var(--deep); }
+.hero.full .bleed img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.85); }
+.hero.full .bleed::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,44,73,.15) 0%, rgba(21,44,73,.25) 45%, rgba(21,44,73,.82) 100%); }
+.hero.full .bleed > .hin { position: relative; z-index: 2; width: 100%; padding: 120px 32px 72px; text-align: left; }
+.hero.full h1 { color: var(--white); text-align: left; margin: 0; max-width: 900px; font-size: 84px; line-height: 88px; }
+.hero.full .sub { color: rgba(255,255,255,.82); text-align: left; margin: 20px 0 0; max-width: 560px; }
+.hero.full .sub b { color: var(--white); }
+.hero.full .check { margin: 30px 0 0; border-color: transparent; }
+.hero.full .check-note { color: rgba(255,255,255,.72); text-align: left; }
+.hero.full .check-note .tlink { color: var(--white); text-decoration-color: rgba(255,255,255,.5); }
+.hero.full .line2 { color: var(--white); font-size: 84px; line-height: 88px; letter-spacing: -0.045em; font-weight: 500; opacity: .9; margin: 0; }
+.hero.full .check { margin-top: 40px; }
+@media (max-width: 960px) { .hero.full .line2 { font-size: 46px; line-height: 50px; } }
+.hero.full .pstrip { margin-top: 36px; }
+.hero.full .pcard { display: none; }
+@media (max-width: 960px) { .hero.full .bleed { min-height: 640px; } .hero.full h1 { font-size: 46px; line-height: 50px; } .hero.full .bleed > .hin { padding: 80px 16px 40px; } }
+
+
+/* transparent nav over the photo hero until scroll */
+.topbar { transition: background-color .35s var(--ease), border-color .35s var(--ease), backdrop-filter .35s var(--ease); }
+.topbar.over { background: transparent; backdrop-filter: none; border-bottom-color: transparent; }
+.topbar.over .nav-links a, .topbar.over .nav-login { color: var(--white); }
+.topbar.over .nav-links a:hover, .topbar.over .nav-login:hover { background: rgba(255,255,255,.14); }
+.topbar.over .nav-toggle { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.35); color: var(--white); }
+.topbar .nav-logo.rev { display: none; }
+.topbar.over .nav-logo.rev { display: block; } .topbar.over .nav-logo.std { display: none; }
+.topbar.over.open { background: rgba(21,44,73,.96); }
+.topbar.over.open .nav-links { border-top-color: rgba(255,255,255,.18); }
+.hero.full { margin-top: -68px; }
+.hero.full .bleed > .hin { padding-top: 188px; }
+@media (max-width: 960px) { .hero.full { margin-top: -64px; } .hero.full .bleed > .hin { padding-top: 140px; } }
+
+
+/* hero text layout options: ?hl=a..f  (coral = the brand orange #F04D4D) */
+.hero.full .pop { color: var(--coral); }
+.hero.full[data-hl="c"] .bleed > .hin { text-align: center; }
+.hero.full[data-hl="c"] h1, .hero.full[data-hl="c"] .line2 { text-align: center; margin-left: auto; margin-right: auto; }
+.hero.full[data-hl="c"] .check { margin-left: auto; margin-right: auto; }
+.hero.full[data-hl="d"] .bleed { align-items: center; }
+.hero.full[data-hl="d"] .bleed > .hin { padding: 140px 32px 100px; }
+.hero.full[data-hl="d"] h1 { font-size: 52px; line-height: 56px; font-weight: 500; opacity: .85; }
+.hero.full[data-hl="d"] .line2 { font-size: 116px; line-height: 112px; font-weight: 600; color: var(--coral); opacity: 1; margin-top: 6px; }
+.hero.full[data-hl="e"] .bleed > .hin { text-align: right; }
+.hero.full[data-hl="e"] h1, .hero.full[data-hl="e"] .line2 { text-align: right; margin-left: auto; }
+.hero.full[data-hl="e"] .check { margin-left: auto; }
+.hero.full[data-hl="f"] .bleed { align-items: center; }
+.hero.full[data-hl="f"] .bleed > .hin { text-align: center; padding: 140px 32px 100px; }
+.hero.full[data-hl="f"] h1 { font-size: 96px; line-height: 96px; margin: 0 auto; }
+.hero.full[data-hl="f"] .line2 { display: inline-block; margin: 26px auto 0; font-size: 22px; line-height: 28px; font-weight: 600; letter-spacing: 0; color: var(--white); background: var(--coral); padding: 10px 22px; border-radius: var(--r-pill); opacity: 1; }
+.hero.full[data-hl="f"] .check { margin-left: auto; margin-right: auto; }
+@media (max-width: 960px) { .hero.full[data-hl="d"] .line2 { font-size: 64px; line-height: 64px; } .hero.full[data-hl="f"] h1 { font-size: 52px; line-height: 54px; } }
+
+/* product card */
+.card { background: var(--card); border-radius: var(--r-card); overflow: hidden; box-shadow: var(--shadow-card); }
+.pcard { margin-top: 40px; }
+.pcard-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding: 30px 34px 22px; }
+.pcard-head h2 { font-size: 26px; line-height: 32px; letter-spacing: -0.03em; }
+.pcard-head p { color: var(--muted); font-size: 16px; margin-top: 4px; }
+.pcard-media { position: relative; height: 620px; background: var(--indigo); }
+.pcard-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; opacity: .92; filter: saturate(.85); }
+.pcard-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(29,57,91,0) 40%, rgba(29,57,91,.35) 100%); pointer-events: none; }
+.outcome { position: absolute; left: 34px; bottom: 34px; width: 360px; background: var(--white); border-radius: 18px; box-shadow: var(--shadow-float); padding: 20px 22px 18px; z-index: 2; text-align: left; }
+.outcome .status { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--confirmed); }
+.outcome .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--confirmed); box-shadow: 0 0 0 4px rgba(47,133,90,.14); }
+.outcome h3 { font-size: 19px; line-height: 25px; margin: 8px 0 12px; }
+.outcome dl { display: grid; grid-template-columns: 1fr auto; row-gap: 6px; column-gap: 16px; font-size: 14px; line-height: 20px; }
+.outcome dt { color: var(--muted); } .outcome dd { font-weight: 600; text-align: right; }
+@media (max-width: 960px) { .pcard-head { flex-direction: column; padding: 22px 20px 16px; } .pcard-media { height: 440px; } .outcome { left: 16px; right: 16px; width: auto; bottom: 16px; } }
+
+
+/* live counters */
+.live { padding: 72px 0 0; }
+.live-in { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.lv { background: var(--white); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 34px 36px 30px; }
+.lv .lab { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.lv .lab i { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 4px rgba(240,77,77,.14); }
+.lv .n { font-size: 52px; line-height: 56px; font-weight: 600; letter-spacing: -0.045em; margin-top: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lv .n small { font-size: 22px; letter-spacing: -0.02em; color: var(--muted); font-weight: 500; margin-left: 6px; }
+.lv .sub { font-size: 15px; line-height: 23px; color: var(--muted); margin-top: 10px; max-width: 440px; }
+.live .how { margin-top: 14px; font-size: 12.5px; line-height: 19px; color: var(--muted-2); max-width: 900px; }
+.live .how a { color: var(--muted); }
+@media (max-width: 960px) { .live-in { grid-template-columns: 1fr; } .lv .n { font-size: 38px; line-height: 42px; } .lv { padding: 24px 22px; } }
+
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 72px 0 0; }
+.stat .lab { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.stat .n { font-size: 48px; line-height: 52px; font-weight: 600; letter-spacing: -0.04em; }
+.stat .sub { font-size: 15px; color: var(--muted); margin-top: 6px; }
+@media (max-width: 720px) { .stats { grid-template-columns: 1fr; gap: 28px; } }
+
+/* stakes: photo card + reader list */
+.stakes-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: stretch; margin-top: 44px; }
+.stakes-photo { border-radius: var(--r-card); overflow: hidden; background: var(--indigo); min-height: 560px; position: relative; }
+.stakes-photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; filter: saturate(.8); opacity: .95; transition: opacity .35s var(--ease); }
+.stakes-photo img[hidden] { display: block; opacity: 0; }
+.stakes-photo .cap { position: absolute; left: 24px; bottom: 22px; right: 24px; color: var(--white); font-size: 14px; line-height: 20px; text-shadow: 0 1px 8px rgba(0,0,0,.35); z-index: 2; }
+.stakes-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,30,50,0) 55%, rgba(20,30,50,.55) 100%); }
+.readers { display: flex; flex-direction: column; justify-content: space-between; padding: 8px 0; }
+.readers .label { font-size: 13px; color: var(--coral); font-weight: 500; margin-bottom: 14px; }
+.rlist { list-style: none; }
+.rlist button { appearance: none; background: none; border: 0; display: flex; align-items: center; gap: 12px; font-size: 32px; line-height: 40px; letter-spacing: -0.03em; font-weight: 500; color: var(--muted-2); cursor: pointer; padding: 4px 0; text-align: left; transition: color .2s ease; }
+.rlist button:hover { color: var(--muted); }
+.rlist button[aria-selected="true"] { color: var(--text); }
+.rlist button .arrow { width: 22px; opacity: 0; transform: translateX(-6px); transition: opacity .2s ease, transform .2s ease; }
+.rlist button[aria-selected="true"] .arrow { opacity: 1; transform: none; }
+.rpanel { display: none; margin-top: 28px; }
+.rpanel.on { display: block; }
+.rpanel h3 { font-size: 22px; line-height: 29px; letter-spacing: -0.025em; margin-bottom: 10px; }
+.rpanel p { color: var(--muted); font-size: 17px; line-height: 27px; max-width: 520px; }
+.rpanel .nums { display: flex; gap: 40px; margin-top: 22px; }
+.rpanel .nums b { display: block; font-size: 26px; letter-spacing: -0.03em; font-weight: 600; }
+.rpanel .nums span { display: block; font-size: 13.5px; color: var(--muted); margin-top: 2px; max-width: 220px; line-height: 19px; }
+@media (max-width: 960px) { .stakes-grid { grid-template-columns: 1fr; } .stakes-photo { min-height: 380px; } .rlist button { font-size: 24px; line-height: 32px; } }
+
+/* dark quote card */
+.qcard { position: relative; border-radius: var(--r-card); overflow: hidden; background: var(--deep); min-height: 520px; display: flex; align-items: center; color: var(--white); }
+.qcard img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; opacity: .75; filter: saturate(.75); }
+.qcard::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(21,44,73,.92) 0%, rgba(21,44,73,.55) 50%, rgba(21,44,73,.15) 100%); }
+.qcard .in { position: relative; z-index: 2; padding: 64px; max-width: 720px; }
+.qcard blockquote { font-size: 34px; line-height: 42px; letter-spacing: -0.03em; font-weight: 500; }
+.qcard .who { margin-top: 26px; font-size: 14px; color: var(--dark-muted); line-height: 21px; }
+.qcard .who b { color: var(--white); font-weight: 600; display: block; }
+.qcard .pill { margin-top: 26px; }
+@media (max-width: 960px) { .qcard { min-height: 0; } .qcard .in { padding: 36px 24px; } .qcard blockquote { font-size: 26px; line-height: 33px; } }
+
+/* process row */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 48px; }
+.step .num { font-size: 13px; color: var(--muted-2); font-family: var(--font-mono); letter-spacing: .06em; }
+.step h3 { font-size: 20px; line-height: 26px; margin: 10px 0 8px; letter-spacing: -0.02em; }
+.step p { color: var(--muted); font-size: 15px; line-height: 23px; }
+.step .when { margin-top: 6px; font-size: 13.5px; font-weight: 500; }
+@media (max-width: 960px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+
+
+/* interactive process flow */
+.flow { position: relative; margin-top: 48px; padding: 8px 0 0; }
+.beams { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.nodes { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; z-index: 2; }
+.node { appearance: none; background: none; border: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; padding: 8px 0 4px; color: var(--text); font: inherit; }
+.node .ring { position: relative; width: 144px; height: 144px; border-radius: 50%; background: var(--white); border: 2px solid var(--line); box-shadow: 0 0 20px -12px rgba(0,0,0,.8); display: inline-flex; align-items: center; justify-content: center; color: var(--gray-blue); transition: transform .8s var(--ease), border-color 1s var(--ease), color .8s var(--ease); }
+.node .ring::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; box-shadow: 0 0 0 10px rgba(29,57,91,.08), 0 18px 40px -16px rgba(29,57,91,.45); opacity: 0; transition: opacity 1.3s var(--ease); pointer-events: none; }
+.node .ring svg { width: 56px; height: 56px; position: relative; z-index: 1; }
+.node:hover .ring { transform: translateY(-2px); border-color: var(--light-gray-blue); }
+.node[aria-selected="true"] .ring { border-color: var(--indigo); color: var(--indigo); transform: scale(1.06); transition-duration: .6s, .7s, .6s; }
+.node[aria-selected="true"] .ring::after { opacity: 1; transition-duration: .8s; }
+.node .ttl { transition: color .8s var(--ease); }
+.node .num { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; color: var(--muted-2); }
+.node .ttl { font-size: 20px; line-height: 24px; font-weight: 600; letter-spacing: -0.02em; }
+.node[aria-selected="true"] .ttl { color: var(--text); }
+.node:not([aria-selected="true"]) .ttl { color: var(--muted); }
+.detail { max-width: 620px; margin: 34px auto 0; text-align: center; min-height: 54px; }
+.stepd { display: none; font-size: 17px; line-height: 27px; color: var(--muted); }
+.stepd.on { display: block; }
+.stepd b { color: var(--text); font-weight: 600; }
+.beams .base { stroke: var(--line); stroke-width: 2; fill: none; }
+.beams .lit { stroke-width: 2; fill: none; stroke-linecap: round; }
+@media (max-width: 720px) { .nodes { grid-template-columns: 1fr; gap: 28px; } .node { flex-direction: row; justify-content: flex-start; gap: 16px; text-align: left; padding-left: 8px; } .node .ring { width: 96px; height: 96px; } .node .ring svg { width: 40px; height: 40px; } .node .num { display: none; } .detail { text-align: left; margin-top: 26px; } }
+
+/* comparison table */
+.cmp { margin-top: 44px; border-top: 1px solid var(--line); }
+.cmp-row { display: grid; grid-template-columns: 220px 1fr 1fr; gap: 32px; padding: 22px 0; border-bottom: 1px solid var(--line); font-size: 15.5px; line-height: 24px; }
+.cmp-row.head { padding: 14px 0; font-size: 13px; color: var(--muted); }
+.cmp-row .k { font-weight: 600; }
+.cmp-row .a { color: var(--muted); }
+.cmp-row .b { color: var(--text); }
+.cmp-row .b::before { content: "✓ "; color: var(--confirmed); font-weight: 600; }
+@media (max-width: 860px) { .cmp-row { grid-template-columns: 1fr; gap: 6px; } .cmp-row.head { display: none; } .cmp-row .a::before { content: "Public: "; font-weight: 600; color: var(--text); } }
+
+/* story cards */
+.stories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
+.story .ph { border-radius: 20px; overflow: hidden; background: var(--indigo); aspect-ratio: 4 / 3.4; position: relative; }
+.story .ph img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); opacity: .92; }
+.story .ph .n { position: absolute; left: 22px; bottom: 18px; color: var(--white); font-size: 40px; line-height: 44px; letter-spacing: -0.04em; font-weight: 600; text-shadow: 0 2px 12px rgba(0,0,0,.35); }
+.story .ph .band { position: absolute; left: 22px; top: 18px; color: var(--white); font-size: 13px; font-weight: 500; opacity: .92; }
+.story .cap { font-size: 14.5px; line-height: 22px; color: var(--muted); margin-top: 12px; }
+.story .cap b { color: var(--text); font-weight: 600; }
+.stories-note { margin-top: 20px; font-size: 13.5px; color: var(--muted-2); }
+@media (max-width: 960px) { .stories { grid-template-columns: 1fr; } }
+
+/* closing */
+.closing { padding: 110px 0 120px; text-align: center; }
+.closing h2 { font-size: 56px; line-height: 60px; letter-spacing: -0.04em; max-width: 760px; margin: 0 auto; }
+.closing p { color: var(--muted); font-size: 18px; line-height: 28px; max-width: 560px; margin: 18px auto 30px; }
+.closing .small { margin-top: 16px; font-size: 13.5px; color: var(--muted-2); }
+@media (max-width: 720px) { .closing h2 { font-size: 38px; line-height: 42px; } }
+
+/* footer */
+.foot { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; }
+.foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
+.foot .logo { height: 22px; width: auto; margin-bottom: 14px; }
+.foot p { color: var(--muted); max-width: 320px; line-height: 22px; }
+.foot h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.foot ul { list-style: none; }
+.foot li { margin-bottom: 8px; }
+.foot li a { text-decoration: none; color: var(--muted); }
+.foot li a:hover { color: var(--text); }
+.foot .legal { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 12.5px; color: var(--muted-2); }
+@media (max-width: 860px) { .foot-in { grid-template-columns: 1fr 1fr; } }
+
+/* frame helper */
+body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { display: none !important; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar" id="topbar">
+  <div class="shell nav-in">
+    <a href="#" aria-label="Customs Data Lock home"><img class="nav-logo std" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"><img class="nav-logo rev" src="logo/cdl-logo-reversed.svg" alt="" aria-hidden="true"></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#how">How it works</a>
+      <a href="#stakes">Why it matters</a>
+      <a href="CDL-data-demo-r4.html">Resources</a>
+      <a href="CDL-pricing-demo-r4.html">Pricing</a>
+      <a href="CDL-faq-demo-r4.html">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-login" href="#">Log in</a>
+      <a class="pill pill-sm pill-coral" href="#check">Free Exposure Check</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- 01 HERO -->
+<section class="hero" id="hero" data-frame="01-hero">
+  <div class="shell">
+    <h1 class="rise" id="h1"><span class="w">Your</span> <span class="w">supply</span> <span class="w">chain</span> <span class="w">is</span> <span class="w">public.</span></h1>
+    <p class="sub reveal"><b>We make it private.</b> Your new shipments stop showing up on ImportYeti, Panjiva and Import Genius.</p>
+    <form class="check reveal" id="check" action="#" onsubmit="return false">
+      <label class="skip" for="company">Your company's legal name</label>
+      <input id="company" type="text" name="company" placeholder="Your company's legal name" autocomplete="organization">
+      <button class="pill pill-dark" type="submit">See your exposure</button>
+    </form>
+    <p class="check-note reveal">Free, one business day, no obligation. Or <a class="tlink" href="CDL-data-demo-r4.html#contact">talk to an expert</a>.</p>
+
+    <div class="pstrip reveal" id="pstrip" aria-label="Where your records are published today">
+      <div class="ptrack" id="ptrack">
+        <span class="pl" style="--c:#004E66"><img src="platform-logos/importyeti-mark.png" alt="" width="180" height="180"><b>ImportYeti</b></span>
+        <span class="pl" style="--c:#D6002A"><b>Panjiva</b></span>
+        <span class="pl" style="--c:#0A7EF1"><img class="wide" src="platform-logos/importgenius.svg" alt="ImportGenius" width="400" height="78"></span>
+        <span class="pl" style="--c:#414FF6"><b>ImportKey</b></span>
+        <span class="pl" style="--c:#5A1CE2"><img src="platform-logos/trademo-mark.svg" alt="" width="27" height="25"><b>Trademo</b></span>
+        <span class="pl" style="--c:#00AAFF"><img class="wide" src="platform-logos/datamyne.png" alt="Descartes Datamyne" width="300" height="83"></span>
+        <span class="pl" style="--c:#0073F2"><b>Volza</b></span>
+        <span class="pl" style="--c:#D71518"><b>Tradesparq</b></span>
+        <span class="pl more" style="--c:#6B7280"><b>+ 10 more</b></span>
+      </div>
+    </div>
+
+    <div class="card pcard reveal">
+      <div class="pcard-head">
+        <div>
+          <h2>The Free Exposure Check</h2>
+          <p>What the public platforms show about your company, in one business day.</p>
+        </div>
+        <a class="pill pill-light" href="#check">See what's public about you</a>
+      </div>
+      <div class="pcard-media">
+        <img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt="Pallets of shrink-wrapped cartons in an importer's warehouse" width="1920" height="1084">
+        <div class="outcome" aria-label="Example monitoring result">
+          <div class="status"><i aria-hidden="true"></i> Protection confirmed</div>
+          <h3>New shipments, nothing to see.</h3>
+          <dl><dt>Platforms checked this month</dt><dd>18</dd><dt>New records published</dt><dd>0</dd><dt>Next renewal</dt><dd>Automatic</dd></dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 01b LIVE COUNTERS -->
+<section class="live" id="live" data-frame="01b-live">
+  <div class="shell">
+    <div class="live-in">
+      <div class="lv reveal">
+        <div class="lab"><i aria-hidden="true"></i> Since you opened this page</div>
+        <div class="n"><span id="liveRecords">0</span><small>records</small></div>
+        <p class="sub">Shipments filed with U.S. Customs, each one about to become a public record with a supplier, a volume and a product code on it.</p>
+      </div>
+      <div class="lv reveal">
+        <div class="lab"><i aria-hidden="true"></i> Lost to trade secret theft so far this year</div>
+        <div class="n">$<span id="liveLoss">0</span></div>
+        <p class="sub">Supplier lists, pricing and sourcing are trade secrets. This is the low end of the estimate, counting from January 1.</p>
+      </div>
+    </div>
+    <p class="how reveal">How we count: 105,103 entries of merchandise on a typical day (<a href="https://www.cbp.gov/newsroom/stats/typical-day-fy2024" target="_blank" rel="noopener">CBP, fiscal year 2024</a>), and $180 billion a year, the low end of the trade secret theft estimate from the <a href="https://www.fbi.gov/file-repository/china-exec-summary-risk-to-corporate-america-2019.pdf" target="_blank" rel="noopener">Commission on the Theft of American Intellectual Property</a>, as cited by the FBI. Neither number is ours.</p>
+  </div>
+</section>
+
+<!-- 02 STATS -->
+<section id="proof" data-frame="02-stats">
+  <div class="shell">
+    <div class="stats">
+      <div class="stat reveal"><div class="lab">Customs experience</div><div class="n"><span class="countup" data-count="10">0</span>+ years</div></div>
+      <div class="stat reveal"><div class="lab">Shipments protected</div><div class="n"><span class="countup" data-count="15000">0</span>+</div></div>
+      <div class="stat reveal"><div class="lab">Platforms blocked</div><div class="n"><span class="countup" data-count="18">0</span>+</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 STAKES -->
+<section class="sec" id="stakes" data-frame="03-stakes">
+  <div class="shell">
+    <div class="narrow center">
+      <h2 class="sec-h reveal">Four people would find your record very useful.</h2>
+          </div>
+    <div class="stakes-grid">
+      <div class="stakes-photo reveal">
+        <img src="photography/01-hero/cdl-hero-03-ship-overhead.jpg" alt="Container ship seen from above" data-for="0">
+        <img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt="Port cranes in fog" data-for="1" hidden>
+        <img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt="Container terminal yard in fog" data-for="2" hidden>
+        <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt="Container terminal at blue hour" data-for="3" hidden>
+              </div>
+      <div class="readers reveal">
+        <div>
+          <div class="label">Who is reading your record</div>
+          <ul class="rlist" role="tablist" aria-label="Who is reading your record">
+            <li><button role="tab" id="t0" aria-selected="true" aria-controls="p0"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>A competitor</button></li>
+            <li><button role="tab" id="t1" aria-selected="false" aria-controls="p1"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>A copycat</button></li>
+            <li><button role="tab" id="t2" aria-selected="false" aria-controls="p2"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>A fraudster</button></li>
+            <li><button role="tab" id="t3" aria-selected="false" aria-controls="p3"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>The buyer across the table</button></li>
+          </ul>
+        </div>
+        <div>
+          <div class="rpanel on" role="tabpanel" id="p0" aria-labelledby="t0">
+            <h3>Ten years of supplier relationships, readable in ten seconds.</h3>
+            <p>Your record names the mill, the port, and how much you buy. That is everything a competitor needs to ask for the same terms.</p>
+          </div>
+          <div class="rpanel" role="tabpanel" id="p1" aria-labelledby="t1" hidden>
+            <h3>Your product code and your factory are a build sheet.</h3>
+            <p>New codes appear the moment you import something new, so a launch is visible months before your marketing.</p>
+          </div>
+          <div class="rpanel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+            <h3>A fake invoice works when the details are real.</h3>
+            <p>Your supplier, a real shipment, and the week it lands are all public. That is enough to get a wire sent.</p>
+          </div>
+          <div class="rpanel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+            <h3>Your volumes are your leverage. They are also public.</h3>
+            <p>The other side can see how much you ship, how often, and whether you have a second source.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 QUOTE CARD -->
+<section id="quote" data-frame="04-quote" style="padding-bottom: 96px;">
+  <div class="shell">
+    <div class="qcard reveal">
+      <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt="" width="1920" height="1084">
+      <div class="in">
+        <blockquote>“Fast, clear, and it simply works. Our new shipments stopped appearing and we get proof every month.”</blockquote>
+        <div class="who"><b>Logistics Manager</b>Consumer goods importer. Name withheld.</div>
+        <a class="pill pill-ghost" href="CDL-testimonials-demo-r4.html">Read the stories</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 PROCESS (interactive beams, after Magic UI AnimatedBeam) -->
+<section class="sec" id="how" data-frame="05-process" style="padding-top: 0;">
+  <div class="shell">
+    <div class="narrow center">
+      <h2 class="sec-h reveal">Live in days. Protected for years.</h2>
+      <p class="sec-p reveal">Nothing changes about how you ship. We handle the protection and the upkeep.</p>
+    </div>
+    <div class="flow reveal" id="flow">
+      <svg class="beams" id="beams" aria-hidden="true"></svg>
+      <ol class="nodes" role="tablist" aria-label="How it works">
+        <li><button class="node" role="tab" id="n0" aria-selected="true" aria-controls="s0" data-i="0"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></span><span class="num">01</span><span class="ttl">Enroll</span></button></li>
+        <li><button class="node" role="tab" id="n1" aria-selected="false" aria-controls="s1" data-i="1"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1 1 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="num">02</span><span class="ttl">Protect</span></button></li>
+        <li><button class="node" role="tab" id="n2" aria-selected="false" aria-controls="s2" data-i="2"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg></span><span class="num">03</span><span class="ttl">Monitor</span></button></li>
+        <li><button class="node" role="tab" id="n3" aria-selected="false" aria-controls="s3" data-i="3"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="num">04</span><span class="ttl">Maintain</span></button></li>
+      </ol>
+      <div class="detail">
+        <div class="stepd on" role="tabpanel" id="s0" aria-labelledby="n0"><b>1 business day.</b> Tell us the legal entities you import under and the names on your shipments. One form.</div>
+        <div class="stepd" role="tabpanel" id="s1" aria-labelledby="n1" hidden><b>Confirmed in as little as 24 hours.</b> We put a federal confidentiality protection in place for every entity and name we cover, and we maintain it.</div>
+        <div class="stepd" role="tabpanel" id="s2" aria-labelledby="n2" hidden><b>Monthly, with proof.</b> Every month we check 18+ public platforms for anything new under your names and send you the result.</div>
+        <div class="stepd" role="tabpanel" id="s3" aria-labelledby="n3" hidden><b>Never lapses.</b> Renewal is automatic. Protection that quietly expires puts everything back in public view within weeks.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 STORIES -->
+<section class="sec" id="scenarios" data-frame="07-stories" style="padding-top: 0;">
+  <div class="shell">
+    <div class="narrow center">
+      <h2 class="sec-h reveal">Three ways it goes wrong. All of them avoidable.</h2>
+    </div>
+    <div class="stories">
+      <div class="story reveal"><div class="ph"><img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt=""><div class="band">Apparel importer</div><div class="n">18 months</div></div><div class="cap"><b>Supplier poached.</b> Two competitors at the same mill within 18 months.</div></div>
+      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt=""><div class="band">Skincare brand</div><div class="n">90 days</div></div><div class="cap"><b>Product copied.</b> Three copycats on the market within 90 days of launch.</div></div>
+      <div class="story reveal"><div class="ph"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt=""><div class="band">The protection that lapsed</div><div class="n">4 weeks</div></div><div class="cap"><b>Protection lapsed.</b> Nobody renewed it. Records were back on every platform within four weeks.</div></div>
+    </div>
+    <p class="stories-note reveal">Illustrative scenarios. No customer is named, which is the point.</p>
+  </div>
+</section>
+
+<!-- 08 CLOSING -->
+<section class="closing" id="cta" data-frame="08-closing">
+  <div class="shell">
+    <h2 class="reveal">See what your competitors can see.</h2>
+    <p class="reveal">One business day, no obligation. Your quote comes back with the results.</p>
+    <a class="pill pill-lg pill-coral reveal" href="#check">Run your Free Exposure Check</a>
+      </div>
+</section>
+
+</main>
+
+<footer class="foot" id="footer" data-frame="09-footer">
+  <div class="shell">
+    <div class="foot-in">
+      <div>
+        <img class="logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock">
+        <p>Your shipment records stop appearing on public trade platforms.</p>
+      </div>
+      <div><h4>Product</h4><ul><li><a href="#how">How it works</a></li><li><a href="#check">Free Exposure Check</a></li><li><a href="CDL-pricing-demo-r4.html">Pricing</a></li></ul></div>
+      <div><h4>Resources</h4><ul><li><a href="CDL-testimonials-demo-r4.html">Stories</a></li><li><a href="#">Blog</a></li><li><a href="CDL-faq-demo-r4.html">FAQ</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="CDL-data-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Customs Data Lock LLC</span>
+      <span>Privacy practiced on this site: no chat widgets, no tracking pixels, no cookie banners to dismiss.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vh = () => innerHeight || document.documentElement.clientHeight;
+  const inView = (el, frac=0.9) => { const r = el.getBoundingClientRect(); return r.top < vh()*frac && r.bottom > 0; };
+  function onScroll(fn){ fn(); addEventListener('scroll', fn, {passive:true}); addEventListener('resize', fn, {passive:true}); }
+  const qs = new URLSearchParams(location.search);
+  const only = qs.get('only');
+  const isStatic = qs.has('static') || !!only;
+  if (only) { document.body.dataset.only = only; const el = document.getElementById(only); if (el) el.classList.add('keep'); if (only === 'hero') document.getElementById('topbar').classList.add('keep'); }
+
+  const reveals = [...document.querySelectorAll('.reveal')];
+  if (reduce || isStatic) reveals.forEach(e => e.classList.add('in'));
+  else onScroll(() => reveals.forEach(e => { if (!e.classList.contains('in') && inView(e, 0.92)) e.classList.add('in'); }));
+
+  const h1 = document.getElementById('h1');
+  if (h1) { h1.querySelectorAll('.w').forEach((w, i) => w.style.transitionDelay = (i * 60) + 'ms'); setTimeout(() => h1.classList.add('in'), 40); }
+  if (isStatic && h1) h1.classList.add('in');
+  setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
+
+  const fmt = n => n.toLocaleString('en-US');
+  const counts = [...document.querySelectorAll('.countup')];
+  const run = el => { const t = +el.dataset.count; if (reduce) { el.textContent = fmt(t); return; }
+    const s = performance.now(); (function tick(n){ const p = Math.min((n - s) / 1100, 1); el.textContent = fmt(Math.round((1 - Math.pow(1 - p, 3)) * t)); if (p < 1) requestAnimationFrame(tick); })(performance.now()); };
+  const done = new Set();
+  if (reduce || isStatic) counts.forEach(e => e.textContent = fmt(+e.dataset.count));
+  else onScroll(() => counts.forEach(e => { if (!done.has(e) && inView(e, 0.85)) { done.add(e); run(e); } }));
+  setTimeout(() => counts.forEach(e => { if (!done.has(e)) { done.add(e); e.textContent = fmt(+e.dataset.count); } }), 5000);
+
+  // live counters: sourced rates, see the "How we count" line
+  const RECORDS_PER_DAY = 105103;            // CBP, On a Typical Day in FY2024
+  const LOSS_PER_YEAR = 180e9;               // IP Commission low-end estimate for trade secret theft, cited by the FBI
+  const recEl = document.getElementById('liveRecords'), lossEl = document.getElementById('liveLoss');
+  const yearStart = new Date(new Date().getFullYear(), 0, 1).getTime();
+  const yearMs = new Date(new Date().getFullYear() + 1, 0, 1).getTime() - yearStart;
+  const opened = performance.now();
+  // Organic pacing. The displayed value always trails the sourced value by a small lag; slow phases let the lag
+  // build, jumps pay it back. Long-run average = the sourced rate, so nothing is invented.
+  const truthRecords = () => (performance.now() - opened) / 86400000 * RECORDS_PER_DAY;
+  const truthLoss = () => (Date.now() - yearStart) / yearMs * LOSS_PER_YEAR;
+  function pacer(cfg) {
+    let shown = null, mode = 'normal', modeUntil = 0, nextJump = performance.now() + rnd(cfg.jumpEvery), nextSlow = performance.now() + rnd(cfg.slowEvery);
+    return function step(truth, now) {
+      if (shown === null) { shown = truth; step.last = now; return shown; }
+      if (mode === 'slow' && now > modeUntil) { mode = 'normal'; nextSlow = now + rnd(cfg.slowEvery); }
+      if (mode === 'normal' && now > nextSlow) { mode = 'slow'; modeUntil = now + rnd(cfg.slowFor); }
+      const lag = truth - shown;
+      if (now > nextJump && lag > 0) { shown += Math.min(lag * (0.6 + Math.random() * 0.4), cfg.jumpMax * (0.5 + Math.random())); nextJump = now + rnd(cfg.jumpEvery); }
+      else { const rate = mode === 'slow' ? cfg.slowRate : (lag > cfg.maxLag ? 1.6 : cfg.cruise); shown += Math.max(0, Math.min(lag, cfg.perMs * rate * (now - (step.last || now)))); }
+      step.last = now; return shown;
+    };
+  }
+  const rnd = ([a, b]) => a + Math.random() * (b - a);
+  // records: pauses for a beat, then a few land at once
+  const paceRecords = pacer({ perMs: RECORDS_PER_DAY / 86400000, slowRate: 0.05, slowEvery: [2000, 5000], slowFor: [2000, 4500], jumpEvery: [2500, 6000], jumpMax: 6, maxLag: 12, cruise: 0.75 });
+  // money: jumps often, slows rarely and briefly
+  const paceLoss = pacer({ perMs: LOSS_PER_YEAR / yearMs, slowRate: 0.3, slowEvery: [7000, 14000], slowFor: [700, 1500], jumpEvery: [350, 1100], jumpMax: 14000, maxLag: 60000, cruise: 0.55 });
+  function paint(recordsShown, lossShown) { recEl.textContent = fmt(Math.floor(recordsShown)); lossEl.textContent = fmt(Math.floor(lossShown)); }
+  if (isStatic || reduce) { paint(37, truthLoss()); }
+  else (function live(){ const now = performance.now(); paint(paceRecords(truthRecords(), now), paceLoss(truthLoss(), now)); requestAnimationFrame(live); })();
+
+  // process flow: beams between nodes (vanilla port of Magic UI AnimatedBeam), hover / click / keyboard, slow auto-cycle
+  (function(){
+    const flow = document.getElementById('flow'); if (!flow) return;
+    const svg = document.getElementById('beams'), nodes = [...flow.querySelectorAll('.node')], steps = [...flow.querySelectorAll('.stepd')];
+    const NS = 'http://www.w3.org/2000/svg';
+    let active = 0, auto = true, paths = [], t0 = performance.now();
+    function build() {
+      svg.innerHTML = ''; paths = [];
+      const c = flow.getBoundingClientRect(); svg.setAttribute('viewBox', `0 0 ${c.width} ${c.height}`);
+      const defs = document.createElementNS(NS, 'defs'); svg.appendChild(defs);
+      for (let i = 0; i < nodes.length - 1; i++) {
+        const a = nodes[i].querySelector('.ring').getBoundingClientRect(), b = nodes[i + 1].querySelector('.ring').getBoundingClientRect();
+        const vertical = Math.abs(b.top - a.top) > Math.abs(b.left - a.left);
+        const ax = a.left - c.left + a.width / 2, ay = a.top - c.top + a.height / 2, bx = b.left - c.left + b.width / 2, by = b.top - c.top + b.height / 2;
+        const r = a.width / 2 + 8;
+        const d = vertical ? `M ${ax},${ay + r} L ${bx},${by - r}` : `M ${ax + r},${ay} Q ${(ax + bx) / 2},${ay - 34} ${bx - r},${by}`;
+        const g = document.createElementNS(NS, 'linearGradient'); const gid = 'beam' + i; g.setAttribute('id', gid); g.setAttribute('gradientUnits', 'userSpaceOnUse');
+        g.setAttribute('x1', ax); g.setAttribute('x2', bx); g.setAttribute('y1', ay); g.setAttribute('y2', by);
+        [['0', 'var(--gray-blue)', '0'], ['0.35', 'var(--indigo)', '1'], ['0.5', 'var(--coral)', '1'], ['0.65', 'var(--indigo)', '1'], ['1', 'var(--gray-blue)', '0']].forEach(([o, col, op]) => { const s = document.createElementNS(NS, 'stop'); s.setAttribute('offset', o); s.setAttribute('stop-color', col); s.setAttribute('stop-opacity', op); g.appendChild(s); });
+        defs.appendChild(g);
+        const base = document.createElementNS(NS, 'path'); base.setAttribute('class', 'base'); base.setAttribute('d', d); svg.appendChild(base);
+        const lit = document.createElementNS(NS, 'path'); lit.setAttribute('class', 'lit'); lit.setAttribute('d', d); lit.setAttribute('stroke', `url(#${gid})`); svg.appendChild(lit);
+        paths.push({ g, lit, ax, ay, bx, by, vertical, i });
+      }
+    }
+    function select(i, fromUser) {
+      active = i; if (fromUser) auto = false;
+      nodes.forEach((n, j) => n.setAttribute('aria-selected', i === j));
+      steps.forEach((s, j) => { s.classList.toggle('on', i === j); s.hidden = i !== j; });
+    }
+    function frame(now) {
+      const t = ((now - t0) / 2600) % 1;
+      paths.forEach(p => {
+        // only the beam leading into the active step pulses; earlier beams sit lit and still; later beams idle
+        const pulsing = p.i === active - 1, done = p.i < active - 1;
+        const len = p.vertical ? (p.by - p.ay) : (p.bx - p.ax);
+        const span = len * 0.9;
+        if (pulsing) {
+          const pos = -span + (len + 2 * span) * t;
+          const x1 = p.vertical ? p.ax : p.ax + pos, x2 = p.vertical ? p.ax : p.ax + pos + span, y1 = p.vertical ? p.ay + pos : p.ay, y2 = p.vertical ? p.ay + pos + span : p.ay;
+          p.g.setAttribute('x1', x1); p.g.setAttribute('x2', x2); p.g.setAttribute('y1', y1); p.g.setAttribute('y2', y2);
+          p.lit.setAttribute('stroke', `url(#beam${p.i})`); p.lit.style.opacity = 1;
+        } else if (done) { p.lit.setAttribute('stroke', 'var(--indigo)'); p.lit.style.opacity = .55; }
+        else { p.lit.style.opacity = 0; }
+      });
+      if (auto && now - lastAuto > 3200) { lastAuto = now; select((active + 1) % nodes.length, false); }
+      if (!reduce) requestAnimationFrame(frame);
+    }
+    let lastAuto = performance.now();
+    nodes.forEach((n, i) => { n.addEventListener('click', () => select(i, true)); n.addEventListener('mouseenter', () => { select(i, false); auto = false; }); n.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); const k = (i + (e.key === 'ArrowRight' ? 1 : -1) + nodes.length) % nodes.length; select(k, true); nodes[k].focus(); } }); });
+    flow.addEventListener('mouseleave', () => { auto = true; lastAuto = performance.now(); });
+    build(); new ResizeObserver(build).observe(flow); if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
+    const stepParam = qs.get('step'); if (stepParam !== null) { select(+stepParam, true); }
+    if (reduce || isStatic) { if (stepParam === null) select(2, true); paths.forEach(p => { if (p.i === active - 1) { p.g.setAttribute('x1', p.ax); p.g.setAttribute('x2', p.bx); p.g.setAttribute('y1', p.ay); p.g.setAttribute('y2', p.by); p.lit.style.opacity = 1; } else if (p.i < active - 1) { p.lit.setAttribute('stroke', 'var(--indigo)'); p.lit.style.opacity = .55; } else p.lit.style.opacity = 0; }); }
+    else requestAnimationFrame(frame);
+  })();
+
+  // platform strip: logos in their own colors glide left; hover pauses, lights the hovered one, grays the rest
+  (function(){
+    const strip = document.getElementById('pstrip'), track = document.getElementById('ptrack'); if (!strip) return;
+    const items = [...track.children]; items.forEach(el => { const c = el.cloneNode(true); c.setAttribute('aria-hidden', 'true'); c.classList.add('dup'); track.appendChild(c); });
+    const all = [...track.children]; let x = 0, speed = 0, target = 42, half = 0, last = performance.now();
+    const measure = () => { half = track.scrollWidth / 2 + 28; }; measure(); addEventListener('resize', measure); if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    all.forEach(el => { el.addEventListener('mouseenter', () => { strip.classList.add('hovering'); all.forEach(o => o.classList.toggle('on', o === el || (o.textContent === el.textContent && o.innerHTML === el.innerHTML))); target = 0; }); });
+    strip.addEventListener('mouseleave', () => { strip.classList.remove('hovering'); all.forEach(o => o.classList.remove('on')); target = 42; });
+    function tick(now) { const dt = Math.min((now - last) / 1000, .05); last = now; speed += (target - speed) * Math.min(1, dt * 6); x += speed * dt; if (half && x >= half) x -= half; track.style.transform = `translate3d(${-x}px,0,0)`; requestAnimationFrame(tick); }
+    const hv = qs.get('phover'); if (hv !== null) { strip.classList.add('hovering'); items[+hv].classList.add('on'); }
+    if (reduce || isStatic) { track.style.transform = 'translate3d(-120px,0,0)'; } else requestAnimationFrame(tick);
+  })();
+
+  const bar = document.getElementById('topbar');
+  onScroll(() => { const photo = document.getElementById('hero').classList.contains('full'); bar.classList.toggle('over', photo && scrollY < 24 && !qs.has('scrolled')); bar.classList.toggle('stuck', scrollY > 4 || qs.has('scrolled')); });
+  const tog = document.getElementById('navToggle');
+  tog.addEventListener('click', () => { const open = bar.classList.toggle('open'); tog.setAttribute('aria-expanded', open); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && bar.classList.contains('open')) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
+  document.addEventListener('click', e => { if (bar.classList.contains('open') && !bar.contains(e.target)) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
+
+  const tabs = [...document.querySelectorAll('.rlist button')];
+  const panels = [...document.querySelectorAll('.rpanel')];
+  const photos = [...document.querySelectorAll('.stakes-photo img')];
+  function select(i) {
+    tabs.forEach((t, j) => t.setAttribute('aria-selected', i === j));
+    panels.forEach((p, j) => { p.classList.toggle('on', i === j); p.hidden = i !== j; });
+    photos.forEach((ph, j) => ph.hidden = i !== j);
+  }
+  tabs.forEach((t, i) => { t.addEventListener('click', () => select(i)); t.addEventListener('keydown', e => { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const n = (i + (e.key === 'ArrowDown' ? 1 : -1) + tabs.length) % tabs.length; select(n); tabs[n].focus(); } }); });
+  const tabParam = qs.get('tab'); if (tabParam) select(Math.max(0, Math.min(tabs.length - 1, +tabParam)));
+
+  // hero variant: ?hero=photo&img=cranes|bluehour|warehouse|ship wraps the hero copy in a full-bleed photo
+  (function(){
+    const v = qs.get('hero') || 'photo'; if (v !== 'photo') return;
+    const hero = document.getElementById('hero'); hero.classList.add('full'); const hl = qs.get('hl') || 'c'; hero.dataset.hl = hl;
+    const imgs = { cranes: 'photography/01-hero/cdl-hero-04-cranes-fog.jpg', bluehour: 'photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg', warehouse: 'photography/web/cdl-vertical-01-food-warehouse.jpg', ship: 'photography/01-hero/cdl-hero-03-ship-overhead.jpg', yard: 'photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg' };
+    const src = imgs[qs.get('img')] || imgs.bluehour;
+    const shell = hero.querySelector('.shell');
+    const bleed = document.createElement('div'); bleed.className = 'bleed'; bleed.innerHTML = `<img src="${src}" alt="">`;
+    const inner = document.createElement('div'); inner.className = 'shell hin';
+    const h1el = shell.querySelector('h1'); if (['b','c','e'].includes(hl)) { const last = h1el.querySelector('.w:last-child'); if (last) last.classList.add('pop'); } inner.appendChild(h1el);
+    const line2 = document.createElement('p'); line2.className = 'line2'; line2.textContent = 'We make it private.'; inner.appendChild(line2);
+    inner.appendChild(shell.querySelector('.check'));
+    ['.sub', '.check-note'].forEach(s => { const el = shell.querySelector(s); if (el) el.remove(); });
+    bleed.appendChild(inner); hero.insertBefore(bleed, shell); dispatchEvent(new Event('scroll'));
+  })();
+
+  document.getElementById('check').addEventListener('submit', e => { e.preventDefault(); const v = document.getElementById('company').value.trim(); location.href = 'CDL-check-demo-r4.html' + (v ? '?company=' + encodeURIComponent(v) : ''); });
+})();
+</script>
+</body>
+</html>
