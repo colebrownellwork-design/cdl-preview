@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Customs Data Lock · Questions, answered in the first sentence</title>
+<title>Customs Data Lock · Field notes on public trade data</title>
+<meta name="description" content="What anyone can learn about an importer from public shipping records, who uses it, and how protection quietly lapses. Notes from Customs Data Lock.">
 <script>document.documentElement.className += ' js';</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+
 /* CDL FAQ, round 4 (Sana baseline), 2026-09-09. Same system as CDL-home-demo-r4.html. */
 :root {
   --indigo: #1D395B; --gray-blue: #4878A0; --coral: #F04D4D; --light-gray-blue: #AEBBD0; --white: #fff;
@@ -93,43 +95,31 @@ button, input { font: inherit; }
   .topbar.open .nav-links a { padding: 12px 8px; }
 }
 
-/* hero */
-.hero { padding: 72px 0 56px; text-align: center; }
-.hero h1 { font-size: 72px; line-height: 76px; letter-spacing: -0.045em; font-weight: 600; max-width: 900px; margin: 0 auto; }
-.hero .sub { font-size: 20px; line-height: 30px; color: var(--muted); max-width: 560px; margin: 20px auto 0; }
-.jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 30px; }
-.jump a { text-decoration: none; }
-@media (max-width: 960px) { .hero h1 { font-size: 44px; line-height: 48px; } }
 
-/* layout */
-.faq-wrap { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 64px; align-items: start; padding-bottom: 40px; }
-.side { position: sticky; top: 92px; }
-.side h2 { font-size: 26px; line-height: 32px; letter-spacing: -0.03em; }
-.side p { color: var(--muted); font-size: 15px; line-height: 23px; margin-top: 10px; }
-.side .pill { margin-top: 18px; }
-.side .cats { list-style: none; margin-top: 28px; border-top: 1px solid var(--line); }
-.side .cats a { display: block; padding: 11px 0; border-bottom: 1px solid var(--line); text-decoration: none; font-size: 15px; color: var(--muted); }
-.side .cats a:hover, .side .cats a.on { color: var(--text); font-weight: 500; }
-.group { margin-bottom: 56px; scroll-margin-top: 92px; }
-.group h2 { font-size: 15px; font-weight: 500; color: var(--coral); margin-bottom: 8px; }
-.group details { border-top: 1px solid var(--line); position: relative; }
-.group details:last-child { border-bottom: 1px solid var(--line); }
-.group details::before { content: ""; position: absolute; left: 0; top: -1px; width: 0; height: 2px; background: var(--coral); transition: width .3s var(--ease); }
-.group details[open]::before { width: 100%; }
-.group summary { list-style: none; cursor: pointer; padding: 20px 0; font-size: 20px; line-height: 28px; font-weight: 500; display: flex; justify-content: space-between; align-items: center; gap: 24px; letter-spacing: -0.015em; }
-.group summary::-webkit-details-marker { display: none; }
-.group summary::after { content: "+"; color: var(--muted-2); font-size: 24px; font-weight: 400; flex: none; }
-.group details[open] summary::after { content: "–"; }
-.group .a { color: var(--muted); font-size: 17px; line-height: 27px; padding: 0 0 24px; max-width: 680px; }
-.group .a b { color: var(--text); font-weight: 500; }
-@media (max-width: 960px) { .faq-wrap { grid-template-columns: 1fr; gap: 32px; } .side { position: static; } .side .cats { display: none; } .group summary { font-size: 18px; line-height: 26px; } }
+/* transparent nav over a photo band until scroll */
+.topbar { transition: background-color .35s var(--ease), border-color .35s var(--ease); }
+.topbar.over { background: transparent; backdrop-filter: none; border-bottom-color: transparent; }
+.topbar.over .nav-links a, .topbar.over .nav-login { color: var(--white); }
+.topbar.over .nav-links a[aria-current="page"], .topbar.over .nav-dd-btn[aria-current="page"] { background: rgba(255,255,255,.16); }
+.topbar.over .nav-links a:hover, .topbar.over .nav-login:hover { background: rgba(255,255,255,.14); }
+.topbar.over .nav-toggle { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.35); color: var(--white); }
+.topbar .nav-logo.rev { display: none; }
+.topbar.over .nav-logo.rev { display: block; } .topbar.over .nav-logo.std { display: none; }
+.topbar.over.open { background: rgba(21,44,73,.96); }
+.topbar.over .nav-dd-btn { color: var(--white); }
+.topbar.over .nav-dd-btn:hover, .topbar.over .nav-dd-btn[aria-expanded="true"] { background: rgba(255,255,255,.14); }
+.topbar.over .nav-dd-menu { background: rgba(21,44,73,.38); border-color: rgba(255,255,255,.22); box-shadow: 0 24px 48px -16px rgba(0,0,0,.45); }
+.topbar.over .nav-links .nav-dd-menu a { color: var(--white); }
+.topbar.over .nav-links .nav-dd-menu a:hover, .topbar.over .nav-links .nav-dd-menu a:focus-visible { background: rgba(255,255,255,.14); }
+.topbar.over .nav-dd-menu span { color: rgba(255,255,255,.7); }
+.topbar.over .nav-dd-menu a[aria-current="page"] b { color: var(--coral); }
+/* photo band */
+.band { position: relative; margin-top: -68px; background: var(--deep); overflow: hidden; }
+.band img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
+.band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,44,73,.35) 0%, rgba(21,44,73,.45) 50%, rgba(21,44,73,.85) 100%); }
+.band .bin { position: relative; z-index: 2; }
+@media (max-width: 960px) { .band { margin-top: -64px; } }
 
-/* still card */
-.still { max-width: 860px; margin: 24px auto 0; background: var(--indigo); color: var(--white); border-radius: var(--r-card); padding: 34px 40px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
-.still h3 { color: var(--white); font-size: 24px; line-height: 30px; letter-spacing: -0.025em; }
-.still p { color: var(--text-data); font-size: 15px; margin-top: 4px; }
-.still .pill-light { border-color: transparent; }
-@media (max-width: 640px) { .still { padding: 24px 20px; } }
 
 .closing { padding: 100px 0 110px; text-align: center; }
 .closing h2 { font-size: 56px; line-height: 60px; letter-spacing: -0.04em; max-width: 760px; margin: 0 auto; }
@@ -146,14 +136,55 @@ button, input { font: inherit; }
 .foot .legal { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 12.5px; color: var(--muted-2); }
 @media (max-width: 860px) { .foot-in { grid-template-columns: 1fr 1fr; } }
 body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { display: none !important; }
+
+
+/* blog */
+.bhero { padding: 0; }
+.bhero .band .bin { padding: 150px 32px 90px; }
+.bhero .eyebrow { font-size: 13px; color: var(--coral); font-weight: 500; margin-bottom: 14px; }
+.bhero h1 { color: var(--white); font-size: 64px; line-height: 68px; letter-spacing: -0.045em; font-weight: 600; max-width: 760px; }
+.bhero .sub { color: rgba(255,255,255,.82); font-size: 19px; line-height: 29px; max-width: 560px; margin-top: 18px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 36px 0 8px; }
+.filters button { appearance: none; border: 1px solid var(--line); background: var(--white); color: var(--text); font: inherit; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: var(--r-pill); cursor: pointer; transition: background-color .15s ease, border-color .15s ease, color .15s ease; }
+.filters button:hover { border-color: var(--light-gray-blue); }
+.filters button[aria-pressed="true"] { background: var(--indigo); border-color: var(--indigo); color: var(--white); }
+.featured { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 0; margin-top: 28px; background: var(--white); border-radius: var(--r-card); overflow: hidden; box-shadow: var(--shadow-card); }
+.featured .ph { position: relative; min-height: 380px; background: var(--indigo); }
+.featured .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); opacity: .92; }
+.featured .body { padding: 40px 44px; display: flex; flex-direction: column; justify-content: center; }
+.kind { font-size: 12.5px; font-weight: 600; color: var(--coral); }
+.featured h2 { font-size: 32px; line-height: 38px; letter-spacing: -0.03em; margin-top: 10px; }
+.featured p { color: var(--muted); font-size: 16.5px; line-height: 26px; margin-top: 12px; }
+.meta { display: flex; gap: 14px; font-size: 13px; color: var(--muted-2); margin-top: 18px; }
+.featured .pill { align-self: flex-start; margin-top: 24px; }
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
+.post { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-card); display: flex; flex-direction: column; text-decoration: none; color: var(--text); transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+.post:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(20,30,50,.05), 0 22px 44px -18px rgba(20,30,50,.3); }
+.post.hide { display: none; }
+.post .ph { aspect-ratio: 16 / 9; background: var(--card-2); position: relative; overflow: hidden; }
+.post .ph img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.75); opacity: .9; }
+.post .ph .tone { position: absolute; inset: 0; }
+.post .body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+.post h3 { font-size: 19px; line-height: 25px; letter-spacing: -0.02em; margin-top: 8px; }
+.post p { color: var(--muted); font-size: 14.5px; line-height: 22px; margin-top: 8px; flex: 1; }
+.post .meta { margin-top: 14px; }
+@media (max-width: 960px) { .featured { grid-template-columns: 1fr; } .featured .ph { min-height: 240px; } .featured .body { padding: 26px 22px; } .posts { grid-template-columns: 1fr; } .bhero h1 { font-size: 42px; line-height: 46px; } .bhero .band .bin { padding: 110px 16px 60px; } }
+
+/* gate strip */
+.gate { margin-top: 56px; background: var(--indigo); color: var(--white); border-radius: var(--r-card); padding: 40px 44px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: center; }
+.gate h2 { color: var(--white); font-size: 28px; line-height: 34px; letter-spacing: -0.03em; }
+.gate p { color: var(--text-data); font-size: 15.5px; line-height: 24px; margin-top: 8px; max-width: 560px; }
+.gate .pill-light { border-color: transparent; }
+@media (max-width: 860px) { .gate { grid-template-columns: 1fr; padding: 28px 22px; } }
+.empty { text-align: center; color: var(--muted); padding: 40px 0; display: none; }
+.empty.on { display: block; }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-
 <header class="topbar" id="topbar">
   <div class="shell nav-in">
-    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"></a>
+    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo std" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"><img class="nav-logo rev" src="logo/cdl-logo-reversed.svg" alt="" aria-hidden="true"></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -164,9 +195,9 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
         <button class="nav-dd-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navDdMenu" aria-current="page">Resources <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="nav-dd-menu" id="navDdMenu" role="menu">
           <a role="menuitem" href="CDL-testimonials-demo-r4.html"><b>Testimonials</b><span>What importers say. Names withheld.</span></a>
-          <a role="menuitem" href="CDL-faq-demo-r4.html" aria-current="page"><b>FAQ</b><span>Answered in the first sentence.</span></a>
+          <a role="menuitem" href="CDL-faq-demo-r4.html"><b>FAQ</b><span>Answered in the first sentence.</span></a>
           <a role="menuitem" href="CDL-data-demo-r4.html"><b>The Exposure Report</b><span>Free report on who reads your record.</span></a>
-          <a role="menuitem" href="CDL-blog-demo-r4.html"><b>Blog</b><span>Field notes on public trade data.</span></a>
+          <a role="menuitem" href="CDL-blog-demo-r4.html" aria-current="page"><b>Blog</b><span>Field notes on public trade data.</span></a>
         </div>
       </div>
       <a href="CDL-pricing-demo-r4.html">Pricing</a>
@@ -180,75 +211,58 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 
 <main id="main">
 
-<section class="hero" id="hero" data-frame="01-hero">
-  <div class="shell">
-    <h1 class="rise" id="h1"><span class="w">Answered</span> <span class="w">in</span> <span class="w">the</span> <span class="w">first</span> <span class="w">sentence.</span></h1>
-    <p class="sub reveal">If something is missing, ask a person. The contact form reaches us directly.</p>
-    <div class="jump reveal">
-      <a class="pill pill-sm pill-light" href="#how">How it works</a>
-      <a class="pill pill-sm pill-light" href="#privacy">Privacy and confidentiality</a>
-      <a class="pill pill-sm pill-light" href="#coverage">Coverage and quotes</a>
-      <a class="pill pill-sm pill-light" href="#brokers">For brokers and counsel</a>
+<section class="hero bhero" id="hero" data-frame="01-hero">
+  <div class="band"><img class="bg" src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt="" width="1920" height="1084">
+    <div class="shell bin">
+      <div class="eyebrow reveal">Blog</div>
+      <h1 class="rise" id="h1"><span class="w">Field</span> <span class="w">notes</span> <span class="w">on</span> <span class="w">public</span> <span class="w">trade</span> <span class="w">data.</span></h1>
+      <p class="sub reveal">What anyone can learn about an importer from a free website, who uses it, and how protection quietly lapses.</p>
     </div>
   </div>
 </section>
 
-<section id="questions" data-frame="02-questions">
-  <div class="shell faq-wrap">
-    <aside class="side reveal">
-      <h2>The fastest answer is your own name.</h2>
-      <p>Search your company on ImportYeti. That is what your competitors see. The Free Exposure Check does the same across 18+ platforms and sends you the result.</p>
-      <a class="pill pill-dark" href="CDL-check-demo-r4.html">See your exposure</a>
-      <ul class="cats" id="cats">
-        <li><a href="#how" class="on">How it works</a></li>
-        <li><a href="#privacy">Privacy and confidentiality</a></li>
-        <li><a href="#coverage">Coverage and quotes</a></li>
-        <li><a href="#brokers">For brokers and counsel</a></li>
-      </ul>
-    </aside>
+<section id="library" data-frame="02-library">
+  <div class="shell">
+    <div class="filters reveal" role="group" aria-label="Filter posts">
+      <button type="button" aria-pressed="true" data-f="all">All</button>
+      <button type="button" aria-pressed="false" data-f="expose">The lookup</button>
+      <button type="button" aria-pressed="false" data-f="fraud">Fraud</button>
+      <button type="button" aria-pressed="false" data-f="strategy">Leverage</button>
+      <button type="button" aria-pressed="false" data-f="trust">Trust and legal</button>
+      <button type="button" aria-pressed="false" data-f="lapse">Renewal</button>
+      <button type="button" aria-pressed="false" data-f="vertical">By industry</button>
+    </div>
 
-    <div class="reveal">
-      <div class="group" id="how">
-        <h2>How it works</h2>
-        <details open><summary>What does Customs Data Lock do?</summary><div class="a">We stop your future shipment records from being published on public trade platforms. We put a federal confidentiality protection in place on your behalf, maintain it, and check the platforms every month to make sure it holds.</div></details>
-        <details><summary>Is my shipment data really public?</summary><div class="a">Yes. U.S. import records are public by default and get republished by platforms like ImportYeti, Panjiva and Import Genius. Anyone can search your company name and see your suppliers, volumes, product details and shipping patterns.</div></details>
-        <details><summary>Does this remove data that is already out there?</summary><div class="a">No, and anyone who tells you otherwise is overpromising. Past records stay where they are. We stop every future shipment from being published, which is what protects your suppliers, volumes and sourcing strategy from here on.</div></details>
-        <details><summary>How fast does protection start?</summary><div class="a">Confirmation typically arrives within 24 hours. Once active, new shipments stop appearing on public platforms.</div></details>
-        <details><summary>Does my broker or freight forwarder need to change anything?</summary><div class="a">No. Nothing about how you ship changes. We work in the background while you keep operating exactly as you do today.</div></details>
-        <details><summary>How do I know it is working?</summary><div class="a">Every month we check 18+ public platforms for anything new under your names and send you the result. You can also check for yourself: search your company name and watch the new records stop.</div></details>
+    <article class="featured reveal">
+      <div class="ph"><img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt=""></div>
+      <div class="body">
+        <div class="kind">The lookup · Featured</div>
+        <h2>The 30-Second Lookup: what anyone can learn about a $40M importer before their coffee cools</h2>
+        <p>We open a free trade platform, type one company name, and narrate what appears: the mill, the port, the monthly cadence, the new product code. Then we ask who else is looking.</p>
+        <div class="meta"><span>7 min read</span><span>September 2026</span></div>
+        <a class="pill pill-dark" href="#">Read the post</a>
       </div>
+    </article>
 
-      <div class="group" id="privacy">
-        <h2>Privacy and confidentiality</h2>
-        <details><summary>Is this legal?</summary><div class="a">Completely. Confidentiality is a protection available to importers, and we handle the entire process on your behalf. Nothing about it affects your compliance standing.</div></details>
-        <details><summary>What information gets protected?</summary><div class="a">Your supplier and factory names, shipment quantities and weights, product descriptions, ports, carrier and vessel names, container numbers and arrival dates. In short, everything a competitor would want to read.</div></details>
-        <details><summary>What do you need from me?</summary><div class="a">Your company and entity names exactly as they appear on your customs filings. That is it. We handle everything else and confirm when protection is active.</div></details>
-        <details><summary>What do you do with my information?</summary><div class="a">We use it to put your protection in place and to monitor for your names, and for nothing else. We never share it, never sell it, and our own site runs without chat widgets, tracking pixels or cookie banners.</div></details>
-        <details><summary>Are international shipments covered?</summary><div class="a">We protect U.S. import data only. That is where the public exposure problem lives for American importers.</div></details>
-      </div>
+    <div class="posts" id="posts">
+      <a class="post reveal" href="#" data-cat="expose"><div class="ph"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt=""></div><div class="body"><div class="kind">The lookup</div><h3>Your restock schedule is public. Here's what a competitor does with it.</h3><p>A 26-day cadence, visible to anyone, is a calendar for undercutting you.</p><div class="meta"><span>5 min</span><span>Sept 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="expose"><div class="ph"><img src="photography/01-hero/cdl-hero-03-ship-overhead.jpg" alt=""></div><div class="body"><div class="kind">The lookup</div><h3>We looked up 50 supplement brands. 46 of their supplier lists were one search away.</h3><p>Original research, one vertical, one afternoon.</p><div class="meta"><span>6 min</span><span>Sept 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="expose"><div class="ph"><img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt=""></div><div class="body"><div class="kind">The lookup</div><h3>Anatomy of a knockoff: from public shipping record to copycat listing in 90 days</h3><p>The skincare launch, step by step, from the first container to the third copy.</p><div class="meta"><span>8 min</span><span>Aug 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="fraud"><div class="ph"><img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt=""></div><div class="body"><div class="kind">Fraud</div><h3>The invoice looked real because the shipment was real</h3><p>How supplier impersonation starts with public data, and the week it tends to arrive.</p><div class="meta"><span>6 min</span><span>Aug 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="fraud"><div class="ph"><img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt=""></div><div class="body"><div class="kind">Fraud</div><h3>A fraud checklist for importers who wire money overseas</h3><p>Nine questions your accounts payable team can ask before the wire goes out.</p><div class="meta"><span>4 min</span><span>Aug 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="strategy"><div class="ph"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt=""></div><div class="body"><div class="kind">Leverage</div><h3>Your supplier knows what you pay their other customers. So does everyone else.</h3><p>Why the negotiation is over before you sit down.</p><div class="meta"><span>5 min</span><span>Aug 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="strategy"><div class="ph"><img src="photography/01-hero/cdl-hero-03-ship-overhead.jpg" alt=""></div><div class="body"><div class="kind">Leverage</div><h3>The launch you telegraphed: how new products leak months before the ad campaign</h3><p>A new product code is a press release nobody meant to send.</p><div class="meta"><span>5 min</span><span>Jul 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="trust"><div class="ph"><img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt=""></div><div class="body"><div class="kind">Trust and legal</div><h3>Is your supply chain a trade secret? Then why is it on a free website?</h3><p>The question general counsel asks once, then never stops asking.</p><div class="meta"><span>6 min</span><span>Jul 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="lapse"><div class="ph"><img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt=""></div><div class="body"><div class="kind">Renewal</div><h3>Protected in 2022, public in 2024: the quiet way importers lose their coverage</h3><p>Nobody cancelled anything. Somebody left. That was enough.</p><div class="meta"><span>5 min</span><span>Jul 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="lapse"><div class="ph"><img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt=""></div><div class="body"><div class="kind">Renewal</div><h3>What the Free Exposure Check actually checks</h3><p>Every step, every platform, and what we send back, so there are no surprises.</p><div class="meta"><span>4 min</span><span>Jul 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="vertical"><div class="ph"><img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt=""></div><div class="body"><div class="kind">By industry</div><h3>Why specialty food importers guard their suppliers like recipes</h3><p>The relationship is the product. The record gives it away.</p><div class="meta"><span>5 min</span><span>Jun 2026</span></div></div></a>
+      <a class="post reveal" href="#" data-cat="vertical"><div class="ph"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt=""></div><div class="body"><div class="kind">By industry</div><h3>Amazon private label in 2026: your listing tells them what sells, your records tell them how to make it</h3><p>Two public documents, one complete business plan.</p><div class="meta"><span>6 min</span><span>Jun 2026</span></div></div></a>
+    </div>
+    <div class="empty" id="empty">Nothing in this category yet.</div>
 
-      <div class="group" id="coverage">
-        <h2>Coverage and quotes</h2>
-        <details><summary>Why is there no price list?</summary><div class="a">Because coverage is scoped to your legal entities, and no two importers have the same set. You are only ever covered for, and billed for, the entities you actually have. <b>Most quotes are turned around the same day.</b></div></details>
-        <details><summary>What counts as an entity?</summary><div class="a">Every legal name your shipments arrive under. If you import under one company name, that is one entity. If you use several LLCs, brands or DBAs on customs filings, each one is an entity and each one is protected.</div></details>
-        <details><summary>What about misspellings and name variations?</summary><div class="a">Always covered, at no extra cost, on every plan. A forwarder's misspelling is still your record, so capping variations would leave exactly those records exposed.</div></details>
-        <details><summary>Can I add entities later?</summary><div class="a">Yes. Adding an entity moves you to the plan that fits, and renewal dates line up so nothing lapses in between. A new brand or LLC never has to ship exposed.</div></details>
-        <details><summary>What happens at renewal?</summary><div class="a">Protection renews automatically, so coverage never lapses. You are billed once a year and can review or change your plan at any time.</div></details>
-        <details><summary>Can I cancel?</summary><div class="a">Yes, at any time. Keep in mind that once protection ends, your future shipment records begin appearing publicly again, usually within weeks.</div></details>
-      </div>
-
-      <div class="group" id="brokers">
-        <h2>For brokers and counsel</h2>
-        <details><summary>I am a customs broker. Can I bring this to my clients?</summary><div class="a">Yes, and many of our customers arrive that way. Nothing about your filing relationship changes, and we can run the Free Exposure Check on any client you name so the conversation starts with their real record.</div></details>
-        <details><summary>Can our counsel review the protection before we commit?</summary><div class="a">Of course. We will walk your counsel through exactly what is put in place, what it covers, and what it does not, in plain language. Multi-Entity and Enterprise proposals include a vendor pack for procurement and legal review.</div></details>
-        <details><summary>Will you sign an NDA?</summary><div class="a">Yes. Confidentiality is the product, so we are comfortable with yours or ours.</div></details>
-        <details><summary>Do you work with groups that import under many names?</summary><div class="a">Yes. Enterprise coverage starts with a scope call and a signed-off entity map across the whole group, then one proposal on an annual agreement.</div></details>
-      </div>
-
-      <div class="still">
-        <div><h3>Still have a question?</h3><p>Ask a person. You hear back from someone at Customs Data Lock, not a sequence.</p></div>
-        <a class="pill pill-light" href="CDL-data-demo-r4.html#contact">Contact us</a>
-      </div>
+    <div class="gate reveal">
+      <div><h2>The Importer Exposure Report</h2><p>The platform map, the anatomy of a company page, the four readers, and how protection lapses. Free, as a PDF.</p></div>
+      <a class="pill pill-light" href="CDL-data-demo-r4.html">Get the report</a>
     </div>
   </div>
 </section>
@@ -262,7 +276,6 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 </section>
 
 </main>
-
 <footer class="foot" id="footer" data-frame="04-footer">
   <div class="shell">
     <div class="foot-in">
@@ -275,9 +288,9 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   </div>
 </footer>
 
-<script type="application/ld+json" id="faqld"></script>
 <script>
 (function(){
+
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const vh = () => innerHeight || document.documentElement.clientHeight;
   const inView = (el, frac=0.9) => { const r = el.getBoundingClientRect(); return r.top < vh()*frac && r.bottom > 0; };
@@ -292,7 +305,7 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   if (h1) { h1.querySelectorAll('.w').forEach((w, i) => w.style.transitionDelay = (i * 60) + 'ms'); setTimeout(() => h1.classList.add('in'), 40); if (isStatic) h1.classList.add('in'); }
   setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
   const bar = document.getElementById('topbar');
-  onScroll(() => bar.classList.toggle('stuck', scrollY > 4));
+  onScroll(() => { const band = document.querySelector('.band'); bar.classList.toggle('over', !!band && scrollY < 24 && !qs.has('scrolled')); bar.classList.toggle('stuck', scrollY > 4 || qs.has('scrolled')); });
   // resources dropdown: hover opens on desktop, click toggles, Escape and outside click close
   (function(){
     const dd = document.getElementById('navDd'); if (!dd) return; const btn = dd.querySelector('.nav-dd-btn'); let t;
@@ -312,15 +325,11 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   addEventListener('keydown', e => { if (e.key === 'Escape' && bar.classList.contains('open')) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
   document.addEventListener('click', e => { if (bar.classList.contains('open') && !bar.contains(e.target)) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
 
-  // one open per group
-  document.querySelectorAll('.group').forEach(g => g.querySelectorAll('details').forEach(d => d.addEventListener('toggle', () => { if (d.open) g.querySelectorAll('details').forEach(o => { if (o !== d) o.open = false; }); })));
-  // side nav highlight
-  const groups = [...document.querySelectorAll('.group')]; const links = [...document.querySelectorAll('#cats a')];
-  onScroll(() => { let cur = groups[0]; groups.forEach(g => { if (g.getBoundingClientRect().top < vh() * 0.35) cur = g; }); links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + cur.id)); });
-  // FAQPage JSON-LD from the DOM (feeds AI search)
-  const items = [...document.querySelectorAll('.group details')].map(d => ({ '@type': 'Question', name: d.querySelector('summary').textContent.trim(), acceptedAnswer: { '@type': 'Answer', text: d.querySelector('.a').textContent.trim() } }));
-  document.getElementById('faqld').textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: items });
-  if (qs.get('open') === 'all') document.querySelectorAll('.group details').forEach(d => d.open = true);
+
+  // category filter
+  const btns = [...document.querySelectorAll('.filters button')], posts = [...document.querySelectorAll('.post')], empty = document.getElementById('empty');
+  btns.forEach(b => b.addEventListener('click', () => { btns.forEach(x => x.setAttribute('aria-pressed', x === b)); const f = b.dataset.f; let n = 0; posts.forEach(p => { const show = f === 'all' || p.dataset.cat === f; p.classList.toggle('hide', !show); if (show) n++; }); empty.classList.toggle('on', n === 0); }));
+  const pf = qs.get('cat'); if (pf) { const b = btns.find(x => x.dataset.f === pf); if (b) b.click(); }
 })();
 </script>
 </body>
