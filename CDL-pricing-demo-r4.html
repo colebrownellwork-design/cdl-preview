@@ -66,6 +66,34 @@ button, input { font: inherit; }
 .nav-links a { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); color: var(--text); transition: background-color .15s ease; }
 .nav-links a:hover { background: var(--card-2); }
 .nav-links a[aria-current="page"] { background: var(--card-2); }
+/* resources dropdown */
+.nav-dd { position: relative; }
+.nav-dd-btn { appearance: none; background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font: inherit; font-size: 14.5px; font-weight: 500; padding: 8px 12px; border-radius: var(--r-pill); color: var(--text); transition: background-color .15s ease; }
+.nav-dd-btn svg { transition: transform .2s var(--ease); }
+.nav-dd-btn:hover, .nav-dd-btn[aria-expanded="true"], .nav-dd-btn[aria-current="page"] { background: var(--card-2); }
+.nav-dd-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.nav-dd-menu { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(-6px); min-width: 300px; background: rgba(244,244,242,.62); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); border: 1px solid rgba(255,255,255,.55); border-radius: 18px; box-shadow: 0 2px 4px rgba(20,30,50,.05), 0 24px 48px -16px rgba(20,30,50,.25); padding: 8px; opacity: 0; visibility: hidden; transition: opacity .2s var(--ease), transform .2s var(--ease), visibility 0s linear .2s; z-index: 60; text-align: left; }
+.nav-dd.open .nav-dd-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); transition: opacity .2s var(--ease), transform .2s var(--ease), visibility 0s; }
+.nav-dd-menu a { display: block; padding: 10px 12px; border-radius: 12px; text-decoration: none; color: var(--text); }
+.topbar.over .nav-dd-menu { background: rgba(21,44,73,.38); border-color: rgba(255,255,255,.22); box-shadow: 0 24px 48px -16px rgba(0,0,0,.45); }
+.topbar.over .nav-links .nav-dd-menu a { color: var(--white); }
+.topbar.over .nav-links .nav-dd-menu a:hover, .topbar.over .nav-links .nav-dd-menu a:focus-visible { background: rgba(255,255,255,.14); }
+.topbar.over .nav-dd-menu span { color: rgba(255,255,255,.7); }
+.topbar.over .nav-dd-menu a[aria-current="page"] b { color: var(--coral); }
+.nav-dd-menu a:hover, .nav-dd-menu a:focus-visible { background: rgba(255,255,255,.55); }
+.nav-dd-menu a[aria-current="page"] b { color: var(--coral); }
+.nav-dd-menu a[aria-disabled="true"] { opacity: .5; pointer-events: none; }
+.nav-dd-menu b { display: block; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.nav-dd-menu span { display: block; font-size: 13px; color: var(--muted); line-height: 18px; margin-top: 1px; }
+.topbar.over .nav-dd-btn { color: var(--white); }
+.topbar.over .nav-dd-btn:hover, .topbar.over .nav-dd-btn[aria-expanded="true"] { background: rgba(255,255,255,.14); }
+@media (max-width: 960px) {
+  .nav-dd-btn { width: 100%; justify-content: space-between; padding: 12px 8px; }
+  .nav-dd-menu { position: static; transform: none; min-width: 0; box-shadow: none; border: 0; border-radius: 0; padding: 0 0 6px 12px; display: none; opacity: 1; visibility: visible; background: transparent; }
+  .nav-dd.open .nav-dd-menu { display: block; transform: none; }
+  .nav-dd-menu span { display: none; }
+  .topbar.over.open .nav-dd-btn, .topbar.over.open .nav-dd-menu a { color: var(--white); }
+}
 .nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
 .nav-login { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); }
 .nav-login:hover { background: var(--card-2); }
@@ -81,12 +109,54 @@ button, input { font: inherit; }
   .topbar.open .nav-links a { padding: 12px 8px; }
 }
 
+
+/* transparent nav over a photo band until scroll */
+.topbar { transition: background-color .35s var(--ease), border-color .35s var(--ease); }
+.topbar.over { background: transparent; backdrop-filter: none; border-bottom-color: transparent; }
+.topbar.over .nav-links a, .topbar.over .nav-login { color: var(--white); }
+.topbar.over .nav-links a[aria-current="page"], .topbar.over .nav-dd-btn[aria-current="page"] { background: rgba(255,255,255,.16); }
+.topbar.over .nav-links a:hover, .topbar.over .nav-login:hover { background: rgba(255,255,255,.14); }
+.topbar.over .nav-toggle { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.35); color: var(--white); }
+.topbar .nav-logo.rev { display: none; }
+.topbar.over .nav-logo.rev { display: block; } .topbar.over .nav-logo.std { display: none; }
+.topbar.over.open { background: rgba(21,44,73,.96); }
+.topbar.over .nav-dd-btn { color: var(--white); }
+.topbar.over .nav-dd-btn:hover, .topbar.over .nav-dd-btn[aria-expanded="true"] { background: rgba(255,255,255,.14); }
+.topbar.over .nav-dd-menu { background: rgba(21,44,73,.38); border-color: rgba(255,255,255,.22); box-shadow: 0 24px 48px -16px rgba(0,0,0,.45); }
+.topbar.over .nav-links .nav-dd-menu a { color: var(--white); }
+.topbar.over .nav-links .nav-dd-menu a:hover, .topbar.over .nav-links .nav-dd-menu a:focus-visible { background: rgba(255,255,255,.14); }
+.topbar.over .nav-dd-menu span { color: rgba(255,255,255,.7); }
+.topbar.over .nav-dd-menu a[aria-current="page"] b { color: var(--coral); }
+/* photo band */
+.band { position: relative; margin-top: -68px; background: var(--deep); overflow: hidden; }
+.band img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
+.band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,44,73,.35) 0%, rgba(21,44,73,.45) 50%, rgba(21,44,73,.85) 100%); }
+.band .bin { position: relative; z-index: 2; }
+@media (max-width: 960px) { .band { margin-top: -64px; } }
+
 /* hero */
 .hero { padding: 72px 0 24px; text-align: center; }
 .hero h1 { font-size: 76px; line-height: 80px; letter-spacing: -0.045em; font-weight: 600; max-width: 900px; margin: 0 auto; }
 .hero .sub { font-size: 20px; line-height: 30px; color: var(--muted); max-width: 620px; margin: 20px auto 0; }
 .hero .sub b { color: var(--text); font-weight: 500; }
 @media (max-width: 960px) { .hero h1 { font-size: 46px; line-height: 50px; } }
+
+
+.phero { padding: 0; }
+.phero .band .bin { padding: 150px 32px 200px; text-align: center; }
+.phero h1 { color: var(--white); }
+.phero .sub { color: rgba(255,255,255,.82); } .phero .sub b { color: var(--white); }
+.phero .funnel { margin-top: -150px; position: relative; z-index: 3; }
+/* entity map */
+.emap { display: flex; justify-content: center; gap: 8px; margin: 22px 0 6px; min-height: 52px; }
+.emap i { width: 40px; height: 40px; border-radius: 10px; background: var(--ground); border: 1px solid var(--line); display: inline-flex; align-items: center; justify-content: center; color: var(--gray-blue); opacity: 0; transform: scale(.7); transition: opacity .35s var(--ease), transform .45s cubic-bezier(.22,1.2,.36,1), background-color .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease); }
+.emap i.on { opacity: 1; transform: none; }
+.emap i svg { width: 18px; height: 18px; opacity: 0; transform: translateY(4px); transition: opacity .3s var(--ease) .15s, transform .3s var(--ease) .15s; }
+.emap.locked i.on { background: var(--indigo); border-color: var(--indigo); color: var(--white); }
+.emap.locked i.on svg { opacity: 1; transform: none; }
+.emap i.q { font-style: normal; font-weight: 600; color: var(--muted-2); }
+.emap .lbl { align-self: center; font-size: 13px; color: var(--muted); margin-left: 6px; }
+@media (max-width: 960px) { .phero .band .bin { padding: 110px 16px 160px; } .phero .funnel { margin-top: -120px; } }
 
 /* funnel card */
 .funnel { text-align: left; max-width: 860px; margin: 40px auto 0; background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow-card); overflow: hidden; }
@@ -187,16 +257,23 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 
 <header class="topbar" id="topbar">
   <div class="shell nav-in">
-    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"></a>
+    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo std" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"><img class="nav-logo rev" src="logo/cdl-logo-reversed.svg" alt="" aria-hidden="true"></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <nav class="nav-links" id="navLinks">
       <a href="CDL-home-demo-r4.html#how">How it works</a>
       <a href="CDL-home-demo-r4.html#stakes">Why it matters</a>
-      <a href="CDL-data-demo-r4.html">Resources</a>
-      <a href="#" aria-current="page">Pricing</a>
-      <a href="CDL-faq-demo-r4.html">FAQ</a>
+      <div class="nav-dd" id="navDd">
+        <button class="nav-dd-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navDdMenu">Resources <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-dd-menu" id="navDdMenu" role="menu">
+          <a role="menuitem" href="CDL-testimonials-demo-r4.html"><b>Testimonials</b><span>What importers say. Names withheld.</span></a>
+          <a role="menuitem" href="CDL-faq-demo-r4.html"><b>FAQ</b><span>Answered in the first sentence.</span></a>
+          <a role="menuitem" href="CDL-data-demo-r4.html"><b>The Exposure Report</b><span>Free report on who reads your record.</span></a>
+          <a role="menuitem" href="#" aria-disabled="true"><b>Blog</b><span>Coming soon.</span></a>
+        </div>
+      </div>
+      <a href="CDL-pricing-demo-r4.html" aria-current="page">Pricing</a>
     </nav>
     <div class="nav-right">
       <a class="nav-login" href="#">Log in</a>
@@ -208,11 +285,14 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 <main id="main">
 
 <!-- 01 HERO + FUNNEL -->
-<section class="hero" id="hero" data-frame="01-hero">
+<section class="hero phero" id="hero" data-frame="01-hero">
+  <div class="band"><img class="bg" src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt="" width="1920" height="1084">
+    <div class="shell bin">
+      <h1 class="rise" id="h1"><span class="w">Pricing</span> <span class="w">built</span> <span class="w">for</span> <span class="w">you.</span></h1>
+      <p class="sub reveal"><b>Quoted by coverage.</b> Three questions, then your plan.</p>
+    </div>
+  </div>
   <div class="shell">
-    <h1 class="rise" id="h1"><span class="w">Pricing</span> <span class="w">built</span> <span class="w">for</span> <span class="w">you.</span></h1>
-    <p class="sub reveal"><b>Quoted by coverage.</b> You are only ever covered for, and billed for, the entities you actually have. Three questions, then your plan.</p>
-
     <div class="funnel reveal" id="funnel">
       <div class="f-bar"><span id="fBar"></span></div>
       <div class="f-in">
@@ -224,6 +304,7 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
         <div class="q on" data-q="0">
           <h2>How many legal entities do you import under?</h2>
           <p>Every legal name your shipments arrive under counts as one.</p>
+          <div class="emap" id="emap" aria-hidden="true"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><span class="lbl" id="emapLbl"></span></div>
           <div class="chips" role="group" aria-label="Number of entities">
             <button class="chip" type="button" data-v="1">One<small>A single importing company</small></button>
             <button class="chip" type="button" data-v="2-5">Two to five<small>Related companies, brands or subsidiaries</small></button>
@@ -441,11 +522,36 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
 
   const bar = document.getElementById('topbar');
-  onScroll(() => bar.classList.toggle('stuck', scrollY > 4));
+  onScroll(() => { const band = document.querySelector('.band'); bar.classList.toggle('over', !!band && scrollY < 24 && !qs.has('scrolled')); bar.classList.toggle('stuck', scrollY > 4 || qs.has('scrolled')); });
+  // resources dropdown: hover opens on desktop, click toggles, Escape and outside click close
+  (function(){
+    const dd = document.getElementById('navDd'); if (!dd) return; const btn = dd.querySelector('.nav-dd-btn'); let t;
+    const set = o => { dd.classList.toggle('open', o); btn.setAttribute('aria-expanded', o); };
+    btn.addEventListener('click', () => set(!dd.classList.contains('open')));
+    dd.addEventListener('mouseenter', () => { if (matchMedia('(pointer: fine)').matches && innerWidth > 960) { clearTimeout(t); set(true); } });
+    dd.addEventListener('mouseleave', () => { if (innerWidth > 960) t = setTimeout(() => set(false), 160); });
+    document.addEventListener('click', e => { if (!dd.contains(e.target)) set(false); });
+    addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+    dd.querySelectorAll('.nav-dd-menu a').forEach((a, i, all) => a.addEventListener('keydown', e => { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); all[(i + (e.key === 'ArrowDown' ? 1 : -1) + all.length) % all.length].focus(); } }));
+    if (qs.get('dd') === 'open') set(true);
+  })();
+
   const tog = document.getElementById('navToggle');
+  if (qs.get('menu') === 'open') { bar.classList.add('open'); tog.setAttribute('aria-expanded', 'true'); }
   tog.addEventListener('click', () => { const open = bar.classList.toggle('open'); tog.setAttribute('aria-expanded', open); });
   addEventListener('keydown', e => { if (e.key === 'Escape' && bar.classList.contains('open')) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
   document.addEventListener('click', e => { if (bar.classList.contains('open') && !bar.contains(e.target)) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
+
+  // entity map: hover a chip to preview how many entities, select to lock them
+  (function(){
+    const map = document.getElementById('emap'); if (!map) return; const tiles = [...map.querySelectorAll('i')], lbl = document.getElementById('emapLbl');
+    const shape = { '1': [1, 'one entity'], '2-5': [4, 'a small group'], '6+': [9, 'a portfolio'], 'unsure': [3, 'we will find out'] };
+    const show = (v, locked) => { const [n, text] = shape[v] || [0, '']; tiles.forEach((el, i) => { el.classList.toggle('on', i < n); el.classList.toggle('q', v === 'unsure'); el.style.transitionDelay = (i * 40) + 'ms'; }); map.classList.toggle('locked', !!locked); lbl.textContent = text; };
+    const q1 = document.querySelector('.q[data-q="0"]'); let sel = null;
+    q1.querySelectorAll('.chip').forEach(c => { c.addEventListener('mouseenter', () => show(c.dataset.v, false)); c.addEventListener('focus', () => show(c.dataset.v, false)); c.addEventListener('click', () => { sel = c.dataset.v; show(sel, true); }); });
+    q1.addEventListener('mouseleave', () => { if (sel) show(sel, true); else show('', false); });
+    const pre = qs.get('emap'); if (pre) show(pre, qs.get('locked') === '1');
+  })();
 
   // funnel
   const steps = [...document.querySelectorAll('.q')];

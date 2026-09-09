@@ -57,6 +57,34 @@ button, input, textarea, select { font: inherit; }
 .nav-links { display: flex; gap: 2px; justify-content: center; }
 .nav-links a { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); color: var(--text); transition: background-color .15s ease; }
 .nav-links a:hover, .nav-links a[aria-current="page"] { background: var(--card-2); }
+/* resources dropdown */
+.nav-dd { position: relative; }
+.nav-dd-btn { appearance: none; background: none; border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font: inherit; font-size: 14.5px; font-weight: 500; padding: 8px 12px; border-radius: var(--r-pill); color: var(--text); transition: background-color .15s ease; }
+.nav-dd-btn svg { transition: transform .2s var(--ease); }
+.nav-dd-btn:hover, .nav-dd-btn[aria-expanded="true"], .nav-dd-btn[aria-current="page"] { background: var(--card-2); }
+.nav-dd-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.nav-dd-menu { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(-6px); min-width: 300px; background: rgba(244,244,242,.62); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); border: 1px solid rgba(255,255,255,.55); border-radius: 18px; box-shadow: 0 2px 4px rgba(20,30,50,.05), 0 24px 48px -16px rgba(20,30,50,.25); padding: 8px; opacity: 0; visibility: hidden; transition: opacity .2s var(--ease), transform .2s var(--ease), visibility 0s linear .2s; z-index: 60; text-align: left; }
+.nav-dd.open .nav-dd-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); transition: opacity .2s var(--ease), transform .2s var(--ease), visibility 0s; }
+.nav-dd-menu a { display: block; padding: 10px 12px; border-radius: 12px; text-decoration: none; color: var(--text); }
+.topbar.over .nav-dd-menu { background: rgba(21,44,73,.38); border-color: rgba(255,255,255,.22); box-shadow: 0 24px 48px -16px rgba(0,0,0,.45); }
+.topbar.over .nav-links .nav-dd-menu a { color: var(--white); }
+.topbar.over .nav-links .nav-dd-menu a:hover, .topbar.over .nav-links .nav-dd-menu a:focus-visible { background: rgba(255,255,255,.14); }
+.topbar.over .nav-dd-menu span { color: rgba(255,255,255,.7); }
+.topbar.over .nav-dd-menu a[aria-current="page"] b { color: var(--coral); }
+.nav-dd-menu a:hover, .nav-dd-menu a:focus-visible { background: rgba(255,255,255,.55); }
+.nav-dd-menu a[aria-current="page"] b { color: var(--coral); }
+.nav-dd-menu a[aria-disabled="true"] { opacity: .5; pointer-events: none; }
+.nav-dd-menu b { display: block; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.nav-dd-menu span { display: block; font-size: 13px; color: var(--muted); line-height: 18px; margin-top: 1px; }
+.topbar.over .nav-dd-btn { color: var(--white); }
+.topbar.over .nav-dd-btn:hover, .topbar.over .nav-dd-btn[aria-expanded="true"] { background: rgba(255,255,255,.14); }
+@media (max-width: 960px) {
+  .nav-dd-btn { width: 100%; justify-content: space-between; padding: 12px 8px; }
+  .nav-dd-menu { position: static; transform: none; min-width: 0; box-shadow: none; border: 0; border-radius: 0; padding: 0 0 6px 12px; display: none; opacity: 1; visibility: visible; background: transparent; }
+  .nav-dd.open .nav-dd-menu { display: block; transform: none; }
+  .nav-dd-menu span { display: none; }
+  .topbar.over.open .nav-dd-btn, .topbar.over.open .nav-dd-menu a { color: var(--white); }
+}
 .nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
 .nav-login { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); } .nav-login:hover { background: var(--card-2); }
 .nav-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--white); color: var(--text); align-items: center; justify-content: center; cursor: pointer; }
@@ -84,13 +112,38 @@ button, input, textarea, select { font: inherit; }
 body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { display: none !important; }
 
 
+
+/* transparent nav over a photo band until scroll */
+.topbar { transition: background-color .35s var(--ease), border-color .35s var(--ease); }
+.topbar.over { background: transparent; backdrop-filter: none; border-bottom-color: transparent; }
+.topbar.over .nav-links a, .topbar.over .nav-login { color: var(--white); }
+.topbar.over .nav-links a[aria-current="page"], .topbar.over .nav-dd-btn[aria-current="page"] { background: rgba(255,255,255,.16); }
+.topbar.over .nav-links a:hover, .topbar.over .nav-login:hover { background: rgba(255,255,255,.14); }
+.topbar.over .nav-toggle { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.35); color: var(--white); }
+.topbar .nav-logo.rev { display: none; }
+.topbar.over .nav-logo.rev { display: block; } .topbar.over .nav-logo.std { display: none; }
+.topbar.over.open { background: rgba(21,44,73,.96); }
+.topbar.over .nav-dd-btn { color: var(--white); }
+.topbar.over .nav-dd-btn:hover, .topbar.over .nav-dd-btn[aria-expanded="true"] { background: rgba(255,255,255,.14); }
+.topbar.over .nav-dd-menu { background: rgba(21,44,73,.38); border-color: rgba(255,255,255,.22); box-shadow: 0 24px 48px -16px rgba(0,0,0,.45); }
+.topbar.over .nav-links .nav-dd-menu a { color: var(--white); }
+.topbar.over .nav-links .nav-dd-menu a:hover, .topbar.over .nav-links .nav-dd-menu a:focus-visible { background: rgba(255,255,255,.14); }
+.topbar.over .nav-dd-menu span { color: rgba(255,255,255,.7); }
+.topbar.over .nav-dd-menu a[aria-current="page"] b { color: var(--coral); }
+/* photo band */
+.band { position: relative; margin-top: -68px; background: var(--deep); overflow: hidden; }
+.band img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
+.band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,44,73,.35) 0%, rgba(21,44,73,.45) 50%, rgba(21,44,73,.85) 100%); }
+.band .bin { position: relative; z-index: 2; }
+@media (max-width: 960px) { .band { margin-top: -64px; } }
+
 /* report gate */
 .hero { padding: 64px 0 40px; }
 .split { display: grid; grid-template-columns: minmax(0, 1fr) 520px; gap: 64px; align-items: start; }
 .eyebrow { font-size: 13px; color: var(--coral); font-weight: 500; margin-bottom: 14px; }
 .hero h1 { font-size: 64px; line-height: 68px; letter-spacing: -0.045em; font-weight: 600; max-width: 640px; }
 .hero .sub { font-size: 19px; line-height: 29px; color: var(--muted); max-width: 540px; margin-top: 18px; }
-.meta { display: flex; gap: 40px; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); max-width: 540px; }
+.meta { display: flex; gap: 40px; margin-top: 0; padding-top: 0; max-width: 540px; }
 .meta b { display: block; font-size: 22px; letter-spacing: -0.03em; font-weight: 600; }
 .meta span { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
 .inside { list-style: none; margin-top: 30px; max-width: 540px; }
@@ -124,6 +177,45 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 .done .pill { width: auto; margin-top: 22px; }
 @media (max-width: 960px) { .split { grid-template-columns: 1fr; gap: 36px; } .hero h1 { font-size: 42px; line-height: 46px; } .fcard { position: static; padding: 24px 20px; } .row2 { grid-template-columns: 1fr; } .meta { gap: 24px; } }
 
+
+.rhero { padding: 0; }
+.rhero .band { overflow: visible; }
+.rhero .band .bin { padding: 150px 32px 120px; }
+.rhero .band .split { align-items: end; }
+.rhero .eyebrow { color: var(--coral); }
+.rhero h1 { color: var(--white); }
+.rhero .sub { color: rgba(255,255,255,.82); }
+.rhero .live-line { margin-top: 22px; font-size: 14px; color: rgba(255,255,255,.75); display: inline-flex; align-items: center; gap: 8px; }
+.rhero .live-line i { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 4px rgba(240,77,77,.2); }
+.rhero .live-line b { color: var(--white); font-variant-numeric: tabular-nums; }
+.rhero .fcard { position: relative; z-index: 3; margin-bottom: -180px; }
+.rhero .below { padding: 200px 0 40px; }
+.below .split { align-items: start; }
+/* the report as an object */
+.book { position: relative; width: 330px; height: 430px; margin: 10px 0 56px 24px; perspective: 1400px; }
+.book .pg { position: absolute; inset: 0; border-radius: 10px; background: var(--white); border: 1px solid var(--line); box-shadow: 0 2px 4px rgba(20,30,50,.06), 0 30px 60px -24px rgba(20,30,50,.45); transform-origin: left center; transition: transform .8s cubic-bezier(.22,1,.36,1), box-shadow .8s var(--ease); }
+.book .pg.p3 { transform: rotateY(-8deg) translateX(26px) translateY(10px); background: var(--card-2); }
+.book .pg.p2 { transform: rotateY(-8deg) translateX(14px) translateY(5px); padding: 28px 26px; }
+.book .pg.cover { transform: rotateY(-8deg); background: var(--indigo); color: var(--white); padding: 30px 28px; display: flex; flex-direction: column; }
+.book:hover .pg.cover, .book:focus-within .pg.cover, .book.open .pg.cover { transform: rotateY(-42deg) translateX(-6px); box-shadow: 0 2px 4px rgba(20,30,50,.06), 0 40px 70px -24px rgba(20,30,50,.6); }
+.book:hover .pg.p2, .book:focus-within .pg.p2, .book.open .pg.p2 { transform: rotateY(-6deg) translateX(10px) translateY(4px); }
+.book .cover .kick { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--dark-muted); font-family: var(--font-mono); }
+.book .cover h3 { color: var(--white); font-size: 30px; line-height: 34px; letter-spacing: -0.03em; margin-top: 14px; }
+.book .cover .yr { font-size: 60px; line-height: 60px; font-weight: 600; letter-spacing: -0.05em; color: var(--coral); margin-top: auto; }
+.book .cover .foot { display: flex; justify-content: space-between; font-size: 12px; color: var(--dark-muted); margin-top: 10px; }
+.book .cover .readers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 18px; }
+.book .cover .readers i { display: block; height: 34px; border-radius: 6px; background: rgba(255,255,255,.12); }
+.book .cover .readers i:nth-child(3) { background: rgba(240,77,77,.55); }
+.book .p2 .t { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-family: var(--font-mono); color: var(--gray-blue); }
+.book .p2 h4 { font-size: 17px; line-height: 22px; margin: 8px 0 12px; }
+.book .p2 ul { list-style: none; }
+.book .p2 li { display: grid; grid-template-columns: 1fr auto; font-size: 12.5px; color: var(--muted); padding: 6px 0; border-top: 1px solid var(--line); }
+.book .p2 li b { color: var(--text); font-weight: 500; }
+.book .hint { position: absolute; left: 0; bottom: -44px; font-size: 13.5px; font-weight: 600; color: var(--coral); display: inline-flex; align-items: center; gap: 6px; z-index: 2; }
+.book .hint::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 4px rgba(240,77,77,.18); }
+.inside-wrap { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 48px; align-items: start; }
+@media (max-width: 960px) { .rhero .band .bin { padding: 110px 16px 60px; } .rhero .fcard { margin-bottom: 0; } .rhero .below { padding: 48px 0 20px; } .inside-wrap { grid-template-columns: 1fr; } .book { margin: 0 auto 40px; width: 280px; height: 370px; } }
+
 /* preview card */
 .preview { margin-top: 56px; background: var(--indigo); color: var(--white); border-radius: var(--r-card); padding: 44px 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
 .preview h2 { color: var(--white); font-size: 32px; line-height: 38px; letter-spacing: -0.03em; }
@@ -151,16 +243,23 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar" id="topbar">
   <div class="shell nav-in">
-    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"></a>
+    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo std" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"><img class="nav-logo rev" src="logo/cdl-logo-reversed.svg" alt="" aria-hidden="true"></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <nav class="nav-links" id="navLinks">
       <a href="CDL-home-demo-r4.html#how">How it works</a>
       <a href="CDL-home-demo-r4.html#stakes">Why it matters</a>
-      <a href="CDL-home-demo-r4.html#scenarios" aria-current="page">Resources</a>
+      <div class="nav-dd" id="navDd">
+        <button class="nav-dd-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navDdMenu" aria-current="page">Resources <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="nav-dd-menu" id="navDdMenu" role="menu">
+          <a role="menuitem" href="CDL-testimonials-demo-r4.html"><b>Testimonials</b><span>What importers say. Names withheld.</span></a>
+          <a role="menuitem" href="CDL-faq-demo-r4.html"><b>FAQ</b><span>Answered in the first sentence.</span></a>
+          <a role="menuitem" href="CDL-data-demo-r4.html" aria-current="page"><b>The Exposure Report</b><span>Free report on who reads your record.</span></a>
+          <a role="menuitem" href="#" aria-disabled="true"><b>Blog</b><span>Coming soon.</span></a>
+        </div>
+      </div>
       <a href="CDL-pricing-demo-r4.html">Pricing</a>
-      <a href="#">FAQ</a>
     </nav>
     <div class="nav-right">
       <a class="nav-login" href="#">Log in</a>
@@ -171,44 +270,59 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 
 <main id="main">
 
-<section class="hero" id="hero" data-frame="01-report">
-  <div class="shell split">
-    <div>
-      <div class="eyebrow reveal">Free report · 2026 edition</div>
-      <h1 class="rise" id="h1"><span class="w">The</span> <span class="w">Importer</span> <span class="w">Exposure</span> <span class="w">Report.</span></h1>
-      <p class="sub reveal">Which public platforms republish U.S. import records, what a single company page reveals, and who is reading it. Written for owners and operators, not compliance teams.</p>
-      <div class="meta reveal">
-        <div><b>18+</b><span>platforms profiled</span></div>
-        <div><b>4</b><span>reader profiles</span></div>
-        <div><b>Sept 2026</b><span>last updated</span></div>
+<section class="hero rhero" id="hero" data-frame="01-report">
+  <div class="band"><img class="bg" src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt="" width="1920" height="1084">
+    <div class="shell bin split">
+      <div>
+        <div class="eyebrow reveal">Free report · 2026 edition</div>
+        <h1 class="rise" id="h1"><span class="w">The</span> <span class="w">Importer</span> <span class="w">Exposure</span> <span class="w">Report.</span></h1>
+        <p class="sub reveal">Which public platforms republish U.S. import records, what a single company page reveals, and who is reading it.</p>
+        <div class="live-line reveal"><i aria-hidden="true"></i><span><b id="liveRecords">0</b> shipment records filed with U.S. Customs since you opened this page</span></div>
       </div>
-      <ul class="inside reveal">
-        <li><span><b>The platform map.</b> Who republishes your records, how fast, and what each one charges to read them.</span></li>
-        <li><span><b>Anatomy of a company page.</b> Suppliers, product codes, volumes, ports and arrival dates, field by field.</span></li>
-        <li><span><b>The four readers.</b> What a competitor, a copycat, a fraudster and a buyer each do with the same record.</span></li>
-        <li><span><b>How protection lapses.</b> Why records come back within weeks when nobody owns the renewal.</span></li>
-      </ul>
-    </div>
-
-    <div class="fcard reveal" id="rcard">
-      <form id="reportForm" novalidate>
-        <h2>Get the report</h2>
-        <p class="lede">Sent to your inbox as a PDF. No sequence follows it.</p>
-        <div class="field" id="r-email"><label for="remail">Work email</label><input id="remail" name="email" type="email" autocomplete="email" inputmode="email" required><div class="err">That does not look like an email.</div></div>
-        <div class="row2">
-          <div class="field" id="r-name"><label for="rname">First name</label><input id="rname" name="name" type="text" autocomplete="given-name" required><div class="err">Just a first name is fine.</div></div>
-          <div class="field" id="r-company"><label for="rcompany">Company</label><input id="rcompany" name="company" type="text" autocomplete="organization" required><div class="err">Company name, please.</div></div>
+      <div class="fcard reveal" id="rcard">
+        <form id="reportForm" novalidate>
+          <h2>Get the report</h2>
+          <p class="lede">Sent to your inbox as a PDF. No sequence follows it.</p>
+          <div class="field" id="r-email"><label for="remail">Work email</label><input id="remail" name="email" type="email" autocomplete="email" inputmode="email" required><div class="err">That does not look like an email.</div></div>
+          <div class="row2">
+            <div class="field" id="r-name"><label for="rname">First name</label><input id="rname" name="name" type="text" autocomplete="given-name" required><div class="err">Just a first name is fine.</div></div>
+            <div class="field" id="r-company"><label for="rcompany">Company</label><input id="rcompany" name="company" type="text" autocomplete="organization" required><div class="err">Company name, please.</div></div>
+          </div>
+          <div class="field"><label for="rsize">How many legal entities do you import under?</label><select id="rsize" name="entities"><option value="">Select one</option><option value="1">One</option><option value="2-5">Two to five</option><option value="6+">Six or more</option><option value="unsure">Not sure</option></select></div>
+          <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <button class="pill pill-lg pill-dark" type="submit">Get the report</button>
+          <p class="fine">We never share your information. Privacy is the product.</p>
+        </form>
+        <div class="done" aria-live="polite">
+          <div class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+          <h2>It's on its way.</h2>
+          <p>Check <b id="rdoneEmail"></b> in the next few minutes. If you want to see your own company's page instead of the general picture, the check below does that.</p>
+          <a class="pill pill-coral" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a>
         </div>
-        <div class="field"><label for="rsize">How many legal entities do you import under?</label><select id="rsize" name="entities"><option value="">Select one</option><option value="1">One</option><option value="2-5">Two to five</option><option value="6+">Six or more</option><option value="unsure">Not sure</option></select></div>
-        <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
-        <button class="pill pill-lg pill-dark" type="submit">Get the report</button>
-        <p class="fine">We never share your information. Privacy is the product.</p>
-      </form>
-      <div class="done" aria-live="polite">
-        <div class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <h2>It's on its way.</h2>
-        <p>Check <b id="rdoneEmail"></b> in the next few minutes. If you want to see your own company's page instead of the general picture, the check below does that.</p>
-        <a class="pill pill-coral" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell below">
+    <div class="inside-wrap">
+      <div class="book reveal" tabindex="0" aria-label="Preview of the report">
+        <div class="pg p3"></div>
+        <div class="pg p2"><div class="t">Chapter 1 · The platform map</div><h4>Who republishes your records, and how fast.</h4><ul><li><b>ImportYeti</b><span>free, same week</span></li><li><b>Panjiva</b><span>paid, days</span></li><li><b>Import Genius</b><span>paid, days</span></li><li><b>ImportKey</b><span>paid, weeks</span></li><li><b>Trademo</b><span>paid, weeks</span></li><li><b>+ 13 more</b><span></span></li></ul></div>
+        <div class="pg cover"><div class="kick">Customs Data Lock</div><h3>The Importer Exposure Report</h3><div class="readers" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="yr">2026</div><div class="foot"><span>18+ platforms</span><span>4 readers</span><span>Free</span></div></div>
+        <div class="hint">Hover to look inside</div>
+      </div>
+      <div>
+        <div class="meta reveal">
+          <div><b>18+</b><span>platforms profiled</span></div>
+          <div><b>4</b><span>reader profiles</span></div>
+          <div><b>Sept 2026</b><span>last updated</span></div>
+        </div>
+        <ul class="inside reveal">
+          <li><span><b>The platform map.</b> Who republishes your records, how fast, and what each one charges to read them.</span></li>
+          <li><span><b>Anatomy of a company page.</b> Suppliers, product codes, volumes, ports and arrival dates, field by field.</span></li>
+          <li><span><b>The four readers.</b> What a competitor, a copycat, a fraudster and a buyer each do with the same record.</span></li>
+          <li><span><b>How protection lapses.</b> Why records come back within weeks when nobody owns the renewal.</span></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -293,12 +407,30 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   if (h1) { h1.querySelectorAll('.w').forEach((w, i) => w.style.transitionDelay = (i * 60) + 'ms'); setTimeout(() => h1.classList.add('in'), 40); if (isStatic) h1.classList.add('in'); }
   setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
   const bar = document.getElementById('topbar');
-  onScroll(() => bar.classList.toggle('stuck', scrollY > 4));
+  onScroll(() => { const band = document.querySelector('.band'); bar.classList.toggle('over', !!band && scrollY < 24 && !qs.has('scrolled')); bar.classList.toggle('stuck', scrollY > 4 || qs.has('scrolled')); });
+  // resources dropdown: hover opens on desktop, click toggles, Escape and outside click close
+  (function(){
+    const dd = document.getElementById('navDd'); if (!dd) return; const btn = dd.querySelector('.nav-dd-btn'); let t;
+    const set = o => { dd.classList.toggle('open', o); btn.setAttribute('aria-expanded', o); };
+    btn.addEventListener('click', () => set(!dd.classList.contains('open')));
+    dd.addEventListener('mouseenter', () => { if (matchMedia('(pointer: fine)').matches && innerWidth > 960) { clearTimeout(t); set(true); } });
+    dd.addEventListener('mouseleave', () => { if (innerWidth > 960) t = setTimeout(() => set(false), 160); });
+    document.addEventListener('click', e => { if (!dd.contains(e.target)) set(false); });
+    addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+    dd.querySelectorAll('.nav-dd-menu a').forEach((a, i, all) => a.addEventListener('keydown', e => { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); all[(i + (e.key === 'ArrowDown' ? 1 : -1) + all.length) % all.length].focus(); } }));
+    if (qs.get('dd') === 'open') set(true);
+  })();
+
   const tog = document.getElementById('navToggle');
+  if (qs.get('menu') === 'open') { bar.classList.add('open'); tog.setAttribute('aria-expanded', 'true'); }
   tog.addEventListener('click', () => { const open = bar.classList.toggle('open'); tog.setAttribute('aria-expanded', open); });
   addEventListener('keydown', e => { if (e.key === 'Escape' && bar.classList.contains('open')) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
   document.addEventListener('click', e => { if (bar.classList.contains('open') && !bar.contains(e.target)) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
   const params = new URLSearchParams(location.search);
+  // live line: records filed since the page opened (CBP FY2024 typical day: 105,103 entries)
+  (function(){ const el = document.getElementById('liveRecords'); if (!el) return; const opened = performance.now(); const fmt = n => n.toLocaleString('en-US'); if (reduce || isStatic) { el.textContent = '12'; return; } (function tick(){ el.textContent = fmt(Math.floor((performance.now() - opened) / 86400000 * 105103)); requestAnimationFrame(tick); })(); })();
+
+  if (qs.get('book') === 'open') document.querySelector('.book').classList.add('open');
   const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   function wire(formId, cardId, fields, onDone) {
     const form = document.getElementById(formId), card = document.getElementById(cardId);
