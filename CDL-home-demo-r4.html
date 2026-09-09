@@ -239,6 +239,32 @@ main { position: relative; }
 .spine .node text { transition: fill .4s var(--ease), opacity .25s var(--ease); }
 .spine .node.clear text { opacity: 0; }
 
+
+/* port callouts (option b) */
+.callout { position: relative; pointer-events: none; white-space: nowrap; transition: opacity .25s var(--ease); --dx: 14px; --dy: -36px; --len: 26px; --rot: -40deg; transform: translate(var(--dx), var(--dy)); }
+.callout .lead { position: absolute; left: calc(-1 * var(--dx)); top: calc(-1 * var(--dy)); width: var(--len); height: 1.5px; background: var(--indigo); transform-origin: left center; transform: rotate(var(--rot)); }
+.callout.ne { --dx: 16px; --dy: -40px; --len: 30px; --rot: -42deg; }
+.callout.e  { --dx: 30px; --dy: -12px; --len: 26px; --rot: -8deg; }
+.callout.se { --dx: 18px; --dy: 22px; --len: 26px; --rot: 34deg; }
+.callout.s  { --dx: -40px; --dy: 30px; --len: 26px; --rot: 100deg; }
+.callout.sw { --dx: -190px; --dy: 18px; --len: 34px; --rot: 160deg; }
+.callout.nw { --dx: -160px; --dy: -46px; --len: 34px; --rot: -152deg; }
+.callout.sw .pill, .callout.nw .pill { transform: translateX(-4px); }
+.callout .lead::after { content: ""; position: absolute; left: -3px; top: -2.5px; width: 6px; height: 6px; border-radius: 50%; background: var(--indigo); }
+.callout .pill { display: inline-flex; flex-direction: column; background: rgba(255,255,255,.92); border: 1px solid var(--line); border-radius: 10px; padding: 5px 9px; box-shadow: 0 6px 18px -8px rgba(20,30,50,.35); backdrop-filter: blur(6px); }
+.callout b { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 15px; }
+.callout small { font-size: 11px; color: var(--muted); line-height: 14px; }
+.globe-hint { display: flex; align-items: center; gap: 10px; margin-top: 26px; font-size: 14px; color: var(--muted); }
+.globe-hint[hidden] { display: none; }
+.globe-hint svg { width: 20px; height: 20px; color: var(--coral); flex: none; }
+@media (max-width: 960px) { .globe-hint span::after { content: " (tap on touch screens)"; } }
+/* numbered legend (option c) */
+.ports-legend { list-style: none; margin-top: 22px; display: grid; grid-template-columns: 1fr; gap: 6px; max-width: 420px; }
+.ports-legend[hidden] { display: none; }
+.ports-legend li { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: center; font-size: 14px; color: var(--text); }
+.ports-legend b { width: 22px; height: 22px; border-radius: 50%; background: var(--coral); color: var(--white); font-size: 11.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; }
+.ports-legend em { font-style: normal; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+
 /* live counters */
 .live { padding: 0 0 96px; }
 .live-in { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -501,6 +527,8 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
       <h2>Tracked from the moment <span class="pop">it ships.</span></h2>
       <p>Every container that leaves a foreign port for the United States becomes a public record on arrival. Supplier, volume, product, port. These are the routes.</p>
       <div class="legend" aria-hidden="true"><span><i></i> Shipments into the U.S.</span><span><i class="us"></i> U.S. ports of entry</span></div>
+      <ol class="ports-legend" id="portLegend" hidden></ol>
+      <div class="globe-hint" id="globeHint" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 11a1.5 1.5 0 0 1 3 0v3.5a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3.6 14a1.5 1.5 0 0 1 2.4-1.8L9 15"/></svg><span>Hover a port to see how many containers arrive there every day.</span></div>
     </div>
     <div class="stage"><div id="globe" aria-label="Globe showing shipping routes into the United States"></div><div class="portcard" id="portCard" role="tooltip" hidden><div class="pc-name"></div><div class="pc-n"></div><div class="pc-l">containers a day, on average</div><div class="pc-sub"></div><div class="pc-src"></div></div><div class="fallback" id="globeFallback">Interactive globe needs WebGL.</div></div>
   </div>
@@ -809,12 +837,12 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   (function(){
     const el = document.getElementById('globe'); if (!el || typeof Globe === 'undefined') { const f = document.getElementById('globeFallback'); if (f) f.style.display = 'flex'; return; }
     const US = [
-      { name: 'Los Angeles / Long Beach', lat: 33.74, lng: -118.25, teu: 10816420, basis: 'loaded TEUs, 2023, both ports', src: 'BTS Port Performance 2026' },
-      { name: 'New York / New Jersey', lat: 40.67, lng: -74.05, teu: 5397161, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' },
-      { name: 'Savannah', lat: 32.08, lng: -81.09, teu: 3774774, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' },
-      { name: 'Houston', lat: 29.73, lng: -95.02, teu: 3209897, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' },
-      { name: 'Seattle / Tacoma', lat: 47.58, lng: -122.35, teu: 3340733, basis: 'total TEUs, 2024', src: 'Northwest Seaport Alliance' },
-      { name: 'Miami', lat: 25.77, lng: -80.18, teu: 824203, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' } ];
+      { name: 'Los Angeles / Long Beach', lat: 33.74, lng: -118.25, side: 'sw', teu: 10816420, basis: 'loaded TEUs, 2023, both ports', src: 'BTS Port Performance 2026' },
+      { name: 'New York / New Jersey', lat: 40.67, lng: -74.05, side: 'ne', teu: 5397161, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' },
+      { name: 'Savannah', lat: 32.08, lng: -81.09, side: 'e', teu: 3774774, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' },
+      { name: 'Houston', lat: 29.73, lng: -95.02, side: 's', teu: 3209897, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' },
+      { name: 'Seattle / Tacoma', lat: 47.58, lng: -122.35, side: 'nw', teu: 3340733, basis: 'total TEUs, 2024', src: 'Northwest Seaport Alliance' },
+      { name: 'Miami', lat: 25.77, lng: -80.18, side: 'se', teu: 824203, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' } ];
     const ROUTES = [ ['Shanghai', 31.23, 121.47, 0], ['Shenzhen', 22.54, 114.06, 0], ['Busan', 35.1, 129.04, 4], ['Ho Chi Minh City', 10.78, 106.7, 0], ['Mumbai', 19.08, 72.88, 1], ['Rotterdam', 51.95, 4.14, 1], ['Hamburg', 53.55, 9.99, 2], ['Santos', -23.96, -46.33, 5], ['Manzanillo', 19.05, -104.32, 3], ['Valencia', 39.46, -0.33, 2] ];
     const arcs = ROUTES.map(r => ({ startLat: r[1], startLng: r[2], endLat: US[r[3]].lat, endLng: US[r[3]].lng, label: r[0] + ' → ' + US[r[3]].name }));
     let hovered = null; const card = document.getElementById('portCard'); const stage = el.parentElement; let mouse = { x: 0, y: 0 };
@@ -844,10 +872,24 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
       .arcDashLength(.18).arcDashGap(.9).arcDashInitialGap(() => Math.random()).arcDashAnimateTime(() => reduce ? 0 : 3200 + Math.random() * 1600).arcLabel(d => d.label)
       .pathsData(arcs.map(a => [[a.startLat, a.startLng], [a.endLat, a.endLng]])).pathColor(() => 'rgba(240,77,77,.22)').pathStroke(.3).pathPointAlt(() => .001).pathResolution(2)
       .ringsData(US).ringLat('lat').ringLng('lng').ringColor(() => t => `rgba(240,77,77,${.9 * (1 - t)})`).ringMaxRadius(2.2).ringPropagationSpeed(1.2).ringRepeatPeriod(1600).ringAltitude(.012)
-      .pointsData(US).pointLat('lat').pointLng('lng').pointColor(() => '#1D395B').pointAltitude(.012).pointRadius(.4).pointLabel('name')
-      .labelsData(US).labelLat('lat').labelLng('lng').labelText('name').labelSize(.85).labelDotRadius(0).labelColor(() => 'rgba(29,57,91,.75)').labelResolution(2).labelAltitude(.02);
+      .pointsData(US).pointLat('lat').pointLng('lng').pointColor(() => '#1D395B').pointAltitude(.012).pointRadius(.4).pointLabel(() => '')
+      ;
+    const portsMode = qs.get('ports') || 'd';
+    if (portsMode === 'a') { // big 3D labels on the surface
+      g.labelsData(US).labelLat('lat').labelLng('lng').labelText('name').labelSize(1.7).labelDotRadius(0).labelColor(() => '#1D395B').labelResolution(3).labelAltitude(.025).labelLabel(() => '');
+    } else if (portsMode === 'b') { // screen-facing callouts with a leader line, pinned to each port
+      const perDay = d => '~' + (Math.round(d.teu / 365 / 100) * 100).toLocaleString('en-US') + ' a day';
+      g.htmlElementsData(US).htmlLat('lat').htmlLng('lng').htmlAltitude(.02).htmlElement(d => { const el = document.createElement('div'); el.className = 'callout ' + (d.side || 'ne'); el.innerHTML = `<span class="lead"></span><span class="pill"><b>${d.name}</b><small>${perDay(d)}</small></span>`; return el; });
+      if (typeof g.htmlElementVisibilityModifier === 'function') g.htmlElementVisibilityModifier((el, vis) => { el.style.opacity = vis ? 1 : 0; });
+    } else if (portsMode === 'd') { // bigger dots, no names; the hover card carries the name and the number
+      g.pointRadius(.9).pointAltitude(.02);
+      const hint = document.getElementById('globeHint'); if (hint) hint.hidden = false;
+    } else { // numbered badges on the globe + a legend beside the copy
+      g.labelsData(US.map((d, i) => Object.assign({ i: i + 1 }, d))).labelLat('lat').labelLng('lng').labelText(d => String(d.i)).labelSize(1.5).labelDotRadius(.9).labelDotOrientation(() => 'bottom').labelColor(() => '#F04D4D').labelResolution(3).labelAltitude(.025).labelLabel(() => '');
+      const legend = document.getElementById('portLegend'); if (legend) { legend.hidden = false; legend.innerHTML = US.map((d, i) => `<li><b>${i + 1}</b><span>${d.name}</span><em>~${(Math.round(d.teu / 365 / 100) * 100).toLocaleString('en-US')} a day</em></li>`).join(''); }
+    }
     // transparent globe: no texture, a barely-there dark sphere so the band shows through the oceans
-    const mat = g.globeMaterial(); mat.color.set('#F4F4F2'); mat.transparent = true; mat.opacity = .0; mat.emissive.set('#F4F4F2'); mat.emissiveIntensity = 0;
+    const mat = g.globeMaterial(); mat.color.set('#000000'); mat.transparent = false; mat.opacity = 1; mat.emissive.set('#F4F4F2'); mat.emissiveIntensity = 1; mat.shininess = 0; mat.depthWrite = true;
     fetch('https://unpkg.com/globe.gl/example/datasets/ne_110m_admin_0_countries.geojson').then(r => r.json()).then(c => { g.hexPolygonsData(c.features).hexPolygonResolution(4).hexPolygonMargin(.38).hexPolygonAltitude(.004).hexPolygonColor(f => f.properties.ISO_A2 === 'US' ? '#1D395B' : 'rgba(120,132,150,.45)'); }).catch(() => {});
     // slow sway around the U.S. instead of a full spin
     const home = { lat: 30, lng: -96, altitude: 2.05 }; g.pointOfView(home, 0);
