@@ -305,6 +305,29 @@ main { position: relative; }
 @media (max-width: 860px) { .foot-in { grid-template-columns: 1fr 1fr; } }
 
 body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { display: none !important; }
+
+/* skeletons: every async piece shows the shape of what is coming, then fades to the real thing */
+.skel { position: relative; overflow: hidden; background: var(--card-2); border-radius: inherit; }
+.skel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.6) 50%, transparent 100%); transform: translateX(-100%); animation: skel 1.5s var(--ease) infinite; }
+@keyframes skel { to { transform: translateX(100%); } }
+.skel-img { position: absolute; inset: 0; z-index: 1; pointer-events: none; transition: opacity .45s var(--ease); }
+.skel-img.off { opacity: 0; }
+img.skel-src { opacity: 0; transition: opacity .5s var(--ease); }
+img.skel-src.on { opacity: 1; }
+.skel-lines { position: absolute; inset: 0; z-index: 3; padding: 20px 22px; background: var(--white); display: flex; flex-direction: column; gap: 10px; transition: opacity .35s var(--ease); pointer-events: none; }
+.skel-lines.off { opacity: 0; }
+.skel-lines i { display: block; height: 12px; border-radius: 6px; background: var(--card-2); position: relative; overflow: hidden; }
+.skel-lines i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); transform: translateX(-100%); animation: skel 1.5s var(--ease) infinite; }
+.skel-lines i.w60 { width: 60%; } .skel-lines i.w80 { width: 80%; } .skel-lines i.w40 { width: 40%; } .skel-lines i.h20 { height: 20px; }
+.skel-num { color: transparent !important; background: var(--card-2); border-radius: 8px; position: relative; overflow: hidden; }
+.skel-num::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); transform: translateX(-100%); animation: skel 1.5s var(--ease) infinite; }
+.band .skel-img, .bleed .skel-img, .qcard .skel-img, .pcard-media .skel-img, .stakes-photo .skel-img { background: var(--deep); }
+.band .skel-img::after, .bleed .skel-img::after, .qcard .skel-img::after, .pcard-media .skel-img::after, .stakes-photo .skel-img::after { background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.12) 50%, transparent 100%); }
+.skel-globe { position: absolute; left: 50%; top: 50%; width: min(62%, 500px); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle at 50% 50%, var(--card-2) 0 60%, transparent 61%); z-index: 1; pointer-events: none; transition: opacity .5s var(--ease); }
+.skel-globe::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background-image: radial-gradient(circle, rgba(29,57,91,.18) 1.2px, transparent 1.6px); background-size: 9px 9px; mask-image: radial-gradient(circle, black 55%, transparent 62%); -webkit-mask-image: radial-gradient(circle, black 55%, transparent 62%); }
+.skel-globe::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent); transform: translateX(-100%); animation: skel 1.6s var(--ease) infinite; }
+.skel-globe.off { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .skel::after, .skel-lines i::after, .skel-num::after, .skel-globe::after { animation: none; } }
 </style>
 </head>
 <body>
@@ -628,6 +651,32 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
     build(); new ResizeObserver(() => build()).observe(main); if (document.fonts && document.fonts.ready) document.fonts.ready.then(build); addEventListener('load', build);
     if (reduce || isStatic) { addEventListener('scroll', () => update(true), { passive: true }); update(true); }
     else { addEventListener('scroll', () => update(false), { passive: true }); (function loop(){ update(false); requestAnimationFrame(loop); })(); }
+  })();
+
+  // skeletons: images, numbers and cards show their shape until the real thing is ready (?skeleton=1 freezes them for review)
+  (function(){
+    const freeze = qs.has('skeleton');
+    const skipImg = img => img.classList.contains('nav-logo') || img.classList.contains('logo') || img.closest('.pl') || (img.getBoundingClientRect().width && img.getBoundingClientRect().width < 60);
+    const skelImage = img => {
+      if (skipImg(img)) return; const par = img.parentElement; if (getComputedStyle(par).position === 'static') par.style.position = 'relative';
+      const ov = document.createElement('div'); ov.className = 'skel skel-img'; par.appendChild(ov); img.classList.add('skel-src');
+      const done = () => { if (freeze) return; img.classList.add('on'); ov.classList.add('off'); setTimeout(() => ov.remove(), 500); };
+      if (img.complete && img.naturalWidth) done(); else { img.addEventListener('load', done); img.addEventListener('error', done); }
+    };
+    window.__skelImage = skelImage; document.querySelectorAll('main img, .band img').forEach(skelImage);
+    // cards that come from data: show text lines until they are populated
+    const cardHosts = ['.post', '.tier', '.story', '.cell', '.t'];
+    document.querySelectorAll(cardHosts.join(',')).forEach(card => {
+      const body = card.querySelector('.body') || card; if (getComputedStyle(body).position === 'static') body.style.position = 'relative';
+      const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.innerHTML = '<i class="w40"></i><i class="h20 w80"></i><i></i><i class="w60"></i>'; body.appendChild(sk);
+      if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, 350 + Math.random() * 350);
+    });
+    // numbers that are computed: counters and stats
+    document.querySelectorAll('#liveRecords, #liveLoss, .stat .n, .lv .n').forEach(n => { n.classList.add('skel-num'); if (!freeze) setTimeout(() => n.classList.remove('skel-num'), 600 + Math.random() * 300); });
+    // the globe: a dotted disc until the real one has drawn
+    const gl = document.getElementById('globe'); if (gl) { const sg = document.createElement('div'); sg.className = 'skel-globe'; gl.parentElement.appendChild(sg); window.__globeSkeleton = sg; if (!freeze) setTimeout(() => { sg.classList.add('off'); setTimeout(() => sg.remove(), 600); }, 2200); }
+    // form cards: fields show as lines for a beat
+    document.querySelectorAll('.fcard form').forEach(f => { if (getComputedStyle(f).position === 'static') f.style.position = 'relative'; const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.style.padding = '0'; sk.innerHTML = '<i class="h20 w60"></i><i class="w80"></i><i class="h20"></i><i class="h20"></i><i class="h20"></i><i class="h20 w40"></i>'; f.appendChild(sk); if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, 450); });
   })();
 
   const bar = document.getElementById('topbar');
