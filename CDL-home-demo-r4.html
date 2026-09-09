@@ -843,7 +843,7 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
       { name: 'Houston', lat: 29.73, lng: -95.02, side: 's', teu: 3209897, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' },
       { name: 'Seattle / Tacoma', lat: 47.58, lng: -122.35, side: 'nw', teu: 3340733, basis: 'total TEUs, 2024', src: 'Northwest Seaport Alliance' },
       { name: 'Miami', lat: 25.77, lng: -80.18, side: 'se', teu: 824203, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' } ];
-    const ROUTES = [ ['Shanghai', 31.23, 121.47, 0], ['Shenzhen', 22.54, 114.06, 0], ['Busan', 35.1, 129.04, 4], ['Ho Chi Minh City', 10.78, 106.7, 0], ['Mumbai', 19.08, 72.88, 1], ['Rotterdam', 51.95, 4.14, 1], ['Hamburg', 53.55, 9.99, 2], ['Santos', -23.96, -46.33, 5], ['Manzanillo', 19.05, -104.32, 3], ['Valencia', 39.46, -0.33, 2] ];
+    const ROUTES = [ ['Shanghai', 31.23, 121.47, 0], ['Shenzhen', 22.54, 114.06, 0], ['Busan', 35.1, 129.04, 4], ['Ho Chi Minh City', 10.78, 106.7, 0], ['Mumbai', 19.08, 72.88, 1], ['Rotterdam', 51.95, 4.14, 1], ['Hamburg', 53.55, 9.99, 2], ['Santos', -23.96, -46.33, 5], ['Manzanillo', 19.05, -104.32, 3], ['Valencia', 39.46, -0.33, 2], ['Ningbo', 29.87, 121.55, 0], ['Kaohsiung', 22.62, 120.28, 4] ];
     const arcs = ROUTES.map(r => ({ startLat: r[1], startLng: r[2], endLat: US[r[3]].lat, endLng: US[r[3]].lng, label: r[0] + ' → ' + US[r[3]].name }));
     let hovered = null; const card = document.getElementById('portCard'); const stage = el.parentElement; let mouse = { x: 0, y: 0 };
     // hover by screen distance to each port (generous 30px target), not by hitting the tiny dot
@@ -889,7 +889,7 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
       const legend = document.getElementById('portLegend'); if (legend) { legend.hidden = false; legend.innerHTML = US.map((d, i) => `<li><b>${i + 1}</b><span>${d.name}</span><em>~${(Math.round(d.teu / 365 / 100) * 100).toLocaleString('en-US')} a day</em></li>`).join(''); }
     }
     // transparent globe: no texture, a barely-there dark sphere so the band shows through the oceans
-    const mat = g.globeMaterial(); mat.color.set('#000000'); mat.transparent = false; mat.opacity = 1; mat.emissive.set('#F4F4F2'); mat.emissiveIntensity = 1; mat.shininess = 0; mat.depthWrite = true;
+    const mat = g.globeMaterial(); mat.color.set('#000000'); mat.transparent = false; mat.opacity = 1; mat.emissive.set('#EDEDEA'); mat.emissiveIntensity = 1; mat.shininess = 0; mat.depthWrite = true;
     fetch('https://unpkg.com/globe.gl/example/datasets/ne_110m_admin_0_countries.geojson').then(r => r.json()).then(c => { g.hexPolygonsData(c.features).hexPolygonResolution(4).hexPolygonMargin(.38).hexPolygonAltitude(.004).hexPolygonColor(f => f.properties.ISO_A2 === 'US' ? '#1D395B' : 'rgba(120,132,150,.45)'); }).catch(() => {});
     // slow sway around the U.S. instead of a full spin
     const home = { lat: 30, lng: -96, altitude: 2.05 }; g.pointOfView(home, 0);
