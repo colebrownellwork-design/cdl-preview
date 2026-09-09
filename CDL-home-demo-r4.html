@@ -215,6 +215,22 @@ button, input { font: inherit; }
 @media (max-width: 960px) { .pcard-head { flex-direction: column; padding: 22px 20px 16px; } .pcard-media { height: 440px; } .outcome { left: 16px; right: 16px; width: auto; bottom: 16px; } }
 
 
+
+/* the shipping line: a route that runs the length of the page and leads to the next chapter */
+main { position: relative; }
+.spine { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: visible; }
+.spine .spine-base { fill: none; stroke: var(--light-gray-blue); stroke-width: 2; stroke-dasharray: 6 8; opacity: .8; }
+.spine .spine-prog { fill: none; stroke: var(--coral); stroke-width: 2.5; stroke-linecap: round; }
+.spine .node circle.dot { fill: var(--ground); stroke: var(--light-gray-blue); stroke-width: 2; transition: fill .4s var(--ease), stroke .4s var(--ease); }
+.spine .node text { font-family: var(--font-sans); font-size: 12px; font-weight: 600; fill: var(--muted-2); transition: fill .4s var(--ease); }
+.spine .node.on circle.dot { fill: var(--coral); stroke: var(--coral); }
+.spine .node.on text { fill: var(--text); }
+.spine .ship .hull { fill: var(--coral); }
+.spine .ship .halo { fill: rgba(240,77,77,.14); }
+.spine .port { fill: var(--indigo); }
+@media (max-width: 1180px) { .spine { display: none; } }
+
+
 /* live counters */
 .live { padding: 0 0 96px; }
 .live-in { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -421,6 +437,8 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 
 <main id="main">
 
+<svg class="spine" id="spine" aria-hidden="true"><path class="spine-base" id="spineBase"/><path class="spine-prog" id="spineProg"/><g id="spineNodes"></g><g class="ship" id="ship"><circle class="halo" r="16"/><g class="hull" transform="translate(-14,-8)"><path d="M2 10 L26 10 L23 15 L5 15 Z"/><rect x="6" y="4" width="4" height="6" rx=".5"/><rect x="11" y="3" width="4" height="7" rx=".5"/><rect x="16" y="5" width="4" height="5" rx=".5"/><rect x="21" y="1" width="3" height="9" rx=".5"/></g></g></svg>
+
 <!-- 01 HERO -->
 <section class="hero" id="hero" data-frame="01-hero">
   <div class="shell">
@@ -467,8 +485,9 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   </div>
 </section>
 
+
 <!-- 02b ROUTES GLOBE -->
-<section class="routes" id="routes" data-frame="02b-routes">
+<section class="routes" id="routes" data-chapter="1" data-chapter-label="Tracked from the moment it ships" data-frame="02b-routes">
   <div class="shell">
     <div class="reveal">
       <h2>Tracked from the moment <span class="pop">it ships.</span></h2>
@@ -479,8 +498,9 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   </div>
 </section>
 
+
 <!-- 03 STAKES -->
-<section class="sec" id="stakes" data-frame="03-stakes">
+<section class="sec" id="stakes" data-chapter="2" data-chapter-label="Who reads it" data-frame="03-stakes">
   <div class="shell">
     <div class="narrow center">
       <h2 class="sec-h reveal">Four people would find your record very useful.</h2>
@@ -525,33 +545,9 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   </div>
 </section>
 
-<!-- 02 STATS -->
-<section id="proof" data-frame="02-stats">
-  <div class="shell">
-    <div class="stats" id="stats">
-      <div class="stat reveal" tabindex="0"><div class="lab">Customs experience</div><div class="n"><span class="odo" data-value="10">10</span><span class="suf">+ years</span></div><i class="rule"></i><div class="sub">Working inside the import process, not around it.</div></div>
-      <div class="stat reveal" tabindex="0"><div class="lab">Shipments protected</div><div class="n"><span class="odo" data-value="15000">15,000</span><span class="suf">+</span></div><i class="rule"></i><div class="sub">Records that never reached a public platform.</div></div>
-      <div class="stat reveal" tabindex="0"><div class="lab">Platforms blocked</div><div class="n"><span class="odo" data-value="18">18</span><span class="suf">+</span></div><i class="rule"></i><div class="sub">Checked every month, with proof sent to you.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- 04 QUOTE CARD -->
-<section id="quote" data-frame="04-quote" style="padding-bottom: 96px;">
-  <div class="shell">
-    <div class="qcard reveal">
-      <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt="" width="1920" height="1084">
-      <div class="in">
-        <blockquote>“Fast, clear, and it simply works. Our new shipments stopped appearing and we get proof every month.”</blockquote>
-        <div class="who"><b>Logistics Manager</b>Consumer goods importer. Name withheld.</div>
-        <a class="pill pill-ghost" href="CDL-testimonials-demo-r4.html">Read the stories</a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- 01b LIVE COUNTERS -->
-<section class="live" id="live" data-frame="01b-live">
+<section class="live" id="live" data-chapter="3" data-chapter-label="What it costs" data-frame="01b-live">
   <div class="shell">
     <div class="live-in">
       <div class="lv reveal">
@@ -569,8 +565,9 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   </div>
 </section>
 
+
 <!-- 05 PROCESS (interactive beams, after Magic UI AnimatedBeam) -->
-<section class="sec" id="how" data-frame="05-process" style="padding-top: 0;">
+<section class="sec" id="how" data-chapter="4" data-chapter-label="How it stops" data-frame="05-process" style="padding-top: 0;">
   <div class="shell">
     <div class="narrow center">
       <h2 class="sec-h reveal">Live in days. Protected for years.</h2>
@@ -594,6 +591,34 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   </div>
 </section>
 
+
+<!-- 02 STATS -->
+<section id="proof" data-chapter="5" data-chapter-label="Proof" data-frame="02-stats">
+  <div class="shell">
+    <div class="stats" id="stats">
+      <div class="stat reveal" tabindex="0"><div class="lab">Customs experience</div><div class="n"><span class="odo" data-value="10">10</span><span class="suf">+ years</span></div><i class="rule"></i><div class="sub">Working inside the import process, not around it.</div></div>
+      <div class="stat reveal" tabindex="0"><div class="lab">Shipments protected</div><div class="n"><span class="odo" data-value="15000">15,000</span><span class="suf">+</span></div><i class="rule"></i><div class="sub">Records that never reached a public platform.</div></div>
+      <div class="stat reveal" tabindex="0"><div class="lab">Platforms blocked</div><div class="n"><span class="odo" data-value="18">18</span><span class="suf">+</span></div><i class="rule"></i><div class="sub">Checked every month, with proof sent to you.</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 04 QUOTE CARD -->
+<section id="quote" data-frame="04-quote" style="padding-bottom: 96px;">
+  <div class="shell">
+    <div class="qcard reveal">
+      <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt="" width="1920" height="1084">
+      <div class="in">
+        <blockquote>“Fast, clear, and it simply works. Our new shipments stopped appearing and we get proof every month.”</blockquote>
+        <div class="who"><b>Logistics Manager</b>Consumer goods importer. Name withheld.</div>
+        <a class="pill pill-ghost" href="CDL-testimonials-demo-r4.html">Read the stories</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- 07 STORIES -->
 <section class="sec" id="scenarios" data-frame="07-stories" style="padding-top: 0;">
   <div class="shell">
@@ -609,8 +634,9 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
   </div>
 </section>
 
+
 <!-- 08 CLOSING -->
-<section class="closing" id="cta" data-frame="08-closing">
+<section class="closing" id="cta" data-chapter="6" data-chapter-label="Your move" data-frame="08-closing">
   <div class="shell">
     <h2 class="reveal">See what your competitors can see.</h2>
     <p class="reveal">One business day, no obligation. Your quote comes back with the results.</p>
@@ -824,6 +850,44 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
     (function sway(now){ if (!reduce && !isStatic && !paused) { phase = (now - t0) / 1000; g.pointOfView({ lat: home.lat + Math.sin(phase / 9) * 4, lng: home.lng + Math.sin(phase / 14) * 22, altitude: home.altitude }, 0); } requestAnimationFrame(sway); })(t0);
     addEventListener('resize', () => g.width(w()).height(h()));
     const pp = qs.get('port'); if (pp !== null) { mouse = { x: stage.clientWidth * .52, y: stage.clientHeight * .42 }; showPort(US[+pp]); }
+  })();
+
+  // shipping line: an SVG route down the left margin with a stop per chapter; the coral marker rides it with scroll
+  (function(){
+    const svg = document.getElementById('spine'); if (!svg) return;
+    const base = document.getElementById('spineBase'), prog = document.getElementById('spineProg'), nodesG = document.getElementById('spineNodes'), ship = document.getElementById('ship');
+    const main = document.getElementById('main'); const NS = 'http://www.w3.org/2000/svg';
+    let stops = [], total = 0, shown = 0, target = 0;
+    function build() {
+      const mr = main.getBoundingClientRect(); const W = main.clientWidth, H = main.scrollHeight; svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
+      const x = Math.max(28, (W - 1360) / 2 + 6);
+      stops = [...main.querySelectorAll('[data-chapter]')].map(s => { const r = s.getBoundingClientRect(); const isHero = s.id === 'hero'; return { el: s, n: s.dataset.chapter, label: s.dataset.chapterLabel, x, y: r.top - mr.top + (s.id === 'routes' ? 120 : -22), hero: false }; });
+      if (stops.length < 2) return;
+      let d = `M ${stops[0].x},${stops[0].y - 30} L ${stops[0].x},${stops[0].y}`;
+      for (let i = 1; i < stops.length; i++) { const a = stops[i - 1], b = stops[i]; const bend = 34 * (i % 2 ? 1 : -1); const my = (a.y + b.y) / 2; d += ` C ${a.x + bend},${a.y + (b.y - a.y) * .35} ${b.x + bend},${my + (b.y - a.y) * .15} ${b.x},${b.y}`; }
+      const last = stops[stops.length - 1]; d += ` L ${last.x},${last.y + 60}`;
+      base.setAttribute('d', d); prog.setAttribute('d', d); total = prog.getTotalLength(); prog.style.strokeDasharray = total; prog.style.strokeDashoffset = total;
+      nodesG.innerHTML = ''; stops.forEach(s => { const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'node' + (s.hero ? ' hero' : '')); g.setAttribute('transform', `translate(${s.x},${s.y})`);
+        g.innerHTML = `<circle class="dot" r="8"/><text x="20" y="4">${s.label}</text>`; nodesG.appendChild(g); s.g = g; });
+      const port = document.createElementNS(NS, 'circle'); port.setAttribute('class', 'port'); port.setAttribute('r', 4); port.setAttribute('cx', stops[0].x); port.setAttribute('cy', stops[0].y - 30); nodesG.appendChild(port);
+      update(true);
+    }
+    function lenAt(y) { // path length at a given page y (search along the path)
+      let lo = 0, hi = total; for (let i = 0; i < 24; i++) { const mid = (lo + hi) / 2; if (prog.getPointAtLength(mid).y < y) lo = mid; else hi = mid; } return lo;
+    }
+    function update(snap) {
+      if (!total) return;
+      const mr = main.getBoundingClientRect(); const focusY = -mr.top + innerHeight * .45; // where the reader is looking
+      target = Math.max(0, Math.min(total, lenAt(focusY)));
+      if (isStatic) target = total * (qs.get('spine') ? +qs.get('spine') : .42);
+      if (snap || reduce || isStatic) shown = target; else shown += (target - shown) * .18;
+      prog.style.strokeDashoffset = total - shown; ship.style.opacity = shown > 2 ? 1 : 0;
+      const pt = prog.getPointAtLength(shown), p2 = prog.getPointAtLength(Math.min(total, shown + 6)); const ang = Math.atan2(p2.y - pt.y, p2.x - pt.x) * 180 / Math.PI - 90; ship.setAttribute('transform', `translate(${pt.x},${pt.y}) rotate(${ang})`);
+      stops.forEach(s => s.g && s.g.classList.toggle('on', pt.y >= s.y - 2));
+    }
+    build(); new ResizeObserver(() => build()).observe(main); if (document.fonts && document.fonts.ready) document.fonts.ready.then(build); addEventListener('load', build);
+    if (reduce || isStatic) { addEventListener('scroll', () => update(true), { passive: true }); update(true); }
+    else { addEventListener('scroll', () => update(false), { passive: true }); (function loop(){ update(false); requestAnimationFrame(loop); })(); }
   })();
 
   const bar = document.getElementById('topbar');
