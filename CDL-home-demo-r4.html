@@ -784,7 +784,13 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
     const ROUTES = [ ['Shanghai', 31.23, 121.47, 0], ['Shenzhen', 22.54, 114.06, 0], ['Busan', 35.1, 129.04, 4], ['Ho Chi Minh City', 10.78, 106.7, 0], ['Mumbai', 19.08, 72.88, 1], ['Rotterdam', 51.95, 4.14, 1], ['Hamburg', 53.55, 9.99, 2], ['Santos', -23.96, -46.33, 5], ['Manzanillo', 19.05, -104.32, 3], ['Valencia', 39.46, -0.33, 2] ];
     const arcs = ROUTES.map(r => ({ startLat: r[1], startLng: r[2], endLat: US[r[3]].lat, endLng: US[r[3]].lng, label: r[0] + ' → ' + US[r[3]].name }));
     let hovered = null; const card = document.getElementById('portCard'); const stage = el.parentElement; let mouse = { x: 0, y: 0 };
-    stage.addEventListener('mousemove', e => { const r = stage.getBoundingClientRect(); mouse = { x: e.clientX - r.left, y: e.clientY - r.top }; if (hovered) { card.style.left = mouse.x + 'px'; card.style.top = mouse.y + 'px'; } });
+    // hover by screen distance to each port (generous 30px target), not by hitting the tiny dot
+    let lastNear = null;
+    stage.addEventListener('mousemove', e => { const r = stage.getBoundingClientRect(); mouse = { x: e.clientX - r.left, y: e.clientY - r.top };
+      const gr = el.getBoundingClientRect(); let near = null, best = 30;
+      US.forEach(pt => { const c = g.getScreenCoords(pt.lat, pt.lng); if (!c) return; const dx = (c.x + gr.left - r.left) - mouse.x, dy = (c.y + gr.top - r.top) - mouse.y; const d = Math.hypot(dx, dy); if (d < best) { best = d; near = pt; } });
+      if (near !== lastNear) { lastNear = near; showPort(near); } else if (hovered) { card.style.left = mouse.x + 'px'; card.style.top = mouse.y + 'px'; } });
+    stage.addEventListener('mouseleave', () => { lastNear = null; showPort(null); });
     function showPort(d) {
       hovered = d || null; g.pointColor(g.pointColor()).pointAltitude(g.pointAltitude()).pointRadius(g.pointRadius());
       if (!d) { card.classList.remove('on'); card.hidden = true; return; }
