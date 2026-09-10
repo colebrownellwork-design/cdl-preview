@@ -158,61 +158,6 @@ button, input { font: inherit; }
 .emap .lbl { align-self: center; font-size: 13px; color: var(--muted); margin-left: 6px; }
 @media (max-width: 960px) { .phero .band .bin { padding: 110px 16px 160px; } .phero .funnel { margin-top: -120px; } }
 
-/* the shipping line: a route that runs the length of the page and leads to the next chapter */
-main { position: relative; }
-.spine { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; z-index: 4; overflow: visible; }
-.spine .spine-base { fill: none; stroke: var(--light-gray-blue); stroke-width: 2; stroke-dasharray: 6 8; opacity: .8; }
-.spine .spine-prog { fill: none; stroke: var(--coral); stroke-width: 2.5; stroke-linecap: round; }
-.spine .node circle.dot { fill: var(--ground); stroke: var(--light-gray-blue); stroke-width: 2; transition: fill .4s var(--ease), stroke .4s var(--ease); }
-.spine .node text { font-family: var(--font-sans); font-size: 12px; font-weight: 600; fill: var(--muted-2); transition: fill .4s var(--ease); }
-.spine .node.on circle.dot { fill: var(--coral); stroke: var(--coral); }
-.spine .node.on text { fill: var(--text); }
-.spine .ship .shadow { fill: rgba(21,44,73,.22); }
-.spine .ship .vessel { filter: drop-shadow(0 1.5px 1.5px rgba(21,44,73,.28)); }
-.spine .spine-wake { fill: none; stroke: rgba(174,187,208,.55); stroke-width: 10; stroke-linecap: round; filter: blur(2px); opacity: 0; transition: opacity .4s var(--ease); }
-.spine .ship.moving ~ .spine-wake, .spine .spine-wake.on { opacity: 1; }
-.spine .port rect { fill: var(--light-gray-blue); }
-@media (max-width: 1180px) { .spine { display: none; } }
-
-
-
-/* route lane: on wide screens the chapters after the hero leave the left margin to the shipping line */
-@media (min-width: 1181px) { main > section:not(.hero) > .shell, main > section:not(.hero) .band > .shell { padding-left: 132px; } .routes .shell { padding-left: 132px; } }
-.spine .node text { transition: fill .4s var(--ease), opacity .25s var(--ease); }
-.spine .node.clear text { opacity: 0; }
-
-
-/* port callouts (option b) */
-.callout { position: relative; pointer-events: none; white-space: nowrap; transition: opacity .25s var(--ease); --dx: 14px; --dy: -36px; --len: 26px; --rot: -40deg; transform: translate(var(--dx), var(--dy)); }
-.callout .lead { position: absolute; left: calc(-1 * var(--dx)); top: calc(-1 * var(--dy)); width: var(--len); height: 1.5px; background: var(--indigo); transform-origin: left center; transform: rotate(var(--rot)); }
-.callout.ne { --dx: 16px; --dy: -40px; --len: 30px; --rot: -42deg; }
-.callout.e  { --dx: 30px; --dy: -12px; --len: 26px; --rot: -8deg; }
-.callout.se { --dx: 18px; --dy: 22px; --len: 26px; --rot: 34deg; }
-.callout.s  { --dx: -40px; --dy: 30px; --len: 26px; --rot: 100deg; }
-.callout.sw { --dx: -190px; --dy: 18px; --len: 34px; --rot: 160deg; }
-.callout.nw { --dx: -160px; --dy: -46px; --len: 34px; --rot: -152deg; }
-.callout.sw .pill, .callout.nw .pill { transform: translateX(-4px); }
-.callout .lead::after { content: ""; position: absolute; left: -3px; top: -2.5px; width: 6px; height: 6px; border-radius: 50%; background: var(--indigo); }
-.callout .pill { display: inline-flex; flex-direction: column; background: rgba(255,255,255,.92); border: 1px solid var(--line); border-radius: 10px; padding: 5px 9px; box-shadow: 0 6px 18px -8px rgba(20,30,50,.35); backdrop-filter: blur(6px); }
-.callout b { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 15px; }
-.callout small { font-size: 11px; color: var(--muted); line-height: 14px; }
-.globe-hint { display: flex; align-items: center; gap: 10px; margin-top: 26px; font-size: 14px; color: var(--muted); }
-.globe-hint[hidden] { display: none; }
-.globe-hint svg { width: 20px; height: 20px; color: var(--coral); flex: none; }
-@media (max-width: 960px) { .globe-hint span::after { content: " (tap on touch screens)"; } }
-/* numbered legend (option c) */
-.ports-legend { list-style: none; margin-top: 22px; display: grid; grid-template-columns: 1fr; gap: 6px; max-width: 420px; }
-.ports-legend[hidden] { display: none; }
-.ports-legend li { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: center; font-size: 14px; color: var(--text); }
-.ports-legend b { width: 22px; height: 22px; border-radius: 50%; background: var(--coral); color: var(--white); font-size: 11.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; }
-.ports-legend em { font-style: normal; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
-
-
-/* route lane: on wide screens the chapters after the hero leave the left margin to the shipping line */
-@media (min-width: 1181px) { main > section:not(.hero) > .shell { padding-left: 132px; } }
-.spine .node text { transition: fill .4s var(--ease), opacity .25s var(--ease); }
-.spine .node.clear text { opacity: 0; }
-
 /* funnel card */
 .funnel { text-align: left; max-width: 860px; margin: 40px auto 0; background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow-card); overflow: hidden; }
 .f-bar { height: 4px; background: var(--card-2); }
@@ -267,53 +212,34 @@ main { position: relative; }
 @media (max-width: 560px) { .row4 { grid-template-columns: 1fr; } }
 
 
-/* coverage story */
+/* coverage story: the monitoring report a customer receives; it scrolls to the section the reader is on */
 .cov-wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 56px; margin-top: 44px; align-items: start; }
 .cov-stage { position: sticky; top: 96px; }
-.cov-card { background: var(--white); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 28px 30px 26px; min-height: 480px; position: relative; overflow: hidden; }
-.cov-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: var(--muted); }
-.cov-count { font-variant-numeric: tabular-nums; color: var(--text); font-weight: 600; }
-.ents { display: grid; gap: 10px; margin-top: 16px; }
-.ent { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 12px; font-weight: 600; font-size: 15px; transition: background-color .5s var(--ease), border-color .5s var(--ease), color .5s var(--ease); }
-.ent .lock { width: 26px; height: 26px; border-radius: 50%; background: var(--card-2); display: inline-flex; align-items: center; justify-content: center; color: var(--muted-2); transform: scale(.6); opacity: 0; transition: transform .45s cubic-bezier(.22,1.2,.36,1), opacity .3s var(--ease), background-color .4s var(--ease), color .4s var(--ease); }
-.ent .lock svg { width: 14px; height: 14px; }
-.cov-card.b0 .ent, .cov-card.b1 .ent, .cov-card.b2 .ent, .cov-card.b3 .ent { background: var(--indigo); border-color: var(--indigo); color: var(--white); }
-.cov-card.b0 .ent .lock, .cov-card.b1 .ent .lock, .cov-card.b2 .ent .lock, .cov-card.b3 .ent .lock { opacity: 1; transform: none; background: var(--coral); color: var(--white); }
-.cov-card.b0 .ent:nth-child(2) { transition-delay: .15s; } .cov-card.b0 .ent:nth-child(3) { transition-delay: .3s; }
-.cov-card.b0 .ent:nth-child(2) .lock { transition-delay: .2s; } .cov-card.b0 .ent:nth-child(3) .lock { transition-delay: .4s; }
-.vars { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; min-height: 0; }
-.var { font-size: 12.5px; font-weight: 500; color: var(--muted); background: var(--ground); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 5px 11px; opacity: 0; transform: translateX(40px); transition: opacity .4s var(--ease), transform .55s cubic-bezier(.22,1.2,.36,1), background-color .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease); }
-.cov-card.b1 .var, .cov-card.b2 .var, .cov-card.b3 .var { opacity: 1; transform: none; background: rgba(29,57,91,.08); border-color: transparent; color: var(--text); }
-.cov-card.b1 .var:nth-child(2) { transition-delay: .1s; } .cov-card.b1 .var:nth-child(3) { transition-delay: .2s; } .cov-card.b1 .var:nth-child(4) { transition-delay: .3s; } .cov-card.b1 .var:nth-child(5) { transition-delay: .45s; }
-.months { margin-top: 18px; opacity: .35; transition: opacity .4s var(--ease); }
-.cov-card.b2 .months, .cov-card.b3 .months { opacity: 1; }
-.mrow { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 10px; margin-top: 8px; }
-.mrow.lapse { opacity: 0; max-height: 0; overflow: hidden; transition: opacity .4s var(--ease), max-height .5s var(--ease); }
-.cov-card.b3 .mrow.lapse { opacity: 1; max-height: 40px; }
-.mlab { font-size: 12.5px; color: var(--muted); }
-.cells { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; }
-.cells i { display: block; height: 26px; border-radius: 6px; background: var(--card-2); position: relative; transition: background-color .3s var(--ease); }
-.cells i b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--muted-2); font-weight: 500; }
-.cells i.on { background: var(--confirmed); } .cells i.on b { color: var(--white); }
-.cells i.on b::after { content: ""; }
-.mrow.lapse .cells i.on { background: rgba(47,133,90,.55); }
-.mrow.lapse .cells i.bad { background: var(--coral); } .mrow.lapse .cells i.bad b { color: var(--white); }
-.mnote { font-size: 12.5px; color: var(--muted); margin-top: 8px; min-height: 18px; }
-.renew { position: absolute; right: 26px; top: 22px; width: 96px; text-align: center; opacity: 0; transform: scale(.85); transition: opacity .4s var(--ease), transform .5s cubic-bezier(.22,1.2,.36,1); }
-.cov-card.b3 .renew { opacity: 1; transform: none; }
-.cov-card.b3 .cov-count { opacity: 0; }
-.renew svg { width: 96px; height: 96px; transform: rotate(-90deg); }
-.renew .track { fill: none; stroke: var(--card-2); stroke-width: 9; }
-.renew .fill { fill: none; stroke: var(--indigo); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 314; stroke-dashoffset: 314; transition: stroke-dashoffset .2s linear; }
-.renew .rtext { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.renew .rtext b { font-size: 18px; letter-spacing: -0.02em; } .renew .rtext span { font-size: 9.5px; color: var(--muted); line-height: 12px; }
+.paper { background: var(--white); border-radius: 6px; box-shadow: 0 1px 2px rgba(20,30,50,.08), 0 28px 56px -24px rgba(20,30,50,.35); height: 560px; overflow: hidden; position: relative; border: 1px solid var(--line); }
+.paper::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(180deg, rgba(255,255,255,0), #fff); pointer-events: none; }
+.paper-in { padding: 34px 38px 60px; transition: transform .9s cubic-bezier(.22,1,.36,1); }
+.ph-head { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.ph-head img { height: 18px; width: auto; }
+.ph-title { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-top: 18px; }
+.ph-sub { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.ps { margin-top: 26px; padding: 12px 14px; margin-left: -14px; margin-right: -14px; border-radius: 10px; transition: background-color .5s var(--ease); }
+.ps.on { background: rgba(240,77,77,.06); }
+.ps h4 { font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; font-family: var(--font-mono); }
+.ps p { font-size: 13px; line-height: 19px; color: var(--muted); margin-top: 6px; }
+.ps p.quiet { font-size: 12px; color: var(--muted-2); margin-top: 8px; }
+.ps table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+.ps td { padding: 7px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.ps td:first-child { font-weight: 500; color: var(--text); }
+.ps td:nth-child(2) { color: var(--confirmed); font-weight: 500; white-space: nowrap; }
+.ps td:nth-child(3) { color: var(--muted-2); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ps[data-s="2"] td:nth-child(2) { color: var(--muted); font-weight: 400; }
 .beats { list-style: none; padding-top: 8px; }
 .beat { padding: 22px 0 22px 22px; border-left: 2px solid var(--line); min-height: 44vh; display: flex; flex-direction: column; justify-content: center; transition: border-color .4s var(--ease); }
 .beat .num { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; color: var(--muted-2); }
 .beat h3 { font-size: 24px; line-height: 30px; letter-spacing: -0.025em; margin-top: 8px; color: var(--muted-2); transition: color .4s var(--ease); }
 .beat p { color: var(--muted); font-size: 15.5px; line-height: 24px; margin-top: 8px; max-width: 420px; opacity: .55; transition: opacity .4s var(--ease); }
 .beat.on { border-left-color: var(--coral); } .beat.on h3 { color: var(--text); } .beat.on p { opacity: 1; }
-@media (max-width: 960px) { .cov-wrap { grid-template-columns: 1fr; gap: 24px; } .cov-stage { position: relative; top: 0; } .beat { min-height: 0; } .cells { grid-template-columns: repeat(14, 1fr); } .cells i { height: 20px; } .cells i b { font-size: 8px; } }
+@media (max-width: 960px) { .cov-wrap { grid-template-columns: 1fr; gap: 24px; } .cov-stage { position: relative; top: 0; } .paper { height: 420px; } .beat { min-height: 0; } }
 
 /* tiers strip (all three, no numbers) */
 .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
@@ -417,8 +343,6 @@ img.skel-src.on { opacity: 1; }
 </header>
 
 <main id="main">
-
-<svg class="spine" id="spine" aria-hidden="true"><path class="spine-base" id="spineBase"/><path class="spine-prog" id="spineProg"/><path class="spine-wake" id="spineWake"/><g id="spineNodes"></g><defs><filter id="shipShadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter></defs><g class="ship" id="ship"><ellipse class="shadow" cx="4" cy="8" rx="60" ry="16" filter="url(#shipShadow)"/><g class="vessel" transform="translate(-62,-22)"><path d="M9 22 Q9 9 21 9 L98 9 Q114 9 121 22 Q114 35 98 35 L21 35 Q9 35 9 22 Z" fill="#F4F4F2"/><path d="M10 22 Q10 10.5 21.5 10.5 L98 10.5 Q112.5 10.5 119.5 22 Q112.5 33.5 98 33.5 L21.5 33.5 Q10 33.5 10 22 Z" fill="#1D395B"/><path d="M21.5 33.5 L98 33.5 Q112.5 33.5 119.5 22 L119.5 25 Q112.5 36.5 98 36.5 L21.5 36.5 Q10 36.5 10 25 L10 22 Q10 33.5 21.5 33.5 Z" fill="#0F2138"/><path d="M14 22 Q14 13 22 13 L99 13 Q109 13 115 22 Q109 31 99 31 L22 31 Q14 31 14 22 Z" fill="#27476E"/><rect x="18" y="14.5" width="11" height="15" rx="1.4" fill="#FFFFFF"/><rect x="19.5" y="16" width="8" height="1.6" rx=".5" fill="#AEBBD0"/><rect x="19.5" y="18.8" width="8" height="1.6" rx=".5" fill="#AEBBD0"/><rect x="18" y="27.5" width="11" height="2" rx=".6" fill="#D8E2F0"/><circle cx="23.5" cy="24.2" r="1.6" fill="#F04D4D"/><rect x="34" y="13.0" width="8" height="5.6" rx=".6" fill="#AEBBD0"/><rect x="34" y="17.4" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="43" y="13.0" width="8" height="5.6" rx=".6" fill="#4878A0"/><rect x="43" y="17.4" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="52" y="13.0" width="8" height="5.6" rx=".6" fill="#2E5A87"/><rect x="52" y="17.4" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="61" y="13.0" width="8" height="5.6" rx=".6" fill="#7A98B8"/><rect x="61" y="17.4" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="70" y="13.0" width="8" height="5.6" rx=".6" fill="#F04D4D"/><rect x="70" y="17.4" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="79" y="13.0" width="8" height="5.6" rx=".6" fill="#F04D4D"/><rect x="79" y="17.4" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="88" y="13.0" width="8" height="5.6" rx=".6" fill="#D8E2F0"/><rect x="88" y="17.4" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="34" y="19.4" width="8" height="5.6" rx=".6" fill="#F04D4D"/><rect x="34" y="23.8" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="43" y="19.4" width="8" height="5.6" rx=".6" fill="#AEBBD0"/><rect x="43" y="23.8" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="52" y="19.4" width="8" height="5.6" rx=".6" fill="#D8E2F0"/><rect x="52" y="23.8" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="61" y="19.4" width="8" height="5.6" rx=".6" fill="#F04D4D"/><rect x="61" y="23.8" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="70" y="19.4" width="8" height="5.6" rx=".6" fill="#D8E2F0"/><rect x="70" y="23.8" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="79" y="19.4" width="8" height="5.6" rx=".6" fill="#4878A0"/><rect x="79" y="23.8" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="88" y="19.4" width="8" height="5.6" rx=".6" fill="#F04D4D"/><rect x="88" y="23.8" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="34" y="25.8" width="8" height="5.6" rx=".6" fill="#F04D4D"/><rect x="34" y="30.2" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="43" y="25.8" width="8" height="5.6" rx=".6" fill="#2E5A87"/><rect x="43" y="30.2" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="52" y="25.8" width="8" height="5.6" rx=".6" fill="#2E5A87"/><rect x="52" y="30.2" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="61" y="25.8" width="8" height="5.6" rx=".6" fill="#F04D4D"/><rect x="61" y="30.2" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="70" y="25.8" width="8" height="5.6" rx=".6" fill="#4878A0"/><rect x="70" y="30.2" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="79" y="25.8" width="8" height="5.6" rx=".6" fill="#F04D4D"/><rect x="79" y="30.2" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="88" y="25.8" width="8" height="5.6" rx=".6" fill="#D8E2F0"/><rect x="88" y="30.2" width="8" height="1.6" rx=".4" fill="rgba(0,0,0,.28)"/><rect x="100" y="18" width="7" height="8" rx="1" fill="#3A6590"/><rect x="108" y="20" width="4" height="4" rx=".8" fill="#AEBBD0"/></g></g></svg>
 
 
 <!-- 01 HERO + FUNNEL -->
@@ -585,32 +509,34 @@ img.skel-src.on { opacity: 1; }
 </section>
 
 <!-- 02 EVERY PLAN INCLUDES: the coverage story, one illustration, four beats -->
-<section class="sec cov" id="includes" data-frame="02-includes" data-chapter="1" data-chapter-label="What every plan protects">
+<section class="sec cov" id="includes" data-frame="02-includes">
   <div class="shell">
     <div class="narrow center">
       <h2 class="sec-h reveal">Every plan protects everything.</h2>
-      <p class="sec-p reveal">Whatever the funnel said, this part is the same. Scroll and watch it work.</p>
+      <p class="sec-p reveal">Whatever the funnel said, this part is the same. This is the report you get every month.</p>
     </div>
     <div class="cov-wrap">
       <div class="cov-stage" id="covStage" aria-hidden="true">
-        <div class="cov-card">
-          <div class="cov-head"><span class="cov-kick" id="covKick">Your entities</span><span class="cov-count" id="covCount"></span></div>
-          <div class="ents" id="ents">
-            <div class="ent"><span class="nm">Northwind Imports LLC</span><i class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i></div>
-            <div class="ent"><span class="nm">Northwind Home Goods</span><i class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i></div>
-            <div class="ent"><span class="nm">NW Trading Co.</span><i class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i></div>
-          </div>
-          <div class="vars" id="vars">
-            <span class="var">NORTHWND IMPORTS</span><span class="var">Northwind Imp. LLC</span><span class="var">North Wind Imports</span><span class="var">NORTHWIND IMPORTS L.L.C</span><span class="var">+ every other spelling</span>
-          </div>
-          <div class="months" id="months">
-            <div class="mrow ours"><span class="mlab">With us</span><div class="cells"><i data-m="0"><b>1</b></i><i data-m="1"><b>2</b></i><i data-m="2"><b>3</b></i><i data-m="3"><b>4</b></i><i data-m="4"><b>5</b></i><i data-m="5"><b>6</b></i><i data-m="6"><b>7</b></i><i data-m="7"><b>8</b></i><i data-m="8"><b>9</b></i><i data-m="9"><b>10</b></i><i data-m="10"><b>11</b></i><i data-m="11"><b>12</b></i><i data-m="12"><b>13</b></i><i data-m="13"><b>14</b></i></div></div>
-            <div class="mrow lapse"><span class="mlab">Nobody renews</span><div class="cells"><i data-m="0"><b>1</b></i><i data-m="1"><b>2</b></i><i data-m="2"><b>3</b></i><i data-m="3"><b>4</b></i><i data-m="4"><b>5</b></i><i data-m="5"><b>6</b></i><i data-m="6"><b>7</b></i><i data-m="7"><b>8</b></i><i data-m="8"><b>9</b></i><i data-m="9"><b>10</b></i><i data-m="10"><b>11</b></i><i data-m="11"><b>12</b></i><i data-m="12"><b>13</b></i><i data-m="13"><b>14</b></i></div></div>
-            <div class="mnote" id="mnote"></div>
-          </div>
-          <div class="renew" id="renew">
-            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="track" cx="60" cy="60" r="50"/><circle class="fill" cx="60" cy="60" r="50" id="renewRing"/></svg>
-            <div class="rtext"><b id="renewPct">0%</b><span>of the year covered</span></div>
+        <div class="paper" id="paper">
+          <div class="paper-in" id="paperIn">
+            <div class="ph-head"><img src="logo/cdl-logo-primary.svg" alt=""><span>Monitoring report · September 2026</span></div>
+            <div class="ph-title">Northwind Imports LLC</div>
+            <div class="ph-sub">Prepared for the account owner · Reference NW-2026-09</div>
+            <section class="ps" data-s="0"><h4>Protected entities</h4>
+              <table><tr><td>Northwind Imports LLC</td><td>Active</td><td>since 12 Mar 2025</td></tr><tr><td>Northwind Home Goods LLC</td><td>Active</td><td>since 12 Mar 2025</td></tr><tr><td>NW Trading Co.</td><td>Active</td><td>since 04 Jun 2025</td></tr></table>
+            </section>
+            <section class="ps" data-s="1"><h4>Names covered</h4>
+              <p>Every spelling your shipments have arrived under in the last 24 months, and any new one we find.</p>
+              <table><tr><td>NORTHWND IMPORTS</td><td>Covered</td><td>found Feb 2025</td></tr><tr><td>Northwind Imp. LLC</td><td>Covered</td><td>found Mar 2025</td></tr><tr><td>North Wind Imports</td><td>Covered</td><td>found Aug 2025</td></tr><tr><td>NORTHWIND IMPORTS L.L.C</td><td>Covered</td><td>found Aug 2026</td></tr></table>
+            </section>
+            <section class="ps" data-s="2"><h4>Checks this year</h4>
+              <table><tr><td>06 Jan 2026</td><td>18 platforms</td><td>Nothing to see</td></tr><tr><td>03 Feb 2026</td><td>18 platforms</td><td>Nothing to see</td></tr><tr><td>04 Mar 2026</td><td>18 platforms</td><td>Nothing to see</td></tr><tr><td>06 Apr 2026</td><td>18 platforms</td><td>Nothing to see</td></tr><tr><td>05 May 2026</td><td>18 platforms</td><td>Nothing to see</td></tr><tr><td>03 Jun 2026</td><td>18 platforms</td><td>Nothing to see</td></tr><tr><td>06 Jul 2026</td><td>18 platforms</td><td>Nothing to see</td></tr><tr><td>04 Aug 2026</td><td>18 platforms</td><td>Nothing to see</td></tr><tr><td>07 Sep 2026</td><td>18 platforms</td><td>Nothing to see</td></tr></table>
+              <p class="quiet">Report sent to two recipients after each check.</p>
+            </section>
+            <section class="ps" data-s="3"><h4>Renewal</h4>
+              <table><tr><td>Renews</td><td>12 Mar 2027</td><td>Automatic</td></tr><tr><td>Action required</td><td>None</td><td></td></tr><tr><td>Gap in coverage</td><td>0 days</td><td>since March 2025</td></tr></table>
+              <p class="quiet">If a renewal ever needed you, we would write to you 60 days ahead. It does not.</p>
+            </section>
           </div>
         </div>
       </div>
@@ -618,14 +544,14 @@ img.skel-src.on { opacity: 1; }
         <li class="beat" data-beat="0"><div class="num">01</div><h3>Protection, maintained</h3><p>A federal confidentiality protection we file and keep in force for every entity you import under.</p></li>
         <li class="beat" data-beat="1"><div class="num">02</div><h3>Every name variation</h3><p>A forwarder's misspelling is still your record. Every spelling is covered, no cap, on every plan.</p></li>
         <li class="beat" data-beat="2"><div class="num">03</div><h3>Monitoring, with proof</h3><p>We check 18+ public platforms on a schedule and send you the result. Most months it reads: nothing to see.</p></li>
-        <li class="beat" data-beat="3"><div class="num">04</div><h3>Automatic renewal</h3><p>Protection that quietly expires puts everything back in public view within weeks. Ours never depends on one person remembering.</p></li>
+        <li class="beat" data-beat="3"><div class="num">04</div><h3>Automatic renewal</h3><p>Protection that quietly expires puts everything back in public view within weeks. Ours renews itself, and the report says so every month.</p></li>
       </ol>
     </div>
   </div>
 </section>
 
 <!-- 03 THREE PLANS -->
-<section class="sec" id="plans" data-frame="03-plans" style="padding-top: 0;" data-chapter="2" data-chapter-label="Three plans">
+<section class="sec" id="plans" data-frame="03-plans" style="padding-top: 0;">
   <div class="shell">
     <div class="narrow center">
       <h2 class="sec-h reveal">Three plans. One question decides.</h2>
@@ -640,7 +566,7 @@ img.skel-src.on { opacity: 1; }
 </section>
 
 <!-- 04 FAQ MINI -->
-<section class="sec" id="faq" data-frame="04-faq" style="padding-top: 0;" data-chapter="3" data-chapter-label="Questions about quoting">
+<section class="sec" id="faq" data-frame="04-faq" style="padding-top: 0;">
   <div class="shell">
     <div class="narrow center">
       <h2 class="sec-h reveal">Questions about quoting</h2>
@@ -655,7 +581,7 @@ img.skel-src.on { opacity: 1; }
 </section>
 
 <!-- 05 CLOSING -->
-<section class="closing" id="cta" data-frame="05-closing" data-chapter="4" data-chapter-label="Your quote">
+<section class="closing" id="cta" data-frame="05-closing">
   <div class="shell">
     <h2 class="reveal">Your quote comes with your exposure.</h2>
     <p class="reveal">Pick a plan above or let the check pick it for you. Either way, one business day, no obligation.</p>
@@ -693,101 +619,13 @@ img.skel-src.on { opacity: 1; }
   if (h1) { h1.querySelectorAll('.w').forEach((w, i) => w.style.transitionDelay = (i * 60) + 'ms'); setTimeout(() => h1.classList.add('in'), 40); if (isStatic) h1.classList.add('in'); }
   setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
 
-  // shipping line: an SVG route down the left margin with a stop per chapter; the coral marker rides it with scroll
+  // coverage story: the monitoring report scrolls to the section the reader is on
   (function(){
-    const svg = document.getElementById('spine'); if (!svg) return;
-    const base = document.getElementById('spineBase'), prog = document.getElementById('spineProg'), wake = document.getElementById('spineWake'), nodesG = document.getElementById('spineNodes'), ship = document.getElementById('ship');
-    const main = document.getElementById('main'); const NS = 'http://www.w3.org/2000/svg';
-    let stops = [], total = 0, shown = 0, target = 0;
-    function build() {
-      const mr = main.getBoundingClientRect(); const W = main.clientWidth, H = main.scrollHeight; svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
-      const x = Math.max(28, (W - 1360) / 2 + 6);
-      stops = [...main.querySelectorAll('[data-chapter]')].map(s => { const r = s.getBoundingClientRect(); const isHero = s.id === 'hero'; return { el: s, n: s.dataset.chapter, label: s.dataset.chapterLabel, x, y: r.top - mr.top + (s.id === 'includes' ? -30 : -22), hero: false }; });
-      if (stops.length < 2) return;
-      let d = `M ${stops[0].x},${stops[0].y - 30} L ${stops[0].x},${stops[0].y}`;
-      for (let i = 1; i < stops.length; i++) { const a = stops[i - 1], b = stops[i]; const bend = 34 * (i % 2 ? 1 : -1); const my = (a.y + b.y) / 2; d += ` C ${a.x + bend},${a.y + (b.y - a.y) * .35} ${b.x + bend},${my + (b.y - a.y) * .15} ${b.x},${b.y}`; }
-      const last = stops[stops.length - 1]; d += ` L ${last.x},${last.y + 60}`;
-      base.setAttribute('d', d); prog.setAttribute('d', d); total = prog.getTotalLength(); prog.style.strokeDasharray = total; prog.style.strokeDashoffset = total;
-      nodesG.innerHTML = ''; stops.forEach(s => { const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'node' + (s.hero ? ' hero' : '')); g.setAttribute('transform', `translate(${s.x},${s.y})`);
-        g.innerHTML = `<circle class="dot" r="8"/><text x="30" y="-14">${s.label}</text>`; nodesG.appendChild(g); s.g = g; });
-      const port = document.createElementNS(NS, 'g'); port.setAttribute('class', 'port'); port.setAttribute('transform', `translate(${stops[0].x},${stops[0].y - 30})`); port.innerHTML = '<rect x="-26" y="-74" width="52" height="8" rx="2"/><rect x="-3" y="-66" width="6" height="26" rx="1"/>'; nodesG.appendChild(port);
-      update(true);
-    }
-    function lenAt(y) { // path length at a given page y (search along the path)
-      let lo = 0, hi = total; for (let i = 0; i < 24; i++) { const mid = (lo + hi) / 2; if (prog.getPointAtLength(mid).y < y) lo = mid; else hi = mid; } return lo;
-    }
-    function update(snap) {
-      if (!total) return;
-      const mr = main.getBoundingClientRect(); const focusY = -mr.top + innerHeight * .45; // where the reader is looking
-      target = Math.max(0, Math.min(total, lenAt(focusY)));
-      if (isStatic) target = total * (qs.get('spine') ? +qs.get('spine') : .42);
-      if (snap || reduce || isStatic) shown = target; else { const gap = target - shown; const step = Math.sign(gap) * Math.min(Math.abs(gap) * .06 + 1.2, 7); shown = Math.abs(gap) < 1.2 ? target : shown + step; }
-      prog.style.strokeDashoffset = total - shown; ship.style.opacity = 1;
-      const pt = prog.getPointAtLength(shown), p2 = prog.getPointAtLength(Math.min(total, shown + 6)); const ang = Math.atan2(p2.y - pt.y, p2.x - pt.x) * 180 / Math.PI; const now = performance.now() / 1000; const bob = (reduce || isStatic) ? 0 : Math.sin(now * 1.6) * 2.2, sway = (reduce || isStatic) ? 0 : Math.sin(now * 1.1) * 1.4; ship.setAttribute('transform', `translate(${pt.x + sway},${pt.y}) rotate(${ang + bob})`); const moving = Math.abs(target - shown) > 1.5; ship.classList.toggle('moving', moving); wake.classList.toggle('on', moving);
-      // wake: a short fading trail behind the ship along the route it just covered
-      const wl = Math.min(shown, 90); wake.setAttribute('d', prog.getAttribute('d')); wake.style.strokeDasharray = `${wl} ${total}`; wake.style.strokeDashoffset = -(shown - wl);
-      stops.forEach(s => { if (!s.g) return; s.g.classList.toggle('on', pt.y >= s.y - 2); s.g.classList.toggle('clear', Math.abs(pt.y - s.y) < 96); });
-    }
-    build(); new ResizeObserver(() => build()).observe(main); if (document.fonts && document.fonts.ready) document.fonts.ready.then(build); addEventListener('load', build);
-    if (reduce || isStatic) { addEventListener('scroll', () => update(true), { passive: true }); update(true); }
-    else { addEventListener('scroll', () => update(false), { passive: true }); (function loop(){ update(false); requestAnimationFrame(loop); })(); }
-  })();
-
-  // skeletons: images, numbers and cards show their shape until the real thing is ready (?skeleton=1 freezes them for review)
-  (function(){
-    const freeze = qs.has('skeleton');
-    const skipImg = img => img.classList.contains('nav-logo') || img.classList.contains('logo') || img.closest('.pl') || (img.getBoundingClientRect().width && img.getBoundingClientRect().width < 60);
-    const skelImage = img => {
-      if (skipImg(img)) return; const par = img.parentElement; if (getComputedStyle(par).position === 'static') par.style.position = 'relative';
-      const ov = document.createElement('div'); ov.className = 'skel skel-img'; par.appendChild(ov); img.classList.add('skel-src');
-      const done = () => { if (freeze) return; img.classList.add('on'); ov.classList.add('off'); setTimeout(() => ov.remove(), 500); };
-      if (img.complete && img.naturalWidth) done(); else { img.addEventListener('load', done); img.addEventListener('error', done); }
-    };
-    window.__skelImage = skelImage; document.querySelectorAll('main img, .band img').forEach(skelImage);
-    // cards that come from data: show text lines until they are populated
-    const cardHosts = ['.post', '.tier', '.story', '.cell', '.t'];
-    document.querySelectorAll(cardHosts.join(',')).forEach(card => {
-      const body = card.querySelector('.body') || card; if (getComputedStyle(body).position === 'static') body.style.position = 'relative';
-      const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.innerHTML = '<i class="w40"></i><i class="h20 w80"></i><i></i><i class="w60"></i>'; body.appendChild(sk);
-      if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, 350 + Math.random() * 350);
-    });
-    // numbers that are computed: counters and stats
-    document.querySelectorAll('#liveRecords, #liveLoss, .stat .n, .lv .n').forEach(n => { n.classList.add('skel-num'); if (!freeze) setTimeout(() => n.classList.remove('skel-num'), 600 + Math.random() * 300); });
-    // page-specific blocks: question rows, the funnel card, the booklet, step lists, the platform strip, the process nodes
-    const lineSkel = (el, lines, pad) => { if (!el) return; if (getComputedStyle(el).position === 'static') el.style.position = 'relative'; const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.style.padding = pad || '14px 0'; sk.innerHTML = lines; el.appendChild(sk); if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, 400 + Math.random() * 300); };
-    document.querySelectorAll('.group details').forEach(d => lineSkel(d, '<i class="h20 w80"></i>', '18px 0'));
-    document.querySelectorAll('.f-in').forEach(f => lineSkel(f, '<i class="w40"></i><i class="h20 w80"></i><i class="w60"></i><i class="h20"></i><i class="h20"></i>', '40px 48px'));
-    document.querySelectorAll('.steps li, .inside li, .ways li, .ports-legend li, .plan li, .cmp-row').forEach(li => lineSkel(li, '<i class="h20 w80"></i>', '12px 0'));
-    document.querySelectorAll('.book').forEach(b => { const sk = document.createElement('div'); sk.className = 'skel'; sk.style.cssText = 'position:absolute;inset:0;border-radius:10px;z-index:5;transition:opacity .4s var(--ease)'; b.appendChild(sk); if (!freeze) setTimeout(() => { sk.style.opacity = 0; setTimeout(() => sk.remove(), 400); }, 700); });
-    document.querySelectorAll('.node .ring, .stat, .lv, .unsure, .still, .gate, .callout').forEach(el => { if (el.classList.contains('ring')) { el.classList.add('skel'); if (!freeze) setTimeout(() => el.classList.remove('skel'), 500 + Math.random() * 300); } });
-    document.querySelectorAll('.wall').forEach(w => { const sk = document.createElement('div'); sk.className = 'skel-wall'; sk.innerHTML = Array.from({ length: 3 }, () => '<div class="skel-col"><div class="skel-lines"><i class="w80"></i><i></i><i class="w60"></i><i class="w40"></i></div><div class="skel-lines"><i class="w80"></i><i></i><i class="w60"></i><i class="w40"></i></div></div>').join(''); w.parentElement.style.position = 'relative'; w.parentElement.appendChild(sk); if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 500); }, 900); });
-    // the globe: a dotted disc until the real one has drawn
-    const gl = document.getElementById('globe'); if (gl) { const sg = document.createElement('div'); sg.className = 'skel-globe'; gl.parentElement.appendChild(sg); window.__globeSkeleton = sg; if (!freeze) setTimeout(() => { sg.classList.add('off'); setTimeout(() => sg.remove(), 600); }, 2200); }
-    // form cards: fields show as lines for a beat
-    document.querySelectorAll('.fcard form').forEach(f => { if (getComputedStyle(f).position === 'static') f.style.position = 'relative'; const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.style.padding = '0'; sk.innerHTML = '<i class="h20 w60"></i><i class="w80"></i><i class="h20"></i><i class="h20"></i><i class="h20"></i><i class="h20 w40"></i>'; f.appendChild(sk); if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, 450); });
-  })();
-
-  // coverage story: the illustration advances through four beats as the beats scroll past
-  (function(){
-    const card = document.querySelector('.cov-card'); if (!card) return;
-    const beats = [...document.querySelectorAll('.beat')], ours = [...document.querySelectorAll('.mrow.ours .cells i')], lapse = [...document.querySelectorAll('.mrow.lapse .cells i')];
-    const ring = document.getElementById('renewRing'), pct = document.getElementById('renewPct'), kick = document.getElementById('covKick'), count = document.getElementById('covCount'), note = document.getElementById('mnote');
-    const kicks = ['Your entities', 'Every name they ship under', 'Checked every month', 'Renewal, without a gap'];
-    function setBeat(b, f) { // b = current beat 0..3, f = progress within it
-      card.className = 'cov-card b' + b; beats.forEach((el, i) => el.classList.toggle('on', i === b)); kick.textContent = kicks[b];
-      count.textContent = b === 0 ? '3 entities' : b === 1 ? '3 entities · 5 names' : b === 2 ? Math.min(12, Math.ceil(f * 12)) + ' of 12 months checked' : 'renewed, month 13';
-      const filled = b < 2 ? 0 : b === 2 ? Math.min(12, Math.ceil(f * 12)) : 14;
-      ours.forEach((c, i) => c.classList.toggle('on', i < filled));
-      lapse.forEach((c, i) => { c.classList.toggle('on', b === 3 && i < 12); c.classList.toggle('bad', b === 3 && i >= 12 && f > (i - 12) * .3 + .2); });
-      note.textContent = b === 2 ? (filled ? 'Month ' + filled + ': nothing to see. Report sent.' : '') : b === 3 ? 'Month 13: without a renewal, records are back on every platform within four weeks.' : '';
-      const r = b < 3 ? 0 : Math.min(1, f * 1.4); ring.style.strokeDashoffset = 314 - 314 * r; pct.textContent = Math.round(r * 100) + '%';
-    }
-    function upd() {
-      const focus = innerHeight * .55; let b = 0, f = 0;
-      beats.forEach((el, i) => { const r = el.getBoundingClientRect(); if (r.top < focus) { b = i; f = Math.max(0, Math.min(1, (focus - r.top) / r.height)); } });
-      setBeat(b, f);
-    }
-    const st = qs.get('beat'); if (st !== null) { setBeat(+st, +(qs.get('f') || .8)); if (isStatic) return; }
+    const paper = document.getElementById('paperIn'); if (!paper) return;
+    const beats = [...document.querySelectorAll('.beat')], secs = [...document.querySelectorAll('.ps')];
+    function setBeat(b) { beats.forEach((el, i) => el.classList.toggle('on', i === b)); secs.forEach((s, i) => s.classList.toggle('on', i === b)); const y = Math.max(0, secs[b].offsetTop - 110); paper.style.transform = `translateY(${-y}px)`; }
+    function upd() { const focus = innerHeight * .55; let b = 0; beats.forEach((el, i) => { if (el.getBoundingClientRect().top < focus) b = i; }); setBeat(b); }
+    const st = qs.get('beat'); if (st !== null) { setBeat(+st); if (isStatic) return; }
     onScroll(upd);
   })();
 
