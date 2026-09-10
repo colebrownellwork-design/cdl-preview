@@ -259,6 +259,17 @@ button, input { font: inherit; }
 .cm.done.on .tick { background: var(--confirmed); transform: scale(1); transition-delay: calc(var(--i) * 90ms); }
 .cm.done.on .tick svg { opacity: 1; transition-delay: calc(var(--i) * 90ms + 80ms); }
 .cm:not(.done) { border-style: dashed; }
+.cov-days { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+.cal27 { position: relative; transform-origin: top center; transform: perspective(900px) rotateX(-70deg); opacity: 0; transition: transform .8s cubic-bezier(.22,1,.36,1), opacity .5s var(--ease); }
+.cal27 .cal-year { grid-column: 1 / -1; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-2); font-family: var(--font-mono); margin-bottom: 2px; }
+.ps.on .cal27, .ps.filled .cal27, .cal27.nomo { transform: none; opacity: 1; }
+.cm.next { border-style: dashed; }
+.cm.next .mo { color: var(--muted); }
+.cm.next .tick.sch { background: transparent; border: 1.5px dashed var(--light-gray-blue); transform: none; }
+.cm.stamp { border: 1.5px solid var(--indigo); border-style: solid; background: rgba(29,57,91,.05); }
+.cm.stamp .mo { color: var(--text); }
+.cm .rn { display: block; margin: 7px 0 3px; font-size: 11px; font-weight: 700; color: var(--indigo); letter-spacing: .02em; line-height: 13px; }
+.cm .rn small { display: block; font-size: 9.5px; font-weight: 500; color: var(--muted); margin-top: 3px; }
 .cal.nomo .tick, .cal.nomo .tick svg { transition: none !important; }
 .cm:not(.done) .mo { color: var(--muted-2); }
 @media (max-width: 960px) { .cal { grid-template-columns: repeat(4, 1fr); } }
@@ -550,7 +561,7 @@ img.skel-src.on { opacity: 1; }
           <div class="paper-in" id="paperIn">
             <div class="ph-head"><img src="logo/cdl-logo-primary.svg" alt=""><span>Monitoring report · September 2026</span></div>
             <div class="ph-title">Northwind Imports LLC</div>
-            <div class="ph-sub">Prepared for the account owner · Reference NW-2026-09</div>
+            <div class="ph-sub">Prepared for the account owner · Reference NW-2026-09 · <b class="cov-days"><span id="covDays">546</span> days of continuous coverage · 0 gaps</b></div>
             <section class="ps" data-s="0"><h4>Protected entities</h4>
               <table><tr><td>Northwind Imports LLC</td><td>Active</td><td>since 12 Mar 2025</td></tr><tr><td>Northwind Home Goods LLC</td><td>Active</td><td>since 12 Mar 2025</td></tr><tr><td>NW Trading Co.</td><td>Active</td><td>since 04 Jun 2025</td></tr></table>
             </section>
@@ -564,7 +575,9 @@ img.skel-src.on { opacity: 1; }
               <p class="quiet">Report sent to two recipients after each check. Next check: 05 Oct 2026.</p>
             </section>
             <section class="ps" data-s="3"><h4>Renewal</h4>
-              <table><tr><td>Renews</td><td>12 Mar 2027</td><td>Automatic</td></tr><tr><td>Action required</td><td>None</td><td></td></tr><tr><td>Gap in coverage</td><td>0 days</td><td>since March 2025</td></tr></table>
+              <p>Already on the calendar. Nothing for you to do, and the report will say so when it happens.</p>
+              <div class="cal cal27" id="cal27"><div class="cal-year">2027 · scheduled</div><div class="cm next" style="--i:0"><span class="mo">Jan</span><i class="tick sch"></i><span class="dt">05 Jan</span></div><div class="cm next" style="--i:1"><span class="mo">Feb</span><i class="tick sch"></i><span class="dt">02 Feb</span></div><div class="cm next stamp" style="--i:2"><span class="mo">Mar</span><span class="rn">Renewed<small>12 Mar · automatic</small></span></div><div class="cm next" style="--i:3"><span class="mo">Apr</span><i class="tick sch"></i><span class="dt">06 Apr</span></div><div class="cm next" style="--i:4"><span class="mo">May</span><i class="tick sch"></i><span class="dt">04 May</span></div><div class="cm next" style="--i:5"><span class="mo">Jun</span><i class="tick sch"></i><span class="dt">07 Jun</span></div><div class="cm next" style="--i:6"><span class="mo">Jul</span><i class="tick sch"></i><span class="dt">05 Jul</span></div><div class="cm next" style="--i:7"><span class="mo">Aug</span><i class="tick sch"></i><span class="dt">02 Aug</span></div><div class="cm next" style="--i:8"><span class="mo">Sep</span><i class="tick sch"></i><span class="dt">06 Sep</span></div><div class="cm next" style="--i:9"><span class="mo">Oct</span><i class="tick sch"></i><span class="dt">04 Oct</span></div><div class="cm next" style="--i:10"><span class="mo">Nov</span><i class="tick sch"></i><span class="dt">01 Nov</span></div><div class="cm next" style="--i:11"><span class="mo">Dec</span><i class="tick sch"></i><span class="dt">06 Dec</span></div></div>
+              <table><tr><td>Renews</td><td>12 Mar 2027</td><td>Automatic</td></tr><tr><td>Account contact changed</td><td>Feb 2026</td><td>Coverage unaffected</td></tr><tr><td>Gap in coverage</td><td>0 days</td><td>since March 2025</td></tr></table>
               <p class="quiet">If a renewal ever needed you, we would write to you 60 days ahead. It does not.</p>
             </section>
           </div>
@@ -672,6 +685,8 @@ img.skel-src.on { opacity: 1; }
       if (b !== cur) { cur = b; if (!isStatic && !reduce) fill(secs[b]); }
       const cal = document.querySelectorAll('#cal .cm');
       if (b >= 2) { if (isStatic) document.getElementById('cal').classList.add('nomo'); if (lastB < 2 || isStatic) cal.forEach(c => c.classList.add('on')); } else cal.forEach(c => c.classList.remove('on'));
+      const days = document.getElementById('covDays'), c27 = document.getElementById('cal27');
+      if (b === 3) { if (isStatic) c27.classList.add('nomo'); if (lastB !== 3 && !isStatic && !reduce) { const s0 = performance.now(); (function up(n){ const p = Math.min((n - s0) / 1200, 1); days.textContent = Math.round((1 - Math.pow(1 - p, 3)) * 546); if (p < 1) requestAnimationFrame(up); })(s0); } else days.textContent = '546'; }
       lastB = b;
     }
     if (isStatic || reduce) secs.forEach(s => { rows(s).forEach(r => r.classList.add('done')); s.classList.add('filled'); document.querySelectorAll('.nv').forEach(n => n.style.transition = 'none'); });
