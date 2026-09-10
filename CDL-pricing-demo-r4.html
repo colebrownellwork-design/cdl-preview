@@ -240,6 +240,16 @@ button, input { font: inherit; }
 .ps tr.done td:nth-child(2) { transition-delay: .12s; } .ps tr.done td:nth-child(3) { transition-delay: .2s; }
 .ps p.quiet { opacity: 0; transition: opacity .4s var(--ease); } .ps.filled p.quiet { opacity: 1; }
 @keyframes blink { 50% { opacity: 0; } }
+.nm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+.nm-col { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.nm-ent { font-size: 12.5px; font-weight: 600; color: var(--text); padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.nm-col ul { list-style: none; margin-top: 6px; }
+.nv { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); padding: 5px 0; opacity: 0; transform: translateY(4px); transition: opacity .35s var(--ease), transform .35s var(--ease); }
+.nv i { width: 14px; height: 14px; border-radius: 50%; background: var(--confirmed); flex: none; position: relative; }
+.nv i::after { content: ""; position: absolute; left: 4px; top: 3.5px; width: 4px; height: 7px; border: solid #fff; border-width: 0 1.8px 1.8px 0; transform: rotate(45deg); }
+.ps.on .nv, .ps.filled .nv, .cal.nomo ~ .nv { opacity: 1; transform: none; transition-delay: calc(var(--i) * 120ms + 150ms); }
+.ps:not(.on):not(.filled) .nv { transition-delay: 0s; }
+@media (max-width: 960px) { .nm-grid { grid-template-columns: 1fr; } }
 .cal { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 12px; }
 .cm { border: 1px solid var(--line); border-radius: 10px; padding: 10px 8px 8px; text-align: center; background: var(--white); position: relative; }
 .cm .mo { display: block; font-size: 12px; font-weight: 600; color: var(--text); }
@@ -249,6 +259,7 @@ button, input { font: inherit; }
 .cm.done.on .tick { background: var(--confirmed); transform: scale(1); transition-delay: calc(var(--i) * 90ms); }
 .cm.done.on .tick svg { opacity: 1; transition-delay: calc(var(--i) * 90ms + 80ms); }
 .cm:not(.done) { border-style: dashed; }
+.cal.nomo .tick, .cal.nomo .tick svg { transition: none !important; }
 .cm:not(.done) .mo { color: var(--muted-2); }
 @media (max-width: 960px) { .cal { grid-template-columns: repeat(4, 1fr); } }
 .beats { list-style: none; padding-top: 8px; }
@@ -544,8 +555,8 @@ img.skel-src.on { opacity: 1; }
               <table><tr><td>Northwind Imports LLC</td><td>Active</td><td>since 12 Mar 2025</td></tr><tr><td>Northwind Home Goods LLC</td><td>Active</td><td>since 12 Mar 2025</td></tr><tr><td>NW Trading Co.</td><td>Active</td><td>since 04 Jun 2025</td></tr></table>
             </section>
             <section class="ps" data-s="1"><h4>Names covered</h4>
-              <p>Every spelling your shipments have arrived under in the last 24 months, and any new one we find.</p>
-              <table><tr><td>NORTHWND IMPORTS</td><td>Covered</td><td>found Feb 2025</td></tr><tr><td>Northwind Imp. LLC</td><td>Covered</td><td>found Mar 2025</td></tr><tr><td>North Wind Imports</td><td>Covered</td><td>found Aug 2025</td></tr><tr><td>NORTHWIND IMPORTS L.L.C</td><td>Covered</td><td>found Aug 2026</td></tr></table>
+              <p>Every spelling your shipments arrive under, grouped by entity. All covered, and any new one we find is added.</p>
+              <div class="nm-grid"><div class="nm-col"><div class="nm-ent">Northwind Imports LLC</div><ul><li class="nv" style="--i:0"><i></i>NORTHWND IMPORTS</li><li class="nv" style="--i:1"><i></i>Northwind Imp. LLC</li><li class="nv" style="--i:2"><i></i>North Wind Imports</li><li class="nv" style="--i:3"><i></i>NORTHWIND IMPORTS L.L.C</li></ul></div><div class="nm-col"><div class="nm-ent">Northwind Home Goods LLC</div><ul><li class="nv" style="--i:0"><i></i>Northwind Home Goods</li><li class="nv" style="--i:1"><i></i>NW HOME GOODS</li><li class="nv" style="--i:2"><i></i>Northwind Homegoods LLC</li></ul></div><div class="nm-col"><div class="nm-ent">NW Trading Co.</div><ul><li class="nv" style="--i:0"><i></i>N.W. Trading</li><li class="nv" style="--i:1"><i></i>NW Trading Company</li><li class="nv" style="--i:2"><i></i>NORTHWIND TRADING CO</li></ul></div></div>
             </section>
             <section class="ps" data-s="2"><h4>Checks this year</h4>
               <p>Eighteen platforms, every month. Nothing new under your names so far in 2026.</p>
@@ -654,12 +665,16 @@ img.skel-src.on { opacity: 1; }
         type(); };
       timers.push(setTimeout(next, 250));
     }
+    let lastB = -1;
     function setBeat(b) {
       beats.forEach((el, i) => el.classList.toggle('on', i === b)); secs.forEach((s, i) => s.classList.toggle('on', i === b));
       const y = Math.max(0, secs[b].offsetTop - 110); paper.style.transform = `translateY(${-y}px)`;
       if (b !== cur) { cur = b; if (!isStatic && !reduce) fill(secs[b]); }
+      const cal = document.querySelectorAll('#cal .cm');
+      if (b >= 2) { if (isStatic) document.getElementById('cal').classList.add('nomo'); if (lastB < 2 || isStatic) cal.forEach(c => c.classList.add('on')); } else cal.forEach(c => c.classList.remove('on'));
+      lastB = b;
     }
-    if (isStatic || reduce) secs.forEach(s => { rows(s).forEach(r => r.classList.add('done')); s.classList.add('filled'); });
+    if (isStatic || reduce) secs.forEach(s => { rows(s).forEach(r => r.classList.add('done')); s.classList.add('filled'); document.querySelectorAll('.nv').forEach(n => n.style.transition = 'none'); });
     const sec = document.getElementById('includes');
     function upd() { if (sec.getBoundingClientRect().top > innerHeight * .8) return; const focus = innerHeight * .55; let b = 0; beats.forEach((el, i) => { if (el.getBoundingClientRect().top < focus) b = i; }); setBeat(b); }
     const st = qs.get('beat'); if (st !== null) { setBeat(+st); if (isStatic) return; }
