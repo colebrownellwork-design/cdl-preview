@@ -604,10 +604,10 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
           </div>
     <div class="stakes-grid">
       <div class="stakes-photo reveal">
-        <img src="photography/01-hero/cdl-hero-03-ship-overhead.png" alt="Container ship seen from above" data-for="0">
-        <img src="photography/01-hero/cdl-hero-04-cranes-fog.png" alt="Port cranes in fog" data-for="1" hidden>
-        <img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.png" alt="Container terminal yard in fog" data-for="2" hidden>
-        <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.png" alt="Container terminal at blue hour" data-for="3" hidden>
+        <img src="photography/01-hero/cdl-hero-03-ship-overhead.jpg" alt="Container ship seen from above" data-for="0">
+        <img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt="Port cranes in fog" data-for="1" hidden>
+        <img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt="Container terminal yard in fog" data-for="2" hidden>
+        <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt="Container terminal at blue hour" data-for="3" hidden>
               </div>
       <div class="readers reveal">
         <div>
@@ -705,7 +705,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 <section id="quote" data-frame="04-quote" style="padding-bottom: 96px;">
   <div class="shell">
     <div class="qcard reveal">
-      <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.png" alt="" width="1920" height="1084">
+      <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt="" width="1920" height="1084">
       <div class="in">
         <blockquote>“Fast, clear, and it simply works. Our new shipments stopped appearing and we get proof every month.”</blockquote>
         <div class="who"><b>Logistics Manager</b>Consumer goods importer. Name withheld.</div>
@@ -723,9 +723,9 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <h2 class="sec-h reveal">Three ways it goes wrong. All of them avoidable.</h2>
     </div>
     <div class="stories">
-      <div class="story reveal"><div class="ph"><img src="photography/01-hero/cdl-hero-04-cranes-fog.png" alt=""><div class="band">Apparel importer</div><div class="n">18 months</div></div><div class="cap"><b>Supplier poached.</b> Two competitors at the same mill within 18 months.</div></div>
+      <div class="story reveal"><div class="ph"><img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt=""><div class="band">Apparel importer</div><div class="n">18 months</div></div><div class="cap"><b>Supplier poached.</b> Two competitors at the same mill within 18 months.</div></div>
       <div class="story reveal"><div class="ph"><img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt=""><div class="band">Skincare brand</div><div class="n">90 days</div></div><div class="cap"><b>Product copied.</b> Three copycats on the market within 90 days of launch.</div></div>
-      <div class="story reveal"><div class="ph"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.png" alt=""><div class="band">The protection that lapsed</div><div class="n">4 weeks</div></div><div class="cap"><b>Protection lapsed.</b> Nobody renewed it. Records were back on every platform within four weeks.</div></div>
+      <div class="story reveal"><div class="ph"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt=""><div class="band">The protection that lapsed</div><div class="n">4 weeks</div></div><div class="cap"><b>Protection lapsed.</b> Nobody renewed it. Records were back on every platform within four weeks.</div></div>
     </div>
     <p class="stories-note reveal">Illustrative scenarios. No customer is named, which is the point.</p>
   </div>
@@ -1096,7 +1096,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   (function(){
     const v = qs.get('hero') || 'photo'; if (v !== 'photo') return;
     const hero = document.getElementById('hero'); hero.classList.add('full'); const hl = qs.get('hl') || 'c'; hero.dataset.hl = hl;
-    const imgs = { cranes: 'photography/01-hero/cdl-hero-04-cranes-fog.png', bluehour: 'photography/01-hero/cdl-hero-01-terminal-blue-hour.png', warehouse: 'photography/web/cdl-vertical-01-food-warehouse.jpg', ship: 'photography/01-hero/cdl-hero-03-ship-overhead.png', yard: 'photography/01-hero/cdl-hero-02-terminal-yard-fog.png' };
+    const imgs = { cranes: 'photography/01-hero/cdl-hero-04-cranes-fog.jpg', bluehour: 'photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg', warehouse: 'photography/web/cdl-vertical-01-food-warehouse.jpg', ship: 'photography/01-hero/cdl-hero-03-ship-overhead.jpg', yard: 'photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg' };
     const src = imgs[qs.get('img')] || imgs.bluehour;
     const shell = hero.querySelector('.shell');
     const bleed = document.createElement('div'); bleed.className = 'bleed'; bleed.innerHTML = `<img src="${src}" alt="">`;
