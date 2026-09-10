@@ -126,6 +126,39 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 .plan-note b { color: var(--text); font-weight: 600; }
 .plan-note[hidden] { display: none; }
 
+
+/* the lookup, animated */
+.lookup { position: relative; margin-top: 30px; max-width: 520px; background: var(--white); border-radius: 20px; box-shadow: var(--shadow-card); padding: 18px 18px 16px; overflow: hidden; min-height: 300px; }
+.lk-search { display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 14px; border: 1.5px solid var(--line); border-radius: var(--r-pill); font-size: 15px; color: var(--text); background: var(--ground); }
+.lk-search svg { width: 18px; height: 18px; color: var(--muted); flex: none; }
+.lk-search .caret { width: 1.5px; height: 18px; background: var(--indigo); animation: blink 1s steps(2) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.lk-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 14px; }
+.pt { position: relative; height: 44px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); display: flex; align-items: center; justify-content: center; padding: 8px; opacity: .45; filter: grayscale(1); transition: opacity .35s var(--ease), filter .35s var(--ease), border-color .35s var(--ease), transform .35s cubic-bezier(.22,1.2,.36,1); }
+.pt img { max-height: 22px; max-width: 100%; object-fit: contain; }
+.pt.more span { width: 22px; height: 6px; border-radius: 3px; background: var(--line); }
+.pt .ok { position: absolute; right: -5px; top: -5px; width: 18px; height: 18px; border-radius: 50%; background: var(--confirmed); color: var(--white); display: inline-flex; align-items: center; justify-content: center; transform: scale(0); transition: transform .3s cubic-bezier(.22,1.2,.36,1); }
+.pt .ok svg { width: 10px; height: 10px; }
+.pt.on { opacity: 1; filter: none; border-color: rgba(47,133,90,.4); }
+.pt.on .ok { transform: scale(1); }
+.pt.now { transform: translateY(-2px); border-color: var(--indigo); opacity: 1; filter: none; }
+.lk-count { margin-top: 12px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lk-report { position: absolute; left: 18px; right: 18px; bottom: 16px; background: var(--indigo); color: var(--white); border-radius: 14px; padding: 16px 18px; transform: translateY(120%); opacity: 0; transition: transform .6s cubic-bezier(.22,1,.36,1), opacity .4s var(--ease); }
+.lookup.s2 .lk-report { transform: none; opacity: 1; }
+.lk-kick { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dark-muted); font-family: var(--font-mono); }
+.lk-title { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; margin-top: 4px; }
+.lk-rows { margin-top: 10px; display: grid; gap: 5px; }
+.lk-rows div { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-data); }
+.lk-rows b { color: var(--white); font-variant-numeric: tabular-nums; }
+.lk-tag { position: absolute; right: 14px; top: -14px; background: var(--coral); color: var(--white); font-size: 12.5px; font-weight: 600; padding: 6px 12px; border-radius: var(--r-pill); transform: scale(0) rotate(-8deg); transition: transform .45s cubic-bezier(.22,1.3,.36,1) .5s; box-shadow: 0 6px 14px -6px rgba(240,77,77,.6); }
+.lookup.s2.quote .lk-tag { transform: scale(1) rotate(-6deg); }
+.lk-steps { list-style: none; margin-top: 22px; max-width: 520px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.lk-steps li { border-top: 2px solid var(--line); padding-top: 10px; transition: border-color .4s var(--ease); }
+.lk-steps b { display: block; font-size: 14px; font-weight: 600; color: var(--muted-2); transition: color .4s var(--ease); }
+.lk-steps span { display: block; font-size: 12.5px; line-height: 18px; color: var(--muted); margin-top: 4px; opacity: .6; transition: opacity .4s var(--ease); }
+.lk-steps li.on { border-top-color: var(--coral); } .lk-steps li.on b { color: var(--text); } .lk-steps li.on span { opacity: 1; }
+@media (max-width: 960px) { .lk-grid { grid-template-columns: repeat(6, 1fr); } .pt { height: 38px; } .lk-steps { grid-template-columns: 1fr; gap: 10px; } }
+
 /* form card */
 .fcard { background: var(--white); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 36px 36px 30px; position: sticky; top: 92px; }
 .fcard h2 { font-size: 24px; line-height: 30px; letter-spacing: -0.03em; }
@@ -233,10 +266,21 @@ img.skel-src.on { opacity: 1; }
     <div>
       <h1 class="rise" id="h1"><span class="w">See</span> <span class="w">what's</span> <span class="w">public</span> <span class="w">about</span> <span class="w">your</span> <span class="w">company.</span></h1>
       <p class="sub reveal">We check ImportYeti, Panjiva, Import Genius and 15 more platforms for every name you ship under, and send you what they show.</p>
-      <ol class="steps reveal">
-        <li><span class="n">01</span><div><b>Tell us who you are</b><span>Company name and a work email. Other names you ship under help, but we will find them either way.</span></div></li>
-        <li><span class="n">02</span><div><b>We look you up</b><span>A person checks every platform, not a script. You get the report within one business day.</span></div></li>
-        <li><span class="n">03</span><div><b>Your quote comes with it</b><span>Scoped to the entities we found. No obligation, no sales sequence.</span></div></li>
+      <div class="lookup reveal" id="lookup" aria-label="How the check works, animated">
+        <div class="lk-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="typed" id="lkTyped"></span><span class="caret" id="lkCaret"></span></div>
+        <div class="lk-grid" id="lkGrid"><div class="pt" title="ImportYeti"><img src="platform-logos/importyeti-mark.png" alt="ImportYeti"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt" title="Panjiva"><img src="platform-logos/panjiva.svg" alt="Panjiva"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt" title="Import Genius"><img src="platform-logos/importgenius.svg" alt="Import Genius"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt" title="ImportKey"><img src="platform-logos/importkey.png" alt="ImportKey"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt" title="Trademo"><img src="platform-logos/trademo-mark.svg" alt="Trademo"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt" title="Datamyne"><img src="platform-logos/datamyne.png" alt="Datamyne"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div></div>
+        <div class="lk-count" id="lkCount">Checking 18 platforms</div>
+        <div class="lk-report" id="lkReport">
+          <div class="lk-tag" id="lkTag">Your quote</div>
+          <div class="lk-kick">Exposure report</div>
+          <div class="lk-title" id="lkTitle">Northwind Imports LLC</div>
+          <div class="lk-rows"><div><span>Platforms showing your records</span><b>11 of 18</b></div><div><span>Shipments visible, last 12 months</span><b>212</b></div><div><span>Suppliers named</span><b>7</b></div></div>
+        </div>
+      </div>
+      <ol class="lk-steps" id="lkSteps">
+        <li data-s="0"><b>Tell us who you are</b><span>Company name and a work email. Other names help, but we will find them either way.</span></li>
+        <li data-s="1"><b>We look you up</b><span>A person checks every platform, not a script. Within one business day.</span></li>
+        <li data-s="2"><b>Your quote comes with it</b><span>Scoped to the entities we found. No obligation, no sales sequence.</span></li>
       </ol>
       <div class="plan-note reveal" id="planNote" hidden><b id="planName"></b> <span id="planLine"></span></div>
     </div>
@@ -379,6 +423,25 @@ img.skel-src.on { opacity: 1; }
   const plan = params.get('plan');
   const plans = { standard: ['Standard', 'Your quote comes back with the report, usually the same day.'], multi: ['Multi-Entity', 'Your proposal follows within two business days of the report.'], enterprise: ['Enterprise', 'We will suggest a time for a scope call along with the report.'] };
   if (plan && plans[plan]) { document.getElementById('planName').textContent = plans[plan][0] + '.'; document.getElementById('planLine').textContent = plans[plan][1]; document.getElementById('planNote').hidden = false; document.getElementById('planField').value = plan; }
+  // the lookup: types the company, checks 18 platforms one by one, slides the report in and attaches the quote; loops while in view
+  (function(){
+    const box = document.getElementById('lookup'); if (!box) return;
+    const typed = document.getElementById('lkTyped'), tiles = [...document.querySelectorAll('#lkGrid .pt')], count = document.getElementById('lkCount'), steps = [...document.querySelectorAll('#lkSteps li')], title = document.getElementById('lkTitle');
+    const name = (params.get('company') || '').trim() || 'Northwind Imports LLC'; title.textContent = name;
+    const setStep = s => { steps.forEach((li, i) => li.classList.toggle('on', i === s)); box.classList.toggle('s2', s === 2); };
+    let timer = null, running = false;
+    function run() {
+      if (running) return; running = true; box.classList.remove('quote'); tiles.forEach(x => x.classList.remove('on', 'now')); typed.textContent = ''; count.textContent = 'Checking 18 platforms'; setStep(0);
+      let i = 0; const type = () => { if (i <= name.length) { typed.textContent = name.slice(0, i++); timer = setTimeout(type, 45 + Math.random() * 40); } else timer = setTimeout(check, 500); };
+      let k = 0; const check = () => { setStep(1); if (k > 0) tiles[k - 1].classList.remove('now'); if (k < tiles.length) { tiles[k].classList.add('now'); setTimeout(() => tiles[k - 1] && tiles[k - 1].classList.add('on'), 120); count.textContent = (k + 1) + ' of 18 checked'; k++; timer = setTimeout(check, 170); } else { tiles[tiles.length - 1].classList.add('on'); count.textContent = '18 of 18 checked · 11 show your records'; timer = setTimeout(report, 500); } };
+      const report = () => { setStep(2); timer = setTimeout(() => box.classList.add('quote'), 300); timer = setTimeout(() => { running = false; if (inView(box, 1)) run(); }, 6500); };
+      type();
+    }
+    const st = params.get('stage');
+    if (st !== null || isStatic) { const s = +(st || 2); typed.textContent = name; tiles.forEach((x, i) => x.classList.toggle('on', s >= 1 && (s === 2 || i < 11))); count.textContent = s === 0 ? 'Checking 18 platforms' : s === 1 ? '11 of 18 checked' : '18 of 18 checked · 11 show your records'; setStep(s); if (s === 2) box.classList.add('quote'); return; }
+    onScroll(() => { if (!running && inView(box, .9)) run(); });
+  })();
+
   const form = document.getElementById('checkForm'), card = document.getElementById('fcard');
   const reason = document.getElementById('reason'), otherWrap = document.getElementById('f-other');
   reason.addEventListener('change', () => { otherWrap.hidden = reason.value !== 'other'; if (!otherWrap.hidden) document.getElementById('other').focus(); });

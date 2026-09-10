@@ -266,6 +266,55 @@ main { position: relative; }
 @media (max-width: 960px) { .row4 { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .row4 { grid-template-columns: 1fr; } }
 
+
+/* coverage story */
+.cov-wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 56px; margin-top: 44px; align-items: start; }
+.cov-stage { position: sticky; top: 96px; }
+.cov-card { background: var(--white); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 28px 30px 26px; min-height: 480px; position: relative; overflow: hidden; }
+.cov-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: var(--muted); }
+.cov-count { font-variant-numeric: tabular-nums; color: var(--text); font-weight: 600; }
+.ents { display: grid; gap: 10px; margin-top: 16px; }
+.ent { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 12px; font-weight: 600; font-size: 15px; transition: background-color .5s var(--ease), border-color .5s var(--ease), color .5s var(--ease); }
+.ent .lock { width: 26px; height: 26px; border-radius: 50%; background: var(--card-2); display: inline-flex; align-items: center; justify-content: center; color: var(--muted-2); transform: scale(.6); opacity: 0; transition: transform .45s cubic-bezier(.22,1.2,.36,1), opacity .3s var(--ease), background-color .4s var(--ease), color .4s var(--ease); }
+.ent .lock svg { width: 14px; height: 14px; }
+.cov-card.b0 .ent, .cov-card.b1 .ent, .cov-card.b2 .ent, .cov-card.b3 .ent { background: var(--indigo); border-color: var(--indigo); color: var(--white); }
+.cov-card.b0 .ent .lock, .cov-card.b1 .ent .lock, .cov-card.b2 .ent .lock, .cov-card.b3 .ent .lock { opacity: 1; transform: none; background: var(--coral); color: var(--white); }
+.cov-card.b0 .ent:nth-child(2) { transition-delay: .15s; } .cov-card.b0 .ent:nth-child(3) { transition-delay: .3s; }
+.cov-card.b0 .ent:nth-child(2) .lock { transition-delay: .2s; } .cov-card.b0 .ent:nth-child(3) .lock { transition-delay: .4s; }
+.vars { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; min-height: 0; }
+.var { font-size: 12.5px; font-weight: 500; color: var(--muted); background: var(--ground); border: 1px solid var(--line); border-radius: var(--r-pill); padding: 5px 11px; opacity: 0; transform: translateX(40px); transition: opacity .4s var(--ease), transform .55s cubic-bezier(.22,1.2,.36,1), background-color .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease); }
+.cov-card.b1 .var, .cov-card.b2 .var, .cov-card.b3 .var { opacity: 1; transform: none; background: rgba(29,57,91,.08); border-color: transparent; color: var(--text); }
+.cov-card.b1 .var:nth-child(2) { transition-delay: .1s; } .cov-card.b1 .var:nth-child(3) { transition-delay: .2s; } .cov-card.b1 .var:nth-child(4) { transition-delay: .3s; } .cov-card.b1 .var:nth-child(5) { transition-delay: .45s; }
+.months { margin-top: 18px; opacity: .35; transition: opacity .4s var(--ease); }
+.cov-card.b2 .months, .cov-card.b3 .months { opacity: 1; }
+.mrow { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 10px; margin-top: 8px; }
+.mrow.lapse { opacity: 0; max-height: 0; overflow: hidden; transition: opacity .4s var(--ease), max-height .5s var(--ease); }
+.cov-card.b3 .mrow.lapse { opacity: 1; max-height: 40px; }
+.mlab { font-size: 12.5px; color: var(--muted); }
+.cells { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; }
+.cells i { display: block; height: 26px; border-radius: 6px; background: var(--card-2); position: relative; transition: background-color .3s var(--ease); }
+.cells i b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--muted-2); font-weight: 500; }
+.cells i.on { background: var(--confirmed); } .cells i.on b { color: var(--white); }
+.cells i.on b::after { content: ""; }
+.mrow.lapse .cells i.on { background: rgba(47,133,90,.55); }
+.mrow.lapse .cells i.bad { background: var(--coral); } .mrow.lapse .cells i.bad b { color: var(--white); }
+.mnote { font-size: 12.5px; color: var(--muted); margin-top: 8px; min-height: 18px; }
+.renew { position: absolute; right: 26px; top: 22px; width: 96px; text-align: center; opacity: 0; transform: scale(.85); transition: opacity .4s var(--ease), transform .5s cubic-bezier(.22,1.2,.36,1); }
+.cov-card.b3 .renew { opacity: 1; transform: none; }
+.cov-card.b3 .cov-count { opacity: 0; }
+.renew svg { width: 96px; height: 96px; transform: rotate(-90deg); }
+.renew .track { fill: none; stroke: var(--card-2); stroke-width: 9; }
+.renew .fill { fill: none; stroke: var(--indigo); stroke-width: 9; stroke-linecap: round; stroke-dasharray: 314; stroke-dashoffset: 314; transition: stroke-dashoffset .2s linear; }
+.renew .rtext { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.renew .rtext b { font-size: 18px; letter-spacing: -0.02em; } .renew .rtext span { font-size: 9.5px; color: var(--muted); line-height: 12px; }
+.beats { list-style: none; padding-top: 8px; }
+.beat { padding: 22px 0 22px 22px; border-left: 2px solid var(--line); min-height: 44vh; display: flex; flex-direction: column; justify-content: center; transition: border-color .4s var(--ease); }
+.beat .num { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; color: var(--muted-2); }
+.beat h3 { font-size: 24px; line-height: 30px; letter-spacing: -0.025em; margin-top: 8px; color: var(--muted-2); transition: color .4s var(--ease); }
+.beat p { color: var(--muted); font-size: 15.5px; line-height: 24px; margin-top: 8px; max-width: 420px; opacity: .55; transition: opacity .4s var(--ease); }
+.beat.on { border-left-color: var(--coral); } .beat.on h3 { color: var(--text); } .beat.on p { opacity: 1; }
+@media (max-width: 960px) { .cov-wrap { grid-template-columns: 1fr; gap: 24px; } .cov-stage { position: relative; top: 0; } .beat { min-height: 0; } .cells { grid-template-columns: repeat(14, 1fr); } .cells i { height: 20px; } .cells i b { font-size: 8px; } }
+
 /* tiers strip (all three, no numbers) */
 .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
 .tier { background: var(--card); border-radius: 20px; padding: 28px 28px 26px; box-shadow: var(--shadow-card); display: flex; flex-direction: column; min-height: 250px; }
@@ -535,18 +584,42 @@ img.skel-src.on { opacity: 1; }
   </div>
 </section>
 
-<!-- 02 EVERY PLAN INCLUDES -->
-<section class="sec" id="includes" data-frame="02-includes" data-chapter="1" data-chapter-label="What every plan protects">
+<!-- 02 EVERY PLAN INCLUDES: the coverage story, one illustration, four beats -->
+<section class="sec cov" id="includes" data-frame="02-includes" data-chapter="1" data-chapter-label="What every plan protects">
   <div class="shell">
     <div class="narrow center">
       <h2 class="sec-h reveal">Every plan protects everything.</h2>
-      <p class="sec-p reveal">Whatever the funnel said, this part is the same. Plans differ in how many entities we cover and how often we check, never in what is covered.</p>
+      <p class="sec-p reveal">Whatever the funnel said, this part is the same. Scroll and watch it work.</p>
     </div>
-    <div class="row4">
-      <div class="reveal"><div class="num">01</div><h3>Protection, maintained</h3><p>A federal confidentiality protection we file and keep in force for you.</p></div>
-      <div class="reveal"><div class="num">02</div><h3>Every name variation</h3><p>A forwarder's misspelling is still your record. All of them are covered, no cap.</p></div>
-      <div class="reveal"><div class="num">03</div><h3>Monitoring, with proof</h3><p>We check 18+ public platforms and send you the result.</p></div>
-      <div class="reveal"><div class="num">04</div><h3>Automatic renewal</h3><p>Protection never depends on one person remembering.</p></div>
+    <div class="cov-wrap">
+      <div class="cov-stage" id="covStage" aria-hidden="true">
+        <div class="cov-card">
+          <div class="cov-head"><span class="cov-kick" id="covKick">Your entities</span><span class="cov-count" id="covCount"></span></div>
+          <div class="ents" id="ents">
+            <div class="ent"><span class="nm">Northwind Imports LLC</span><i class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i></div>
+            <div class="ent"><span class="nm">Northwind Home Goods</span><i class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i></div>
+            <div class="ent"><span class="nm">NW Trading Co.</span><i class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i></div>
+          </div>
+          <div class="vars" id="vars">
+            <span class="var">NORTHWND IMPORTS</span><span class="var">Northwind Imp. LLC</span><span class="var">North Wind Imports</span><span class="var">NORTHWIND IMPORTS L.L.C</span><span class="var">+ every other spelling</span>
+          </div>
+          <div class="months" id="months">
+            <div class="mrow ours"><span class="mlab">With us</span><div class="cells"><i data-m="0"><b>1</b></i><i data-m="1"><b>2</b></i><i data-m="2"><b>3</b></i><i data-m="3"><b>4</b></i><i data-m="4"><b>5</b></i><i data-m="5"><b>6</b></i><i data-m="6"><b>7</b></i><i data-m="7"><b>8</b></i><i data-m="8"><b>9</b></i><i data-m="9"><b>10</b></i><i data-m="10"><b>11</b></i><i data-m="11"><b>12</b></i><i data-m="12"><b>13</b></i><i data-m="13"><b>14</b></i></div></div>
+            <div class="mrow lapse"><span class="mlab">Nobody renews</span><div class="cells"><i data-m="0"><b>1</b></i><i data-m="1"><b>2</b></i><i data-m="2"><b>3</b></i><i data-m="3"><b>4</b></i><i data-m="4"><b>5</b></i><i data-m="5"><b>6</b></i><i data-m="6"><b>7</b></i><i data-m="7"><b>8</b></i><i data-m="8"><b>9</b></i><i data-m="9"><b>10</b></i><i data-m="10"><b>11</b></i><i data-m="11"><b>12</b></i><i data-m="12"><b>13</b></i><i data-m="13"><b>14</b></i></div></div>
+            <div class="mnote" id="mnote"></div>
+          </div>
+          <div class="renew" id="renew">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="track" cx="60" cy="60" r="50"/><circle class="fill" cx="60" cy="60" r="50" id="renewRing"/></svg>
+            <div class="rtext"><b id="renewPct">0%</b><span>of the year covered</span></div>
+          </div>
+        </div>
+      </div>
+      <ol class="beats" id="beats">
+        <li class="beat" data-beat="0"><div class="num">01</div><h3>Protection, maintained</h3><p>A federal confidentiality protection we file and keep in force for every entity you import under.</p></li>
+        <li class="beat" data-beat="1"><div class="num">02</div><h3>Every name variation</h3><p>A forwarder's misspelling is still your record. Every spelling is covered, no cap, on every plan.</p></li>
+        <li class="beat" data-beat="2"><div class="num">03</div><h3>Monitoring, with proof</h3><p>We check 18+ public platforms on a schedule and send you the result. Most months it reads: nothing to see.</p></li>
+        <li class="beat" data-beat="3"><div class="num">04</div><h3>Automatic renewal</h3><p>Protection that quietly expires puts everything back in public view within weeks. Ours never depends on one person remembering.</p></li>
+      </ol>
     </div>
   </div>
 </section>
@@ -692,6 +765,30 @@ img.skel-src.on { opacity: 1; }
     const gl = document.getElementById('globe'); if (gl) { const sg = document.createElement('div'); sg.className = 'skel-globe'; gl.parentElement.appendChild(sg); window.__globeSkeleton = sg; if (!freeze) setTimeout(() => { sg.classList.add('off'); setTimeout(() => sg.remove(), 600); }, 2200); }
     // form cards: fields show as lines for a beat
     document.querySelectorAll('.fcard form').forEach(f => { if (getComputedStyle(f).position === 'static') f.style.position = 'relative'; const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.style.padding = '0'; sk.innerHTML = '<i class="h20 w60"></i><i class="w80"></i><i class="h20"></i><i class="h20"></i><i class="h20"></i><i class="h20 w40"></i>'; f.appendChild(sk); if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, 450); });
+  })();
+
+  // coverage story: the illustration advances through four beats as the beats scroll past
+  (function(){
+    const card = document.querySelector('.cov-card'); if (!card) return;
+    const beats = [...document.querySelectorAll('.beat')], ours = [...document.querySelectorAll('.mrow.ours .cells i')], lapse = [...document.querySelectorAll('.mrow.lapse .cells i')];
+    const ring = document.getElementById('renewRing'), pct = document.getElementById('renewPct'), kick = document.getElementById('covKick'), count = document.getElementById('covCount'), note = document.getElementById('mnote');
+    const kicks = ['Your entities', 'Every name they ship under', 'Checked every month', 'Renewal, without a gap'];
+    function setBeat(b, f) { // b = current beat 0..3, f = progress within it
+      card.className = 'cov-card b' + b; beats.forEach((el, i) => el.classList.toggle('on', i === b)); kick.textContent = kicks[b];
+      count.textContent = b === 0 ? '3 entities' : b === 1 ? '3 entities · 5 names' : b === 2 ? Math.min(12, Math.ceil(f * 12)) + ' of 12 months checked' : 'renewed, month 13';
+      const filled = b < 2 ? 0 : b === 2 ? Math.min(12, Math.ceil(f * 12)) : 14;
+      ours.forEach((c, i) => c.classList.toggle('on', i < filled));
+      lapse.forEach((c, i) => { c.classList.toggle('on', b === 3 && i < 12); c.classList.toggle('bad', b === 3 && i >= 12 && f > (i - 12) * .3 + .2); });
+      note.textContent = b === 2 ? (filled ? 'Month ' + filled + ': nothing to see. Report sent.' : '') : b === 3 ? 'Month 13: without a renewal, records are back on every platform within four weeks.' : '';
+      const r = b < 3 ? 0 : Math.min(1, f * 1.4); ring.style.strokeDashoffset = 314 - 314 * r; pct.textContent = Math.round(r * 100) + '%';
+    }
+    function upd() {
+      const focus = innerHeight * .55; let b = 0, f = 0;
+      beats.forEach((el, i) => { const r = el.getBoundingClientRect(); if (r.top < focus) { b = i; f = Math.max(0, Math.min(1, (focus - r.top) / r.height)); } });
+      setBeat(b, f);
+    }
+    const st = qs.get('beat'); if (st !== null) { setBeat(+st, +(qs.get('f') || .8)); if (isStatic) return; }
+    onScroll(upd);
   })();
 
   const bar = document.getElementById('topbar');
