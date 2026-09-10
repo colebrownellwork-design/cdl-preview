@@ -260,16 +260,25 @@ button, input { font: inherit; }
 .cm.done.on .tick svg { opacity: 1; transition-delay: calc(var(--i) * 90ms + 80ms); }
 .cm:not(.done) { border-style: dashed; }
 .cov-days { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
-.cal27 { position: relative; transform-origin: top center; transform: perspective(900px) rotateX(-70deg); opacity: 0; transition: transform .8s cubic-bezier(.22,1,.36,1), opacity .5s var(--ease); }
-.cal27 .cal-year { grid-column: 1 / -1; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-2); font-family: var(--font-mono); margin-bottom: 2px; }
-.ps.on .cal27, .ps.filled .cal27, .cal27.nomo { transform: none; opacity: 1; }
-.cm.next { border-style: dashed; }
-.cm.next .mo { color: var(--muted); }
-.cm.next .tick.sch { background: transparent; border: 1.5px dashed var(--light-gray-blue); transform: none; }
-.cm.stamp { border: 1.5px solid var(--indigo); border-style: solid; background: rgba(29,57,91,.05); }
-.cm.stamp .mo { color: var(--text); }
-.cm .rn { display: block; margin: 7px 0 3px; font-size: 11px; font-weight: 700; color: var(--indigo); letter-spacing: .02em; line-height: 13px; }
-.cm .rn small { display: block; font-size: 9.5px; font-weight: 500; color: var(--muted); margin-top: 3px; }
+.tl { margin: 34px 0 18px; padding: 64px 8px 50px; position: relative; }
+.tl-track { position: relative; height: 3px; background: var(--line); border-radius: 2px; }
+.tl-line { position: absolute; left: 0; top: 0; height: 100%; width: 0; background: var(--confirmed); border-radius: 2px; transition: width 1.6s cubic-bezier(.22,1,.36,1); }
+.ps.on .tl-line, .ps.filled .tl-line, .tl.nomo .tl-line { width: 76%; }
+.tl-today { position: absolute; left: var(--x); top: -10px; width: 2px; height: 23px; background: var(--coral); transform: translateX(-50%); }
+.tl-today span { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 700; color: var(--coral); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.tl-marks { position: absolute; left: 8px; right: 8px; top: 64px; height: 3px; }
+.tl-m { position: absolute; left: var(--x); top: 0; transform: translate(-50%, 0); width: 150px; text-align: center; opacity: 0; transition: opacity .4s var(--ease); transition-delay: calc(var(--i) * 260ms + 300ms); }
+.ps.on .tl-m, .ps.filled .tl-m, .tl.nomo .tl-m { opacity: 1; }
+.tl-m i { display: block; width: 12px; height: 12px; border-radius: 50%; background: var(--confirmed); border: 2.5px solid var(--white); box-shadow: 0 0 0 2px var(--confirmed); margin: -4.5px auto 0; }
+.tl-m.next i { background: var(--white); box-shadow: 0 0 0 2px var(--light-gray-blue); }
+.tl-m b { display: block; font-size: 12px; font-weight: 700; color: var(--text); margin-top: 10px; }
+.tl-m span { display: block; font-size: 10.5px; color: var(--muted); line-height: 14px; margin-top: 2px; }
+.tl-m.down { transform: translate(-50%, -100%); top: -6px; display: flex; flex-direction: column-reverse; width: 170px; }
+.tl-m.down i { margin: 0 auto -4.5px; }
+.tl-m.down b { margin: 0 0 10px; } .tl-m.down span { margin: 0 0 2px; }
+.tl-m:first-child { text-align: left; transform: translate(0, 0); } .tl-m:first-child i { margin-left: -1px; }
+.tl-m.next { text-align: right; transform: translate(-100%, 0); } .tl-m.next i { margin-right: -1px; }
+.tl.nomo .tl-line, .tl.nomo .tl-m { transition: none !important; }
 .cal.nomo .tick, .cal.nomo .tick svg { transition: none !important; }
 .cm:not(.done) .mo { color: var(--muted-2); }
 @media (max-width: 960px) { .cal { grid-template-columns: repeat(4, 1fr); } }
@@ -387,7 +396,7 @@ img.skel-src.on { opacity: 1; }
 
 <!-- 01 HERO + FUNNEL -->
 <section class="hero phero" id="hero" data-frame="01-hero">
-  <div class="band"><img class="bg" src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt="" width="1920" height="1084">
+  <div class="band"><img class="bg" src="photography/01-hero/cdl-hero-02-terminal-yard-fog.png" alt="" width="1920" height="1084">
     <div class="shell bin">
       <h1 class="rise" id="h1"><span class="w">Pricing</span> <span class="w">built</span> <span class="w">for</span> <span class="w">you.</span></h1>
       <p class="sub reveal"><b>Quoted by coverage.</b> Four questions, then your plan.</p>
@@ -575,9 +584,16 @@ img.skel-src.on { opacity: 1; }
               <p class="quiet">Report sent to two recipients after each check. Next check: 05 Oct 2026.</p>
             </section>
             <section class="ps" data-s="3"><h4>Renewal</h4>
-              <p>Already on the calendar. Nothing for you to do, and the report will say so when it happens.</p>
-              <div class="cal cal27" id="cal27"><div class="cal-year">2027 · scheduled</div><div class="cm next" style="--i:0"><span class="mo">Jan</span><i class="tick sch"></i><span class="dt">05 Jan</span></div><div class="cm next" style="--i:1"><span class="mo">Feb</span><i class="tick sch"></i><span class="dt">02 Feb</span></div><div class="cm next stamp" style="--i:2"><span class="mo">Mar</span><span class="rn">Renewed<small>12 Mar · automatic</small></span></div><div class="cm next" style="--i:3"><span class="mo">Apr</span><i class="tick sch"></i><span class="dt">06 Apr</span></div><div class="cm next" style="--i:4"><span class="mo">May</span><i class="tick sch"></i><span class="dt">04 May</span></div><div class="cm next" style="--i:5"><span class="mo">Jun</span><i class="tick sch"></i><span class="dt">07 Jun</span></div><div class="cm next" style="--i:6"><span class="mo">Jul</span><i class="tick sch"></i><span class="dt">05 Jul</span></div><div class="cm next" style="--i:7"><span class="mo">Aug</span><i class="tick sch"></i><span class="dt">02 Aug</span></div><div class="cm next" style="--i:8"><span class="mo">Sep</span><i class="tick sch"></i><span class="dt">06 Sep</span></div><div class="cm next" style="--i:9"><span class="mo">Oct</span><i class="tick sch"></i><span class="dt">04 Oct</span></div><div class="cm next" style="--i:10"><span class="mo">Nov</span><i class="tick sch"></i><span class="dt">01 Nov</span></div><div class="cm next" style="--i:11"><span class="mo">Dec</span><i class="tick sch"></i><span class="dt">06 Dec</span></div></div>
-              <table><tr><td>Renews</td><td>12 Mar 2027</td><td>Automatic</td></tr><tr><td>Account contact changed</td><td>Feb 2026</td><td>Coverage unaffected</td></tr><tr><td>Gap in coverage</td><td>0 days</td><td>since March 2025</td></tr></table>
+              <p>One line, no gaps. Renewal happens on the calendar, not in someone's inbox.</p>
+              <div class="tl" id="tl">
+                <div class="tl-track"><div class="tl-line" id="tlLine"></div><div class="tl-today" style="--x:76%"><span>Today</span></div></div>
+                <div class="tl-marks">
+                  <div class="tl-m" style="--x:0%;--i:0"><i></i><b>Protected</b><span>12 Mar 2025</span></div>
+                  <div class="tl-m down" style="--x:22%;--i:1"><i></i><b>Contact changed</b><span>Aug 2025 · coverage unaffected</span></div>
+                  <div class="tl-m" style="--x:50%;--i:2"><i></i><b>Renewed</b><span>12 Mar 2026 · automatic</span></div>
+                  <div class="tl-m next" style="--x:100%;--i:3"><i></i><b>Renews</b><span>12 Mar 2027 · scheduled</span></div>
+                </div>
+              </div>
               <p class="quiet">If a renewal ever needed you, we would write to you 60 days ahead. It does not.</p>
             </section>
           </div>
@@ -685,7 +701,7 @@ img.skel-src.on { opacity: 1; }
       if (b !== cur) { cur = b; if (!isStatic && !reduce) fill(secs[b]); }
       const cal = document.querySelectorAll('#cal .cm');
       if (b >= 2) { if (isStatic) document.getElementById('cal').classList.add('nomo'); if (lastB < 2 || isStatic) cal.forEach(c => c.classList.add('on')); } else cal.forEach(c => c.classList.remove('on'));
-      const days = document.getElementById('covDays'), c27 = document.getElementById('cal27');
+      const days = document.getElementById('covDays'), c27 = document.getElementById('tl');
       if (b === 3) { if (isStatic) c27.classList.add('nomo'); if (lastB !== 3 && !isStatic && !reduce) { const s0 = performance.now(); (function up(n){ const p = Math.min((n - s0) / 1200, 1); days.textContent = Math.round((1 - Math.pow(1 - p, 3)) * 546); if (p < 1) requestAnimationFrame(up); })(s0); } else days.textContent = '546'; }
       lastB = b;
     }
