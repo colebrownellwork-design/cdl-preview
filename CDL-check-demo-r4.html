@@ -128,43 +128,60 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 
 
 /* the lookup, animated */
-.lookup { position: relative; margin-top: 30px; max-width: 520px; background: var(--white); border-radius: 20px; box-shadow: var(--shadow-card); padding: 18px 18px 16px; overflow: hidden; min-height: 300px; }
-.lk-search { display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 14px; border: 1.5px solid var(--line); border-radius: var(--r-pill); font-size: 15px; color: var(--text); background: var(--ground); }
+.lookup { position: relative; margin-top: 30px; max-width: 660px; background: var(--white); border-radius: 22px; box-shadow: var(--shadow-card); padding: 22px 22px 20px; overflow: hidden; min-height: 640px; display: flex; flex-direction: column; }
+.lk-prep { flex: 1; margin-top: 16px; border: 1.5px dashed var(--line); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; color: var(--muted-2); }
+.lk-prep b { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--light-gray-blue); font-weight: 600; }
+.lk-prep span { font-size: 12.5px; }
+.lookup.s2 .lk-prep { visibility: hidden; }
+.lk-search { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 16px; border: 1.5px solid var(--line); border-radius: var(--r-pill); font-size: 15px; color: var(--text); background: var(--ground); }
 .lk-search svg { width: 18px; height: 18px; color: var(--muted); flex: none; }
 .lk-search .caret { width: 1.5px; height: 18px; background: var(--indigo); animation: blink 1s steps(2) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.lk-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
-.pt { position: relative; height: 64px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); display: flex; align-items: center; justify-content: center; padding: 8px; opacity: .45; filter: grayscale(1); transition: opacity .35s var(--ease), filter .35s var(--ease), border-color .35s var(--ease), transform .35s cubic-bezier(.22,1.2,.36,1); }
-.pt img { max-height: 40px; max-width: 92%; object-fit: contain; }
-.pt .wm { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
+.lk-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+.pt { position: relative; height: 104px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); display: flex; align-items: center; justify-content: center; padding: 8px; opacity: .45; filter: grayscale(1); transition: opacity .35s var(--ease), filter .35s var(--ease), border-color .35s var(--ease), transform .35s cubic-bezier(.22,1.2,.36,1); }
+.pt img { max-height: 58px; max-width: 88%; object-fit: contain; }
+.pt .wm { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; }
 .pt.more span { width: 34px; height: 8px; border-radius: 3px; background: var(--line); }
 .pt .ok { position: absolute; right: -5px; top: -5px; width: 18px; height: 18px; border-radius: 50%; background: var(--confirmed); color: var(--white); display: inline-flex; align-items: center; justify-content: center; transform: scale(0); transition: transform .3s cubic-bezier(.22,1.2,.36,1); }
 .pt .ok svg { width: 10px; height: 10px; }
 .pt.on { opacity: 1; filter: none; border-color: rgba(47,133,90,.4); }
 .pt.on .ok { transform: scale(1); }
 .pt.now { transform: translateY(-2px); border-color: var(--indigo); opacity: 1; filter: none; }
-.lk-count { margin-top: 12px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.lk-report { position: absolute; left: 18px; right: 18px; bottom: 16px; background: var(--white); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px 14px; box-shadow: 0 1px 2px rgba(20,30,50,.06), 0 24px 48px -20px rgba(20,30,50,.4); transform: translateY(120%); opacity: 0; transition: transform .6s cubic-bezier(.22,1,.36,1), opacity .4s var(--ease); }
+.lk-count { margin-top: 14px; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lk-report { position: absolute; left: 22px; right: 22px; top: 22px; bottom: 20px; overflow: hidden; background: var(--white); color: var(--text); border: 1px solid var(--line); border-top: 5px solid var(--indigo); border-radius: 6px; padding: 16px 22px 14px; box-shadow: 0 1px 2px rgba(20,30,50,.06), 0 24px 48px -20px rgba(20,30,50,.4); transform: translateY(110%); opacity: 0; transition: transform .6s cubic-bezier(.22,1,.36,1), opacity .4s var(--ease); }
 .lookup.s2 .lk-report { transform: none; opacity: 1; }
-.lr-head { display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--muted); padding-bottom: 10px; border-bottom: 1px solid var(--line); }
-.lr-head img { height: 15px; width: auto; }
-.lr-title { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; margin-top: 10px; }
-.lr-sub { font-size: 12px; color: var(--muted-2); margin-top: 1px; }
-.lr-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12.5px; }
-.lr-table th { text-align: left; font-weight: 500; color: var(--muted-2); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 4px 0; border-bottom: 1px solid var(--line); }
+.lr-head { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 12px; border-bottom: 2px solid var(--indigo); }
+.lr-head img { height: 17px; width: auto; }
+.lr-meta { text-align: right; }
+.lr-meta b { display: block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); font-weight: 600; }
+.lr-meta span { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lr-block { text-align: center; padding: 18px 0 16px; border-bottom: 1px solid var(--line); }
+.lr-kicker { font-family: var(--font-mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--coral); font-weight: 600; }
+.lr-title { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--indigo); margin-top: 6px; }
+.lr-sub { font-size: 11.5px; color: var(--muted); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.lr-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 6px 13px; border-radius: 999px; background: var(--indigo); color: var(--white); font-size: 11.5px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.lr-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+.lr-sec { margin-top: 14px; }
+.lr-sec h4 { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); font-weight: 700; font-family: var(--font-mono); }
+.lr-sec h4::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.lr-sec h4 em { font-style: normal; font-family: var(--font-sans); font-size: 10.5px; letter-spacing: 0; text-transform: none; font-weight: 600; color: var(--indigo); background: rgba(29,57,91,.08); padding: 2px 8px; border-radius: 999px; }
+.lr-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12.5px; }
+.lr-table th { text-align: left; font-weight: 500; color: var(--muted-2); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; padding: 4px 0; border-bottom: 1px solid var(--line); }
 .lr-table td { padding: 6px 0; border-bottom: 1px solid var(--line); color: var(--text); font-variant-numeric: tabular-nums; }
+.lr-table td:first-child { font-weight: 500; }
 .lr-table td:nth-child(2), .lr-table th:nth-child(2) { text-align: right; padding-right: 18px; }
 .lr-table td:nth-child(3), .lr-table th:nth-child(3) { text-align: right; color: var(--muted); }
 .lr-table td.mut { color: var(--muted-2); border-bottom: 0; }
-.lr-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 12px; color: var(--muted); }
-.lr-q { color: var(--text); font-weight: 600; opacity: 0; transition: opacity .4s var(--ease) .5s; }
+.lr-foot { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid var(--line); font-size: 10.5px; color: var(--muted-2); font-variant-numeric: tabular-nums; }
+.lr-foot b { color: var(--indigo); font-weight: 600; }
+.lr-q { color: var(--indigo); font-weight: 600; font-size: 11.5px; opacity: 0; transition: opacity .4s var(--ease) .5s; }
 .lookup.s2.quote .lr-q { opacity: 1; }
-.lk-steps { list-style: none; margin-top: 22px; max-width: 520px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.lk-steps { list-style: none; margin-top: 22px; max-width: 660px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .lk-steps li { border-top: 2px solid var(--line); padding-top: 10px; transition: border-color .4s var(--ease); }
 .lk-steps b { display: block; font-size: 14px; font-weight: 600; color: var(--muted-2); transition: color .4s var(--ease); }
 .lk-steps span { display: block; font-size: 12.5px; line-height: 18px; color: var(--muted); margin-top: 4px; opacity: .6; transition: opacity .4s var(--ease); }
 .lk-steps li.on { border-top-color: var(--coral); } .lk-steps li.on b { color: var(--text); } .lk-steps li.on span { opacity: 1; }
-@media (max-width: 960px) { .lk-grid { grid-template-columns: repeat(4, 1fr); } .pt { height: 54px; } .lk-steps { grid-template-columns: 1fr; gap: 10px; } }
+@media (max-width: 960px) { .lk-grid { grid-template-columns: repeat(4, 1fr); } .pt { height: 64px; } .lookup { min-height: 660px; } .lk-steps { grid-template-columns: 1fr; gap: 10px; } }
 
 /* form card */
 .fcard { background: var(--white); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 36px 36px 30px; position: sticky; top: 92px; }
@@ -308,12 +325,13 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
         <div class="lk-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="typed" id="lkTyped"></span><span class="caret" id="lkCaret"></span></div>
         <div class="lk-grid" id="lkGrid"><div class="pt" title="ImportYeti"><img src="platform-logos/importyeti-mark.png" alt="ImportYeti"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt" title="Panjiva"><span class="wm" style="color:#C8102E">Panjiva</span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt" title="Import Genius"><img src="platform-logos/importgenius.svg" alt="Import Genius"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt" title="ImportKey"><span class="wm" style="color:#2F6FED">ImportKey</span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt" title="Trademo"><img src="platform-logos/trademo-mark.svg" alt="Trademo"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt" title="Datamyne"><img src="platform-logos/datamyne.png" alt="Datamyne"><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="pt more"><span></span><i class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div></div>
         <div class="lk-count" id="lkCount">Checking 18 platforms</div>
+        <div class="lk-prep" aria-hidden="true"><b>Exposure report</b><span>Prepared once every platform is checked</span></div>
         <div class="lk-report" id="lkReport">
-          <div class="lr-head"><img src="logo/cdl-logo-primary.svg" alt=""><span>Exposure report · <span id="lkDate">September 2026</span></span></div>
-          <div class="lr-title" id="lkTitle">Northwind Imports LLC</div>
-          <div class="lr-sub">Prepared from public trade platforms · one business day</div>
-          <table class="lr-table"><tr><th>Platform</th><th>Records</th><th>Latest</th></tr><tr><td>ImportYeti</td><td>212</td><td>Aug 2026</td></tr><tr><td>Panjiva</td><td>198</td><td>Aug 2026</td></tr><tr><td>Import Genius</td><td>204</td><td>Jul 2026</td></tr><tr><td class="mut">15 more platforms</td><td class="mut">8 showing</td><td class="mut"></td></tr></table>
-          <div class="lr-foot"><span>Suppliers named: 7 · Product codes visible: 14</span><span class="lr-q">Quote enclosed · 1 entity</span></div>
+          <div class="lr-head"><img src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"><div class="lr-meta"><b>Exposure report</b><span><span id="lkDate">Sep 2026</span> · Ref EX-2026-0918</span></div></div>
+          <div class="lr-block"><div class="lr-kicker">Prepared for</div><div class="lr-title" id="lkTitle">Northwind Imports LLC</div><div class="lr-sub">Issued within one business day · 18 platforms checked</div><div class="lr-pill">11 of 18 platforms show your records</div></div>
+          <div class="lr-sec"><h4>What is public <em>Suppliers named: 7 · Product codes: 14</em></h4>
+          <table class="lr-table"><tr><th>Platform</th><th>Records</th><th>Latest</th></tr><tr><td>ImportYeti</td><td>212</td><td>Aug 2026</td></tr><tr><td>Panjiva</td><td>198</td><td>Aug 2026</td></tr><tr><td>Import Genius</td><td>204</td><td>Jul 2026</td></tr><tr><td class="mut">8 more platforms showing</td><td class="mut"></td><td class="mut"></td></tr></table></div>
+          <div class="lr-foot"><span><b>Customs Data Lock</b> · Confidential · Prepared for the named company only</span><span class="lr-q">Quote enclosed · 1 entity</span></div>
         </div>
       </div>
       <ol class="lk-steps" id="lkSteps">
