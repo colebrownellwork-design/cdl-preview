@@ -233,6 +233,13 @@ button, input { font: inherit; }
 .ps td:nth-child(2) { color: var(--confirmed); font-weight: 500; white-space: nowrap; }
 .ps td:nth-child(3) { color: var(--muted-2); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .ps[data-s="2"] td:nth-child(2) { color: var(--muted); font-weight: 400; }
+.ps tr.pend td { opacity: 0; }
+.ps tr.typing td:first-child { opacity: 1; }
+.ps tr.typing td:first-child::after { content: ""; display: inline-block; width: 1.5px; height: 12px; background: var(--indigo); margin-left: 2px; vertical-align: -1px; animation: blink 1s steps(2) infinite; }
+.ps tr.done td { opacity: 1; transition: opacity .35s var(--ease); }
+.ps tr.done td:nth-child(2) { transition-delay: .12s; } .ps tr.done td:nth-child(3) { transition-delay: .2s; }
+.ps p.quiet { opacity: 0; transition: opacity .4s var(--ease); } .ps.filled p.quiet { opacity: 1; }
+@keyframes blink { 50% { opacity: 0; } }
 .beats { list-style: none; padding-top: 8px; }
 .beat { padding: 22px 0 22px 22px; border-left: 2px solid var(--line); min-height: 44vh; display: flex; flex-direction: column; justify-content: center; transition: border-color .4s var(--ease); }
 .beat .num { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; color: var(--muted-2); }
@@ -619,12 +626,30 @@ img.skel-src.on { opacity: 1; }
   if (h1) { h1.querySelectorAll('.w').forEach((w, i) => w.style.transitionDelay = (i * 60) + 'ms'); setTimeout(() => h1.classList.add('in'), 40); if (isStatic) h1.classList.add('in'); }
   setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
 
-  // coverage story: the monitoring report scrolls to the section the reader is on
+  // coverage story: the monitoring report scrolls to the section the reader is on, and that section fills in as they watch:
+  // each row types its name, then its status and date appear. Once a section has filled it stays filled.
   (function(){
     const paper = document.getElementById('paperIn'); if (!paper) return;
     const beats = [...document.querySelectorAll('.beat')], secs = [...document.querySelectorAll('.ps')];
-    function setBeat(b) { beats.forEach((el, i) => el.classList.toggle('on', i === b)); secs.forEach((s, i) => s.classList.toggle('on', i === b)); const y = Math.max(0, secs[b].offsetTop - 110); paper.style.transform = `translateY(${-y}px)`; }
-    function upd() { const focus = innerHeight * .55; let b = 0; beats.forEach((el, i) => { if (el.getBoundingClientRect().top < focus) b = i; }); setBeat(b); }
+    const rows = sec => [...sec.querySelectorAll('tr')];
+    if (!isStatic && !reduce) secs.forEach(sec => rows(sec).forEach(r => { const c = r.querySelector('td'); r.dataset.text = c.textContent; c.textContent = ''; r.classList.add('pend'); }));
+    let cur = -1; const filled = new Set(); let timers = [];
+    function fill(sec) {
+      if (filled.has(sec)) return; filled.add(sec);
+      const rs = rows(sec); let i = 0;
+      const next = () => { if (i >= rs.length) { sec.classList.add('filled'); return; } const r = rs[i++], c = r.querySelector('td'), text = r.dataset.text; r.classList.remove('pend'); r.classList.add('typing'); let k = 0;
+        const type = () => { if (k <= text.length) { c.textContent = text.slice(0, k++); timers.push(setTimeout(type, 28 + Math.random() * 30)); } else { r.classList.remove('typing'); r.classList.add('done'); timers.push(setTimeout(next, 260)); } };
+        type(); };
+      timers.push(setTimeout(next, 250));
+    }
+    function setBeat(b) {
+      beats.forEach((el, i) => el.classList.toggle('on', i === b)); secs.forEach((s, i) => s.classList.toggle('on', i === b));
+      const y = Math.max(0, secs[b].offsetTop - 110); paper.style.transform = `translateY(${-y}px)`;
+      if (b !== cur) { cur = b; if (!isStatic && !reduce) fill(secs[b]); }
+    }
+    if (isStatic || reduce) secs.forEach(s => { rows(s).forEach(r => r.classList.add('done')); s.classList.add('filled'); });
+    const sec = document.getElementById('includes');
+    function upd() { if (sec.getBoundingClientRect().top > innerHeight * .8) return; const focus = innerHeight * .55; let b = 0; beats.forEach((el, i) => { if (el.getBoundingClientRect().top < focus) b = i; }); setBeat(b); }
     const st = qs.get('beat'); if (st !== null) { setBeat(+st); if (isStatic) return; }
     onScroll(upd);
   })();
