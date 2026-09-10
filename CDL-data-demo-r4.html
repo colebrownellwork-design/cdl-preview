@@ -277,8 +277,39 @@ img.skel-src.on { opacity: 1; }
 @media (max-width: 720px) { .skel-wall .skel-col:nth-child(n+2) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .skel::after, .skel-lines i::after, .skel-num::after, .skel-globe::after { animation: none; } }
 </style>
+<style>
+/* page skeleton: an outline of the page paints first, so the site is never blank while it loads; the real nav sits above it and stays usable */
+.pskel { position: fixed; inset: 0; z-index: 40; background: var(--ground); pointer-events: none; transition: opacity .5s var(--ease); overflow: hidden; padding-top: 68px; }
+.pskel.off { opacity: 0; }
+.pskel i { display: block; background: var(--card-2); border-radius: 8px; position: relative; overflow: hidden; }
+.pskel i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent); transform: translateX(-100%); animation: skel 1.5s var(--ease) infinite; }
+.pskel-shell { max-width: 1360px; margin: 0 auto; padding: 0 32px; }
+.pskel-lines { display: flex; flex-direction: column; gap: 12px; }
+.pskel-lines i { height: 12px; } .pskel-lines i.h { height: 40px; } .pskel-lines i.w80 { width: 80%; } .pskel-lines i.w60 { width: 60%; } .pskel-lines i.w40 { width: 40%; } .pskel-lines i.w30 { width: 30%; }
+.pskel-lines.center { align-items: center; }
+.pskel-card { background: var(--white); border: 1px solid var(--line); border-radius: 24px; padding: 30px; }
+.pskel-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+.pskel-row .pskel-card { min-height: 220px; }
+.pskel-hero { position: relative; }
+.pskel.v-bleed .pskel-hero { margin-top: -68px; height: 100vh; background: var(--deep); display: flex; align-items: center; justify-content: center; }
+.pskel.v-bleed .pskel-hero i { background: rgba(255,255,255,.14); } .pskel.v-bleed .pskel-hero i::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); }
+.pskel.v-bleed .pskel-lines { align-items: center; width: min(640px, 86vw); gap: 16px; }
+.pskel.v-band .pskel-hero { margin-top: -68px; height: calc(42vh + 68px); min-height: 360px; background: var(--deep); }
+.pskel.v-band .pskel-hero i { background: rgba(255,255,255,.12); } .pskel.v-band .pskel-hero i::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,.1), transparent); }
+.pskel.v-band .pskel-hero .pskel-lines { position: absolute; left: 50%; top: 44%; transform: translateX(-50%); width: min(560px, 80vw); align-items: center; }
+.pskel-card.over { width: min(760px, 100%); margin: -120px auto 0; min-height: 340px; position: relative; }
+.pskel.v-split .pskel-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding-top: 56px; }
+.pskel.v-split .pskel-hero > i { height: 540px; border-radius: 24px; }
+.pskel.v-list .pskel-hero, .pskel.v-wall .pskel-hero { padding-top: 64px; }
+.pskel-rows { margin-top: 40px; display: flex; flex-direction: column; gap: 12px; }
+.pskel-rows i { height: 58px; border-radius: 14px; background: var(--white); border: 1px solid var(--line); }
+@media (max-width: 720px) { .pskel-row { grid-template-columns: 1fr; } .pskel.v-split .pskel-hero { grid-template-columns: 1fr; } .pskel.v-split .pskel-hero > i { display: none; } .pskel-row .pskel-card:nth-child(n+3) { display: none; } }
+@media (prefers-reduced-motion: reduce) { .pskel i::after { animation: none; } }
+html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, html.skel-fast .skel-globe, html.skel-fast .skel-wall, html.skel-fast img.skel-src { transition: none !important; }
+</style>
 </head>
 <body>
+<div class="pskel v-band" id="pskel" aria-hidden="true"><div class="pskel-hero"><div class="pskel-lines"><i class="h w80"></i><i class="w40"></i></div></div><div class="pskel-shell"><div class="pskel-card over"><div class="pskel-lines"><i class="w30"></i><i class="h w80"></i><i class="w60"></i><i class="h"></i><i class="h"></i><i class="h w40"></i></div></div><div class="pskel-row"><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div></div></div></div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar" id="topbar">
   <div class="shell nav-in">
@@ -353,7 +384,7 @@ img.skel-src.on { opacity: 1; }
           <div class="p2-foot">12</div>
         </div>
         <div class="pg cover">
-          <div class="cv-photo"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt=""></div>
+          <div class="cv-photo"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.png" alt=""></div>
           <div class="cv-body">
             <img class="cv-logo" src="logo/cdl-logo-primary.svg" alt="">
             <div class="cv-kick">2026 edition</div>
@@ -383,7 +414,7 @@ img.skel-src.on { opacity: 1; }
   <div class="shell">
     <div class="two reveal">
       <a class="pick" href="#rcard">
-        <div class="pick-ph"><img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt=""></div>
+        <div class="pick-ph"><img src="photography/01-hero/cdl-hero-04-cranes-fog.png" alt=""></div>
         <div class="pick-body"><div class="kind">The report</div><h3>The pattern, for every importer</h3><p>The platform map, the anatomy of a company page, the four readers, how protection lapses. Free, as a PDF.</p><span class="pick-cta">Get the report</span></div>
       </a>
       <a class="pick" href="CDL-check-demo-r4.html">
@@ -460,11 +491,18 @@ img.skel-src.on { opacity: 1; }
   // skeletons: images, numbers and cards show their shape until the real thing is ready (?skeleton=1 freezes them for review)
   (function(){
     const freeze = qs.has('skeleton');
+    // skeletons only when something is slow: the outline drops the moment the page structure, fonts and hero image are in; a fast load never shows one
+    const FAST = 400; let fast = false;
+    const dom = new Promise(r => document.readyState !== 'loading' ? r() : addEventListener('DOMContentLoaded', r));
+    const heroReady = dom.then(() => new Promise(r => { const im = document.querySelector('.bleed img, .band img, .hero img, .stakes-photo img'); if (!im || im.complete) r(); else { im.addEventListener('load', r); im.addEventListener('error', r); } }));
+    const gate = Promise.all([dom, heroReady, document.fonts ? document.fonts.ready : Promise.resolve()]).then(() => { fast = performance.now() < FAST; if (fast) document.documentElement.classList.add('skel-fast'); });
+    const ps = document.getElementById('pskel'); if (ps && !freeze) gate.then(() => { if (fast) return ps.remove(); ps.classList.add('off'); setTimeout(() => ps.remove(), 600); });
+    const reveal = (fn, el) => { if (freeze) return; gate.then(() => { if (fast) return fn(); let d = 0; try { const top = (el && el.getBoundingClientRect ? el.getBoundingClientRect().top : 0) + scrollY; d = 120 + Math.min(Math.max(top, 0), 3000) / 3000 * 300 + Math.random() * 80; } catch (e) {} setTimeout(fn, d); }); };
     const skipImg = img => img.classList.contains('nav-logo') || img.classList.contains('logo') || img.closest('.pl') || (img.getBoundingClientRect().width && img.getBoundingClientRect().width < 60);
     const skelImage = img => {
       if (skipImg(img)) return; const par = img.parentElement; if (getComputedStyle(par).position === 'static') par.style.position = 'relative';
       const ov = document.createElement('div'); ov.className = 'skel skel-img'; par.appendChild(ov); img.classList.add('skel-src');
-      const done = () => { if (freeze) return; img.classList.add('on'); ov.classList.add('off'); setTimeout(() => ov.remove(), 500); };
+      const done = () => reveal(() => { img.classList.add('on'); ov.classList.add('off'); setTimeout(() => ov.remove(), 500); }, img);
       if (img.complete && img.naturalWidth) done(); else { img.addEventListener('load', done); img.addEventListener('error', done); }
     };
     window.__skelImage = skelImage; document.querySelectorAll('main img, .band img').forEach(skelImage);
@@ -473,22 +511,22 @@ img.skel-src.on { opacity: 1; }
     document.querySelectorAll(cardHosts.join(',')).forEach(card => {
       const body = card.querySelector('.body') || card; if (getComputedStyle(body).position === 'static') body.style.position = 'relative';
       const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.innerHTML = '<i class="w40"></i><i class="h20 w80"></i><i></i><i class="w60"></i>'; body.appendChild(sk);
-      if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, 350 + Math.random() * 350);
+      reveal(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, sk);
     });
     // numbers that are computed: counters and stats
-    document.querySelectorAll('#liveRecords, #liveLoss, .stat .n, .lv .n').forEach(n => { n.classList.add('skel-num'); if (!freeze) setTimeout(() => n.classList.remove('skel-num'), 600 + Math.random() * 300); });
+    document.querySelectorAll('#liveRecords, #liveLoss, .stat .n, .lv .n').forEach(n => { n.classList.add('skel-num'); reveal(() => n.classList.remove('skel-num'), n); });
     // page-specific blocks: question rows, the funnel card, the booklet, step lists, the platform strip, the process nodes
-    const lineSkel = (el, lines, pad) => { if (!el) return; if (getComputedStyle(el).position === 'static') el.style.position = 'relative'; const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.style.padding = pad || '14px 0'; sk.innerHTML = lines; el.appendChild(sk); if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, 400 + Math.random() * 300); };
+    const lineSkel = (el, lines, pad) => { if (!el) return; if (getComputedStyle(el).position === 'static') el.style.position = 'relative'; const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.style.padding = pad || '14px 0'; sk.innerHTML = lines; el.appendChild(sk); reveal(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, sk); };
     document.querySelectorAll('.group details').forEach(d => lineSkel(d, '<i class="h20 w80"></i>', '18px 0'));
     document.querySelectorAll('.f-in').forEach(f => lineSkel(f, '<i class="w40"></i><i class="h20 w80"></i><i class="w60"></i><i class="h20"></i><i class="h20"></i>', '40px 48px'));
     document.querySelectorAll('.steps li, .inside li, .ways li, .ports-legend li, .plan li, .cmp-row').forEach(li => lineSkel(li, '<i class="h20 w80"></i>', '12px 0'));
-    document.querySelectorAll('.book').forEach(b => { const sk = document.createElement('div'); sk.className = 'skel'; sk.style.cssText = 'position:absolute;inset:0;border-radius:10px;z-index:5;transition:opacity .4s var(--ease)'; b.appendChild(sk); if (!freeze) setTimeout(() => { sk.style.opacity = 0; setTimeout(() => sk.remove(), 400); }, 700); });
-    document.querySelectorAll('.node .ring, .stat, .lv, .unsure, .still, .gate, .callout').forEach(el => { if (el.classList.contains('ring')) { el.classList.add('skel'); if (!freeze) setTimeout(() => el.classList.remove('skel'), 500 + Math.random() * 300); } });
-    document.querySelectorAll('.wall').forEach(w => { const sk = document.createElement('div'); sk.className = 'skel-wall'; sk.innerHTML = Array.from({ length: 3 }, () => '<div class="skel-col"><div class="skel-lines"><i class="w80"></i><i></i><i class="w60"></i><i class="w40"></i></div><div class="skel-lines"><i class="w80"></i><i></i><i class="w60"></i><i class="w40"></i></div></div>').join(''); w.parentElement.style.position = 'relative'; w.parentElement.appendChild(sk); if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 500); }, 900); });
+    document.querySelectorAll('.book').forEach(b => { const sk = document.createElement('div'); sk.className = 'skel'; sk.style.cssText = 'position:absolute;inset:0;border-radius:10px;z-index:5;transition:opacity .4s var(--ease)'; b.appendChild(sk); reveal(() => { sk.style.opacity = 0; setTimeout(() => sk.remove(), 400); }, sk); });
+    document.querySelectorAll('.node .ring, .stat, .lv, .unsure, .still, .gate, .callout').forEach(el => { if (el.classList.contains('ring')) { el.classList.add('skel'); reveal(() => el.classList.remove('skel'), el); } });
+    document.querySelectorAll('.wall').forEach(w => { const sk = document.createElement('div'); sk.className = 'skel-wall'; sk.innerHTML = Array.from({ length: 3 }, () => '<div class="skel-col"><div class="skel-lines"><i class="w80"></i><i></i><i class="w60"></i><i class="w40"></i></div><div class="skel-lines"><i class="w80"></i><i></i><i class="w60"></i><i class="w40"></i></div></div>').join(''); w.parentElement.style.position = 'relative'; w.parentElement.appendChild(sk); reveal(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 500); }, sk); });
     // the globe: a dotted disc until the real one has drawn
-    const gl = document.getElementById('globe'); if (gl) { const sg = document.createElement('div'); sg.className = 'skel-globe'; gl.parentElement.appendChild(sg); window.__globeSkeleton = sg; if (!freeze) setTimeout(() => { sg.classList.add('off'); setTimeout(() => sg.remove(), 600); }, 2200); }
+    const gl = document.getElementById('globe'); if (gl) { const sg = document.createElement('div'); sg.className = 'skel-globe'; gl.parentElement.appendChild(sg); window.__globeSkeleton = sg; window.__globeReveal = () => reveal(() => { sg.classList.add('off'); setTimeout(() => sg.remove(), 600); }, sg); if (!freeze) setTimeout(window.__globeReveal, 6000); }
     // form cards: fields show as lines for a beat
-    document.querySelectorAll('.fcard form').forEach(f => { if (getComputedStyle(f).position === 'static') f.style.position = 'relative'; const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.style.padding = '0'; sk.innerHTML = '<i class="h20 w60"></i><i class="w80"></i><i class="h20"></i><i class="h20"></i><i class="h20"></i><i class="h20 w40"></i>'; f.appendChild(sk); if (!freeze) setTimeout(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, 450); });
+    document.querySelectorAll('.fcard form').forEach(f => { if (getComputedStyle(f).position === 'static') f.style.position = 'relative'; const sk = document.createElement('div'); sk.className = 'skel-lines'; sk.style.padding = '0'; sk.innerHTML = '<i class="h20 w60"></i><i class="w80"></i><i class="h20"></i><i class="h20"></i><i class="h20"></i><i class="h20 w40"></i>'; f.appendChild(sk); reveal(() => { sk.classList.add('off'); setTimeout(() => sk.remove(), 400); }, sk); });
   })();
 
   const bar = document.getElementById('topbar');
