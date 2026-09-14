@@ -1,0 +1,400 @@
+<!doctype html><html lang="en"><head><title>Customs Data Lock · Admin</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="logo/official/cdl-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --indigo: #1D395B; --gray-blue: #4878A0; --coral: #F04D4D; --light-gray-blue: #AEBBD0; --black: #0A1217; --white: #fff;
+  --ground: #F4F4F2; --card: #FFFFFF; --card-2: #ECECE9; --deep: #152C49;
+  --line: #E3E3DF; --text: #1D395B; --muted: #6B7280; --muted-2: #9AA1AB; --text-data: #D8E2F0; --dark-muted: #AEBBD0;
+  --confirmed: #2F855A;
+  --r-card: 24px; --r-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(20,30,50,.04), 0 12px 32px -12px rgba(20,30,50,.10);
+  --shadow-float: 0 2px 4px rgba(16,32,56,.08), 0 24px 48px -16px rgba(16,32,56,.30);
+  --font-sans: "Geist", "Segoe UI", Arial, sans-serif;
+  --font-mono: "Geist Mono", Consolas, "Courier New", monospace;
+  --ease: cubic-bezier(.4,0,.2,1);
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--ground); }
+body { font-family: var(--font-sans); color: var(--text); background: var(--ground); font-size: 15px; line-height: 23px; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; } img { max-width: 100%; display: block; } button, input, select, textarea { font: inherit; color: inherit; }
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.03em; }
+[hidden] { display: none !important; }
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: var(--r-pill); font-size: 14.5px; font-weight: 500; border: 1px solid transparent; cursor: pointer; white-space: nowrap; background: none; }
+.pill-coral { background: var(--coral); color: #fff; } .pill-dark { background: var(--indigo); color: #fff; } .pill-light { background: #fff; color: var(--text); border-color: var(--line); }
+.pill-sm { height: 34px; padding: 0 14px; font-size: 13.5px; }
+.field { display: block; } .field span { display: block; font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 6px; }
+.field input, .field select, .field textarea { width: 100%; height: 46px; border: 1px solid var(--line); border-radius: 12px; padding: 0 14px; background: #fff; outline: none; }
+.field select { appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%236B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>') no-repeat right 14px center; }
+.field textarea { height: auto; padding: 12px 14px; min-height: 96px; resize: vertical; }
+.field input:focus, .field textarea:focus { border-color: var(--gray-blue); box-shadow: 0 0 0 3px rgba(72,120,160,.15); }
+.f2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; } .f2 > .field, .fstack > .field { margin-bottom: 14px; }
+.app { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; }
+.side { background: #fff; border-right: 1px solid var(--line); padding: 22px 16px; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; }
+.side .logo { padding: 4px 10px 22px; } .side .logo a { display: inline-flex; padding: 6px 8px; margin-left: -8px; border-radius: 10px; transition: background-color .2s var(--ease), transform .2s var(--ease); } .side .logo a:hover, .side .logo a:focus-visible { background: var(--ground); transform: translateY(-1px); outline: none; } .side .logo img { height: 36px; width: auto; }
+.side .who { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-2); padding: 0 12px 10px; }
+.side nav a { display: flex; gap: 11px; align-items: center; padding: 10px 12px; border-radius: 12px; color: var(--muted); font-size: 14.5px; font-weight: 500; }
+.side nav a.on { background: var(--ground); color: var(--text); } .side nav a .b { margin-left: auto; font-size: 11.5px; font-weight: 600; background: var(--coral); color: #fff; padding: 1px 7px; border-radius: 999px; }
+.side .acct { margin-top: auto; border-top: 1px solid var(--line); padding-top: 16px; display: flex; gap: 10px; align-items: center; font-size: 13px; }
+.side .acct .out { margin-left: auto; color: var(--muted-2); }
+.av { width: 34px; height: 34px; border-radius: 50%; background: var(--indigo); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex: none; }
+.av.sm { width: 28px; height: 28px; font-size: 11px; }
+.acct b { display: block; font-size: 13.5px; } .acct span { color: var(--muted-2); font-size: 12.5px; }
+.main { padding: 26px 36px 60px; min-width: 0; }
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+.crumb { font-size: 13px; color: var(--muted-2); } .crumb b { color: var(--muted); font-weight: 500; }
+.search { display: flex; align-items: center; gap: 8px; height: 40px; width: 320px; border: 1px solid var(--line); border-radius: 999px; background: #fff; padding: 0 14px; color: var(--muted-2); font-size: 14px; }
+.status { display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 999px; background: var(--indigo); color: #fff; font-size: 12.5px; font-weight: 600; }
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--coral); }
+.head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 22px; gap: 20px; }
+.h1 { font-size: 30px; line-height: 36px; } .sub { color: var(--muted); margin-top: 4px; }
+.grid { display: grid; gap: 18px; } .g4 { grid-template-columns: repeat(4, 1fr); } .g2 { grid-template-columns: 1fr 1fr; } .g21 { grid-template-columns: 1.6fr 1fr; } .g12 { grid-template-columns: 1fr 1.6fr; } .g3 { grid-template-columns: 1fr 1fr 1fr; }
+.mb { margin-bottom: 18px; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; box-shadow: var(--shadow-card); min-width: 0; }
+.card h3 { font-size: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.card h3 a, .lnk { font-size: 13px; color: var(--gray-blue); font-weight: 500; cursor: pointer; }
+.card .note { font-size: 12.5px; color: var(--muted-2); margin-top: 10px; }
+.kpi .n { font-size: 32px; line-height: 38px; font-weight: 600; letter-spacing: -0.03em; margin-top: 6px; } .kpi .l { font-size: 13px; color: var(--muted); } .kpi .n small { font-size: 15px; color: var(--muted); font-weight: 500; letter-spacing: 0; margin-left: 4px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-2); font-weight: 600; padding: 8px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 11px 0; border-bottom: 1px solid var(--line); vertical-align: middle; } tr:last-child td { border-bottom: 0; } td.r, th.r { text-align: right; } td.m { color: var(--muted); }
+tr.sel td { cursor: pointer; } tr.sel:hover td { background: var(--ground); }
+.tag { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; background: rgba(29,57,91,.08); color: var(--indigo); white-space: nowrap; }
+.tag.coral { background: rgba(240,77,77,.1); color: var(--coral); } .px-cmp { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; margin-top: 6px; } .px-cmp > div { display: flex; flex-direction: column; gap: 4px; } .px-cmp b { font-size: 26px; letter-spacing: -0.02em; } .px-cmp .s { font-size: 12.5px; color: var(--muted); } .px-cmp .vs { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; color: var(--muted-2); text-transform: uppercase; } .px-cmp .tag { align-self: flex-start; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex: none; } .dot.coral { background: var(--coral); } .dot.amber { background: #D97706; } .dot.green { background: var(--confirmed); } .dot.indigo { background: var(--indigo); } .dot.gray { background: var(--light-gray-blue); }
+.key { margin: 18px 4px 0; padding: 12px 12px 4px; border-top: 1px solid var(--line); } .key h5 { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-2); font-weight: 600; margin-bottom: 8px; }
+.key div { display: grid; grid-template-columns: 8px 1fr; gap: 0 9px; align-items: start; padding: 5px 0; } .key div .dot { margin-top: 6px; } .key div b { display: block; color: var(--text); font-weight: 500; font-size: 12.5px; line-height: 17px; } .key div span { display: block; grid-column: 2; font-size: 11.5px; line-height: 15px; color: var(--muted-2); }
+.upd { list-style: none; } .upd li { display: flex; gap: 10px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; line-height: 19px; } .upd li:last-child { border-bottom: 0; } .upd .dot { margin-top: 6px; } .upd span.d { display: block; font-size: 11.5px; color: var(--muted-2); }
+.nm li em { font-style: normal; font-size: 12px; color: var(--muted-2); margin-left: 4px; white-space: nowrap; } .nm li .n { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.calm .d i.sched { background: rgba(29,57,91,.08); color: var(--indigo); } .calm .d i.wait { background: rgba(217,119,6,.12); color: #B45309; } .tag.mute { background: var(--card-2); color: var(--muted); } .tag.green { background: rgba(47,133,90,.1); color: var(--confirmed); }
+.docs { list-style: none; } .docs li { display: flex; gap: 14px; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--line); } .docs li:last-child { border-bottom: 0; }
+.doc-ico { width: 38px; height: 48px; border: 1px solid var(--line); border-top: 4px solid var(--indigo); border-radius: 4px; background: #fff; position: relative; flex: none; }
+.doc-ico.x { border-top-color: var(--coral); }
+.doc-ico i { position: absolute; left: 7px; right: 7px; height: 3px; border-radius: 2px; background: var(--card-2); } .doc-ico i:nth-child(1) { top: 10px; } .doc-ico i:nth-child(2) { top: 17px; right: 14px; } .doc-ico i:nth-child(3) { top: 24px; }
+.docs b { display: block; font-size: 14px; font-weight: 600; } .docs span.s { font-size: 12.5px; color: var(--muted); } .docs .dl { margin-left: auto; color: var(--gray-blue); display: inline-flex; gap: 14px; align-items: center; }
+.names { list-style: none; } .names li { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; } .names li:last-child { border-bottom: 0; }
+.names i { width: 14px; height: 14px; border-radius: 50%; background: var(--indigo); flex: none; position: relative; } .names i::after { content: ""; position: absolute; left: 4px; top: 3.5px; width: 4px; height: 7px; border: solid #fff; border-width: 0 1.8px 1.8px 0; transform: rotate(45deg); }
+.names i.pend { background: #fff; border: 2px dashed var(--light-gray-blue); } .names i.pend::after { display: none; }
+.names .by { margin-left: auto; }
+.nm { list-style: none; } .nm li { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; } .nm li:last-child { border-bottom: 0; }
+.nm li .del { margin-left: auto; color: var(--muted-2); opacity: .45; cursor: pointer; display: inline-flex; padding: 4px; border-radius: 8px; } .nm li:hover .del { opacity: 1; } .nm li .del:hover { color: var(--coral); background: rgba(240,77,77,.08); }
+.nm li.pend { color: var(--muted); } .nm li.pend em { font-style: normal; font-size: 12px; color: var(--muted-2); margin-left: 4px; }
+.nm li.add { color: var(--gray-blue); cursor: pointer; font-weight: 500; } .nm li.add .plus { width: 22px; height: 22px; border-radius: 50%; border: 1.5px dashed var(--light-gray-blue); display: inline-flex; align-items: center; justify-content: center; color: var(--gray-blue); }
+.nm li.add input { flex: 1; border: 0; border-bottom: 1.5px solid var(--gray-blue); background: transparent; outline: none; padding: 2px 0; font-size: 14.5px; color: var(--text); }
+.ent-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; } .ent-head b { font-size: 16px; } .ent-head span { font-size: 12.5px; color: var(--muted-2); white-space: nowrap; margin-left: 10px; }
+.tl { position: relative; margin: 26px 6px 6px; padding: 30px 0 34px; } .tl-track { height: 3px; background: var(--line); border-radius: 2px; position: relative; } .tl-line { position: absolute; left: 0; top: 0; height: 100%; width: 76%; background: var(--indigo); border-radius: 2px; }
+.tl-today { position: absolute; left: 76%; top: -9px; width: 2px; height: 21px; background: var(--coral); } .tl-today span { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 700; color: var(--coral); letter-spacing: .06em; text-transform: uppercase; }
+.tl-m { position: absolute; top: 30px; transform: translate(-50%, 0); width: 130px; text-align: center; } .tl-m i { display: block; width: 11px; height: 11px; border-radius: 50%; background: var(--indigo); border: 2.5px solid #fff; box-shadow: 0 0 0 2px var(--indigo); margin: -4px auto 0; } .tl-m.next i { background: #fff; box-shadow: 0 0 0 2px var(--light-gray-blue); }
+.tl-m b { display: block; font-size: 12px; margin-top: 8px; } .tl-m span { display: block; font-size: 11px; color: var(--muted); }
+.tl-m:first-child { transform: none; text-align: left; } .tl-m:first-child i { margin-left: 0; } .tl-m.next { transform: translateX(-100%); text-align: right; } .tl-m.next i { margin-right: 0; }
+.row { display: flex; align-items: center; gap: 10px; } .row.sb { justify-content: space-between; }
+.tabs { display: inline-flex; gap: 4px; background: var(--card-2); padding: 4px; border-radius: 999px; } .tabs a { padding: 6px 14px; border-radius: 999px; font-size: 13.5px; font-weight: 500; color: var(--muted); cursor: pointer; } .tabs a.on { background: #fff; color: var(--text); box-shadow: 0 1px 2px rgba(20,30,50,.08); }
+.tabs a .b { margin-left: 6px; font-size: 11px; background: var(--coral); color: #fff; padding: 0 6px; border-radius: 999px; }
+.year { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-2); margin: 18px 0 4px; }
+.toggle { display: inline-block; width: 38px; height: 22px; border-radius: 999px; background: var(--indigo); position: relative; vertical-align: middle; } .toggle::after { content: ""; position: absolute; top: 3px; right: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; }
+.toggle.off { background: var(--light-gray-blue); } .toggle.off::after { right: auto; left: 3px; }
+.setrow { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); gap: 20px; } .setrow:last-child { border-bottom: 0; } .setrow b { display: block; font-size: 14px; } .setrow span.s { font-size: 13px; color: var(--muted); }
+.calm { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; } .calm .d { min-height: 86px; border: 1px solid var(--line); border-radius: 10px; padding: 8px 9px; font-size: 12px; background: #fff; }
+.calm .d b { display: block; font-size: 12px; color: var(--muted-2); font-weight: 500; } .calm .d.mute { background: var(--ground); border-style: dashed; } .calm .d.today { border-color: var(--coral); }
+.calm .d i { display: block; font-style: normal; margin-top: 4px; padding: 2px 6px; border-radius: 6px; background: rgba(29,57,91,.08); color: var(--indigo); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .calm .d i.done { background: rgba(47,133,90,.1); color: var(--confirmed); } .calm .d i.hot { background: rgba(240,77,77,.1); color: var(--coral); }
+.dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 6px; } .dow span { padding: 0 9px; }
+.paper { background: #fff; border: 1px solid var(--line); border-top: 5px solid var(--indigo); border-radius: 6px; padding: 26px 34px 24px; box-shadow: 0 1px 2px rgba(20,30,50,.06), 0 24px 48px -24px rgba(20,30,50,.35); }
+.ph-head { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 12px; border-bottom: 2px solid var(--indigo); } .ph-head img { height: 28px; }
+.ph-meta { text-align: right; } .ph-meta b { display: block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); } .ph-meta span { display: block; font-size: 11px; color: var(--muted); }
+.ph-block { text-align: center; padding: 22px 0 18px; border-bottom: 1px solid var(--line); } .ph-kicker { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--coral); font-weight: 600; }
+.ph-title { font-size: 24px; color: var(--indigo); margin-top: 6px; } .ph-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.ph-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 6px 13px; border-radius: 999px; background: var(--indigo); color: #fff; font-size: 12px; font-weight: 600; } .ph-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+.ps { margin-top: 20px; } .ps h4 { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); font-weight: 700; font-family: var(--font-mono); } .ps h4::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.ps h4 em { font-style: normal; font-family: var(--font-sans); font-size: 10.5px; letter-spacing: 0; text-transform: none; font-weight: 600; color: var(--indigo); background: rgba(29,57,91,.08); padding: 2px 8px; border-radius: 999px; }
+.ps table { margin-top: 6px; font-size: 13px; } .ps td, .ps th { padding: 7px 0; }
+.ph-foot { margin-top: 22px; padding-top: 10px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted-2); } .ph-foot b { color: var(--indigo); }
+.drawer { position: fixed; right: 0; top: 0; height: 100vh; width: 460px; background: #fff; border-left: 1px solid var(--line); box-shadow: -24px 0 48px -32px rgba(20,30,50,.3); padding: 26px 28px; overflow: auto; z-index: 5; }
+.drawer .x { position: absolute; right: 18px; top: 18px; color: var(--muted-2); cursor: pointer; font-size: 22px; line-height: 1; }
+.dsec { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); } .dsec h4 { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); display: flex; justify-content: space-between; margin-bottom: 8px; }
+.dsec p { font-size: 14px; margin-top: 6px; } .m2 { color: var(--muted); font-size: 13px; }
+.act { list-style: none; } .act li { font-size: 13.5px; padding: 7px 0; border-bottom: 1px solid var(--line); } .act li span { display: block; font-size: 11.5px; color: var(--muted-2); }
+.view { animation: vin .25s var(--ease); } html.noanim .view { animation: none; } @keyframes vin { from { opacity: 0; transform: translateY(4px); } }
+.chk { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid var(--light-gray-blue); display: inline-block; vertical-align: middle; } .chk.on { background: var(--indigo); border-color: var(--indigo); position: relative; } .chk.on::after { content: ""; position: absolute; left: 5px; top: 2px; width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+.px-annual { font-size: 34px; line-height: 40px; font-weight: 600; letter-spacing: -0.03em; margin-top: 4px; }
+.px-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 10px; } .px-tier { border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; } .px-tier > b { display: block; font-size: 14px; } .px-tier > .m2 { display: block; margin-bottom: 8px; }
+.px-tier .field { margin-top: 8px; } .px-tier .field span { font-size: 12px; margin-bottom: 3px; } .px-tier .field input { height: 36px; border-radius: 9px; padding: 0 10px; font-size: 14px; }
+.px-band { display: grid; grid-template-columns: 70px 1fr 1fr 1fr; gap: 8px; align-items: end; margin-top: 6px; } .px-band em { font-style: normal; font-size: 11.5px; color: var(--muted); padding-bottom: 10px; } .px-band .field { margin-top: 0; } .px-band .field span { font-size: 11px; }
+.tag.amber { background: rgba(217,119,6,.12); color: #B45309; }
+.plat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; } .plat div { border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; font-size: 13.5px; display: flex; justify-content: space-between; align-items: center; min-height: 44px; gap: 8px; overflow: hidden; } .plat.two { grid-template-columns: 1fr 1fr; } .plat div > span.s { color: var(--muted-2); font-size: 12px; }
+.plg { display: inline-flex; align-items: center; gap: 7px; min-width: 0; overflow: hidden; color: var(--c); font-weight: 600; font-size: 13.5px; letter-spacing: -0.01em; white-space: nowrap; } .plg img { height: 20px; width: auto; } .plg img.wide { height: 16px; }
+.mg { width: 34px; height: 34px; border-radius: 9px; background: var(--c); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; letter-spacing: .02em; flex: none; } .mg.sm { width: 28px; height: 28px; font-size: 11px; border-radius: 8px; }
+.cardmark { height: 16px; width: 48px; display: inline-block; vertical-align: -3px; margin-right: 6px; } .cardmark.ach { width: auto; height: auto; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em; color: var(--indigo); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; vertical-align: 0; }
+.doc-ico::before { content: ""; position: absolute; left: 7px; bottom: 6px; width: 10px; height: 10px; background: url('logo/official/cdl-lock-icon.png') no-repeat center / contain; opacity: .9; }
+.side .co { display: flex; align-items: center; gap: 10px; margin: 0 4px 18px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; } .side .co b { display: block; font-size: 13px; line-height: 16px; } .side .co span { font-size: 12px; color: var(--muted-2); }
+.head-co { display: flex; align-items: center; gap: 12px; }
+</style></head><body>
+<div class="app">
+<aside class="side"><div class="logo"><a href="CDL-home-demo-r4.html"><img src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"></a></div><div class="who">Admin</div><nav><a href="#overview" data-view="overview" data-label="Overview"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Overview</a><a href="#accounts" data-view="accounts" data-label="Accounts"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 20a5 5 0 0 1 6-4.5"/></svg>Accounts</a><a href="#checks" data-view="checks" data-label="Exposure checks"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2.5-8h13L21 13v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M3 13h5l1.5 3h5l1.5-3h5"/></svg>Exposure checks<span class=b>4</span></a><a href="#monitoring" data-view="monitoring" data-label="Monitoring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Monitoring</a><a href="#renewals" data-view="renewals" data-label="Renewals"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg>Renewals</a><a href="#pricing" data-view="pricing" data-label="Pricing"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Pricing</a><a href="#team" data-view="team" data-label="Team"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Team</a><a href="#settings" data-view="settings" data-label="Settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Settings</a></nav><div class="key"><h5>Key</h5><div><i class="dot coral"></i><b>Needs action</b><span>New, overdue, or failing</span></div><div><i class="dot amber"></i><b>In progress</b><span>Started, or waiting on the customer</span></div><div><i class="dot indigo"></i><b>Scheduled</b><span>Automatic, nothing to do</span></div><div><i class="dot green"></i><b>Done</b><span>Sent or completed</span></div></div><div class="acct"><span class="av" style="background:var(--coral)">CB</span><div><b>Cole Brownell</b><span>Admin</span></div><a class="out" href="CDL-login-demo-r4.html" title="Log out"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4M15 8l5 4-5 4M20 12H9"/></svg></a></div></aside>
+<main class="main">
+  <div class="topbar"><div class="crumb"><b>Admin</b> / <span id="crumbView">Overview</span></div><div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg> Search accounts, contacts, names</div></div>
+  <section class="view" data-view="overview">
+  <div class="head"><div><h1 class="h1">Thursday, 10 September.</h1><p class="sub">4 exposure checks are waiting. 8 monitoring reports still to send this month.</p></div><a class="pill pill-coral pill-sm" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> New account</a></div>
+  <div class="grid g4 mb"><div class="card kpi"><span class="l">Active accounts</span><div class="n">128</div></div><div class="card kpi"><span class="l">Exposure checks waiting</span><div class="n" style="color:var(--coral)">4</div></div><div class="card kpi"><span class="l">Reports this month</span><div class="n">29<small>of 37 sent</small></div></div><div class="card kpi"><span class="l">Renewals in 60 days</span><div class="n">9<small>all automatic</small></div></div></div>
+  <div class="card mb"><h3>Exposure checks <a data-go="checks">Queue</a></h3><table><tr><th>Company</th><th>Contact</th><th>Submitted</th><th>Reason</th><th>Status</th><th class="r">Quote</th></tr><tr class="sel" data-check="0"><td><div class="row"><span class="mg sm" style="--c:#B45309">HV</span><b>Harbor & Vine Foods</b></div></td><td class="m">Priya Natarajan · Ops Director</td><td class="m">Today 09:12</td><td class="m">Competitor concern</td><td><span class="tag coral">New</span></td><td class="r m">—</td></tr><tr class="sel" data-check="1"><td><div class="row"><span class="mg sm" style="--c:#0E7490">LO</span><b>Lumen Outdoor Co.</b></div></td><td class="m">Tom Reilly · Founder</td><td class="m">Today 08:40</td><td class="m">Saw us on ImportYeti</td><td><span class="tag coral">New</span></td><td class="r m">—</td></tr><tr class="sel" data-check="2"><td><div class="row"><span class="mg sm" style="--c:#7C2D12">CA</span><b>Castellan Apparel Group</b></div></td><td class="m">J. Whitfield · Procurement</td><td class="m">Yesterday</td><td class="m">Procurement review</td><td><span class="tag amber">In review</span></td><td class="r m">—</td></tr><tr class="sel" data-check="3"><td><div class="row"><span class="mg sm" style="--c:#2F855A">BF</span><b>Blue Fern Skincare</b></div></td><td class="m">Ana Duarte · CEO</td><td class="m">Yesterday</td><td class="m">Product copied</td><td><span class="tag amber">In review</span></td><td class="r m">—</td></tr><tr class="sel" data-check="4"><td><div class="row"><span class="mg sm" style="--c:#1D395B">YC</span><b>Your Company LLC</b></div></td><td class="m">Dana Reyes · Logistics Mgr</td><td class="m">18 Feb 2025</td><td class="m">Competitor concern</td><td><span class="tag green">Sent</span></td><td class="r m">Multi-Entity · accepted</td></tr></table></div>
+  <div class="card"><h3>Accounts <a data-go="accounts">All 128</a></h3><table><tr><th>Company</th><th>Plan</th><th>Entities</th><th>Names</th><th>Next check</th><th>Renewal</th><th class="r">Status</th></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#1D395B">YC</span><b>Your Company LLC</b></div></td><td class="m">Multi-Entity</td><td class="m">3</td><td class="m">10</td><td class="m">05 Oct</td><td class="m">12 Mar 2027</td><td class="r"><span class="tag ">Protected</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#4878A0">MP</span><b>Meridian Parts Supply</b></div></td><td class="m">Standard</td><td class="m">1</td><td class="m">3</td><td class="m">02 Oct</td><td class="m">30 Nov 2026</td><td class="r"><span class="tag ">Protected</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#2F855A">BF</span><b>Blue Fern Skincare</b></div></td><td class="m">Standard</td><td class="m">1</td><td class="m">2</td><td class="m">—</td><td class="m">—</td><td class="r"><span class="tag amber">Quote sent</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#8B5E34">OF</span><b>Oakhaven Furniture Imports</b></div></td><td class="m">Enterprise</td><td class="m">9</td><td class="m">31</td><td class="m">01 Oct</td><td class="m">15 Jan 2027</td><td class="r"><span class="tag ">Protected</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#5A3E2B">SC</span><b>Sable Coffee Traders</b></div></td><td class="m">Standard</td><td class="m">1</td><td class="m">4</td><td class="m">06 Oct</td><td class="m">08 Dec 2026</td><td class="r"><span class="tag coral">Renewal due</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#0F6E8C">TM</span><b>Tidewater Marine Supply</b></div></td><td class="m">Multi-Entity</td><td class="m">4</td><td class="m">12</td><td class="m">03 Oct</td><td class="m">22 Feb 2027</td><td class="r"><span class="tag ">Protected</span></td></tr></table></div></section><section class="view" data-view="accounts" hidden>
+  <div class="head"><div><h1 class="h1">Accounts</h1><p class="sub">128 accounts · 121 protected · 5 quotes out · 2 renewals due. Click a row to open it.</p></div><div class="row"><div class="tabs"><a class="on">All</a><a>Protected</a><a>Quote sent</a><a>Renewal due</a></div><a class="pill pill-coral pill-sm" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> New account</a></div></div>
+  <div class="card"><table><tr><th>Company</th><th>Plan</th><th>Entities</th><th>Names</th><th>Next check</th><th>Renewal</th><th class="r">Status</th></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#1D395B">YC</span><b>Your Company LLC</b></div></td><td class="m">Multi-Entity</td><td class="m">3</td><td class="m">10</td><td class="m">05 Oct</td><td class="m">12 Mar 2027</td><td class="r"><span class="tag ">Protected</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#4878A0">MP</span><b>Meridian Parts Supply</b></div></td><td class="m">Standard</td><td class="m">1</td><td class="m">3</td><td class="m">02 Oct</td><td class="m">30 Nov 2026</td><td class="r"><span class="tag ">Protected</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#2F855A">BF</span><b>Blue Fern Skincare</b></div></td><td class="m">Standard</td><td class="m">1</td><td class="m">2</td><td class="m">—</td><td class="m">—</td><td class="r"><span class="tag amber">Quote sent</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#8B5E34">OF</span><b>Oakhaven Furniture Imports</b></div></td><td class="m">Enterprise</td><td class="m">9</td><td class="m">31</td><td class="m">01 Oct</td><td class="m">15 Jan 2027</td><td class="r"><span class="tag ">Protected</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#5A3E2B">SC</span><b>Sable Coffee Traders</b></div></td><td class="m">Standard</td><td class="m">1</td><td class="m">4</td><td class="m">06 Oct</td><td class="m">08 Dec 2026</td><td class="r"><span class="tag coral">Renewal due</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#0F6E8C">TM</span><b>Tidewater Marine Supply</b></div></td><td class="m">Multi-Entity</td><td class="m">4</td><td class="m">12</td><td class="m">03 Oct</td><td class="m">22 Feb 2027</td><td class="r"><span class="tag ">Protected</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#3F7D3A">GP</span><b>Greenline Produce Partners</b></div></td><td class="m">Standard</td><td class="m">1</td><td class="m">2</td><td class="m">07 Oct</td><td class="m">19 Apr 2027</td><td class="r"><span class="tag ">Protected</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#C2410C">HT</span><b>Halcyon Toys Inc</b></div></td><td class="m">Multi-Entity</td><td class="m">2</td><td class="m">6</td><td class="m">02 Oct</td><td class="m">03 Jan 2027</td><td class="r"><span class="tag ">Protected</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#374151">RT</span><b>Ridgeback Tools</b></div></td><td class="m">Standard</td><td class="m">1</td><td class="m">3</td><td class="m">—</td><td class="m">—</td><td class="r"><span class="tag amber">Quote sent</span></td></tr><tr class="sel" data-open="acct"><td><div class="row"><span class="mg sm" style="--c:#6D28D9">AP</span><b>Aster & Pine Home</b></div></td><td class="m">Enterprise</td><td class="m">6</td><td class="m">22</td><td class="m">01 Oct</td><td class="m">28 Feb 2027</td><td class="r"><span class="tag ">Protected</span></td></tr></table><p class="note">Showing 10 of 128.</p></div></section><section class="view" data-view="checks" hidden>
+  <div class="head"><div><h1 class="h1">Exposure checks</h1><p class="sub">Every free check submitted from the site. Look them up, attach the report, send it with the quote.</p></div><div class="tabs" data-tabs="ck"><a class="on" data-tab="open">Open<span class="b">4</span></a><a data-tab="sent">Sent</a><a data-tab="all">All</a></div></div>
+  <div class="grid g12">
+    <div class="card"><h3>Queue</h3><table><tr><th>Company</th><th>Status</th><th class="r">Submitted</th></tr><tr class="sel" data-check="0"><td><div class="row"><span class="mg sm" style="--c:#B45309">HV</span><div><b>Harbor & Vine Foods</b><br><span class="m2">Priya Natarajan · Ops Director</span></div></div></td><td><span class="tag coral">New</span></td><td class="r m">Today 09:12</td></tr><tr class="sel" data-check="1"><td><div class="row"><span class="mg sm" style="--c:#0E7490">LO</span><div><b>Lumen Outdoor Co.</b><br><span class="m2">Tom Reilly · Founder</span></div></div></td><td><span class="tag coral">New</span></td><td class="r m">Today 08:40</td></tr><tr class="sel" data-check="2"><td><div class="row"><span class="mg sm" style="--c:#7C2D12">CA</span><div><b>Castellan Apparel Group</b><br><span class="m2">J. Whitfield · Procurement</span></div></div></td><td><span class="tag amber">In review</span></td><td class="r m">Yesterday</td></tr><tr class="sel" data-check="3"><td><div class="row"><span class="mg sm" style="--c:#2F855A">BF</span><div><b>Blue Fern Skincare</b><br><span class="m2">Ana Duarte · CEO</span></div></div></td><td><span class="tag amber">In review</span></td><td class="r m">Yesterday</td></tr></table></div>
+    <div class="card"><div class="row sb"><div class="head-co"><span class="mg" style="--c:#B45309">HV</span><div><div class="crumb">Submission · today 09:12</div><h2 style="font-size:22px">Harbor & Vine Foods</h2></div></div><span class="tag coral">New</span></div>
+      <div class="dsec"><h4>What they told us</h4><table><tr><td class="m" style="width:160px">Name</td><td>Priya Natarajan</td></tr><tr><td class="m">Job title</td><td>Operations Director</td></tr><tr><td class="m">Work email</td><td>priya@harborandvine.com</td></tr><tr><td class="m">Reason</td><td>A competitor seems to know our suppliers</td></tr><tr><td class="m">Other names</td><td>Harbor and Vine Foods Inc, H&amp;V Foods</td></tr></table></div>
+      <div class="dsec"><h4>Lookup <span class="m2" style="text-transform:none;letter-spacing:0;font-family:var(--font-sans)">18 platforms</span></h4><div class="plat two"><div><span class="plg" style="--c:#004E66"><img src="platform-logos/importyeti-mark.png" alt=""><b>ImportYeti</b></span><span class="chk on"></span></div><div><span class="plg" style="--c:#D6002A"><b>Panjiva</b></span><span class="chk on"></span></div><div><span class="plg" style="--c:#0A7EF1"><img class="wide" src="platform-logos/importgenius.svg" alt="Import Genius"></span><span class="chk on"></span></div><div><span class="plg" style="--c:#414FF6"><b>ImportKey</b></span><span class="chk"></span></div><div><span class="plg" style="--c:#5A1CE2"><img src="platform-logos/trademo-mark.svg" alt=""><b>Trademo</b></span><span class="chk"></span></div><div><span class="plg" style="--c:#00AAFF"><img class="wide" src="platform-logos/datamyne.png" alt="Datamyne"></span><span class="chk"></span></div></div><p class="note">3 of 18 checked · 3 showing records so far · <a class="lnk">Mark all checked</a></p></div>
+      <div class="dsec"><h4>Report and quote</h4><div class="f2"><label class="field"><span>Exposure report</span><input placeholder="Attach PDF or generate from lookup"></label><label class="field"><span>Plan</span><select><option>Standard</option><option>Multi-Entity</option><option>Enterprise</option></select></label></div><div class="f2"><label class="field"><span>Quote</span><input placeholder="$"></label><label class="field"><span>Entities quoted</span><input value="1"></label></div>
+        <div class="row"><button class="pill pill-coral" type="button"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg> Send report and quote</button><button class="pill pill-light" type="button">Save as in review</button></div></div>
+      <div class="dsec"><h4>Notes</h4><label class="field"><textarea placeholder="Internal note for the team"></textarea></label></div></div>
+  </div></section><section class="view" data-view="monitoring" hidden>
+  <div class="head"><div><h1 class="h1">Monitoring</h1><p class="sub">Every account is checked once a month across 18 platforms, and the report goes out the same day.</p></div><div class="row"><div class="tabs"><a>September</a><a class="on">October 2026</a><a>November</a></div></div></div>
+  <div class="grid g21">
+    <div class="card"><h3>October 2026 <span class="tag">37 checks · 6 done</span></h3><div class="dow"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div><div class="calm"><div class="d mute"></div><div class="d mute"></div><div class="d mute"></div><div class="d mute"></div><div class="d"><b>1</b><i class="done">Oakhaven</i><i class="done">Aster &amp; Pine</i></div><div class="d"><b>2</b><i class="done">Meridian</i><i class="done">Halcyon</i><i>+3 more</i></div><div class="d"><b>3</b></div><div class="d"><b>4</b></div><div class="d"><b>5</b><i class="hot">Your Company</i><i class="wait">Sable Coffee</i><i>+4 more</i></div><div class="d"><b>6</b><i>Tidewater</i><i>+2 more</i></div><div class="d"><b>7</b><i>Greenline</i><i>+5 more</i></div><div class="d"><b>8</b><i>+4 more</i></div><div class="d"><b>9</b><i>+4 more</i></div><div class="d today"><b>10</b></div><div class="d"><b>11</b></div><div class="d"><b>12</b><i>+4 more</i></div><div class="d"><b>13</b><i>+4 more</i></div><div class="d"><b>14</b><i>+2 more</i></div><div class="d"><b>15</b></div><div class="d"><b>16</b></div><div class="d"><b>17</b></div><div class="d"><b>18</b></div><div class="d"><b>19</b></div><div class="d"><b>20</b></div><div class="d"><b>21</b></div><div class="d"><b>22</b></div><div class="d"><b>23</b></div><div class="d"><b>24</b></div><div class="d"><b>25</b></div><div class="d"><b>26</b></div><div class="d"><b>27</b></div><div class="d"><b>28</b></div><div class="d"><b>29</b></div><div class="d"><b>30</b></div><div class="d"><b>31</b></div></div></div>
+    <div><div class="card mb"><h3>Due 05 Oct <span class="tag coral">6 accounts</span></h3><table><tr><th>Account</th><th>Names</th><th class="r">Report</th></tr><tr><td><b>Your Company LLC</b></td><td class="m">10</td><td class="r"><a class="lnk">Check</a></td></tr><tr><td><div class="row"><span class="mg sm" style="--c:#5A3E2B">SC</span><b>Sable Coffee Traders</b></div></td><td class="m">4</td><td class="r"><a class="lnk">Check</a></td></tr><tr><td><div class="row"><span class="mg sm" style="--c:#4B5563">PC</span><b>Pinecrest Ceramics</b></div></td><td class="m">2</td><td class="r"><a class="lnk">Check</a></td></tr><tr><td><div class="row"><span class="mg sm" style="--c:#9D174D">MT</span><b>Marlow Textiles</b></div></td><td class="m">5</td><td class="r"><a class="lnk">Check</a></td></tr></table><p class="note">2 more.</p></div>
+      <div class="card mb"><h3>Running a check</h3><p class="m2">Open the account, tick each platform as you look, mark "nothing new" or add the name you found. The report is generated from your ticks and sent to the recipients.</p></div>
+      <div class="card"><h3>This month</h3><div class="grid g2"><div class="kpi"><span class="l">Sent</span><div class="n">29</div></div><div class="kpi"><span class="l">New names found</span><div class="n">2</div></div></div></div></div>
+  </div></section><section class="view" data-view="renewals" hidden>
+  <div class="head"><div><h1 class="h1">Renewals</h1><p class="sub">Renewals happen on the calendar. This is the list of what renews when, and whether anything needs a person.</p></div><div class="tabs"><a class="on">Next 60 days</a><a>Next 90</a><a>All</a></div></div>
+  <div class="grid g4 mb"><div class="card kpi"><span class="l">Renewing in 60 days</span><div class="n">9</div></div><div class="card kpi"><span class="l">Automatic, card on file</span><div class="n">7</div></div><div class="card kpi"><span class="l">Need a person</span><div class="n" style="color:var(--coral)">2</div></div><div class="card kpi"><span class="l">Notices sent</span><div class="n">9<small>of 9</small></div></div></div>
+  <div class="card"><table><tr><th>Account</th><th>Plan</th><th>Renews</th><th>Payment</th><th>60-day notice</th><th class="r">Status</th></tr>
+    <tr class="sel"><td><div class="row"><span class="mg sm" style="--c:#4878A0">MP</span><b>Meridian Parts Supply</b></div></td><td class="m">Standard</td><td class="m">30 Nov 2026</td><td class="m"><svg class="cardmark" viewBox="0 0 48 16" aria-label="Visa"><text x="0" y="14" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-style="italic" font-size="17" fill="#1A1F71" letter-spacing="-.5">VISA</text></svg>·· 2201</td><td class="m">Sent 01 Oct</td><td class="r"><span class="tag">Automatic</span></td></tr>
+    <tr class="sel"><td><div class="row"><span class="mg sm" style="--c:#5A3E2B">SC</span><b>Sable Coffee Traders</b></div></td><td class="m">Standard</td><td class="m">08 Dec 2026</td><td class="m">Card expired</td><td class="m">Sent 09 Oct</td><td class="r"><span class="tag coral">Needs new card</span></td></tr>
+    <tr class="sel"><td><div class="row"><span class="mg sm" style="--c:#C2410C">HT</span><b>Halcyon Toys Inc</b></div></td><td class="m">Multi-Entity</td><td class="m">03 Jan 2027</td><td class="m">Invoice · net 30</td><td class="m">Due 04 Nov</td><td class="r"><span class="tag amber">Invoice to send</span></td></tr>
+    <tr class="sel"><td><div class="row"><span class="mg sm" style="--c:#8B5E34">OF</span><b>Oakhaven Furniture Imports</b></div></td><td class="m">Enterprise</td><td class="m">15 Jan 2027</td><td class="m"><span class="cardmark ach">ACH</span> on file</td><td class="m">Due 16 Nov</td><td class="r"><span class="tag">Automatic</span></td></tr>
+    <tr class="sel"><td><div class="row"><span class="mg sm" style="--c:#0F6E8C">TM</span><b>Tidewater Marine Supply</b></div></td><td class="m">Multi-Entity</td><td class="m">22 Feb 2027</td><td class="m"><svg class="cardmark" viewBox="0 0 48 16" aria-label="Visa"><text x="0" y="14" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-style="italic" font-size="17" fill="#1A1F71" letter-spacing="-.5">VISA</text></svg>·· 8830</td><td class="m">Due 24 Dec</td><td class="r"><span class="tag">Automatic</span></td></tr></table></div></section><section class="view" data-view="pricing" hidden>
+  <div class="head"><div><h1 class="h1">Pricing calculator</h1><p class="sub">Every quote comes from one model. The tier sets the starting point; names, volume, cadence and add-ons carry the price from there with no cap. Tiers are internal; the customer only ever sees their quote.</p></div><div class="row"><a class="pill pill-light pill-sm" id="pxReset">Reset to file</a><a class="pill pill-dark pill-sm" id="pxCopy">Copy model JSON</a></div></div>
+  <div class="grid g12 mb">
+    <div class="card"><h3>Prospect</h3>
+      <div class="fstack">
+        <label class="field"><span>Entities importing</span><input type="number" id="pxEnt" value="1" min="1"></label>
+        <label class="field"><span>Names on record (spellings, DBAs)</span><input type="number" id="pxNames" value="9" min="1"></label>
+        <label class="field"><span>Ocean shipments a year</span><input type="number" id="pxShip" value="120" min="0"></label>
+        <label class="field"><span>Checking cadence</span><select id="pxCad"><option value="monthly">Monthly</option><option value="biweekly">Every two weeks</option><option value="weekly">Weekly</option></select></label>
+        <div class="setrow"><div><b>Procurement or legal review</b><span class="s">Vendor onboarding, security review, NDA. Moves the quote to enterprise.</span></div><span class="toggle off" id="pxProc"></span></div>
+        <div class="setrow"><div><b>Priority reporting</b><span class="s">Named contact, faster turnaround</span></div><span class="toggle off" id="pxPrio"></span></div>
+      </div></div>
+    <div>
+      <div class="card mb px-result"><div class="row sb"><div><span class="l" style="font-size:12px;color:var(--muted)">Quote</span><div class="px-annual" id="pxAnnual">$0</div><div class="m2" id="pxMonthly"></div></div><div style="text-align:right"><span class="tag" id="pxTier">Standard</span><div class="m2" id="pxRange" style="margin-top:6px"></div></div></div>
+        <table id="pxLines" style="margin-top:14px"></table></div>
+      <div class="card mb"><h3>Size beats tier <span class="m2" style="font-weight:400">no caps, so a large single-entity importer can quote above a small group</span></h3><div class="px-cmp" id="pxCompare"></div></div>
+      <div class="card"><h3>Try the presets</h3><div class="row" style="flex-wrap:wrap;gap:8px" id="pxPresets">
+        <a class="pill pill-light pill-sm" data-p="1,3,20,monthly,">Small importer</a><a class="pill pill-light pill-sm" data-p="1,24,88,monthly,">Totally Nuts &amp; More</a><a class="pill pill-light pill-sm" data-p="1,9,12,monthly,">Pandasaurus Games</a><a class="pill pill-light pill-sm" data-p="3,12,400,monthly,">Three entities</a><a class="pill pill-light pill-sm" data-p="5,30,1500,biweekly,">Five entities, biweekly</a><a class="pill pill-light pill-sm" data-p="8,40,3000,weekly,procurement,priority">Group with procurement</a></div></div>
+    </div>
+  </div>
+  <div class="card"><h3>Strategy <span class="m2" style="font-weight:400">edits apply live on this page; copy the JSON into pricing/model.json to make them permanent</span></h3>
+    <div class="px-grid" id="pxStrategy"></div></div>
+</section><section class="view" data-view="team" hidden>
+  <div class="head"><div><h1 class="h1">Team</h1><p class="sub">Who can see this side of Customs Data Lock, and what they can do.</p></div><a class="pill pill-coral pill-sm" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> Invite</a></div>
+  <div class="card"><table><tr><th>Person</th><th>Role</th><th>Can</th><th>Last active</th><th class="r"></th></tr>
+    <tr><td><div class="row"><span class="av sm" style="background:var(--coral)">CB</span><b>Cole Brownell</b></div></td><td class="m">Owner</td><td class="m">Everything</td><td class="m">Now</td><td class="r"></td></tr>
+    <tr><td><div class="row"><span class="av sm">TB</span><b>Tegan Brownell</b></div></td><td class="m">Team</td><td class="m">Everything</td><td class="m">Invited</td><td class="r"><a class="lnk">Edit</a></td></tr>
+    <tr><td><div class="row"><span class="av sm" style="background:var(--gray-blue)">PK</span><b>Parker Kurtz</b></div></td><td class="m">Team</td><td class="m">Everything</td><td class="m">Invited</td><td class="r"><a class="lnk">Edit</a></td></tr>
+    <tr><td><div class="row"><span class="av sm" style="background:#2F855A">CP</span><b>Colin Pfeifer</b></div></td><td class="m">Team</td><td class="m">Everything</td><td class="m">Invited</td><td class="r"><a class="lnk">Edit</a></td></tr>
+    <tr><td><div class="row"><span class="av sm" style="background:#6D28D9">EB</span><b>Eric Brownell</b></div></td><td class="m">Team</td><td class="m">Everything</td><td class="m">Invited</td><td class="r"><a class="lnk">Edit</a></td></tr></table>
+    <p class="note">Roles: Owner can change billing and the pricing model. Team can run checks, send reports, quote, and edit accounts. Set a narrower role from Edit.</p></div></section><section class="view" data-view="settings" hidden>
+  <div class="head"><div><h1 class="h1">Settings</h1><p class="sub">The platforms we check, the documents we send, and who hears about what.</p></div></div>
+  <div class="grid g2">
+    <div class="card"><h3>Platforms checked <a><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> Add</a></h3><div class="plat"><div><span class="plg" style="--c:#004E66"><img src="platform-logos/importyeti-mark.png" alt=""><b>ImportYeti</b></span></div><div><span class="plg" style="--c:#D6002A"><b>Panjiva</b></span></div><div><span class="plg" style="--c:#0A7EF1"><img class="wide" src="platform-logos/importgenius.svg" alt="Import Genius"></span></div><div><span class="plg" style="--c:#414FF6"><b>ImportKey</b></span></div><div><span class="plg" style="--c:#5A1CE2"><img src="platform-logos/trademo-mark.svg" alt=""><b>Trademo</b></span></div><div><span class="plg" style="--c:#00AAFF"><img class="wide" src="platform-logos/datamyne.png" alt="Datamyne"></span></div><div><span class="plg" style="--c:#0073F2"><b>Volza</b></span></div><div><span class="plg" style="--c:#D71518"><b>Tradesparq</b></span></div><div><span class="plg" style="--c:#4B5563"><b>ImportInfo</b></span></div><div><span class="plg" style="--c:#4B5563"><b>Zauba</b></span></div><div><span class="plg" style="--c:#4B5563"><b>52wmb</b></span></div><div><span class="plg" style="--c:#4B5563"><b>Seair</b></span></div><div><span class="plg" style="--c:#4B5563"><b>Export Genius</b></span></div><div><span class="plg" style="--c:#4B5563"><b>Tridge</b></span></div><div><span class="plg" style="--c:#4B5563"><b>USImportData</b></span></div><div><span class="plg" style="--c:#4B5563"><b>Bill of Lading DB</b></span></div><div><span class="plg" style="--c:#4B5563"><b>Manifest DB</b></span></div><div><span class="plg" style="--c:#4B5563"><b>PortExaminer</b></span></div></div><p class="note">18 platforms. Every check and every report lists all of them.</p></div>
+    <div><div class="card mb"><h3>Documents</h3><div class="setrow"><div><b>Exposure report template</b><span class="s">CDL letterhead · v4 · updated 09 Sep 2026</span></div><a class="lnk">Edit</a></div><div class="setrow"><div><b>Monitoring report template</b><span class="s">CDL letterhead · v4</span></div><a class="lnk">Edit</a></div><div class="setrow"><div><b>Quote letter</b><span class="s">Sent with every exposure report</span></div><a class="lnk">Edit</a></div></div>
+      <div class="card"><h3>Alerts to the team</h3><div class="setrow"><div><b>New exposure check</b><span class="s">Email Sam and Cole the moment one lands</span></div><span class="toggle"></span></div><div class="setrow"><div><b>Check overdue</b><span class="s">If an account passes its check date unsent</span></div><span class="toggle"></span></div><div class="setrow"><div><b>Card failing</b><span class="s">60 days before a renewal with a bad card</span></div><span class="toggle"></span></div></div></div>
+  </div></section>
+</main></div><aside class="drawer" id="acctDrawer" hidden><span class="x" data-close>×</span>
+  <div class="row sb"><div class="head-co"><span class="mg" style="--c:#1D395B">YC</span><div><div class="crumb">Account</div><h2 style="font-size:22px">Your Company LLC</h2></div></div><span class="status">Protected</span></div>
+  <div class="dsec"><h4>Contact</h4><div class="row"><span class="av">DR</span><div><b>Dana Reyes</b> · Logistics Manager<br><span class="m2">dana@yourcompany.com · (317) 555-0142</span></div></div></div>
+  <div class="dsec"><h4>Plan</h4><p>Multi-Entity · annual · paid 12 Mar 2026 · renews 12 Mar 2027 automatically</p></div>
+  <div class="dsec"><h4>Entities and names <a class="lnk">Edit</a></h4>
+    <p><b>Your Company LLC</b> <span class="m2">· YOUR COMPANY · Your Co. LLC · Your Company Inc · YOUR COMPANY L.L.C</span></p>
+    <p><b>Your Brand Inc</b> <span class="m2">· Your Brand · YOUR BRAND INC</span></p>
+    <p><b>Your Trading Co.</b> <span class="m2">· Your Trading · Your Trading Company</span></p>
+    <p><span class="tag coral">Pending</span> <span class="m2">Your Company Corp · submitted by customer 10 Sep</span></p></div>
+  <div class="dsec"><h4>Reports</h4><ul class="docs"><li><div class="doc-ico x"><i></i><i></i><i></i></div><div><b>Exposure report · 18 Feb 2025</b><span class="s">11 of 18 platforms · 614 records</span></div><span class="dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M4 20h16"/></svg></span></li><li><div class="doc-ico"><i></i><i></i><i></i></div><div><b>Monitoring · Sep 2026</b><span class="s">Sent 07 Sep · nothing new</span></div><span class="dl"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10l5 5 5-5M4 20h16"/></svg></span></li></ul><a class="lnk">All 19 reports</a></div>
+  <div class="dsec"><h4>Notes</h4><label class="field"><textarea>Asked about adding a Canadian entity in Q1. Follow up in January.</textarea></label></div>
+  <div class="dsec"><h4>Activity</h4><ul class="act"><li><span>10 Sep 2026</span>Customer submitted a new name: Your Company Corp</li><li><span>07 Sep 2026</span>September monitoring report sent to 2 recipients</li><li><span>04 Aug 2026</span>August monitoring report sent</li><li><span>12 Mar 2026</span>Renewed automatically · INV-2026-031 paid</li><li><span>Feb 2026</span>Contact changed: Dana Reyes replaces Luis Ortega</li></ul></div>
+</aside><script>
+(function(){
+  const qs = new URLSearchParams(location.search); if (qs.has('static')) document.documentElement.classList.add('noanim'); const views = [...document.querySelectorAll('.view')]; const links = [...document.querySelectorAll('.side nav a[data-view]')];
+  function show(v) { if (!views.some(x => x.dataset.view === v)) v = views[0].dataset.view; views.forEach(x => x.hidden = x.dataset.view !== v); links.forEach(a => a.classList.toggle('on', a.dataset.view === v)); const c = document.getElementById('crumbView'); const l = links.find(a => a.dataset.view === v); if (c) c.textContent = l ? l.dataset.label : v; }
+  links.forEach(a => a.addEventListener('click', e => { e.preventDefault(); history.replaceState(null, '', '#' + a.dataset.view); show(a.dataset.view); }));
+  document.querySelectorAll('[data-go]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); history.replaceState(null, '', '#' + el.dataset.go); show(el.dataset.go); }));
+  show(qs.get('view') || location.hash.slice(1) || views[0].dataset.view);
+  document.querySelectorAll('.tabs').forEach(t => t.querySelectorAll('a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); t.querySelectorAll('a').forEach(x => x.classList.remove('on')); a.classList.add('on'); const grp = t.dataset.tabs; if (grp) document.querySelectorAll(`[data-tab-of="${grp}"]`).forEach(p => p.hidden = p.dataset.tab !== a.dataset.tab); })));
+  document.querySelectorAll('.toggle').forEach(t => t.addEventListener('click', () => t.classList.toggle('off')));
+  document.querySelectorAll('.nm').forEach(ul => {
+    ul.addEventListener('click', e => { const del = e.target.closest('.del'); if (del) { const li = del.closest('li'); li.style.opacity = 0; setTimeout(() => li.remove(), 200); return; }
+      const add = e.target.closest('li.add'); if (add && !add.classList.contains('open')) { add.classList.add('open'); add.querySelector('.lbl').hidden = true; const inp = add.querySelector('input'); inp.hidden = false; inp.focus(); } });
+    const add = ul.querySelector('li.add'), inp = add && add.querySelector('input');
+    if (inp) { const close = () => { add.classList.remove('open'); inp.hidden = true; add.querySelector('.lbl').hidden = false; inp.value = ''; };
+      inp.addEventListener('keydown', e => { if (e.key === 'Escape') close(); if (e.key === 'Enter' && inp.value.trim()) { const li = document.createElement('li'); li.className = 'pend'; li.innerHTML = '<i class="dot amber"></i><span class="n">' + inp.value.trim() + '</span><em>being added</em><span class="del" title="Withdraw">' + add.querySelector('.plus').innerHTML + '</span>'; li.querySelector('.del').innerHTML = document.querySelector('.nm .del').innerHTML; ul.insertBefore(li, add); close(); } });
+      inp.addEventListener('blur', () => { if (!inp.value.trim()) close(); }); }
+  });
+})();
+</script><script>
+(function(){
+  const FILE = {
+  "_about": "CDL pricing strategy. Every quote is computed from this file. Tier (by entity count) sets only the starting point; names, volume, cadence and add-ons carry the price from there with no cap, so a large single-entity importer can quote above a small multi-entity one. Tiers are internal and never shown on the public site.",
+  "version": "2026-09-13b",
+  "rounding": 10,
+  "monthly_multiplier": 1.1,
+  "tiers": {
+    "standard": {
+      "label": "Standard",
+      "entities": [
+        1,
+        1
+      ],
+      "typical": [
+        600,
+        1000
+      ],
+      "base": 600,
+      "included_names": 5,
+      "per_name": 25,
+      "per_extra_entity": 0
+    },
+    "multi": {
+      "label": "Multi-Entity",
+      "entities": [
+        2,
+        5
+      ],
+      "typical": [
+        1000,
+        2000
+      ],
+      "base": 1000,
+      "included_names": 10,
+      "per_name": 15,
+      "per_extra_entity": 200
+    },
+    "enterprise": {
+      "label": "Enterprise",
+      "entities": [
+        6,
+        999
+      ],
+      "typical": [
+        2000,
+        8000
+      ],
+      "base": 2000,
+      "included_names": 25,
+      "per_name": 10,
+      "per_extra_entity": 400
+    }
+  },
+  "volume": {
+    "_about": "Add-on by annual ocean shipments, per tier. Open-ended: the last band also adds per_extra_1000 for every 1,000 shipments beyond it.",
+    "bands": [
+      {
+        "upto": 50,
+        "standard": 0,
+        "multi": 0,
+        "enterprise": 0
+      },
+      {
+        "upto": 500,
+        "standard": 150,
+        "multi": 300,
+        "enterprise": 500
+      },
+      {
+        "upto": 2000,
+        "standard": 400,
+        "multi": 600,
+        "enterprise": 1000
+      },
+      {
+        "upto": 5000,
+        "standard": 800,
+        "multi": 1000,
+        "enterprise": 1500
+      },
+      {
+        "upto": 10000,
+        "standard": 1200,
+        "multi": 1500,
+        "enterprise": 2200
+      }
+    ],
+    "per_extra_1000": {
+      "standard": 150,
+      "multi": 200,
+      "enterprise": 250
+    }
+  },
+  "cadence": {
+    "_about": "Monitoring frequency add-on. Monthly is the default.",
+    "monthly": 0,
+    "biweekly": 150,
+    "weekly": 400
+  },
+  "addons": {
+    "procurement": {
+      "label": "Procurement or legal review, vendor onboarding",
+      "amount": 500,
+      "force_tier": "enterprise"
+    },
+    "priority": {
+      "label": "Priority reporting and a named contact",
+      "amount": 300
+    }
+  }
+};
+  let M = JSON.parse(JSON.stringify(FILE));
+  const $ = id => document.getElementById(id); if (!$('pxAnnual')) return;
+  const fmt = n => '$' + Math.round(n).toLocaleString();
+  // mirror of pricing/calc.py: keep the two in step
+  function pickTier(entities, names, spy, addons) {
+    if (addons.includes('procurement') && M.addons.procurement.force_tier === 'enterprise') return 'enterprise';
+    for (const [k, tier] of Object.entries(M.tiers)) { const [lo, hi] = tier.entities; if (entities >= lo && entities <= hi) return k; }
+    return 'enterprise';
+  }
+  function quote(entities, names, spy, cadence, addons) {
+    entities = Math.max(1, entities | 0); names = Math.max(entities, names | 0); spy = Math.max(0, +spy || 0);
+    const key = pickTier(entities, names, spy, addons), t = M.tiers[key]; const lines = [['Base', t.base]];
+    const ee = Math.max(0, entities - t.entities[0]); if (ee && t.per_extra_entity) lines.push([ee + ' additional entit' + (ee === 1 ? 'y' : 'ies'), ee * t.per_extra_entity]);
+    const en = Math.max(0, names - t.included_names); if (en) lines.push([en + ' names beyond the ' + t.included_names + ' included', en * t.per_name]);
+    const band = M.volume.bands.find(b => spy <= b.upto);
+    if (!band) { const top = M.volume.bands[M.volume.bands.length - 1]; const extra = Math.ceil((spy - top.upto) / 1000); lines.push(['Volume, about ' + Math.round(spy) + ' shipments a year', top[key] + extra * M.volume.per_extra_1000[key]]); }
+    else if (band[key]) lines.push(['Volume, about ' + Math.round(spy) + ' shipments a year', band[key]]);
+    if (M.cadence[cadence]) lines.push([cadence[0].toUpperCase() + cadence.slice(1) + ' checks', M.cadence[cadence]]);
+    addons.forEach(a => { if (M.addons[a] && M.addons[a].amount) lines.push([M.addons[a].label, M.addons[a].amount]); });
+    const raw = lines.reduce((s, l) => s + l[1], 0); const r = M.rounding || 10; let annual = Math.round(raw / r) * r;
+    return { tier: key, label: t.label, annual, monthly: Math.ceil(annual * (M.monthly_multiplier || 1) / 12), typical: t.typical, lines };
+  }
+  function addons() { const a = []; if (!$('pxProc').classList.contains('off')) a.push('procurement'); if (!$('pxPrio').classList.contains('off')) a.push('priority'); return a; }
+  function compare() {
+    const a = quote(1, 60, 3000, 'monthly', []), b = quote(2, 6, 40, 'monthly', []);
+    $('pxCompare').innerHTML = '<div><span class="tag">' + a.label + '</span><b>' + fmt(a.annual) + '</b><span class="s">One entity, 60 names, 3,000 shipments a year</span></div><div class="vs">vs</div><div><span class="tag amber">' + b.label + '</span><b>' + fmt(b.annual) + '</b><span class="s">Two entities, 6 names, 40 shipments a year</span></div>';
+  }
+  function run() {
+    compare();
+    const q = quote(+$('pxEnt').value, +$('pxNames').value, +$('pxShip').value, $('pxCad').value, addons());
+    $('pxAnnual').textContent = fmt(q.annual) + ' per year'; $('pxMonthly').textContent = 'or ' + fmt(q.monthly) + ' per month';
+    $('pxTier').textContent = q.label; $('pxTier').className = 'tag ' + (q.tier === 'enterprise' ? 'coral' : q.tier === 'multi' ? 'amber' : ''); $('pxRange').textContent = 'typically ' + fmt(q.typical[0]) + ' to ' + fmt(q.typical[1]) + ', no cap';
+    $('pxLines').innerHTML = q.lines.map(l => '<tr><td>' + l[0] + '</td><td class="r"' + (l[1] < 0 ? ' style="color:var(--coral)"' : '') + '>' + (l[1] < 0 ? '-' : '') + fmt(Math.abs(l[1])) + '</td></tr>').join('') + '<tr><td><b>Annual quote</b></td><td class="r"><b>' + fmt(q.annual) + '</b></td></tr>';
+  }
+  function field(label, path, val) { return '<label class="field"><span>' + label + '</span><input type="number" data-path="' + path + '" value="' + val + '"></label>'; }
+  function strategy() {
+    let h = '';
+    for (const [k, t] of Object.entries(M.tiers)) { h += '<div class="px-tier"><b>' + t.label + '</b><span class="m2">entities ' + t.entities[0] + (t.entities[1] > 100 ? '+' : ' to ' + t.entities[1]) + '</span>' + field('Starting point (base)', 'tiers.' + k + '.base', t.base) + field('Typical low (reference only)', 'tiers.' + k + '.typical.0', t.typical[0]) + field('Typical high (reference only)', 'tiers.' + k + '.typical.1', t.typical[1]) + field('Names included', 'tiers.' + k + '.included_names', t.included_names) + field('Per extra name', 'tiers.' + k + '.per_name', t.per_name) + field('Per extra entity', 'tiers.' + k + '.per_extra_entity', t.per_extra_entity) + '</div>'; }
+    h += '<div class="px-tier"><b>Volume add-on</b><span class="m2">by shipments a year, per tier</span>' + M.volume.bands.map((b, i) => '<div class="px-band"><em>up to ' + b.upto.toLocaleString() + '</em>' + field('Std', 'volume.bands.' + i + '.standard', b.standard) + field('Multi', 'volume.bands.' + i + '.multi', b.multi) + field('Ent', 'volume.bands.' + i + '.enterprise', b.enterprise) + '</div>').join('') + '<div class="px-band"><em>per 1,000 beyond</em>' + field('Std', 'volume.per_extra_1000.standard', M.volume.per_extra_1000.standard) + field('Multi', 'volume.per_extra_1000.multi', M.volume.per_extra_1000.multi) + field('Ent', 'volume.per_extra_1000.enterprise', M.volume.per_extra_1000.enterprise) + '</div></div>';
+    h += '<div class="px-tier"><b>Cadence and add-ons</b><span class="m2">flat amounts</span>' + field('Every two weeks', 'cadence.biweekly', M.cadence.biweekly) + field('Weekly', 'cadence.weekly', M.cadence.weekly) + field('Procurement / legal', 'addons.procurement.amount', M.addons.procurement.amount) + field('Priority reporting', 'addons.priority.amount', M.addons.priority.amount) + field('Monthly billing multiplier', 'monthly_multiplier', M.monthly_multiplier) + field('Round to', 'rounding', M.rounding) + '</div>';
+    $('pxStrategy').innerHTML = h;
+    $('pxStrategy').querySelectorAll('input').forEach(i => i.addEventListener('input', () => { const p = i.dataset.path.split('.'); let o = M; while (p.length > 1) o = o[p.shift()]; o[p[0]] = +i.value; run(); }));
+  }
+  ['pxEnt', 'pxNames', 'pxShip', 'pxCad'].forEach(id => $(id).addEventListener('input', run));
+  ['pxProc', 'pxPrio'].forEach(id => $(id).addEventListener('click', () => setTimeout(run, 0)));
+  $('pxPresets').addEventListener('click', e => { const a = e.target.closest('[data-p]'); if (!a) return; e.preventDefault(); const [en, nm, sh, cad, ...ad] = a.dataset.p.split(','); $('pxEnt').value = en; $('pxNames').value = nm; $('pxShip').value = sh; $('pxCad').value = cad; $('pxProc').classList.toggle('off', !ad.includes('procurement')); $('pxPrio').classList.toggle('off', !ad.includes('priority')); run(); });
+  $('pxReset').addEventListener('click', e => { e.preventDefault(); M = JSON.parse(JSON.stringify(FILE)); strategy(); run(); });
+  $('pxCopy').addEventListener('click', e => { e.preventDefault(); const s = JSON.stringify(M, null, 2); (navigator.clipboard ? navigator.clipboard.writeText(s) : Promise.reject()).then(() => { e.target.textContent = 'Copied'; setTimeout(() => e.target.textContent = 'Copy model JSON', 1500); }).catch(() => prompt('Model JSON', s)); });
+  window.__pxQuote = quote; strategy(); run();
+})();
+</script>
+<script>(function(){ const d = document.getElementById('acctDrawer'); document.querySelectorAll('[data-open="acct"]').forEach(r => r.addEventListener('click', () => d.hidden = false)); d.querySelector('[data-close]').addEventListener('click', () => d.hidden = true); if (new URLSearchParams(location.search).has('account')) d.hidden = false; })();</script>
+</body></html>

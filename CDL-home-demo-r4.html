@@ -48,8 +48,8 @@ button, input { font: inherit; }
 /* motion */
 .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
 .reveal.in { opacity: 1; transform: none; }
-.js .rise > .w { display: inline-block; opacity: 0; filter: blur(6px); transform: translateY(.3em); transition: opacity .6s var(--ease), transform .6s var(--ease), filter .6s var(--ease); }
-.js .rise.in > .w { opacity: 1; filter: blur(0); transform: none; }
+.js .rise > .w { display: inline-block; opacity: 0; transform: translateY(.3em); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.js .rise.in > .w { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { *:not(.keep-motion) { animation-duration: .001ms !important; transition-duration: .001ms !important; } html { scroll-behavior: auto; } }
 
 /* pills */
@@ -71,7 +71,12 @@ button, input { font: inherit; }
 .topbar { position: sticky; top: 0; z-index: 50; background: rgba(244,244,242,.86); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
 .topbar.stuck { border-bottom-color: var(--line); }
 .nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 68px; gap: 16px; }
-.nav-logo { height: 24px; width: auto; display: block; }
+.nav-logo { height: 38px; width: auto; display: block; }
+/* the logo is a link home: a soft hover so it reads as clickable */
+.topbar a[aria-label="Customs Data Lock home"] { display: inline-flex; align-items: center; padding: 6px 10px; margin-left: -10px; border-radius: 12px; transition: background-color .2s var(--ease), transform .2s var(--ease); }
+.topbar a[aria-label="Customs Data Lock home"]:hover, .topbar a[aria-label="Customs Data Lock home"]:focus-visible { background: var(--card-2); transform: translateY(-1px); outline: none; }
+.topbar a[aria-label="Customs Data Lock home"]:active { transform: translateY(0); }
+.topbar.over a[aria-label="Customs Data Lock home"]:hover, .topbar.over a[aria-label="Customs Data Lock home"]:focus-visible { background: rgba(255,255,255,.14); }
 .nav-links { display: flex; gap: 2px; justify-content: center; }
 .nav-links a { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); color: var(--text); transition: background-color .15s ease; }
 .nav-links a:hover { background: var(--card-2); }
@@ -104,7 +109,7 @@ button, input { font: inherit; }
   .topbar.over.open .nav-dd-btn, .topbar.over.open .nav-dd-menu a { color: var(--white); }
 }
 .nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
-.nav-login { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); }
+.nav-login { white-space: nowrap; font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); }
 .nav-login:hover { background: var(--card-2); }
 .nav-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--white); color: var(--text); align-items: center; justify-content: center; cursor: pointer; }
 @media (max-width: 960px) {
@@ -113,7 +118,7 @@ button, input { font: inherit; }
   .nav-toggle { display: inline-flex; order: 3; }
   .nav-right { order: 2; }
   .nav-login { display: none; }
-  .nav-logo { height: 21px; }
+  .nav-logo { height: 32px; }
   .topbar.open .nav-links { display: flex; flex-direction: column; align-items: stretch; grid-column: 1 / -1; padding: 8px 0 12px; border-top: 1px solid var(--line); }
   .topbar.open .nav-links a { padding: 12px 8px; }
 }
@@ -416,16 +421,25 @@ main { position: relative; }
 @media (max-width: 960px) { .stories { grid-template-columns: 1fr; } }
 
 /* closing */
-.closing { padding: 110px 0 120px; text-align: center; }
-.closing h2 { font-size: 56px; line-height: 60px; letter-spacing: -0.04em; max-width: 760px; margin: 0 auto; }
-.closing p { color: var(--muted); font-size: 18px; line-height: 28px; max-width: 560px; margin: 18px auto 30px; }
+.closing { padding: 110px 0 120px; text-align: left; }
+.closing .arrive { display: grid; grid-template-columns: 520px minmax(0, 1fr); gap: 64px; align-items: center; }
+.quay-slot { height: 440px; }
+.closing h2 { font-size: 46px; line-height: 52px; letter-spacing: -0.035em; max-width: 760px; margin: 0; }
+.closing p { color: var(--muted); font-size: 18px; line-height: 28px; max-width: 560px; margin: 18px 0 30px; }
+.closing .check { max-width: 600px; margin: 0; }
+.sr { position: absolute; left: -9999px; }
+.spine .quay rect.deck { fill: var(--light-gray-blue); } .spine .quay rect.face { fill: var(--line); } .spine .quay rect.bollard { fill: var(--indigo); }
+.spine .quay text { font-family: var(--font-mono); font-size: 11px; letter-spacing: .18em; fill: var(--gray-blue); }
+.spine .mooring { fill: none; stroke: var(--coral); stroke-width: 2; stroke-linecap: round; opacity: 0; transition: opacity .5s var(--ease); }
+.spine .mooring.on { opacity: 1; }
+@media (max-width: 1180px) { .closing .arrive { grid-template-columns: 1fr; text-align: center; } .quay-slot { display: none; } .closing h2, .closing p { margin-left: auto; margin-right: auto; } .closing .check { margin: 0 auto; } }
 .closing .small { margin-top: 16px; font-size: 13.5px; color: var(--muted-2); }
 @media (max-width: 720px) { .closing h2 { font-size: 38px; line-height: 42px; } }
 
 /* footer */
 .foot { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; }
 .foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
-.foot .logo { height: 22px; width: auto; margin-bottom: 14px; }
+.foot .logo { height: 34px; width: auto; margin-bottom: 14px; }
 .foot p { color: var(--muted); max-width: 320px; line-height: 22px; }
 .foot h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
 .foot ul { list-style: none; }
@@ -467,6 +481,34 @@ img.skel-src.on { opacity: 1; }
 .ring.skel svg { opacity: 0; }
 @media (max-width: 720px) { .skel-wall .skel-col:nth-child(n+2) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .skel::after, .skel-lines i::after, .skel-num::after, .skel-globe::after { animation: none; } }
+
+/* ocean study: ?ocean=a|b|c|d (chart, swell, tides, shimmer). Tones of the ground only, no new colors. */
+html.ocean body { background: transparent; }
+html.ocean .routes { background: transparent; }
+.ocean-layer { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.ocean-page { position: absolute; left: 0; top: 0; width: 100%; will-change: transform; }
+.ocean-page svg { display: block; width: 100%; height: 100%; }
+/* a: nautical chart */
+.oc-a .grid line { stroke: var(--line); stroke-width: 1; opacity: .55; }
+.oc-a .contour { fill: none; stroke: var(--line); stroke-width: 1.2; opacity: .9; }
+.oc-a .contour.deep { stroke: var(--light-gray-blue); opacity: .28; }
+.oc-a .sound { font-family: var(--font-mono); font-size: 10px; fill: var(--light-gray-blue); opacity: .55; }
+/* b: swell lines */
+.oc-b .swell path { fill: none; stroke: var(--line); stroke-width: 1.3; }
+.oc-b .swell.far path { opacity: .55; }
+.oc-b .part { fill: url(#partGrad); }
+/* c: tidal bands */
+.oc-c .band-tint { fill: var(--card-2); opacity: .5; }
+.oc-c .band-ground { fill: var(--ground); }
+.oc-c .spray { fill: var(--white); stroke: var(--light-gray-blue); stroke-width: .8; }
+.oc-c .bow { fill: none; stroke: var(--white); stroke-width: 2.2; stroke-linecap: round; opacity: .9; }
+.oc-c .band-edge { fill: none; stroke: var(--line); stroke-width: 1; opacity: .8; }
+html.ocean-loud .oc-c .band-tint { opacity: 1; }
+html.ocean-loud .oc-c .band-edge { stroke: var(--light-gray-blue); stroke-width: 1.5; opacity: .9; }
+.oc-c .ripple { fill: none; stroke: var(--light-gray-blue); stroke-width: 1.2; }
+/* d: shimmer */
+.oc-d .glow { fill: url(#shimGrad); }
+.oc-d .fine path { fill: none; stroke: var(--line); stroke-width: 1; opacity: .4; }
 </style>
 <style>
 /* page skeleton: an outline of the page paints first, so the site is never blank while it loads; the real nav sits above it and stays usable */
@@ -505,7 +547,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 
 <header class="topbar" id="topbar">
   <div class="shell nav-in">
-    <a href="#" aria-label="Customs Data Lock home"><img class="nav-logo std" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"><img class="nav-logo rev" src="logo/cdl-logo-reversed.svg" alt="" aria-hidden="true"></a>
+    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo std" src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"><img class="nav-logo rev" src="logo/official/cdl-logo-light-for-dark-bg.png" alt="" aria-hidden="true"></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -524,7 +566,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <a href="CDL-pricing-demo-r4.html">Pricing</a>
     </nav>
     <div class="nav-right">
-      <a class="nav-login" href="#">Log in</a>
+      <a class="nav-login" href="CDL-login-demo-r4.html">Log in</a>
       <a class="pill pill-sm pill-coral" href="CDL-check-demo-r4.html">Free Exposure Check</a>
     </div>
   </div>
@@ -734,11 +776,18 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 
 <!-- 08 CLOSING -->
 <section class="closing" id="cta" data-chapter="6" data-chapter-label="Your move" data-frame="08-closing">
-  <div class="shell">
-    <h2 class="reveal">See what your competitors can see.</h2>
-    <p class="reveal">One business day, no obligation. Your quote comes back with the results.</p>
-    <a class="pill pill-lg pill-coral reveal" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a>
-      </div>
+  <div class="shell arrive">
+    <div class="quay-slot" id="quaySlot" aria-hidden="true"></div>
+    <div class="arrive-copy">
+      <h2 class="reveal">Your records made it here.<br>Your competitors did not.</h2>
+      <p class="reveal">One business day, no obligation. Your quote comes back with the results.</p>
+      <form class="check reveal" action="CDL-check-demo-r4.html" method="get" style="margin-left:0">
+        <label class="sr" for="company2">Your company's legal name</label>
+        <input id="company2" type="text" name="company" placeholder="Your company's legal name" autocomplete="organization">
+        <button class="pill pill-coral" type="submit">Run your Free Exposure Check</button>
+      </form>
+    </div>
+  </div>
 </section>
 
 </main>
@@ -747,7 +796,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   <div class="shell">
     <div class="foot-in">
       <div>
-        <img class="logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock">
+        <img class="logo" src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock">
         <p>Your shipment records stop appearing on public trade platforms.</p>
       </div>
       <div><h4>Product</h4><ul><li><a href="#how">How it works</a></li><li><a href="#check">Free Exposure Check</a></li><li><a href="CDL-pricing-demo-r4.html">Pricing</a></li></ul></div>
@@ -895,7 +944,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   })();
 
   // routes globe (globe.gl): transparent dotted globe, a few coral shipments into the U.S., slow sway centred on the U.S.
-  (function(){
+  (function(){ try {
     const el = document.getElementById('globe'); if (!el || typeof Globe === 'undefined') { const f = document.getElementById('globeFallback'); if (f) f.style.display = 'flex'; return; }
     const US = [
       { name: 'Los Angeles / Long Beach', lat: 33.74, lng: -118.25, side: 'sw', teu: 10816420, basis: 'loaded TEUs, 2023, both ports', src: 'BTS Port Performance 2026' },
@@ -977,6 +1026,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
     })(t0);
     addEventListener('resize', () => g.width(w()).height(h()));
     const pp = qs.get('port'); if (pp !== null) { mouse = { x: stage.clientWidth * .52, y: stage.clientHeight * .42 }; showPort(US[+pp]); }
+  } catch (e) { const f = document.getElementById('globeFallback'); if (f) f.style.display = 'flex'; if (window.__globeReveal) window.__globeReveal(); }
   })();
 
   // shipping line: an SVG route down the left margin with a stop per chapter; the coral marker rides it with scroll
@@ -984,7 +1034,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
     const svg = document.getElementById('spine'); if (!svg) return;
     const base = document.getElementById('spineBase'), prog = document.getElementById('spineProg'), wake = document.getElementById('spineWake'), nodesG = document.getElementById('spineNodes'), ship = document.getElementById('ship');
     const main = document.getElementById('main'); const NS = 'http://www.w3.org/2000/svg';
-    let stops = [], total = 0, shown = 0, target = 0;
+    let stops = [], total = 0, shown = 0, target = 0, quay = null, runStart = 0;
     function build() {
       const mr = main.getBoundingClientRect(); const W = main.clientWidth, H = main.scrollHeight; svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
       const x = Math.max(28, (W - 1360) / 2 + 6);
@@ -992,13 +1042,20 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       if (stops.length < 2) return;
       let d = `M ${stops[0].x},${stops[0].y - 30} L ${stops[0].x},${stops[0].y}`;
       for (let i = 1; i < stops.length; i++) { const a = stops[i - 1], b = stops[i]; const bend = 34 * (i % 2 ? 1 : -1); const my = (a.y + b.y) / 2; d += ` C ${a.x + bend},${a.y + (b.y - a.y) * .35} ${b.x + bend},${my + (b.y - a.y) * .15} ${b.x},${b.y}`; }
-      const last = stops[stops.length - 1]; d += ` L ${last.x},${last.y + 60}`;
-      base.setAttribute('d', d); prog.setAttribute('d', d); total = prog.getTotalLength(); prog.style.strokeDasharray = total; prog.style.strokeDashoffset = total;
+      const last = stops[stops.length - 1]; const slot = document.getElementById('quaySlot'); quay = null;
+      if (slot && slot.offsetParent) { const sr = slot.getBoundingClientRect(); const qx = sr.left - mr.left, qy = sr.top - mr.top + sr.height * .62, qw = sr.width; const cr = document.getElementById('cta').getBoundingClientRect(); quay = { x: qx, y: qy, w: qw, runY: qy - 40, runX0: qx + 90, runX1: qx + qw - 104, dockY: cr.top - mr.top + cr.height / 2 };
+        d += ` C ${last.x},${last.y + (quay.runY - last.y) * .55} ${quay.runX0 - 150},${quay.runY} ${quay.runX0},${quay.runY} L ${quay.runX1},${quay.runY}`; }
+      else d += ` L ${last.x},${last.y + 60}`;
+      base.setAttribute('d', d); prog.setAttribute('d', d); total = prog.getTotalLength(); runStart = quay ? lenAtRun() : total; if (quay) { quay.appY = quay.runY - 320; quay.appLen = lenAt(quay.appY); } prog.style.strokeDasharray = total; prog.style.strokeDashoffset = total;
       nodesG.innerHTML = ''; stops.forEach(s => { const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'node' + (s.hero ? ' hero' : '')); g.setAttribute('transform', `translate(${s.x},${s.y})`);
         g.innerHTML = `<circle class="dot" r="8"/><text x="30" y="-14">${s.label}</text>`; nodesG.appendChild(g); s.g = g; });
+      if (quay) { const q = document.createElementNS(NS, 'g'); q.setAttribute('class', 'quay'); q.innerHTML = `<rect class="deck" x="${quay.x + 40}" y="${quay.y}" width="${quay.w - 40}" height="14" rx="3"/><rect class="face" x="${quay.x + 40}" y="${quay.y + 14}" width="${quay.w - 40}" height="44" rx="2"/>` + [0.15, 0.5, 0.85].map(f => `<rect class="bollard" x="${quay.x + 40 + (quay.w - 40) * f - 4}" y="${quay.y - 9}" width="8" height="10" rx="2"/>`).join('') + `<text x="${quay.x + 40}" y="${quay.y + 88}">YOUR MOVE · BERTH 6</text>`; nodesG.insertBefore(q, nodesG.firstChild);
+        const m = document.createElementNS(NS, 'path'); m.setAttribute('class', 'mooring'); m.setAttribute('id', 'mooring'); m.setAttribute('d', `M ${quay.runX1 - 30},${quay.runY + 12} Q ${quay.runX1 - 10},${quay.y + 4} ${quay.x + 40 + (quay.w - 40) * .85},${quay.y - 4}`); nodesG.appendChild(m); }
       const port = document.createElementNS(NS, 'g'); port.setAttribute('class', 'port'); port.setAttribute('transform', `translate(${stops[0].x},${stops[0].y - 30})`); port.innerHTML = '<rect x="-26" y="-74" width="52" height="8" rx="2"/><rect x="-3" y="-66" width="6" height="26" rx="1"/>'; nodesG.appendChild(port);
       update(true);
     }
+    function lenAtRun() { // length where the route reaches the quay run (its y stops changing)
+      let lo = 0, hi = total; for (let i = 0; i < 30; i++) { const mid = (lo + hi) / 2; if (prog.getPointAtLength(mid).y < quay.runY - .5) lo = mid; else hi = mid; } return lo; }
     function lenAt(y) { // path length at a given page y (search along the path)
       let lo = 0, hi = total; for (let i = 0; i < 24; i++) { const mid = (lo + hi) / 2; if (prog.getPointAtLength(mid).y < y) lo = mid; else hi = mid; } return lo;
     }
@@ -1006,13 +1063,16 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       if (!total) return;
       const mr = main.getBoundingClientRect(); const focusY = -mr.top + innerHeight * .45; // where the reader is looking
       target = Math.max(0, Math.min(total, lenAt(focusY)));
+      // final approach: from 320px above the quay run, the rest of the route maps onto the scroll until the closing section is centred, so the ship is berthed by then
+      if (quay) { const dockFocus = quay.dockY - innerHeight * .05 - 6; const frac = (focusY - quay.appY) / Math.max(1, dockFocus - quay.appY); if (frac > 0) target = Math.max(target, quay.appLen + Math.min(1, frac) * (total - quay.appLen)); const maxScroll = document.documentElement.scrollHeight - innerHeight; if (scrollY >= maxScroll - 2) target = total; }
       if (isStatic) target = total * (qs.get('spine') ? +qs.get('spine') : .42);
       if (snap || reduce || isStatic) shown = target; else { const gap = target - shown; const step = Math.sign(gap) * Math.min(Math.abs(gap) * .06 + 1.2, 7); shown = Math.abs(gap) < 1.2 ? target : shown + step; }
       prog.style.strokeDashoffset = total - shown; ship.style.opacity = 1;
-      const pt = prog.getPointAtLength(shown), p2 = prog.getPointAtLength(Math.min(total, shown + 6)); const ang = Math.atan2(p2.y - pt.y, p2.x - pt.x) * 180 / Math.PI; const now = performance.now() / 1000; const bob = (reduce || isStatic) ? 0 : Math.sin(now * 1.6) * 2.2, sway = (reduce || isStatic) ? 0 : Math.sin(now * 1.1) * 1.4; ship.setAttribute('transform', `translate(${pt.x + sway},${pt.y}) rotate(${ang + bob})`); const moving = Math.abs(target - shown) > 1.5; ship.classList.toggle('moving', moving); wake.classList.toggle('on', moving);
+      const pt = prog.getPointAtLength(shown), p2 = prog.getPointAtLength(Math.min(total, shown + 6)); const ang = Math.atan2(p2.y - pt.y, p2.x - pt.x) * 180 / Math.PI; const now = performance.now() / 1000; const bob = (reduce || isStatic) ? 0 : Math.sin(now * 1.6) * 2.2, sway = (reduce || isStatic) ? 0 : Math.sin(now * 1.1) * 1.4; ship.setAttribute('transform', `translate(${pt.x + sway},${pt.y + (window.__heave || 0)}) rotate(${ang + bob + (window.__pitch || 0)})`); const moving = Math.abs(target - shown) > 1.5; ship.classList.toggle('moving', moving); wake.classList.toggle('on', moving);
       // wake: a short fading trail behind the ship along the route it just covered
       const wl = Math.min(shown, 90); wake.setAttribute('d', prog.getAttribute('d')); wake.style.strokeDasharray = `${wl} ${total}`; wake.style.strokeDashoffset = -(shown - wl);
       stops.forEach(s => { if (!s.g) return; s.g.classList.toggle('on', pt.y >= s.y - 2); s.g.classList.toggle('clear', Math.abs(pt.y - s.y) < 96); });
+      const moor = document.getElementById('mooring'); if (moor) moor.classList.toggle('on', total - shown < 3);
     }
     build(); new ResizeObserver(() => build()).observe(main); if (document.fonts && document.fonts.ready) document.fonts.ready.then(build); addEventListener('load', build);
     if (reduce || isStatic) { addEventListener('scroll', () => update(true), { passive: true }); update(true); }
@@ -1021,14 +1081,14 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 
   // skeletons: images, numbers and cards show their shape until the real thing is ready (?skeleton=1 freezes them for review)
   (function(){
-    const freeze = qs.has('skeleton');
+    const freeze = qs.has('skeleton') && qs.get('skeleton') !== 'off'; const off = qs.get('skeleton') === 'off';
     // skeletons only when something is slow: the outline drops the moment the page structure, fonts and hero image are in; a fast load never shows one
     const FAST = 400; let fast = false;
     const dom = new Promise(r => document.readyState !== 'loading' ? r() : addEventListener('DOMContentLoaded', r));
     const heroReady = dom.then(() => new Promise(r => { const im = document.querySelector('.bleed img, .band img, .hero img, .stakes-photo img'); if (!im || im.complete) r(); else { im.addEventListener('load', r); im.addEventListener('error', r); } }));
-    const gate = Promise.all([dom, heroReady, document.fonts ? document.fonts.ready : Promise.resolve()]).then(() => { fast = performance.now() < FAST; if (fast) document.documentElement.classList.add('skel-fast'); });
-    const ps = document.getElementById('pskel'); if (ps && !freeze) gate.then(() => { if (fast) return ps.remove(); ps.classList.add('off'); setTimeout(() => ps.remove(), 600); });
-    const reveal = (fn, el) => { if (freeze) return; gate.then(() => { if (fast) return fn(); let d = 0; try { const top = (el && el.getBoundingClientRect ? el.getBoundingClientRect().top : 0) + scrollY; d = 120 + Math.min(Math.max(top, 0), 3000) / 3000 * 300 + Math.random() * 80; } catch (e) {} setTimeout(fn, d); }); };
+    const gate = Promise.race([Promise.all([dom, heroReady, document.fonts ? document.fonts.ready : Promise.resolve()]), new Promise(r => setTimeout(r, 2500))]).then(() => { fast = performance.now() < FAST; if (fast) document.documentElement.classList.add('skel-fast'); });
+    const ps = document.getElementById('pskel'); if (ps && off) ps.remove(); else if (ps && !freeze) gate.then(() => { if (fast) return ps.remove(); ps.classList.add('off'); setTimeout(() => ps.remove(), 600); });
+    const reveal = (fn, el) => { if (freeze) return; if (off) return fn(); gate.then(() => { if (fast) return fn(); let d = 0; try { const top = (el && el.getBoundingClientRect ? el.getBoundingClientRect().top : 0) + scrollY; d = 120 + Math.min(Math.max(top, 0), 3000) / 3000 * 300 + Math.random() * 80; } catch (e) {} setTimeout(fn, d); }); };
     const skipImg = img => img.classList.contains('nav-logo') || img.classList.contains('logo') || img.closest('.pl') || (img.getBoundingClientRect().width && img.getBoundingClientRect().width < 60);
     const skelImage = img => {
       if (skipImg(img)) return; const par = img.parentElement; if (getComputedStyle(par).position === 'static') par.style.position = 'relative';
@@ -1109,6 +1169,92 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   })();
 
   document.getElementById('check').addEventListener('submit', e => { e.preventDefault(); const v = document.getElementById('company').value.trim(); location.href = 'CDL-check-demo-r4.html' + (v ? '?company=' + encodeURIComponent(v) : ''); });
+})();
+</script>
+
+<script>
+(function(){
+  const qs = new URLSearchParams(location.search); const mode = qs.get('ocean') || 'c'; if (mode === 'off' || !'abcd'.includes(mode)) return; // tidal bands are the default; ?ocean=off removes the sea, ?ocean=a|b|d shows the other studies
+  document.documentElement.classList.add('ocean');
+  const main = document.getElementById('main'); const NS = 'http://www.w3.org/2000/svg';
+  const layer = document.createElement('div'); layer.className = 'ocean-layer oc-' + mode; const page = document.createElement('div'); page.className = 'ocean-page'; layer.appendChild(page); document.body.appendChild(layer);
+  const svg = document.createElementNS(NS, 'svg'); page.appendChild(svg);
+  let W = 0, H = 0, top = 0, ready = false, lastW = innerWidth, lastH = 0; let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const chapters = () => [...main.querySelectorAll('[data-chapter]')].map(s => s.getBoundingClientRect().top + scrollY);
+  const loud = qs.has('loud'); if (loud) document.documentElement.classList.add('ocean-loud');
+  const sections = () => [...main.querySelectorAll(':scope > section')].filter(s => s.id !== 'hero').map(s => s.getBoundingClientRect().top + scrollY);
+  function blob(cx, cy, rx, ry, k) { // smooth closed contour
+    const n = 9; let d = ''; const pts = []; for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2; const r = 1 + (rnd() - .5) * k; pts.push([cx + Math.cos(a) * rx * r, cy + Math.sin(a) * ry * r]); }
+    for (let i = 0; i < n; i++) { const p0 = pts[(i - 1 + n) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n]; const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6], c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6]; d += (i ? '' : `M${p1[0]},${p1[1]}`) + ` C${c1[0]},${c1[1]} ${c2[0]},${c2[1]} ${p2[0]},${p2[1]}`; }
+    return d + 'Z';
+  }
+  function swellRow(y, amp, len, phase) { let d = `M-${len},${y}`; for (let x = -len; x < W + len * 2; x += len) d += ` C${x + len * .33},${y - amp} ${x + len * .66},${y + amp} ${x + len},${y}`; return d; }
+  function build() {
+    W = innerWidth; H = main.scrollHeight; top = main.getBoundingClientRect().top + scrollY; lastH = H; page.style.height = H + 'px'; svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.innerHTML = ''; seed = 7;
+    const heroEnd = (document.getElementById('routes').getBoundingClientRect().top + scrollY) - top;
+    if (mode === 'a') {
+      const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'grid'); let h = '';
+      for (let x = 0; x < W; x += 180) h += `<line x1="${x}" y1="${heroEnd}" x2="${x}" y2="${H}"/>`; for (let y = heroEnd; y < H; y += 180) h += `<line x1="0" y1="${y}" x2="${W}" y2="${y}"/>`; g.innerHTML = h; svg.appendChild(g);
+      let c = ''; for (let i = 0; i < 14; i++) { const cx = rnd() * W, cy = heroEnd + 200 + rnd() * (H - heroEnd - 400), rx = 220 + rnd() * 420, ry = 120 + rnd() * 260; for (let k = 0; k < 3; k++) { seed = 100 + i * 10 + k; const f = 1 + k * .28; c += `<path class="contour${k === 2 ? ' deep' : ''}" d="${blob(cx, cy, rx * f, ry * f, .18)}"/>`; } c += `<text class="sound" x="${cx + 8}" y="${cy + 4}">${(40 + (i * 37) % 120)}</text>`; }
+      const cg = document.createElementNS(NS, 'g'); cg.innerHTML = c; svg.appendChild(cg);
+    }
+    if (mode === 'b') {
+      svg.innerHTML = `<defs><radialGradient id="partGrad"><stop offset="0" stop-color="#F4F4F2"/><stop offset=".55" stop-color="#F4F4F2" stop-opacity=".95"/><stop offset="1" stop-color="#F4F4F2" stop-opacity="0"/></radialGradient></defs>`;
+      ['far', 'near'].forEach((cls, li) => { const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'swell ' + cls); let d = ''; seed = 40 + li; for (let y = heroEnd + 70 + li * 80; y < H; y += 150 + rnd() * 70) { const shift = rnd() * 400; d += `<g transform="translate(${-shift},0)"><path d="${swellRow(y, li ? 13 : 9, li ? 520 : 400, 0)}"/></g>`; } g.innerHTML = d; svg.appendChild(g); });
+      const part = document.createElementNS(NS, 'ellipse'); part.setAttribute('class', 'part'); part.setAttribute('rx', 150); part.setAttribute('ry', 70); svg.appendChild(part); svg.__part = part;
+    }
+    if (mode === 'c') {
+      const A = loud ? 26 : 10, L = loud ? 360 : 260; const edgesOut = []; let h = '';
+      // each wave line sits just above its stop marker and label (never through them); the first one also clears the platform strip
+      const nodeYs = [...document.querySelectorAll('#spineNodes .node')].map(n => +(/translate\([-\d.]+,([-\d.]+)\)/.exec(n.getAttribute('transform')) || [0, 0])[1]).filter(Boolean);
+      const strip = document.getElementById('pstrip'); const stripBottom = strip ? strip.getBoundingClientRect().bottom + scrollY - top + 28 : 0;
+      // content boxes: every wave line is centred in the empty gap between the last thing above it and the label below it, and its
+      // amplitude shrinks if that gap is tight, so the line never runs through words, photos, cards or the stop markers
+      const boxes = [...main.querySelectorAll('h1,h2,h3,p,img,.lv,.qcard,.story,.stakes-photo,.stat,.ring,form,ol,ul,.pstrip,#spineNodes .port rect')].map(el => { const r = el.getBoundingClientRect(); return r.height ? { y0: r.top + scrollY - top, y1: r.bottom + scrollY - top } : null; }).filter(Boolean);
+      const amps = [];
+      let ys = loud || nodeYs.length < 2 ? (loud ? sections() : chapters()).map(y => { amps.push(A); return y - top - 40; }) : nodeYs.map(ny => {
+        const labelTop = ny - 28; let prevBottom = Math.max(stripBottom, ...boxes.filter(b => b.y1 <= labelTop - 4 && b.y1 > labelTop - 420).map(b => b.y1));
+        const gap = labelTop - prevBottom; const amp = Math.max(4, Math.min(A, gap / 2 - 10)); amps.push(amp); return (prevBottom + labelTop) / 2; });
+      ys.push(H);
+      for (let i = 0; i < ys.length - 1; i++) { const y0 = ys[i], y1 = ys[i + 1]; const Ai = amps[i] || A; const edge = (y) => { let d = `M0,${y}`; for (let x = 0; x < W; x += L) d += ` C${x + L * .35},${y - Ai} ${x + L * .65},${y + Ai} ${x + L},${y}`; return d; };
+        h += `<path class="${i % 2 === 0 ? 'band-tint' : 'band-ground'}" d="${edge(y0)} L${W},${H} L0,${H} Z"/>`; edgesOut.push(y0); h += `<path class="band-edge" data-edge d="${edge(y0)}"/>`; }
+      let e = '';
+      const g = document.createElementNS(NS, 'g'); g.innerHTML = h + e; svg.appendChild(g); const rg = document.createElementNS(NS, 'g'); rg.setAttribute('class', 'ripples'); svg.appendChild(rg); svg.__rip = rg; svg.__edges = edgesOut; svg.__edgeFn = { A, L };
+    }
+    if (mode === 'd') {
+      svg.innerHTML = `<defs><radialGradient id="shimGrad"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".7"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient></defs>`;
+      let h = ''; for (let i = 0; i < 9; i++) { const cx = rnd() * W, cy = heroEnd + rnd() * (H - heroEnd); h += `<ellipse class="glow" cx="${cx}" cy="${cy}" rx="${380 + rnd() * 300}" ry="${200 + rnd() * 160}"><animate attributeName="cx" values="${cx};${cx + 120};${cx}" dur="${28 + rnd() * 20}s" repeatCount="indefinite"/></ellipse>`; }
+      let f = ''; for (let y = heroEnd + 30; y < H; y += 46) f += `<path d="${swellRow(y, 2.5, 140, 0)}"/>`;
+      const g = document.createElementNS(NS, 'g'); g.innerHTML = h + `<g class="fine">${f}</g>`; svg.appendChild(g);
+    }
+  }
+  const ship = document.getElementById('ship'); let lastRip = 0, crossing = false, crossT = -1e9;
+  function spray(x, y) { if (!svg.__rip) return; const g = document.createElementNS(NS, 'g'); let h = `<path class="bow" d="M${x - 26},${y + 10} q -10,-14 -4,-30"><animate attributeName="opacity" from=".9" to="0" dur=".8s" fill="freeze"/></path><path class="bow" d="M${x + 26},${y + 10} q 10,-14 4,-30"><animate attributeName="opacity" from=".9" to="0" dur=".8s" fill="freeze"/></path>`;
+    for (let i = 0; i < 9; i++) { const side = i % 2 ? 1 : -1, dx = side * (18 + Math.random() * 30), dy = -(22 + Math.random() * 40), r = 1.6 + Math.random() * 2.2, dur = .55 + Math.random() * .35;
+      h += `<circle class="spray" cx="${x + side * 14}" cy="${y + 4}" r="${r}"><animate attributeName="cx" from="${x + side * 14}" to="${x + side * 14 + dx}" dur="${dur}s" fill="freeze"/><animate attributeName="cy" values="${y + 4};${y + 4 + dy};${y + 4 + dy * .55}" keyTimes="0;.55;1" dur="${dur}s" fill="freeze"/><animate attributeName="opacity" values="1;1;0" keyTimes="0;.6;1" dur="${dur}s" fill="freeze"/></circle>`; }
+    g.innerHTML = h; svg.__rip.appendChild(g); setTimeout(() => g.remove(), 1200); }
+  function frame() {
+    const par = mode === 'a' ? .92 : mode === 'd' ? .85 : 1; page.style.transform = `translateY(${-(scrollY - top) * par}px)`;
+    if (ship && ship.getAttribute('transform')) { const m = /translate\(([-\d.]+),([-\d.]+)\)/.exec(ship.getAttribute('transform')); if (m) { const x = +m[1], y = +m[2];
+      if (mode === 'b' && svg.__part) { svg.__part.setAttribute('cx', x); svg.__part.setAttribute('cy', y); }
+      if (mode === 'c' && svg.__edges) { const now = performance.now(); const moving = ship.classList.contains('moving'); const nearY = svg.__edges.find(e => Math.abs(y - e) < 26);
+        if (nearY !== undefined && moving && !crossing) { crossing = true; crossT = now; spray(x, y); } if (nearY === undefined) crossing = false;
+        const t = (now - crossT) / 760; if (t < 1) { window.__heave = -6 * Math.sin(t * Math.PI); window.__pitch = -4 * Math.sin(t * Math.PI * 2); } else { window.__heave = 0; window.__pitch = 0; } }
+      if (mode === 'c' && svg.__rip && ship.classList.contains('moving') && performance.now() - lastRip > 520) { lastRip = performance.now(); const c = document.createElementNS(NS, 'circle'); c.setAttribute('class', 'ripple'); c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 14); c.innerHTML = `<animate attributeName="r" from="14" to="120" dur="2.4s" fill="freeze"/><animate attributeName="opacity" from=".7" to="0" dur="2.4s" fill="freeze"/>`; svg.__rip.appendChild(c); setTimeout(() => c.remove(), 2600); } } }
+    requestAnimationFrame(frame);
+  }
+  // the sea is drawn once the page has settled (fonts, hero image, window load), then fades in; before that the layer stays
+  // invisible so the bands never visibly shift while things are still arriving. Afterwards it only rebuilds on a settled change.
+  layer.style.opacity = '0'; layer.style.transition = 'opacity .6s var(--ease)';
+  let t = null; const settled = () => { build(); if (!ready) { ready = true; requestAnimationFrame(() => { layer.style.opacity = '1'; }); } };
+  const loaded = new Promise(r => document.readyState === 'complete' ? r() : addEventListener('load', r));
+  Promise.all([loaded, document.fonts ? document.fonts.ready : Promise.resolve()]).then(() => setTimeout(settled, 120));
+  if (qs.has('static')) settled();
+  new ResizeObserver(() => { if (!ready) return; const h = main.scrollHeight; if (innerWidth === lastW && Math.abs(h - lastH) < 3 && lastH) return; lastW = innerWidth; lastH = h; clearTimeout(t); t = setTimeout(build, 200); }).observe(main);
+  frame();
+  if (qs.has('static') && mode === 'c' && qs.has('splash')) { setTimeout(() => { const m = /translate\(([-\d.]+),([-\d.]+)\)/.exec(ship.getAttribute('transform')); if (!m) return; const x = +m[1], y = +m[2]; const g = document.createElementNS(NS, 'g');
+    let h = `<path class="bow" d="M${x - 26},${y + 10} q -10,-14 -4,-30" opacity=".7"/><path class="bow" d="M${x + 26},${y + 10} q 10,-14 4,-30" opacity=".7"/>`; for (let i = 0; i < 9; i++) { const side = i % 2 ? 1 : -1; h += `<circle class="spray" cx="${x + side * (22 + i * 3)}" cy="${y - 10 - (i % 4) * 9}" r="${1.6 + (i % 3)}" opacity="${1 - i * .07}"/>`; } g.innerHTML = h; svg.__rip.appendChild(g); }, 600); }
+  if (qs.has('static') && mode === 'c') { const x = 34, y = +qs.get('ry') || 0; if (y) [0, 1, 2].forEach(i => { const c = document.createElementNS(NS, 'circle'); c.setAttribute('class', 'ripple'); c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 30 + i * 36); c.setAttribute('opacity', .6 - i * .2); svg.__rip.appendChild(c); }); }
 })();
 </script>
 </body>

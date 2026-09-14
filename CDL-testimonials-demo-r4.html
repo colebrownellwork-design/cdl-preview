@@ -37,8 +37,8 @@ button, input { font: inherit; }
 @media (max-width: 720px) { .shell { padding: 0 16px; } }
 .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
 .reveal.in { opacity: 1; transform: none; }
-.js .rise > .w { display: inline-block; opacity: 0; filter: blur(6px); transform: translateY(.3em); transition: opacity .6s var(--ease), transform .6s var(--ease), filter .6s var(--ease); }
-.js .rise.in > .w { opacity: 1; filter: blur(0); transform: none; }
+.js .rise > .w { display: inline-block; opacity: 0; transform: translateY(.3em); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.js .rise.in > .w { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { *:not(.keep-motion) { animation-duration: .001ms !important; transition-duration: .001ms !important; } html { scroll-behavior: auto; } }
 
 .pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: var(--r-pill); font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid transparent; cursor: pointer; white-space: nowrap; transition: transform .08s ease, background-color .15s ease; }
@@ -53,7 +53,12 @@ button, input { font: inherit; }
 .topbar { position: sticky; top: 0; z-index: 50; background: rgba(244,244,242,.86); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
 .topbar.stuck { border-bottom-color: var(--line); }
 .nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 68px; gap: 16px; }
-.nav-logo { height: 24px; width: auto; display: block; }
+.nav-logo { height: 38px; width: auto; display: block; }
+/* the logo is a link home: a soft hover so it reads as clickable */
+.topbar a[aria-label="Customs Data Lock home"] { display: inline-flex; align-items: center; padding: 6px 10px; margin-left: -10px; border-radius: 12px; transition: background-color .2s var(--ease), transform .2s var(--ease); }
+.topbar a[aria-label="Customs Data Lock home"]:hover, .topbar a[aria-label="Customs Data Lock home"]:focus-visible { background: var(--card-2); transform: translateY(-1px); outline: none; }
+.topbar a[aria-label="Customs Data Lock home"]:active { transform: translateY(0); }
+.topbar.over a[aria-label="Customs Data Lock home"]:hover, .topbar.over a[aria-label="Customs Data Lock home"]:focus-visible { background: rgba(255,255,255,.14); }
 .nav-links { display: flex; gap: 2px; justify-content: center; }
 .nav-links a { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); color: var(--text); transition: background-color .15s ease; }
 .nav-links a:hover, .nav-links a[aria-current="page"] { background: var(--card-2); }
@@ -86,11 +91,11 @@ button, input { font: inherit; }
   .topbar.over.open .nav-dd-btn, .topbar.over.open .nav-dd-menu a { color: var(--white); }
 }
 .nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
-.nav-login { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); } .nav-login:hover { background: var(--card-2); }
+.nav-login { white-space: nowrap; font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); } .nav-login:hover { background: var(--card-2); }
 .nav-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--white); color: var(--text); align-items: center; justify-content: center; cursor: pointer; }
 @media (max-width: 960px) {
   .nav-in { grid-template-columns: auto 1fr auto; height: auto; padding: 10px 0; gap: 10px; }
-  .nav-links { display: none; order: 4; } .nav-toggle { display: inline-flex; order: 3; } .nav-right { order: 2; } .nav-login { display: none; } .nav-logo { height: 21px; }
+  .nav-links { display: none; order: 4; } .nav-toggle { display: inline-flex; order: 3; } .nav-right { order: 2; } .nav-login { display: none; } .nav-logo { height: 32px; }
   .topbar.open .nav-links { display: flex; flex-direction: column; align-items: stretch; grid-column: 1 / -1; padding: 8px 0 12px; border-top: 1px solid var(--line); }
   .topbar.open .nav-links a { padding: 12px 8px; }
 }
@@ -102,7 +107,7 @@ button, input { font: inherit; }
 
 .foot { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; }
 .foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
-.foot .logo { height: 22px; width: auto; margin-bottom: 14px; }
+.foot .logo { height: 34px; width: auto; margin-bottom: 14px; }
 .foot p { color: var(--muted); max-width: 320px; line-height: 22px; }
 .foot h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
 .foot ul { list-style: none; } .foot li { margin-bottom: 8px; }
@@ -127,11 +132,15 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 .col.c2 { display: none; } .col.c3 { display: none; }
 @media (min-width: 720px) { .col.c2 { display: block; } }
 @media (min-width: 1080px) { .col.c3 { display: block; } }
-.t { background: var(--white); border: 1px solid var(--line); border-radius: 24px; padding: 30px 30px 26px; box-shadow: var(--shadow-card); }
+.t { position: relative; background: var(--white); border: 1px solid var(--line); border-top: 4px solid var(--c, var(--indigo)); border-radius: 24px; padding: 34px 30px 22px; box-shadow: var(--shadow-card); transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+.t:hover { transform: translateY(-3px); box-shadow: var(--shadow-float); }
+.t .qm { position: absolute; left: 24px; top: 6px; font-size: 72px; line-height: 1; font-weight: 700; color: var(--c, var(--coral)); opacity: .18; letter-spacing: -0.04em; pointer-events: none; }
 .t blockquote { font-size: 17px; line-height: 27px; color: var(--text); letter-spacing: -0.01em; }
-.t figcaption { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
-.t .av { width: 36px; height: 36px; border-radius: 50%; background: var(--card-2); color: var(--text); display: inline-flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 600; letter-spacing: .02em; flex: none; }
-.t cite { font-style: normal; font-weight: 500; font-size: 15px; line-height: 20px; display: block; letter-spacing: -0.01em; }
+.t figcaption { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
+.t .av { width: 42px; height: 42px; border-radius: 50%; background: color-mix(in srgb, var(--c, var(--indigo)) 12%, #fff); color: var(--c, var(--indigo)); display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; letter-spacing: .02em; flex: none; box-shadow: 0 0 0 3px #fff, 0 0 0 5.5px var(--c, var(--indigo)); margin: 4px 6px 4px 4px; }
+.t .vf { display: flex; align-items: center; gap: 8px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted-2); } .t .vf img { width: 14px; height: 14px; opacity: .8; } .t .vf span { display: inline; font-size: 12px; line-height: 16px; }
+.t cite { font-style: normal; font-weight: 600; font-size: 15px; line-height: 20px; display: block; letter-spacing: -0.01em; }
+.t figcaption > div > span { color: var(--c, var(--muted)); font-weight: 500; }
 .t span { display: block; font-size: 13.5px; line-height: 19px; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .wall { height: auto; -webkit-mask-image: none; mask-image: none; } .col { overflow: visible; } .col .track > .dup { display: none; } }
 
@@ -210,7 +219,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar" id="topbar">
   <div class="shell nav-in">
-    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"></a>
+    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo" src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -229,7 +238,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <a href="CDL-pricing-demo-r4.html">Pricing</a>
     </nav>
     <div class="nav-right">
-      <a class="nav-login" href="#">Log in</a>
+      <a class="nav-login" href="CDL-login-demo-r4.html">Log in</a>
       <a class="pill pill-sm pill-coral" href="CDL-check-demo-r4.html">Free Exposure Check</a>
     </div>
   </div>
@@ -279,7 +288,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 <footer class="foot" id="footer" data-frame="04-footer">
   <div class="shell">
     <div class="foot-in">
-      <div><img class="logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"><p>Your shipment records stop appearing on public trade platforms.</p></div>
+      <div><img class="logo" src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"><p>Your shipment records stop appearing on public trade platforms.</p></div>
       <div><h4>Product</h4><ul><li><a href="CDL-home-demo-r4.html#how">How it works</a></li><li><a href="CDL-check-demo-r4.html">Free Exposure Check</a></li><li><a href="CDL-pricing-demo-r4.html">Pricing</a></li></ul></div>
       <div><h4>Resources</h4><ul><li><a href="CDL-testimonials-demo-r4.html">Stories</a></li><li><a href="CDL-blog-demo-r4.html">Blog</a></li><li><a href="CDL-faq-demo-r4.html">FAQ</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="CDL-data-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
@@ -305,14 +314,14 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
   // skeletons: images, numbers and cards show their shape until the real thing is ready (?skeleton=1 freezes them for review)
   (function(){
-    const freeze = qs.has('skeleton');
+    const freeze = qs.has('skeleton') && qs.get('skeleton') !== 'off'; const off = qs.get('skeleton') === 'off';
     // skeletons only when something is slow: the outline drops the moment the page structure, fonts and hero image are in; a fast load never shows one
     const FAST = 400; let fast = false;
     const dom = new Promise(r => document.readyState !== 'loading' ? r() : addEventListener('DOMContentLoaded', r));
     const heroReady = dom.then(() => new Promise(r => { const im = document.querySelector('.bleed img, .band img, .hero img, .stakes-photo img'); if (!im || im.complete) r(); else { im.addEventListener('load', r); im.addEventListener('error', r); } }));
-    const gate = Promise.all([dom, heroReady, document.fonts ? document.fonts.ready : Promise.resolve()]).then(() => { fast = performance.now() < FAST; if (fast) document.documentElement.classList.add('skel-fast'); });
-    const ps = document.getElementById('pskel'); if (ps && !freeze) gate.then(() => { if (fast) return ps.remove(); ps.classList.add('off'); setTimeout(() => ps.remove(), 600); });
-    const reveal = (fn, el) => { if (freeze) return; gate.then(() => { if (fast) return fn(); let d = 0; try { const top = (el && el.getBoundingClientRect ? el.getBoundingClientRect().top : 0) + scrollY; d = 120 + Math.min(Math.max(top, 0), 3000) / 3000 * 300 + Math.random() * 80; } catch (e) {} setTimeout(fn, d); }); };
+    const gate = Promise.race([Promise.all([dom, heroReady, document.fonts ? document.fonts.ready : Promise.resolve()]), new Promise(r => setTimeout(r, 2500))]).then(() => { fast = performance.now() < FAST; if (fast) document.documentElement.classList.add('skel-fast'); });
+    const ps = document.getElementById('pskel'); if (ps && off) ps.remove(); else if (ps && !freeze) gate.then(() => { if (fast) return ps.remove(); ps.classList.add('off'); setTimeout(() => ps.remove(), 600); });
+    const reveal = (fn, el) => { if (freeze) return; if (off) return fn(); gate.then(() => { if (fast) return fn(); let d = 0; try { const top = (el && el.getBoundingClientRect ? el.getBoundingClientRect().top : 0) + scrollY; d = 120 + Math.min(Math.max(top, 0), 3000) / 3000 * 300 + Math.random() * 80; } catch (e) {} setTimeout(fn, d); }); };
     const skipImg = img => img.classList.contains('nav-logo') || img.classList.contains('logo') || img.closest('.pl') || (img.getBoundingClientRect().width && img.getBoundingClientRect().width < 60);
     const skelImage = img => {
       if (skipImg(img)) return; const par = img.parentElement; if (getComputedStyle(par).position === 'static') par.style.position = 'relative';
@@ -366,17 +375,17 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   document.addEventListener('click', e => { if (bar.classList.contains('open') && !bar.contains(e.target)) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
   // data: anonymized. Initials are the role, never a person.
   const T = [
-    { q: 'We searched our own name and found our whole factory list. Ninety days later there was nothing new to find. That silence is worth every penny.', i: 'VP', r: 'VP of Operations', c: 'Consumer electronics importer' },
-    { q: 'Our biggest competitor stopped showing up at our suppliers. That is not a coincidence.', i: 'FD', r: 'Founder', c: 'Home goods brand' },
-    { q: 'Setup took one email. We never touched our broker and never changed a single process.', i: 'LM', r: 'Logistics Manager', c: 'Beverage company' },
-    { q: 'I used to dread launch season because the records leaked our timing. Last drop, nobody saw it coming.', i: 'CE', r: 'CEO', c: 'Apparel brand' },
-    { q: 'Three entities, one renewal, zero thinking about it. Exactly what we wanted.', i: 'CF', r: 'CFO', c: 'Auto parts distributor' },
-    { q: 'The quote came back the next morning. One number, and no surprises since.', i: 'OW', r: 'Owner', c: 'Specialty foods importer' },
-    { q: 'They told us up front what they could not do. That honesty is why we signed.', i: 'CO', r: 'COO', c: 'Electronics accessories brand' },
-    { q: 'We found our shipment history on a public site the same week a competitor emailed our supplier. Never again.', i: 'SC', r: 'Supply Chain Manager', c: 'Outdoor equipment brand' },
-    { q: 'Renewal is automatic and the reports give me something to show the board. Quiet, and provable.', i: 'LM', r: 'Logistics Manager', c: 'Consumer goods importer' },
+    { q: 'We searched our own name and found our whole factory list. Ninety days later there was nothing new to find. That silence is worth every penny.', i: 'VP', r: 'VP of Operations', c: 'Consumer electronics importer', k: '#4878A0', s: '2024' },
+    { q: 'Our biggest competitor stopped showing up at our suppliers. That is not a coincidence.', i: 'FD', r: 'Founder', c: 'Home goods brand', k: '#F04D4D', s: '2025' },
+    { q: 'Setup took one email. We never touched our broker and never changed a single process.', i: 'LM', r: 'Logistics Manager', c: 'Beverage company', k: '#1D395B', s: '2025' },
+    { q: 'I used to dread launch season because the records leaked our timing. Last drop, nobody saw it coming.', i: 'CE', r: 'CEO', c: 'Apparel brand', k: '#F04D4D', s: '2024' },
+    { q: 'Three entities, one renewal, zero thinking about it. Exactly what we wanted.', i: 'CF', r: 'CFO', c: 'Auto parts distributor', k: '#4878A0', s: '2023' },
+    { q: 'The quote came back the next morning. One number, and no surprises since.', i: 'OW', r: 'Owner', c: 'Specialty foods importer', k: '#2F855A', s: '2025' },
+    { q: 'They told us up front what they could not do. That honesty is why we signed.', i: 'CO', r: 'COO', c: 'Electronics accessories brand', k: '#1D395B', s: '2024' },
+    { q: 'We found our shipment history on a public site the same week a competitor emailed our supplier. Never again.', i: 'SC', r: 'Supply Chain Manager', c: 'Outdoor equipment brand', k: '#2E5A87', s: '2025' },
+    { q: 'Renewal is automatic and the reports give me something to show the board. Quiet, and provable.', i: 'LM', r: 'Logistics Manager', c: 'Consumer goods importer', k: '#8B5E34', s: '2023' },
   ];
-  const card = t => `<figure class="t"><blockquote>“${t.q}”</blockquote><figcaption><span class="av" aria-hidden="true">${t.i}</span><div><cite>${t.r}</cite><span>${t.c}</span></div></figcaption></figure>`;
+  const card = t => `<figure class="t" style="--c:${t.k}"><span class="qm" aria-hidden="true">“</span><blockquote>${t.q}</blockquote><figcaption><span class="av" aria-hidden="true">${t.i}</span><div><cite>${t.r}</cite><span>${t.c}</span></div></figcaption><div class="vf"><img src="logo/official/cdl-lock-icon.png" alt=""><span>Verified customer · protected since ${t.s}</span></div></figure>`;
   const cols = [T.slice(0, 3), T.slice(3, 6), T.slice(6, 9)];
   cols.forEach((list, i) => { const el = document.getElementById('col' + (i + 1)); const html = list.map(card).join(''); el.innerHTML = html + list.map(card).join('').replace(/<figure class="t"/g, '<figure class="t dup" aria-hidden="true"'); });
 

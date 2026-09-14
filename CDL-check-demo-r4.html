@@ -37,8 +37,8 @@ button, input, textarea, select { font: inherit; }
 @media (max-width: 720px) { .shell { padding: 0 16px; } }
 .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
 .reveal.in { opacity: 1; transform: none; }
-.js .rise > .w { display: inline-block; opacity: 0; filter: blur(6px); transform: translateY(.3em); transition: opacity .6s var(--ease), transform .6s var(--ease), filter .6s var(--ease); }
-.js .rise.in > .w { opacity: 1; filter: blur(0); transform: none; }
+.js .rise > .w { display: inline-block; opacity: 0; transform: translateY(.3em); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.js .rise.in > .w { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { *:not(.keep-motion) { animation-duration: .001ms !important; transition-duration: .001ms !important; } html { scroll-behavior: auto; } }
 
 .pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: var(--r-pill); font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid transparent; cursor: pointer; white-space: nowrap; transition: transform .08s ease, background-color .15s ease; }
@@ -53,7 +53,12 @@ button, input, textarea, select { font: inherit; }
 .topbar { position: sticky; top: 0; z-index: 50; background: rgba(244,244,242,.86); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
 .topbar.stuck { border-bottom-color: var(--line); }
 .nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 68px; gap: 16px; }
-.nav-logo { height: 24px; width: auto; display: block; }
+.nav-logo { height: 38px; width: auto; display: block; }
+/* the logo is a link home: a soft hover so it reads as clickable */
+.topbar a[aria-label="Customs Data Lock home"] { display: inline-flex; align-items: center; padding: 6px 10px; margin-left: -10px; border-radius: 12px; transition: background-color .2s var(--ease), transform .2s var(--ease); }
+.topbar a[aria-label="Customs Data Lock home"]:hover, .topbar a[aria-label="Customs Data Lock home"]:focus-visible { background: var(--card-2); transform: translateY(-1px); outline: none; }
+.topbar a[aria-label="Customs Data Lock home"]:active { transform: translateY(0); }
+.topbar.over a[aria-label="Customs Data Lock home"]:hover, .topbar.over a[aria-label="Customs Data Lock home"]:focus-visible { background: rgba(255,255,255,.14); }
 .nav-links { display: flex; gap: 2px; justify-content: center; }
 .nav-links a { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); color: var(--text); transition: background-color .15s ease; }
 .nav-links a:hover, .nav-links a[aria-current="page"] { background: var(--card-2); }
@@ -86,11 +91,11 @@ button, input, textarea, select { font: inherit; }
   .topbar.over.open .nav-dd-btn, .topbar.over.open .nav-dd-menu a { color: var(--white); }
 }
 .nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
-.nav-login { font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); } .nav-login:hover { background: var(--card-2); }
+.nav-login { white-space: nowrap; font-size: 14.5px; font-weight: 500; text-decoration: none; padding: 8px 12px; border-radius: var(--r-pill); } .nav-login:hover { background: var(--card-2); }
 .nav-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--white); color: var(--text); align-items: center; justify-content: center; cursor: pointer; }
 @media (max-width: 960px) {
   .nav-in { grid-template-columns: auto 1fr auto; height: auto; padding: 10px 0; gap: 10px; }
-  .nav-links { display: none; order: 4; } .nav-toggle { display: inline-flex; order: 3; } .nav-right { order: 2; } .nav-login { display: none; } .nav-logo { height: 21px; }
+  .nav-links { display: none; order: 4; } .nav-toggle { display: inline-flex; order: 3; } .nav-right { order: 2; } .nav-login { display: none; } .nav-logo { height: 32px; }
   .topbar.open .nav-links { display: flex; flex-direction: column; align-items: stretch; grid-column: 1 / -1; padding: 8px 0 12px; border-top: 1px solid var(--line); }
   .topbar.open .nav-links a { padding: 12px 8px; }
 }
@@ -102,7 +107,7 @@ button, input, textarea, select { font: inherit; }
 
 .foot { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; }
 .foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
-.foot .logo { height: 22px; width: auto; margin-bottom: 14px; }
+.foot .logo { height: 34px; width: auto; margin-bottom: 14px; }
 .foot p { color: var(--muted); max-width: 320px; line-height: 22px; }
 .foot h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
 .foot ul { list-style: none; } .foot li { margin-bottom: 8px; }
@@ -220,6 +225,26 @@ img.skel-src.on { opacity: 1; }
 .ring.skel svg { opacity: 0; }
 @media (max-width: 720px) { .skel-wall .skel-col:nth-child(n+2) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .skel::after, .skel-lines i::after, .skel-num::after, .skel-globe::after { animation: none; } }
+
+/* what the check covers: four cards, each with a small real artifact instead of a number */
+.cov-cards { gap: 18px; }
+.cv { background: var(--white); border: 1px solid var(--line); border-top: 4px solid var(--c, var(--indigo)); border-radius: 20px; padding: 18px 20px 22px; box-shadow: var(--shadow-card); transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+.cv:hover { transform: translateY(-3px); box-shadow: var(--shadow-float); }
+.cv h3 { margin-top: 16px; } .cv p { margin-top: 6px; }
+.cv-art { height: 154px; border-radius: 12px; background: var(--ground); padding: 10px 12px; overflow: hidden; position: relative; }
+.names-mini { list-style: none; } .names-mini li { position: relative; font-size: 12.5px; line-height: 17px; padding: 4px 0 4px 20px; border-bottom: 1px solid var(--line); color: var(--text); font-weight: 500; }
+.names-mini li::before { content: ""; position: absolute; left: 0; top: 8px; width: 11px; height: 11px; border-radius: 50%; background: var(--indigo); } .names-mini li::after { content: ""; position: absolute; left: 3.5px; top: 10px; width: 3px; height: 5px; border: solid #fff; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
+.names-mini li.more { color: var(--muted-2); font-weight: 400; border-bottom: 0; } .names-mini li.more::before { background: var(--light-gray-blue); } .names-mini li.more::after { display: none; }
+.plat-mini { display: flex; flex-wrap: wrap; gap: 8px; } .plg { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 10px; border-radius: 8px; background: var(--white); border: 1px solid var(--line); color: var(--c); font-weight: 600; font-size: 12px; white-space: nowrap; }
+.plg img { height: 16px; width: auto; } .plg img.wide { height: 13px; } .plg.more { color: var(--muted-2); font-weight: 500; }
+.rec-mini { font-size: 10.5px; white-space: nowrap; } .rec-mini .rh, .rec-mini .rr { display: grid; grid-template-columns: 1.25fr .55fr .8fr .85fr; gap: 6px; padding: 5px 0; border-bottom: 1px solid var(--line); align-items: center; } .rec-mini .rr > * { overflow: hidden; text-overflow: ellipsis; }
+.rec-mini .rh span { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-2); } .rec-mini .rr b { font-weight: 600; } .rec-mini .rr span { color: var(--muted); } .rec-mini .rr .mono { font-family: var(--font-mono); font-size: 10.5px; color: var(--gray-blue); } .rec-mini .rr.dim { opacity: .55; border-bottom: 0; }
+.doc-mini { background: var(--white); border: 1px solid var(--line); border-top: 3px solid var(--indigo); border-radius: 5px; padding: 6px 9px 7px; height: 100%; box-shadow: 0 8px 20px -14px rgba(20,30,50,.5); }
+.doc-mini .dh { display: flex; justify-content: space-between; align-items: center; padding-bottom: 4px; border-bottom: 1px solid var(--indigo); } .doc-mini .dh img { height: 13px; } .doc-mini .dh span { font-family: var(--font-mono); font-size: 7.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--indigo); }
+.doc-mini .dk { font-family: var(--font-mono); font-size: 6.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--coral); text-align: center; margin-top: 5px; } .doc-mini .dt { font-size: 11px; line-height: 14px; font-weight: 600; text-align: center; color: var(--indigo); margin-top: 1px; }
+.doc-mini i { display: block; height: 3px; border-radius: 2px; background: var(--card-2); margin-top: 5px; } .doc-mini i.w70 { width: 70%; } .doc-mini i.w50 { width: 50%; }
+.doc-mini .dq { margin-top: 6px; padding-top: 4px; border-top: 1px solid var(--line); font-size: 8.5px; color: var(--indigo); font-weight: 600; }
+@media (max-width: 960px) { .cov-cards { grid-template-columns: 1fr 1fr; } }
 </style>
 <style>
 /* page skeleton: an outline of the page paints first, so the site is never blank while it loads; the real nav sits above it and stays usable */
@@ -257,7 +282,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar" id="topbar">
   <div class="shell nav-in">
-    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"></a>
+    <a href="CDL-home-demo-r4.html" aria-label="Customs Data Lock home"><img class="nav-logo" src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -276,7 +301,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <a href="CDL-pricing-demo-r4.html">Pricing</a>
     </nav>
     <div class="nav-right">
-      <a class="nav-login" href="#">Log in</a>
+      <a class="nav-login" href="CDL-login-demo-r4.html">Log in</a>
       <a class="pill pill-sm pill-coral" href="CDL-check-demo-r4.html">Free Exposure Check</a>
     </div>
   </div>
@@ -342,11 +367,11 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 <section class="covers" id="covers" data-frame="02-covers">
   <div class="shell">
     <h2 class="reveal">What the check covers.</h2>
-    <div class="row4">
-      <div class="reveal"><div class="num">01</div><h3>Every name</h3><p>Your legal entities, brands, DBAs, and the misspellings a forwarder might use.</p></div>
-      <div class="reveal"><div class="num">02</div><h3>18+ platforms</h3><p>ImportYeti, Panjiva, Import Genius, ImportKey, Trademo and the rest.</p></div>
-      <div class="reveal"><div class="num">03</div><h3>What they show</h3><p>Suppliers, volumes, product codes, ports and arrival dates, as a competitor sees them.</p></div>
-      <div class="reveal"><div class="num">04</div><h3>Your plan</h3><p>Scoped to the entities we found, quoted the same day.</p></div>
+    <div class="row4 cov-cards">
+      <div class="reveal cv" style="--c:#1D395B"><div class="cv-art"><ul class="names-mini"><li>Your Company LLC</li><li>YOUR COMPANY</li><li>Your Co. LLC</li><li class="more">+ 7 more spellings</li></ul></div><h3>Every name</h3><p>Your legal entities, brands, DBAs, and the misspellings a forwarder might use.</p></div>
+      <div class="reveal cv" style="--c:#4878A0"><div class="cv-art"><div class="plat-mini"><span class="plg" style="--c:#004E66"><img src="platform-logos/importyeti-mark.png" alt=""><b>ImportYeti</b></span><span class="plg" style="--c:#D6002A"><b>Panjiva</b></span><span class="plg" style="--c:#0A7EF1"><img class="wide" src="platform-logos/importgenius.svg" alt="Import Genius"></span><span class="plg" style="--c:#414FF6"><b>ImportKey</b></span><span class="plg" style="--c:#5A1CE2"><img src="platform-logos/trademo-mark.svg" alt=""><b>Trademo</b></span><span class="plg more"><b>+ 13 more</b></span></div></div><h3>18+ platforms</h3><p>ImportYeti, Panjiva, Import Genius, ImportKey, Trademo and the rest.</p></div>
+      <div class="reveal cv" style="--c:#F04D4D"><div class="cv-art"><div class="rec-mini"><div class="rh"><span>Supplier</span><span>Records</span><span>Code</span><span>Latest</span></div><div class="rr"><b>Yori Printing</b><span>212</span><span class="mono">9504.90</span><span>Aug 2026</span></div><div class="rr"><b>Whatz Games</b><span>88</span><span class="mono">9504.90</span><span>Jul 2026</span></div><div class="rr dim"><b>Longshore</b><span>41</span><span class="mono">9504.90</span><span>Jun 2026</span></div></div></div><h3>What they show</h3><p>Suppliers, volumes, product codes, ports and arrival dates, as a competitor sees them.</p></div>
+      <div class="reveal cv" style="--c:#1D395B"><div class="cv-art"><div class="doc-mini"><div class="dh"><img src="logo/official/cdl-logo-dark-for-light-bg.png" alt=""><span>Exposure report</span></div><div class="dk">Prepared for</div><div class="dt">Your company</div><i></i><i class="w70"></i><div class="dq">Quote enclosed · same day</div></div></div><h3>Your plan</h3><p>Scoped to the entities we found, quoted the same day.</p></div>
     </div>
     <p class="privacy reveal">Privacy is the product. We never sell, share or keep your information beyond the check.</p>
   </div>
@@ -356,7 +381,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 <footer class="foot" id="footer" data-frame="04-footer">
   <div class="shell">
     <div class="foot-in">
-      <div><img class="logo" src="logo/cdl-logo-primary.svg" alt="Customs Data Lock"><p>Your shipment records stop appearing on public trade platforms.</p></div>
+      <div><img class="logo" src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"><p>Your shipment records stop appearing on public trade platforms.</p></div>
       <div><h4>Product</h4><ul><li><a href="CDL-home-demo-r4.html#how">How it works</a></li><li><a href="CDL-check-demo-r4.html">Free Exposure Check</a></li><li><a href="CDL-pricing-demo-r4.html">Pricing</a></li></ul></div>
       <div><h4>Resources</h4><ul><li><a href="CDL-testimonials-demo-r4.html">Stories</a></li><li><a href="CDL-blog-demo-r4.html">Blog</a></li><li><a href="CDL-faq-demo-r4.html">FAQ</a></li></ul></div>
       <div><h4>Company</h4><ul><li><a href="CDL-data-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
@@ -382,14 +407,14 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
   // skeletons: images, numbers and cards show their shape until the real thing is ready (?skeleton=1 freezes them for review)
   (function(){
-    const freeze = qs.has('skeleton');
+    const freeze = qs.has('skeleton') && qs.get('skeleton') !== 'off'; const off = qs.get('skeleton') === 'off';
     // skeletons only when something is slow: the outline drops the moment the page structure, fonts and hero image are in; a fast load never shows one
     const FAST = 400; let fast = false;
     const dom = new Promise(r => document.readyState !== 'loading' ? r() : addEventListener('DOMContentLoaded', r));
     const heroReady = dom.then(() => new Promise(r => { const im = document.querySelector('.bleed img, .band img, .hero img, .stakes-photo img'); if (!im || im.complete) r(); else { im.addEventListener('load', r); im.addEventListener('error', r); } }));
-    const gate = Promise.all([dom, heroReady, document.fonts ? document.fonts.ready : Promise.resolve()]).then(() => { fast = performance.now() < FAST; if (fast) document.documentElement.classList.add('skel-fast'); });
-    const ps = document.getElementById('pskel'); if (ps && !freeze) gate.then(() => { if (fast) return ps.remove(); ps.classList.add('off'); setTimeout(() => ps.remove(), 600); });
-    const reveal = (fn, el) => { if (freeze) return; gate.then(() => { if (fast) return fn(); let d = 0; try { const top = (el && el.getBoundingClientRect ? el.getBoundingClientRect().top : 0) + scrollY; d = 120 + Math.min(Math.max(top, 0), 3000) / 3000 * 300 + Math.random() * 80; } catch (e) {} setTimeout(fn, d); }); };
+    const gate = Promise.race([Promise.all([dom, heroReady, document.fonts ? document.fonts.ready : Promise.resolve()]), new Promise(r => setTimeout(r, 2500))]).then(() => { fast = performance.now() < FAST; if (fast) document.documentElement.classList.add('skel-fast'); });
+    const ps = document.getElementById('pskel'); if (ps && off) ps.remove(); else if (ps && !freeze) gate.then(() => { if (fast) return ps.remove(); ps.classList.add('off'); setTimeout(() => ps.remove(), 600); });
+    const reveal = (fn, el) => { if (freeze) return; if (off) return fn(); gate.then(() => { if (fast) return fn(); let d = 0; try { const top = (el && el.getBoundingClientRect ? el.getBoundingClientRect().top : 0) + scrollY; d = 120 + Math.min(Math.max(top, 0), 3000) / 3000 * 300 + Math.random() * 80; } catch (e) {} setTimeout(fn, d); }); };
     const skipImg = img => img.classList.contains('nav-logo') || img.classList.contains('logo') || img.closest('.pl') || (img.getBoundingClientRect().width && img.getBoundingClientRect().width < 60);
     const skelImage = img => {
       if (skipImg(img)) return; const par = img.parentElement; if (getComputedStyle(par).position === 'static') par.style.position = 'relative';
@@ -444,13 +469,13 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   const params = new URLSearchParams(location.search);
   const company = params.get('company'); if (company) document.getElementById('company').value = company;
   const plan = params.get('plan');
-  const plans = { standard: ['Standard', 'Your quote comes back with the report, usually the same day.'], multi: ['Multi-Entity', 'Your proposal follows within two business days of the report.'], enterprise: ['Enterprise', 'We will suggest a time for a scope call along with the report.'] };
+  const plans = { standard: ['One entity.', 'Your quote comes back with the report, usually the same day.'], multi: ['Several entities, covered as one.', 'Your proposal follows within two business days of the report.'], enterprise: ['A scope built around your group.', 'We will reach out to set up a short scope call after the report.'] };
   if (plan && plans[plan]) { document.getElementById('planName').textContent = plans[plan][0] + '.'; document.getElementById('planLine').textContent = plans[plan][1]; document.getElementById('planNote').hidden = false; document.getElementById('planField').value = plan; }
   // the lookup: types the company, checks 18 platforms one by one, slides the report in and attaches the quote; loops while in view
   (function(){
     const box = document.getElementById('lookup'); if (!box) return;
     const typed = document.getElementById('lkTyped'), tiles = [...document.querySelectorAll('#lkGrid .pt')], count = document.getElementById('lkCount'), steps = [...document.querySelectorAll('#lkSteps li')];
-    const name = (params.get('company') || '').trim() || 'Northwind Imports LLC';
+    const name = (params.get('company') || '').trim() || 'Your Company LLC';
     const setStep = s => { steps.forEach((li, i) => li.classList.toggle('on', i === Math.min(s, steps.length - 1))); };
     let timer = null, running = false;
     function run() {
@@ -474,7 +499,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   form.addEventListener('submit', e => { e.preventDefault(); if (form.website.value) return; const fs = fields(); const ok = fs.map(valid).every(Boolean); if (!ok) { document.getElementById(fs.find(id => !valid(id))).focus(); return; }
     document.getElementById('doneName').textContent = document.getElementById('name').value.trim(); document.getElementById('doneCompany').textContent = document.getElementById('company').value.trim(); card.classList.add('sent'); card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
   if (params.get('reason')) { reason.value = params.get('reason'); reason.dispatchEvent(new Event('change')); }
-  if (params.get('state') === 'sent') { document.getElementById('name').value = 'Dana'; document.getElementById('company').value = company || 'Northwind Imports LLC'; document.getElementById('doneName').textContent = 'Dana'; document.getElementById('doneCompany').textContent = company || 'Northwind Imports LLC'; card.classList.add('sent'); }
+  if (params.get('state') === 'sent') { document.getElementById('name').value = 'Dana'; document.getElementById('company').value = company || 'Your Company LLC'; document.getElementById('doneName').textContent = 'Dana'; document.getElementById('doneCompany').textContent = company || 'Your Company LLC'; card.classList.add('sent'); }
 })();
 </script>
 </body>

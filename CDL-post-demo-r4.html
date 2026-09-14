@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Customs Data Lock · The Importer Exposure Report 2026</title>
-<meta name="description" content="Which public platforms republish U.S. import records, what a single company page reveals, and who reads it. A free report for importers, plus a direct line to a person at Customs Data Lock.">
+<title>Customs Data Lock · The 30-Second Lookup</title>
+<meta name="description" content="What anyone can learn about an importer from public shipping records, who uses it, and how protection quietly lapses. Notes from Customs Data Lock.">
 <script>document.documentElement.className += ' js';</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
-/* Shared r4 system (Sana baseline). Source: CDL-home-demo-r4.html */
+/* CDL FAQ, round 4 (Sana baseline), 2026-09-09. Same system as CDL-home-demo-r4.html. */
 :root {
   --indigo: #1D395B; --gray-blue: #4878A0; --coral: #F04D4D; --light-gray-blue: #AEBBD0; --white: #fff;
   --ground: #F4F4F2; --card: #FFFFFF; --card-2: #ECECE9; --deep: #152C49;
@@ -29,7 +29,7 @@ body { font-family: var(--font-sans); color: var(--text); background: var(--grou
 h1, h2, h3 { color: var(--text); font-weight: 600; letter-spacing: -0.03em; }
 a { color: inherit; }
 img { max-width: 100%; display: block; }
-button, input, textarea, select { font: inherit; }
+button, input { font: inherit; }
 :focus-visible { outline: 2px solid var(--gray-blue); outline-offset: 3px; border-radius: 6px; }
 .skip { position: absolute; left: -9999px; top: 0; z-index: 100; background: var(--indigo); color: #fff; padding: 10px 16px; border-radius: 6px; }
 .skip:focus { left: 16px; top: 16px; }
@@ -100,23 +100,6 @@ button, input, textarea, select { font: inherit; }
   .topbar.open .nav-links a { padding: 12px 8px; }
 }
 
-.closing { padding: 100px 0 110px; text-align: center; }
-.closing h2 { font-size: 56px; line-height: 60px; letter-spacing: -0.04em; max-width: 760px; margin: 0 auto; }
-.closing p { color: var(--muted); font-size: 18px; line-height: 28px; max-width: 520px; margin: 18px auto 30px; }
-@media (max-width: 720px) { .closing h2 { font-size: 38px; line-height: 42px; } }
-
-.foot { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; }
-.foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
-.foot .logo { height: 34px; width: auto; margin-bottom: 14px; }
-.foot p { color: var(--muted); max-width: 320px; line-height: 22px; }
-.foot h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
-.foot ul { list-style: none; } .foot li { margin-bottom: 8px; }
-.foot li a { text-decoration: none; color: var(--muted); } .foot li a:hover { color: var(--text); }
-.foot .legal { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 12.5px; color: var(--muted-2); }
-@media (max-width: 860px) { .foot-in { grid-template-columns: 1fr 1fr; } }
-body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { display: none !important; }
-
-
 
 /* transparent nav over a photo band until scroll */
 .topbar { transition: background-color .35s var(--ease), border-color .35s var(--ease); }
@@ -142,115 +125,64 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 .band .bin { position: relative; z-index: 2; }
 @media (max-width: 960px) { .band { margin-top: -64px; } }
 
-/* report gate */
-.hero { padding: 64px 0 40px; }
-.split { display: grid; grid-template-columns: minmax(0, 1fr) 520px; gap: 64px; align-items: start; }
-.eyebrow { font-size: 13px; color: var(--coral); font-weight: 500; margin-bottom: 14px; }
-.hero h1 { font-size: 64px; line-height: 68px; letter-spacing: -0.045em; font-weight: 600; max-width: 640px; }
-.hero .sub { font-size: 19px; line-height: 29px; color: var(--muted); max-width: 540px; margin-top: 18px; }
-.meta { display: flex; gap: 40px; margin-top: 0; padding-top: 0; max-width: 540px; }
-.meta b { display: block; font-size: 22px; letter-spacing: -0.03em; font-weight: 600; }
-.meta span { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; }
-.inside { list-style: none; margin-top: 30px; max-width: 540px; }
-.inside li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 16px; line-height: 24px; }
-.inside li::before { content: "✓"; color: var(--confirmed); font-weight: 600; }
-.inside li:last-child { border-bottom: 1px solid var(--line); }
-.inside b { font-weight: 600; }
 
-.fcard { background: var(--white); border-radius: var(--r-card); box-shadow: var(--shadow-card); padding: 36px 36px 30px; position: sticky; top: 92px; }
-.fcard h2 { font-size: 24px; line-height: 30px; letter-spacing: -0.03em; }
-.fcard .lede { color: var(--muted); font-size: 15px; margin-top: 6px; }
-.field { margin-top: 18px; }
-.field label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 7px; }
-.field label small { color: var(--muted-2); font-weight: 400; }
-.field input, .field textarea, .field select { width: 100%; height: 48px; padding: 0 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--ground); font-size: 16px; color: var(--text); transition: border-color .15s ease, box-shadow .15s ease; appearance: none; }
-.field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
-.field textarea { height: auto; min-height: 120px; padding: 12px 16px; resize: vertical; }
-.field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--gray-blue); background-color: var(--white); box-shadow: 0 0 0 4px rgba(72,120,160,.15); }
-.field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: var(--coral); }
-.err { display: none; color: var(--coral); font-size: 13.5px; margin-top: 6px; }
-.field.bad .err { display: block; }
-.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.hp { position: absolute; left: -9999px; }
-.fcard .pill { margin-top: 24px; width: 100%; }
-.fine { margin-top: 14px; font-size: 13px; line-height: 19px; color: var(--muted-2); text-align: center; }
-.done { display: none; text-align: center; padding: 20px 0 10px; }
-.fcard.sent form { display: none; } .fcard.sent .done { display: block; }
-.done .tick { width: 56px; height: 56px; border-radius: 50%; background: rgba(47,133,90,.12); color: var(--confirmed); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; }
-.done h2 { font-size: 26px; }
-.done p { color: var(--muted); margin-top: 8px; font-size: 16px; }
-.done .pill { width: auto; margin-top: 22px; }
-@media (max-width: 960px) { .split { grid-template-columns: 1fr; gap: 36px; } .hero h1 { font-size: 42px; line-height: 46px; } .fcard { position: static; padding: 24px 20px; } .row2 { grid-template-columns: 1fr; } .meta { gap: 24px; } }
+.closing { padding: 100px 0 110px; text-align: center; }
+.closing h2 { font-size: 56px; line-height: 60px; letter-spacing: -0.04em; max-width: 760px; margin: 0 auto; }
+.closing p { color: var(--muted); font-size: 18px; line-height: 28px; max-width: 520px; margin: 18px auto 30px; }
+@media (max-width: 720px) { .closing h2 { font-size: 38px; line-height: 42px; } }
+
+.foot { border-top: 1px solid var(--line); padding: 48px 0 32px; font-size: 14px; }
+.foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
+.foot .logo { height: 34px; width: auto; margin-bottom: 14px; }
+.foot p { color: var(--muted); max-width: 320px; line-height: 22px; }
+.foot h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.foot ul { list-style: none; } .foot li { margin-bottom: 8px; }
+.foot li a { text-decoration: none; color: var(--muted); } .foot li a:hover { color: var(--text); }
+.foot .legal { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 12.5px; color: var(--muted-2); }
+@media (max-width: 860px) { .foot-in { grid-template-columns: 1fr 1fr; } }
+body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { display: none !important; }
 
 
-.rhero { padding: 0; }
-.rhero .band { overflow: visible; }
-.rhero .band .bin { padding: 150px 32px 120px; }
-.rhero .band .split { align-items: end; }
-.rhero .eyebrow { color: var(--coral); }
-.rhero h1 { color: var(--white); }
-.rhero .sub { color: rgba(255,255,255,.82); }
-.rhero .live-line { margin-top: 22px; font-size: 14px; color: rgba(255,255,255,.75); display: inline-flex; align-items: center; gap: 8px; }
-.rhero .live-line i { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 4px rgba(240,77,77,.2); }
-.rhero .live-line b { color: var(--white); font-variant-numeric: tabular-nums; }
-.rhero .fcard { position: relative; z-index: 3; margin-bottom: -180px; }
-.rhero .below { padding: 200px 0 40px; }
-.below .split { align-items: start; }
-/* the report as an object: a real cover, a real spread */
-.book { position: relative; width: 340px; height: 450px; margin: 10px 0 56px 12px; perspective: 1600px; }
-.book .pg { position: absolute; inset: 0; border-radius: 4px; background: var(--white); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(20,30,50,.06), 0 24px 48px -22px rgba(20,30,50,.45); transform-origin: left center; transition: transform .8s cubic-bezier(.22,1,.36,1); overflow: hidden; }
-.book .pg.p3 { transform: translateX(10px) translateY(6px); background: var(--card-2); }
-.book .pg.p2 { transform: translateX(5px) translateY(3px); padding: 26px 24px; }
-.book .pg.cover { transform: none; display: flex; flex-direction: column; }
-.book:hover .pg.cover, .book:focus-within .pg.cover { transform: rotateY(-34deg) translateX(-4px); box-shadow: 0 2px 4px rgba(20,30,50,.06), 0 40px 70px -24px rgba(20,30,50,.55); }
-.cv-photo { height: 150px; background: var(--indigo); position: relative; }
-.cv-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
-.cv-body { padding: 18px 22px 20px; display: flex; flex-direction: column; flex: 1; }
-.cv-logo { height: 16px; width: auto; align-self: flex-start; }
-.cv-kick { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--coral); font-family: var(--font-mono); margin-top: 16px; }
-.book .cover h3 { font-size: 24px; line-height: 27px; letter-spacing: -0.03em; margin-top: 6px; }
-.book .cover p { font-size: 12px; line-height: 17px; color: var(--muted); margin-top: 8px; }
-.cv-toc { list-style: none; margin-top: auto; border-top: 1px solid var(--line); padding-top: 10px; display: grid; gap: 5px; }
-.cv-toc li { display: flex; gap: 10px; font-size: 12px; color: var(--text); }
-.cv-toc li span { color: var(--muted-2); font-family: var(--font-mono); font-size: 11px; width: 12px; }
-.p2-head { display: flex; justify-content: space-between; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; font-family: var(--font-mono); color: var(--muted-2); }
-.book .p2 h4 { font-size: 16px; line-height: 21px; margin: 10px 0 12px; letter-spacing: -0.02em; }
-.book .p2 table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.book .p2 td { padding: 6px 0; border-top: 1px solid var(--line); color: var(--muted); }
-.book .p2 td:first-child { color: var(--text); font-weight: 500; }
-.book .p2 td:last-child { text-align: right; }
-.p2-foot { position: absolute; bottom: 14px; right: 24px; font-size: 10.5px; color: var(--muted-2); font-family: var(--font-mono); }
-.book .hint { position: absolute; left: 0; bottom: -44px; font-size: 13.5px; font-weight: 600; color: var(--coral); display: inline-flex; align-items: center; gap: 6px; z-index: 2; }
-.book .hint::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--coral); box-shadow: 0 0 0 4px rgba(240,77,77,.18); }
-.inside-wrap { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 48px; align-items: start; }
-@media (max-width: 960px) { .rhero .band .bin { padding: 110px 16px 60px; } .rhero .fcard { margin-bottom: 0; } .rhero .below { padding: 48px 0 20px; } .inside-wrap { grid-template-columns: 1fr; } .book { margin: 0 auto 40px; width: 280px; height: 370px; } }
+/* blog */
+.bhero { padding: 0; }
+.bhero .band .bin { padding: 150px 32px 90px; }
+.bhero .eyebrow { font-size: 13px; color: var(--coral); font-weight: 500; margin-bottom: 14px; }
+.bhero h1 { color: var(--white); font-size: 64px; line-height: 68px; letter-spacing: -0.045em; font-weight: 600; max-width: 760px; }
+.bhero .sub { color: rgba(255,255,255,.82); font-size: 19px; line-height: 29px; max-width: 560px; margin-top: 18px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 36px 0 8px; }
+.filters button { appearance: none; border: 1px solid var(--line); background: var(--white); color: var(--text); font: inherit; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: var(--r-pill); cursor: pointer; transition: background-color .15s ease, border-color .15s ease, color .15s ease; }
+.filters button:hover { border-color: var(--light-gray-blue); }
+.filters button[aria-pressed="true"] { background: var(--indigo); border-color: var(--indigo); color: var(--white); }
+.featured { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 0; margin-top: 28px; background: var(--white); border-radius: var(--r-card); overflow: hidden; box-shadow: var(--shadow-card); }
+.featured .ph { position: relative; min-height: 380px; background: var(--indigo); }
+.featured .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); opacity: .92; }
+.featured .body { padding: 40px 44px; display: flex; flex-direction: column; justify-content: center; }
+.kind { font-size: 12.5px; font-weight: 600; color: var(--coral); }
+.featured h2 { font-size: 32px; line-height: 38px; letter-spacing: -0.03em; margin-top: 10px; }
+.featured p { color: var(--muted); font-size: 16.5px; line-height: 26px; margin-top: 12px; }
+.meta { display: flex; gap: 14px; font-size: 13px; color: var(--muted-2); margin-top: 18px; }
+.featured .pill { align-self: flex-start; margin-top: 24px; }
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; }
+.post { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-card); display: flex; flex-direction: column; text-decoration: none; color: var(--text); transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+.post:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(20,30,50,.05), 0 22px 44px -18px rgba(20,30,50,.3); }
+.post.hide { display: none; }
+.post .ph { aspect-ratio: 16 / 9; background: var(--card-2); position: relative; overflow: hidden; }
+.post .ph img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.75); opacity: .9; }
+.post .ph .tone { position: absolute; inset: 0; }
+.post .body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+.post h3 { font-size: 19px; line-height: 25px; letter-spacing: -0.02em; margin-top: 8px; }
+.post p { color: var(--muted); font-size: 14.5px; line-height: 22px; margin-top: 8px; flex: 1; }
+.post .meta { margin-top: 14px; }
+@media (max-width: 960px) { .featured { grid-template-columns: 1fr; } .featured .ph { min-height: 240px; } .featured .body { padding: 26px 22px; } .posts { grid-template-columns: 1fr; } .bhero h1 { font-size: 42px; line-height: 46px; } .bhero .band .bin { padding: 110px 16px 60px; } }
 
-/* the two doors: report or check */
-.two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
-.pick { display: grid; grid-template-columns: 200px 1fr; background: var(--white); border-radius: var(--r-card); overflow: hidden; box-shadow: var(--shadow-card); text-decoration: none; color: var(--text); transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
-.pick:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(20,30,50,.05), 0 22px 44px -18px rgba(20,30,50,.3); }
-.pick-ph { position: relative; background: var(--indigo); min-height: 100%; }
-.pick-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
-.pick-body { padding: 26px 28px; }
-.pick .kind { font-size: 12.5px; font-weight: 600; color: var(--coral); }
-.pick h3 { font-size: 22px; line-height: 28px; letter-spacing: -0.025em; margin-top: 6px; }
-.pick p { color: var(--muted); font-size: 14.5px; line-height: 22px; margin-top: 8px; }
-.pick-cta { display: inline-block; margin-top: 16px; font-size: 14px; font-weight: 600; border-bottom: 1.5px solid var(--light-gray-blue); padding-bottom: 2px; }
-.pick:hover .pick-cta { border-color: var(--coral); }
-@media (max-width: 960px) { .two { grid-template-columns: 1fr; } .pick { grid-template-columns: 1fr; } .pick-ph { height: 160px; } }
-
-/* contact */
-.contact { padding: 110px 0 100px; scroll-margin-top: 80px; }
-.contact .split { grid-template-columns: minmax(0, 1fr) 520px; }
-.contact h2 { font-size: 48px; line-height: 54px; letter-spacing: -0.04em; max-width: 520px; }
-.contact .sub { font-size: 18px; line-height: 28px; color: var(--muted); max-width: 480px; margin-top: 16px; }
-.ways { list-style: none; margin-top: 30px; max-width: 480px; border-top: 1px solid var(--line); }
-.ways li { display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15.5px; }
-.ways li span { color: var(--muted); }
-.ways li a { text-decoration: none; font-weight: 500; }
-.ways li a:hover { text-decoration: underline; text-underline-offset: 4px; }
-.contact .fcard { position: static; }
-.contact .fcard h2 { font-size: 24px; line-height: 30px; }
+/* gate strip */
+.gate { margin-top: 56px; background: var(--indigo); color: var(--white); border-radius: var(--r-card); padding: 40px 44px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: center; }
+.gate h2 { color: var(--white); font-size: 28px; line-height: 34px; letter-spacing: -0.03em; }
+.gate p { color: var(--text-data); font-size: 15.5px; line-height: 24px; margin-top: 8px; max-width: 560px; }
+.gate .pill-light { border-color: transparent; }
+@media (max-width: 860px) { .gate { grid-template-columns: 1fr; padding: 28px 22px; } }
+.empty { text-align: center; color: var(--muted); padding: 40px 0; display: none; }
+.empty.on { display: block; }
 
 /* skeletons: every async piece shows the shape of what is coming, then fades to the real thing */
 .skel { position: relative; overflow: hidden; background: var(--card-2); border-radius: inherit; }
@@ -281,6 +213,86 @@ img.skel-src.on { opacity: 1; }
 .ring.skel svg { opacity: 0; }
 @media (max-width: 720px) { .skel-wall .skel-col:nth-child(n+2) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .skel::after, .skel-lines i::after, .skel-num::after, .skel-globe::after { animation: none; } }
+
+/* blog tiles: flat colored illustration tiles mark blog posts; photos mark case studies */
+.post .ph svg.tile, .featured .ph svg.tile { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.post:hover .ph svg.tile { transform: scale(1.03); transition: transform .5s var(--ease); }
+
+/* ---- article pages (blog post + case study) ---- */
+.band.article { min-height: 520px; display: flex; align-items: flex-end; }
+.band.article .bin { padding: 140px 0 56px; }
+.kicker { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--coral); font-weight: 600; }
+.band.article h1 { color: var(--white); font-size: 54px; line-height: 60px; letter-spacing: -0.035em; max-width: 880px; margin-top: 14px; }
+.band.article .dek { color: rgba(255,255,255,.82); font-size: 19px; line-height: 29px; max-width: 700px; margin-top: 16px; }
+.band.article .meta { color: rgba(255,255,255,.7); font-size: 13.5px; margin-top: 22px; display: flex; gap: 18px; }
+.art-wrap { display: grid; grid-template-columns: 280px minmax(0, 720px); gap: 72px; justify-content: center; padding: 64px 32px 24px; }
+.rail { position: sticky; top: 96px; align-self: start; font-size: 17px; }
+.rail h5 { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 14px; }
+.rail a { display: flex; align-items: center; gap: 12px; color: var(--muted); padding: 10px 0 10px 16px; border-left: 3px solid var(--line); text-decoration: none; font-weight: 500; line-height: 24px; transition: color .2s var(--ease), border-color .2s var(--ease); }
+.rail a::before { content: counter(rail) ""; counter-increment: rail; font-family: var(--font-mono); font-size: 12px; color: var(--muted-2); width: 18px; }
+.rail nav { counter-reset: rail; }
+.rail a.on, .rail a:hover { color: var(--text); border-left-color: var(--coral); } .rail a.on { font-weight: 600; } .rail a.on::before { color: var(--coral); }
+.rail .by { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 14px; line-height: 20px; }
+.rail .by img { width: 30px; height: 30px; object-fit: contain; }
+.art { font-size: 18px; line-height: 30px; color: var(--text); }
+.art > p { margin-top: 22px; } .art > p.lead { font-size: 22px; line-height: 34px; color: var(--text); margin-top: 0; }
+.art h2 { font-size: 30px; line-height: 36px; letter-spacing: -0.03em; margin-top: 54px; scroll-margin-top: 90px; }
+.art h3 { font-size: 20px; line-height: 28px; margin-top: 34px; }
+.art ul, .art ol { margin: 18px 0 0 22px; } .art li { margin-top: 8px; }
+.art a { color: var(--gray-blue); }
+/* two tiers: highlighted = dark blue bold; extremely important = coral */
+.hl { font-style: normal; color: var(--indigo); font-weight: 700; }
+.hl.key, .band.article h1 .hl, .glance b .hl { color: var(--coral); font-weight: 600; }
+.art .quote { margin: 40px 0; padding: 0 0 0 26px; border-left: 3px solid var(--coral); font-size: 26px; line-height: 36px; letter-spacing: -0.02em; font-weight: 500; color: var(--indigo); }
+.art .quote small { display: block; font-size: 14px; line-height: 20px; letter-spacing: 0; font-weight: 400; color: var(--muted); margin-top: 12px; }
+.art .aside { margin: 36px 0; background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 22px 26px; font-size: 16px; line-height: 25px; }
+.art .aside b { display: block; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); font-family: var(--font-mono); margin-bottom: 8px; }
+.art figure { margin: 40px 0; } .art figcaption { font-size: 13.5px; line-height: 20px; color: var(--muted); margin-top: 12px; }
+.art .photo { border-radius: 20px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--indigo); } .art .photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
+/* CDL document artifact */
+.paper { background: var(--white); border: 1px solid var(--line); border-top: 5px solid var(--indigo); border-radius: 6px; padding: 24px 30px 20px; box-shadow: 0 1px 2px rgba(20,30,50,.06), 0 28px 56px -28px rgba(20,30,50,.4); font-size: 14px; line-height: 21px; }
+.ph-head { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 12px; border-bottom: 2px solid var(--indigo); } .ph-head img { height: 28px; }
+.ph-meta { text-align: right; } .ph-meta b { display: block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); } .ph-meta span { display: block; font-size: 11px; color: var(--muted); }
+.ph-block { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--line); } .ph-kicker { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--coral); font-weight: 600; }
+.ph-title { font-size: 22px; line-height: 28px; color: var(--indigo); margin-top: 6px; font-weight: 600; letter-spacing: -0.02em; } .ph-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.ph-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 6px 13px; border-radius: 999px; background: var(--indigo); color: #fff; font-size: 12px; font-weight: 600; } .ph-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+.ps { margin-top: 18px; } .ps h4 { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); font-weight: 700; font-family: var(--font-mono); } .ps h4::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.ps h4 em { font-style: normal; font-family: var(--font-sans); font-size: 10.5px; letter-spacing: 0; text-transform: none; font-weight: 600; color: var(--indigo); background: rgba(29,57,91,.08); padding: 2px 8px; border-radius: 999px; }
+.ps table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 13px; } .ps th { text-align: left; font-weight: 500; color: var(--muted-2); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; padding: 4px 0; border-bottom: 1px solid var(--line); }
+.ps td { padding: 7px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; } .ps td.r, .ps th.r { text-align: right; } .ps tr:last-child td { border-bottom: 0; }
+.ph-foot { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted-2); } .ph-foot b { color: var(--indigo); }
+.plg { display: inline-flex; align-items: center; gap: 7px; color: var(--c); font-weight: 600; font-size: 13.5px; white-space: nowrap; } .plg img { height: 18px; width: auto; } .plg img.wide { height: 15px; }
+.cal { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 10px; } .cm { border: 1px solid var(--line); border-radius: 10px; padding: 8px 6px 6px; text-align: center; }
+.cm .mo { display: block; font-size: 12px; font-weight: 600; } .cm .tick { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--indigo); color: #fff; margin: 6px 0 4px; } .cm .tick svg { width: 11px; height: 11px; }
+.cm .dt { display: block; font-size: 10.5px; color: var(--muted-2); } .cm.due { border-style: dashed; } .cm.due .tick { background: var(--card-2); } .cm.due .mo { color: var(--muted-2); }
+/* illustrated band for blog posts */
+.band.illus::after { display: none; } .band.illus .kicker { color: var(--white); opacity: .85; } .band.illus h1 .hl { color: var(--white); text-decoration: underline; text-decoration-color: rgba(255,255,255,.5); text-underline-offset: 8px; text-decoration-thickness: 3px; }
+.band.illus .bin { display: grid; grid-template-columns: minmax(0, 1fr) 460px; gap: 56px; align-items: center; padding-top: 120px; }
+.band.illus .illus-art svg { width: 100%; height: auto; aspect-ratio: 400 / 280; } .band.illus .illus-art svg rect:first-child { fill: transparent; }
+.band.illus h1 { font-size: 48px; line-height: 54px; }
+@media (max-width: 960px) { .band.illus .illus-art { display: none; } }
+/* icons */
+.gi { width: 40px; height: 40px; border-radius: 12px; background: rgba(29,57,91,.07); color: var(--gray-blue); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.glance div.now .gi { background: rgba(240,77,77,.1); color: var(--coral); }
+.steps4 .gi { width: 36px; height: 36px; margin-bottom: 10px; }
+.readers { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; } .readers div { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; font-size: 15.5px; line-height: 23px; }
+.readers div b { display: block; font-size: 16px; margin-bottom: 4px; } .readers .gi { margin-bottom: 10px; }
+.timeline li .gi { position: absolute; left: -19px; top: -4px; width: 36px; height: 36px; background: var(--ground); border: 1px solid var(--line); border-radius: 50%; margin: 0; } .timeline li.ic { padding-left: 34px; } .timeline li.ic::before { display: none; }
+/* case study extras */
+.glance { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; max-width: 1360px; margin: -44px auto 0; padding: 0 32px; position: relative; z-index: 3; }
+.glance div { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; box-shadow: var(--shadow-card); }
+.glance span { display: block; font-size: 12px; color: var(--muted); } .glance b { display: block; font-size: 20px; line-height: 26px; letter-spacing: -0.02em; margin-top: 4px; }
+.steps4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0 0; } .steps4 div { border-top: 2px solid var(--line); padding-top: 12px; font-size: 15px; line-height: 22px; }
+.steps4 div b { display: block; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); font-family: var(--font-mono); margin-bottom: 4px; }
+.timeline { list-style: none; margin: 24px 0 0; padding: 0; border-left: 2px solid var(--line); } .timeline li { position: relative; padding: 0 0 22px 24px; font-size: 16px; line-height: 24px; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 7px; width: 12px; height: 12px; border-radius: 50%; background: var(--indigo); border: 2.5px solid var(--ground); } .timeline li b { display: block; font-size: 12.5px; color: var(--muted); font-family: var(--font-mono); letter-spacing: .06em; }
+.timeline li.today::before { background: var(--coral); }
+.related { max-width: 1360px; margin: 64px auto 0; padding: 0 32px; } .related h2 { font-size: 30px; letter-spacing: -0.03em; }
+.related .posts { margin-top: 22px; }
+.art-cta { max-width: 720px; margin: 56px auto 0; padding: 0 32px; }
+.art-cta .gate { margin-top: 0; }
+@media (max-width: 1180px) { .art-wrap { grid-template-columns: minmax(0, 720px); } .rail { display: none; } .glance { grid-template-columns: repeat(2, 1fr); } .band.article h1 { font-size: 40px; line-height: 46px; } }
+@media (max-width: 720px) { .steps4 { grid-template-columns: 1fr 1fr; } .cal { grid-template-columns: repeat(4, 1fr); } .related .posts { grid-template-columns: 1fr; } }
 </style>
 <style>
 /* page skeleton: an outline of the page paints first, so the site is never blank while it loads; the real nav sits above it and stays usable */
@@ -314,7 +326,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 </style>
 </head>
 <body>
-<div class="pskel v-band" id="pskel" aria-hidden="true"><div class="pskel-hero"><div class="pskel-lines"><i class="h w80"></i><i class="w40"></i></div></div><div class="pskel-shell"><div class="pskel-card over"><div class="pskel-lines"><i class="w30"></i><i class="h w80"></i><i class="w60"></i><i class="h"></i><i class="h"></i><i class="h w40"></i></div></div><div class="pskel-row"><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div></div></div></div>
+<div class="pskel v-band" id="pskel" aria-hidden="true"><div class="pskel-hero"><div class="pskel-lines"><i class="h w80"></i><i class="w40"></i></div></div><div class="pskel-shell"><div class="pskel-row"><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div></div><div class="pskel-row"><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div><div class="pskel-card"><div class="pskel-lines"><i class="w40"></i><i class="h w80"></i><i class=""></i><i class="w60"></i></div></div></div></div></div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar" id="topbar">
   <div class="shell nav-in">
@@ -330,8 +342,8 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
         <div class="nav-dd-menu" id="navDdMenu" role="menu">
           <a role="menuitem" href="CDL-testimonials-demo-r4.html"><b>Testimonials</b><span>What importers say. Names withheld.</span></a>
           <a role="menuitem" href="CDL-faq-demo-r4.html"><b>FAQ</b><span>Answered in the first sentence.</span></a>
-          <a role="menuitem" href="CDL-data-demo-r4.html" aria-current="page"><b>The Exposure Report</b><span>Free report on who reads your record.</span></a>
-          <a role="menuitem" href="CDL-blog-demo-r4.html"><b>Blog</b><span>Field notes on public trade data.</span></a>
+          <a role="menuitem" href="CDL-data-demo-r4.html"><b>The Exposure Report</b><span>Free report on who reads your record.</span></a>
+          <a role="menuitem" href="CDL-blog-demo-r4.html" aria-current="page"><b>Blog</b><span>Field notes on public trade data.</span></a>
         </div>
       </div>
       <a href="CDL-pricing-demo-r4.html">Pricing</a>
@@ -344,127 +356,55 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 </header>
 
 <main id="main">
-
-<section class="hero rhero" id="hero" data-frame="01-report">
-  <div class="band"><img class="bg" src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt="" width="1920" height="1084">
-    <div class="shell bin split">
-      <div>
-        <div class="eyebrow reveal">Free report · 2026 edition</div>
-        <h1 class="rise" id="h1"><span class="w">The</span> <span class="w">Importer</span> <span class="w">Exposure</span> <span class="w">Report.</span></h1>
-        <p class="sub reveal">Which public platforms republish U.S. import records, what a single company page reveals, and who is reading it.</p>
-        <div class="live-line reveal"><i aria-hidden="true"></i><span><b id="liveRecords">0</b> shipment records filed with U.S. Customs since you opened this page</span></div>
-      </div>
-      <div class="fcard reveal" id="rcard">
-        <form id="reportForm" novalidate>
-          <h2>Get the report</h2>
-          <p class="lede">Sent to your inbox as a PDF. No sequence follows it.</p>
-          <div class="field" id="r-email"><label for="remail">Work email</label><input id="remail" name="email" type="email" autocomplete="email" inputmode="email" required><div class="err">That does not look like an email.</div></div>
-          <div class="row2">
-            <div class="field" id="r-name"><label for="rname">First name</label><input id="rname" name="name" type="text" autocomplete="given-name" required><div class="err">Just a first name is fine.</div></div>
-            <div class="field" id="r-company"><label for="rcompany">Company</label><input id="rcompany" name="company" type="text" autocomplete="organization" required><div class="err">Company name, please.</div></div>
-          </div>
-          <div class="field"><label for="rsize">How many legal entities do you import under?</label><select id="rsize" name="entities"><option value="">Select one</option><option value="1">One</option><option value="2-5">Two to five</option><option value="6+">Six or more</option><option value="unsure">Not sure</option></select></div>
-          <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
-          <button class="pill pill-lg pill-dark" type="submit">Get the report</button>
-          <p class="fine">We never share your information. Privacy is the product.</p>
-        </form>
-        <div class="done" aria-live="polite">
-          <div class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-          <h2>It's on its way.</h2>
-          <p>Check <b id="rdoneEmail"></b> in the next few minutes. If you want to see your own company's page instead of the general picture, the check below does that.</p>
-          <a class="pill pill-coral" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="shell below">
-    <div class="inside-wrap">
-      <div class="book reveal" tabindex="0" aria-label="Preview of the report">
-        <div class="pg p3"></div>
-        <div class="pg p2">
-          <div class="p2-head"><span>Chapter 1</span><span>The platform map</span></div>
-          <h4>Who republishes your records, and how fast.</h4>
-          <table><tr><td>ImportYeti</td><td>free</td><td>same week</td></tr><tr><td>Panjiva</td><td>paid</td><td>days</td></tr><tr><td>Import Genius</td><td>paid</td><td>days</td></tr><tr><td>ImportKey</td><td>paid</td><td>weeks</td></tr><tr><td>Trademo</td><td>paid</td><td>weeks</td></tr><tr><td>Datamyne</td><td>paid</td><td>weeks</td></tr></table>
-          <div class="p2-foot">12</div>
-        </div>
-        <div class="pg cover">
-          <div class="cv-photo"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt=""></div>
-          <div class="cv-body">
-            <img class="cv-logo" src="logo/official/cdl-logo-dark-for-light-bg.png" alt="">
-            <div class="cv-kick">2026 edition</div>
-            <h3>The Importer Exposure Report</h3>
-            <p>What anyone can learn about a U.S. importer from a free website, who uses it, and how protection lapses.</p>
-            <ol class="cv-toc"><li><span>1</span>The platform map</li><li><span>2</span>Anatomy of a company page</li><li><span>3</span>The four readers</li><li><span>4</span>How protection lapses</li></ol>
-          </div>
-        </div>
-        <div class="hint">Hover to look inside</div>
-      </div>
-      <div>
-        <div class="meta reveal">
-          <div><b>18+</b><span>platforms profiled</span></div>
-          <div><b>4</b><span>reader profiles</span></div>
-          <div><b>Sept 2026</b><span>last updated</span></div>
-        </div>
-        <ul class="inside reveal">
-          <li><span><b>The platform map.</b> Who republishes your records, how fast, and what each one charges to read them.</span></li>
-          <li><span><b>Anatomy of a company page.</b> Suppliers, product codes, volumes, ports and arrival dates, field by field.</span></li>
-          <li><span><b>The four readers.</b> What a competitor, a copycat, a fraudster and a buyer each do with the same record.</span></li>
-          <li><span><b>How protection lapses.</b> Why records come back within weeks when nobody owns the renewal.</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="shell">
-    <div class="two reveal">
-      <a class="pick" href="#rcard">
-        <div class="pick-ph"><img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt=""></div>
-        <div class="pick-body"><div class="kind">The report</div><h3>The pattern, for every importer</h3><p>The platform map, the anatomy of a company page, the four readers, how protection lapses. Free, as a PDF.</p><span class="pick-cta">Get the report</span></div>
-      </a>
-      <a class="pick" href="CDL-check-demo-r4.html">
-        <div class="pick-ph"><img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt=""></div>
-        <div class="pick-body"><div class="kind">The check</div><h3>Your page, by name</h3><p>We look your company up across every platform and send you what is visible today, with your quote. One business day.</p><span class="pick-cta">See what's public about you</span></div>
-      </a>
-    </div>
-  </div>
+<section class="band article illus" data-frame="01-band" style="background:#4878A0">
+  <div class="shell bin"><div class="bin-text"><div class="kicker">The lookup</div><h1>The 30-Second Lookup: what anyone can learn about a $40M importer <em class="hl">before their coffee cools</em></h1>
+    <p class="dek">We open a free trade platform, type one company name, and narrate what appears. Then we ask who else is looking.</p>
+    <div class="meta"><span>7 min read</span><span>12 September 2026</span><span>By the Customs Data Lock team</span></div></div>
+    <div class="illus-art"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#4878A0"/><rect x="118" y="112" width="150" height="86" rx="6" fill="#F4F4F2" transform="rotate(-4 193 155)"/>
+   <path d="M136 132v50M162 130v50M188 128v50M214 127v50M240 126v50" stroke="#4878A0" stroke-width="6" stroke-linecap="round"/>
+   <circle cx="248" cy="118" r="46" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M282 152l38 40" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M228 104c8-12 22-16 34-12" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/></svg></div></div>
 </section>
-
-<section class="contact" id="contact" data-frame="02-contact">
-  <div class="shell split">
-    <div>
-      <h2 class="reveal">Ask a person.</h2>
-      <p class="sub reveal">You hear back from someone at Customs Data Lock, not a sequence. Usually the same business day.</p>
-      <ul class="ways reveal">
-        <li><span>Email</span><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li>
-        <li><span>Hours</span><div>Monday to Friday, 9 to 5 Eastern</div></li>
-        <li><span>Quotes</span><div>Come with the <a href="CDL-check-demo-r4.html">Free Exposure Check</a>, usually the same day</div></li>
-        <li><span>Brokers, counsel</span><div>Ask for the vendor pack or an NDA. Both are ready.</div></li>
-      </ul>
-    </div>
-    <div class="fcard reveal" id="ccard">
-      <form id="contactForm" novalidate>
-        <h2>Send a message</h2>
-        <p class="lede">A person reads every one.</p>
-        <div class="row2">
-          <div class="field" id="c-name"><label for="cname">Name</label><input id="cname" name="name" type="text" autocomplete="name" required><div class="err">Your name, please.</div></div>
-          <div class="field" id="c-email"><label for="cemail">Email</label><input id="cemail" name="email" type="email" autocomplete="email" inputmode="email" required><div class="err">That does not look like an email.</div></div>
-        </div>
-        <div class="field"><label for="ccompany">Company <small>optional</small></label><input id="ccompany" name="company" type="text" autocomplete="organization"></div>
-        <div class="field" id="c-msg"><label for="cmsg">Message</label><textarea id="cmsg" name="message" required></textarea><div class="err">Tell us a little about what you need.</div></div>
-        <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
-        <button class="pill pill-lg pill-dark" type="submit">Send</button>
-        <p class="fine">We never share your information.</p>
-      </form>
-      <div class="done" aria-live="polite">
-        <div class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <h2>Got it.</h2>
-        <p>Thanks, <b id="cdoneName"></b>. Someone will reply to <b id="cdoneEmail"></b>, usually the same business day.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
+<div class="art-wrap">
+  <aside class="rail"><h5>In this post</h5><nav><a href="#s1" class="on">The search</a><a href="#s2">What the page shows</a><a href="#s3">Who else is looking</a><a href="#s4">What you can do</a></nav>
+    <div class="by"><img src="logo/official/cdl-lock-icon.png" alt=""><div>Customs Data Lock<br><span style="color:var(--muted-2);font-size:12.5px">We file and maintain the protection. Nothing else.</span></div></div></aside>
+  <article class="art">
+    <p class="lead">There is a kitchenware importer in Ohio doing about forty million dollars a year. We have never spoken to them. In <em class="hl">thirty seconds</em> we knew who makes their pans, which port they land at, and roughly how many containers arrive each month.</p>
+    <h2 id="s1">The search</h2>
+    <p>The tools are free and they are not hidden. Type a company name into ImportYeti, Panjiva or Import Genius and the page loads before you finish the thought. No account for the basics. <em class="hl key">No warning to the company whose name you typed.</em></p>
+    <p>We did exactly that, the way a competitor or a copycat would. Here is what came back, with the name and a few numbers changed.</p>
+    <figure><div class="paper">
+  <div class="ph-head"><img src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"><div class="ph-meta"><b>Exposure report</b><span>Sep 2026 · sample</span></div></div>
+  <div class="ph-block"><div class="ph-kicker">Prepared for</div><div class="ph-title">A kitchenware importer, Ohio</div><div class="ph-sub">30-second lookup · 18 platforms checked · name withheld</div><div class="ph-pill">11 of 18 platforms show their records</div></div>
+  <div class="ps"><h4>What is public <em>1,204 records · 4 suppliers named · 9 product codes</em></h4>
+    <table><tr><th>Platform</th><th>Records</th><th>Latest</th><th class="r">Suppliers named</th></tr>
+    <tr><td><span class="plg" style="--c:#004E66"><img src="platform-logos/importyeti-mark.png" alt=""><b>ImportYeti</b></span></td><td>412</td><td>Aug 2026</td><td class="r">4</td></tr><tr><td><span class="plg" style="--c:#D6002A"><b>Panjiva</b></span></td><td>388</td><td>Aug 2026</td><td class="r">4</td></tr><tr><td><span class="plg" style="--c:#0A7EF1"><img class="wide" src="platform-logos/importgenius.svg" alt="Import Genius"></span></td><td>404</td><td>Jul 2026</td><td class="r">3</td></tr><tr><td style="color:var(--muted-2)">8 more platforms showing</td><td></td><td></td><td></td></tr></table></div>
+  <div class="ph-foot"><span><b>Customs Data Lock</b> · Sample report · Details changed to protect the company</span><span>Page 1 of 3</span></div>
+</div><figcaption>The first page of the report we send after a lookup. This one is a real company with the name and a few numbers changed.</figcaption></figure>
+    <h2 id="s2">What the page shows</h2>
+    <p><em class="hl">Four supplier names, with cities.</em> The product descriptions the factory wrote on the bill of lading, which is how you learn that the "premium cookware" is actually tri-ply stainless from one mill and non-stick aluminum from another. Container counts by month, which is <em class="hl">a restock calendar</em>. The port, the carrier, and the arrival dates.</p>
+    <p>None of that is a leak. It is how ocean shipping works in the United States: <em class="hl key">the record is public by default</em>, and the platforms republish it for free.</p>
+    <div class="aside"><b>Why the record is public</b>Every ocean shipment into the U.S. creates a manifest record. The record is public unless the importer has a federal confidentiality protection in place, and the platforms simply republish what is public.</div>
+    <h2 id="s3">Who else is looking</h2>
+    <p>The same page is read by four kinds of people, and none of them are journalists.</p>
+    <div class="readers"><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 20a5 5 0 0 1 6-4.5"/></svg></i><b>A competitor</b>Now has the mill, the port and the volume, which is everything they need to ask that mill for the same terms.</div><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg></i><b>A copycat</b>Has the exact factory and the product codes, and can have samples in six weeks.</div><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></svg></i><b>A fraudster</b>Knows what a real invoice from that supplier looks like, and when the next one is due.</div><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l4-4h4l3 3 3-3h4l-4 4"/><path d="M7 11l5 5 2-2 2 2 3-3"/></svg></i><b>The buyer across the table</b>Can see your cost structure before the negotiation starts.</div></div>
+    <p class="quote">"It felt like x-ray vision. I could trace a competitor's product back to the real factory in a couple of minutes."<small>A private-label seller, describing the tool from the other side. Quoted from a public forum.</small></p>
+    <h2 id="s4">What you can do</h2>
+    <p><em class="hl key">Records already published stay published.</em> Nobody can remove them, and anyone who promises to is selling something else. What you can do is <em class="hl">stop the next one, and every one after it.</em></p>
+    <p>That is what we do. We put a federal confidentiality protection in place under every name you ship under, we <em class="hl">check the platforms every month</em> to prove it held, and we renew it before it can lapse. From the outside, your company simply stops appearing.</p>
+    <figure><div class="photo"><img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt=""></div><figcaption>A record is created every time a container lands. The question is only who can read it.</figcaption></figure>
+    <p>If you want to know what your own page shows, we will look you up the same way and send you the report. It takes <em class="hl">one business day</em> and it <em class="hl">costs nothing</em>.</p>
+  </article>
+</div>
+<div class="art-cta"><div class="gate reveal"><div><h2>See your own page.</h2><p>We run the same 30-second lookup on your company and send you the report.</p></div><a class="pill pill-light" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a></div></div>
+<section class="related"><h2>Keep reading</h2><div class="posts"><a class="post reveal" href="#"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#4878A0"/><rect x="118" y="112" width="150" height="86" rx="6" fill="#F4F4F2" transform="rotate(-4 193 155)"/>
+   <path d="M136 132v50M162 130v50M188 128v50M214 127v50M240 126v50" stroke="#4878A0" stroke-width="6" stroke-linecap="round"/>
+   <circle cx="248" cy="118" r="46" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M282 152l38 40" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M228 104c8-12 22-16 34-12" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/></svg></div><div class="body"><div class="kind">The lookup</div><h3>A skincare brand, 90 days after launch, three copycats on the market.</h3><p>The product codes were public. So were the factory and the launch month.</p><div class="meta"><span>6 min</span></div></div></a><a class="post reveal" href="CDL-case-demo-r4.html"><div class="ph"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt=""></div><div class="body"><div class="kind">Case study</div><h3>18 months of supplier poaching, then none.</h3><p>An apparel importer with two entities and eleven names. What was public, what we did, what changed.</p><div class="meta"><span>Case study</span></div></div></a><a class="post reveal" href="#"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#1D395B"/><rect x="98" y="70" width="164" height="150" rx="8" fill="#4878A0"/><rect x="98" y="70" width="164" height="34" rx="8" fill="#F4F4F2" opacity=".9"/>
+   <path d="M126 54v30M234 54v30" stroke="#F4F4F2" stroke-width="7" stroke-linecap="round"/>
+   <g stroke="#1D395B" stroke-width="4" stroke-linecap="round"><path d="M120 130h20M156 130h20M192 130h20M228 130h20M120 160h20M156 160h20M228 160h20M120 190h20M156 190h20M192 190h20"/></g>
+   <circle cx="202" cy="160" r="18" fill="none" stroke="#1D395B" stroke-width="6"/>
+   <path d="M284 92h48M284 208h48M290 94l36 56-36 56M326 94l-36 56 36 56" fill="none" stroke="#F4F4F2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/><path d="M308 176l-12 22h24z" fill="#4878A0"/></svg></div><div class="body"><div class="kind">Renewal</div><h3>The protection that lapsed: four weeks from private to public again.</h3><p>Nobody renewed it. Records were back on every platform within a month.</p><div class="meta"><span>5 min</span></div></div></a></div></section>
+<script>(function(){ const links=[...document.querySelectorAll('.rail nav a')]; if(!links.length) return; const heads=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean); const set=()=>{ let cur=0; heads.forEach((h,i)=>{ if(h.getBoundingClientRect().top < innerHeight*.35) cur=i; }); links.forEach((a,i)=>a.classList.toggle('on', i===cur)); }; addEventListener('scroll', set, {passive:true}); set(); })();</script>
+<section class="closing" id="cta" data-frame="03-closing"><div class="shell"><h2 class="reveal">See what your competitors can see.</h2><p class="reveal">One business day, no obligation. Your quote comes back with the results.</p><a class="pill pill-lg pill-coral reveal" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a></div></section>
 </main>
 <footer class="foot" id="footer" data-frame="04-footer">
   <div class="shell">
@@ -480,6 +420,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 
 <script>
 (function(){
+
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const vh = () => innerHeight || document.documentElement.clientHeight;
   const inView = (el, frac=0.9) => { const r = el.getBoundingClientRect(); return r.top < vh()*frac && r.bottom > 0; };
@@ -554,21 +495,12 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   tog.addEventListener('click', () => { const open = bar.classList.toggle('open'); tog.setAttribute('aria-expanded', open); });
   addEventListener('keydown', e => { if (e.key === 'Escape' && bar.classList.contains('open')) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
   document.addEventListener('click', e => { if (bar.classList.contains('open') && !bar.contains(e.target)) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
-  const params = new URLSearchParams(location.search);
-  // live line: records filed since the page opened (CBP FY2024 typical day: 105,103 entries)
-  (function(){ const el = document.getElementById('liveRecords'); if (!el) return; const opened = performance.now(); const fmt = n => n.toLocaleString('en-US'); if (reduce || isStatic) { el.textContent = '12'; return; } (function tick(){ el.textContent = fmt(Math.floor((performance.now() - opened) / 86400000 * 105103)); requestAnimationFrame(tick); })(); })();
 
-  if (qs.get('book') === 'open') document.querySelector('.book').classList.add('open');
-  const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  function wire(formId, cardId, fields, onDone) {
-    const form = document.getElementById(formId), card = document.getElementById(cardId);
-    const valid = f => { const el = document.getElementById(f.id); const v = el.value.trim(); const ok = f.email ? emailOk(v) : v.length > 1; document.getElementById(f.wrap).classList.toggle('bad', !ok); el.setAttribute('aria-invalid', !ok); return ok; };
-    fields.forEach(f => document.getElementById(f.id).addEventListener('blur', () => valid(f)));
-    form.addEventListener('submit', e => { e.preventDefault(); if (form.website.value) return; const bad = fields.filter(f => !valid(f)); if (bad.length) { document.getElementById(bad[0].id).focus(); return; } onDone(); card.classList.add('sent'); card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
-  }
-  wire('reportForm', 'rcard', [{ id: 'remail', wrap: 'r-email', email: true }, { id: 'rname', wrap: 'r-name' }, { id: 'rcompany', wrap: 'r-company' }], () => { document.getElementById('rdoneEmail').textContent = document.getElementById('remail').value.trim(); });
-  wire('contactForm', 'ccard', [{ id: 'cname', wrap: 'c-name' }, { id: 'cemail', wrap: 'c-email', email: true }, { id: 'cmsg', wrap: 'c-msg' }], () => { document.getElementById('cdoneName').textContent = document.getElementById('cname').value.trim().split(' ')[0]; document.getElementById('cdoneEmail').textContent = document.getElementById('cemail').value.trim(); });
-  if (params.get('state') === 'sent') { document.getElementById('rdoneEmail').textContent = 'dana@yourcompany.com'; document.getElementById('rcard').classList.add('sent'); document.getElementById('cdoneName').textContent = 'Dana'; document.getElementById('cdoneEmail').textContent = 'dana@yourcompany.com'; document.getElementById('ccard').classList.add('sent'); }
+
+  // category filter
+  const btns = [...document.querySelectorAll('.filters button')], posts = [...document.querySelectorAll('.post')], empty = document.getElementById('empty');
+  btns.forEach(b => b.addEventListener('click', () => { btns.forEach(x => x.setAttribute('aria-pressed', x === b)); const f = b.dataset.f; let n = 0; posts.forEach(p => { const show = f === 'all' || p.dataset.cat === f; p.classList.toggle('hide', !show); if (show) n++; }); empty.classList.toggle('on', n === 0); }));
+  const pf = qs.get('cat'); if (pf) { const b = btns.find(x => x.dataset.f === pf); if (b) b.click(); }
 })();
 </script>
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Customs Data Lock · Field notes on public trade data</title>
+<title>Customs Data Lock · Case study: 18 months of supplier poaching, then none</title>
 <meta name="description" content="What anyone can learn about an importer from public shipping records, who uses it, and how protection quietly lapses. Notes from Customs Data Lock.">
 <script>document.documentElement.className += ' js';</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -217,6 +217,82 @@ img.skel-src.on { opacity: 1; }
 /* blog tiles: flat colored illustration tiles mark blog posts; photos mark case studies */
 .post .ph svg.tile, .featured .ph svg.tile { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .post:hover .ph svg.tile { transform: scale(1.03); transition: transform .5s var(--ease); }
+
+/* ---- article pages (blog post + case study) ---- */
+.band.article { min-height: 520px; display: flex; align-items: flex-end; }
+.band.article .bin { padding: 140px 0 56px; }
+.kicker { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--coral); font-weight: 600; }
+.band.article h1 { color: var(--white); font-size: 54px; line-height: 60px; letter-spacing: -0.035em; max-width: 880px; margin-top: 14px; }
+.band.article .dek { color: rgba(255,255,255,.82); font-size: 19px; line-height: 29px; max-width: 700px; margin-top: 16px; }
+.band.article .meta { color: rgba(255,255,255,.7); font-size: 13.5px; margin-top: 22px; display: flex; gap: 18px; }
+.art-wrap { display: grid; grid-template-columns: 280px minmax(0, 720px); gap: 72px; justify-content: center; padding: 64px 32px 24px; }
+.rail { position: sticky; top: 96px; align-self: start; font-size: 17px; }
+.rail h5 { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 14px; }
+.rail a { display: flex; align-items: center; gap: 12px; color: var(--muted); padding: 10px 0 10px 16px; border-left: 3px solid var(--line); text-decoration: none; font-weight: 500; line-height: 24px; transition: color .2s var(--ease), border-color .2s var(--ease); }
+.rail a::before { content: counter(rail) ""; counter-increment: rail; font-family: var(--font-mono); font-size: 12px; color: var(--muted-2); width: 18px; }
+.rail nav { counter-reset: rail; }
+.rail a.on, .rail a:hover { color: var(--text); border-left-color: var(--coral); } .rail a.on { font-weight: 600; } .rail a.on::before { color: var(--coral); }
+.rail .by { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 14px; line-height: 20px; }
+.rail .by img { width: 30px; height: 30px; object-fit: contain; }
+.art { font-size: 18px; line-height: 30px; color: var(--text); }
+.art > p { margin-top: 22px; } .art > p.lead { font-size: 22px; line-height: 34px; color: var(--text); margin-top: 0; }
+.art h2 { font-size: 30px; line-height: 36px; letter-spacing: -0.03em; margin-top: 54px; scroll-margin-top: 90px; }
+.art h3 { font-size: 20px; line-height: 28px; margin-top: 34px; }
+.art ul, .art ol { margin: 18px 0 0 22px; } .art li { margin-top: 8px; }
+.art a { color: var(--gray-blue); }
+/* two tiers: highlighted = dark blue bold; extremely important = coral */
+.hl { font-style: normal; color: var(--indigo); font-weight: 700; }
+.hl.key, .band.article h1 .hl, .glance b .hl { color: var(--coral); font-weight: 600; }
+.art .quote { margin: 40px 0; padding: 0 0 0 26px; border-left: 3px solid var(--coral); font-size: 26px; line-height: 36px; letter-spacing: -0.02em; font-weight: 500; color: var(--indigo); }
+.art .quote small { display: block; font-size: 14px; line-height: 20px; letter-spacing: 0; font-weight: 400; color: var(--muted); margin-top: 12px; }
+.art .aside { margin: 36px 0; background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 22px 26px; font-size: 16px; line-height: 25px; }
+.art .aside b { display: block; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); font-family: var(--font-mono); margin-bottom: 8px; }
+.art figure { margin: 40px 0; } .art figcaption { font-size: 13.5px; line-height: 20px; color: var(--muted); margin-top: 12px; }
+.art .photo { border-radius: 20px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--indigo); } .art .photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
+/* CDL document artifact */
+.paper { background: var(--white); border: 1px solid var(--line); border-top: 5px solid var(--indigo); border-radius: 6px; padding: 24px 30px 20px; box-shadow: 0 1px 2px rgba(20,30,50,.06), 0 28px 56px -28px rgba(20,30,50,.4); font-size: 14px; line-height: 21px; }
+.ph-head { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 12px; border-bottom: 2px solid var(--indigo); } .ph-head img { height: 28px; }
+.ph-meta { text-align: right; } .ph-meta b { display: block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); } .ph-meta span { display: block; font-size: 11px; color: var(--muted); }
+.ph-block { text-align: center; padding: 20px 0 16px; border-bottom: 1px solid var(--line); } .ph-kicker { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--coral); font-weight: 600; }
+.ph-title { font-size: 22px; line-height: 28px; color: var(--indigo); margin-top: 6px; font-weight: 600; letter-spacing: -0.02em; } .ph-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.ph-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 6px 13px; border-radius: 999px; background: var(--indigo); color: #fff; font-size: 12px; font-weight: 600; } .ph-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+.ps { margin-top: 18px; } .ps h4 { display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--indigo); font-weight: 700; font-family: var(--font-mono); } .ps h4::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.ps h4 em { font-style: normal; font-family: var(--font-sans); font-size: 10.5px; letter-spacing: 0; text-transform: none; font-weight: 600; color: var(--indigo); background: rgba(29,57,91,.08); padding: 2px 8px; border-radius: 999px; }
+.ps table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 13px; } .ps th { text-align: left; font-weight: 500; color: var(--muted-2); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; padding: 4px 0; border-bottom: 1px solid var(--line); }
+.ps td { padding: 7px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; } .ps td.r, .ps th.r { text-align: right; } .ps tr:last-child td { border-bottom: 0; }
+.ph-foot { margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 10.5px; color: var(--muted-2); } .ph-foot b { color: var(--indigo); }
+.plg { display: inline-flex; align-items: center; gap: 7px; color: var(--c); font-weight: 600; font-size: 13.5px; white-space: nowrap; } .plg img { height: 18px; width: auto; } .plg img.wide { height: 15px; }
+.cal { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 10px; } .cm { border: 1px solid var(--line); border-radius: 10px; padding: 8px 6px 6px; text-align: center; }
+.cm .mo { display: block; font-size: 12px; font-weight: 600; } .cm .tick { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--indigo); color: #fff; margin: 6px 0 4px; } .cm .tick svg { width: 11px; height: 11px; }
+.cm .dt { display: block; font-size: 10.5px; color: var(--muted-2); } .cm.due { border-style: dashed; } .cm.due .tick { background: var(--card-2); } .cm.due .mo { color: var(--muted-2); }
+/* illustrated band for blog posts */
+.band.illus::after { display: none; } .band.illus .kicker { color: var(--white); opacity: .85; } .band.illus h1 .hl { color: var(--white); text-decoration: underline; text-decoration-color: rgba(255,255,255,.5); text-underline-offset: 8px; text-decoration-thickness: 3px; }
+.band.illus .bin { display: grid; grid-template-columns: minmax(0, 1fr) 460px; gap: 56px; align-items: center; padding-top: 120px; }
+.band.illus .illus-art svg { width: 100%; height: auto; aspect-ratio: 400 / 280; } .band.illus .illus-art svg rect:first-child { fill: transparent; }
+.band.illus h1 { font-size: 48px; line-height: 54px; }
+@media (max-width: 960px) { .band.illus .illus-art { display: none; } }
+/* icons */
+.gi { width: 40px; height: 40px; border-radius: 12px; background: rgba(29,57,91,.07); color: var(--gray-blue); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.glance div.now .gi { background: rgba(240,77,77,.1); color: var(--coral); }
+.steps4 .gi { width: 36px; height: 36px; margin-bottom: 10px; }
+.readers { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; } .readers div { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; font-size: 15.5px; line-height: 23px; }
+.readers div b { display: block; font-size: 16px; margin-bottom: 4px; } .readers .gi { margin-bottom: 10px; }
+.timeline li .gi { position: absolute; left: -19px; top: -4px; width: 36px; height: 36px; background: var(--ground); border: 1px solid var(--line); border-radius: 50%; margin: 0; } .timeline li.ic { padding-left: 34px; } .timeline li.ic::before { display: none; }
+/* case study extras */
+.glance { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; max-width: 1360px; margin: -44px auto 0; padding: 0 32px; position: relative; z-index: 3; }
+.glance div { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; box-shadow: var(--shadow-card); }
+.glance span { display: block; font-size: 12px; color: var(--muted); } .glance b { display: block; font-size: 20px; line-height: 26px; letter-spacing: -0.02em; margin-top: 4px; }
+.steps4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0 0; } .steps4 div { border-top: 2px solid var(--line); padding-top: 12px; font-size: 15px; line-height: 22px; }
+.steps4 div b { display: block; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--coral); font-family: var(--font-mono); margin-bottom: 4px; }
+.timeline { list-style: none; margin: 24px 0 0; padding: 0; border-left: 2px solid var(--line); } .timeline li { position: relative; padding: 0 0 22px 24px; font-size: 16px; line-height: 24px; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 7px; width: 12px; height: 12px; border-radius: 50%; background: var(--indigo); border: 2.5px solid var(--ground); } .timeline li b { display: block; font-size: 12.5px; color: var(--muted); font-family: var(--font-mono); letter-spacing: .06em; }
+.timeline li.today::before { background: var(--coral); }
+.related { max-width: 1360px; margin: 64px auto 0; padding: 0 32px; } .related h2 { font-size: 30px; letter-spacing: -0.03em; }
+.related .posts { margin-top: 22px; }
+.art-cta { max-width: 720px; margin: 56px auto 0; padding: 0 32px; }
+.art-cta .gate { margin-top: 0; }
+@media (max-width: 1180px) { .art-wrap { grid-template-columns: minmax(0, 720px); } .rail { display: none; } .glance { grid-template-columns: repeat(2, 1fr); } .band.article h1 { font-size: 40px; line-height: 46px; } }
+@media (max-width: 720px) { .steps4 { grid-template-columns: 1fr 1fr; } .cal { grid-template-columns: repeat(4, 1fr); } .related .posts { grid-template-columns: 1fr; } }
 </style>
 <style>
 /* page skeleton: an outline of the page paints first, so the site is never blank while it loads; the real nav sits above it and stays usable */
@@ -280,102 +356,58 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 </header>
 
 <main id="main">
-
-<section class="hero bhero" id="hero" data-frame="01-hero">
-  <div class="band"><img class="bg" src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt="" width="1920" height="1084">
-    <div class="shell bin">
-      <div class="eyebrow reveal">Blog</div>
-      <h1 class="rise" id="h1"><span class="w">Field</span> <span class="w">notes</span> <span class="w">on</span> <span class="w">public</span> <span class="w">trade</span> <span class="w">data.</span></h1>
-      <p class="sub reveal">What anyone can learn about an importer from a free website, who uses it, and how protection quietly lapses.</p>
-    </div>
-  </div>
+<section class="band article" data-frame="01-band">
+  <img class="bg" src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt="">
+  <div class="shell bin"><div class="kicker">Case study · Apparel · Names withheld</div><h1>18 months of supplier poaching, <em class="hl">then none.</em></h1>
+    <p class="dek">An apparel importer with two entities and eleven names. What was public, what we did, and what changed.</p>
+    <div class="meta"><span>5 min read</span><span>Protected since March 2025</span><span>Verified by Customs Data Lock</span></div></div>
 </section>
-
-<section id="library" data-frame="02-library">
-  <div class="shell">
-    <div class="filters reveal" role="group" aria-label="Filter posts">
-      <button type="button" aria-pressed="true" data-f="all">All</button>
-      <button type="button" aria-pressed="false" data-f="expose">The lookup</button>
-      <button type="button" aria-pressed="false" data-f="fraud">Fraud</button>
-      <button type="button" aria-pressed="false" data-f="strategy">Leverage</button>
-      <button type="button" aria-pressed="false" data-f="trust">Trust and legal</button>
-      <button type="button" aria-pressed="false" data-f="lapse">Renewal</button>
-      <button type="button" aria-pressed="false" data-f="vertical">By industry</button>
-    </div>
-
-    <article class="featured reveal">
-      <div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#4878A0"/><rect x="118" y="112" width="150" height="86" rx="6" fill="#F4F4F2" transform="rotate(-4 193 155)"/>
+<div class="glance"><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12l-8 8-9-9V4h7l10 8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></i><span>Industry</span><b>Apparel, private label</b></div><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4v9l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v9"/></svg></i><span>Size</span><b>About 320 containers a year</b></div><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2M9 16h2M13 16h2"/></svg></i><span>Entities and names</span><b>2 entities · 11 names</b></div><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg></i><span>Public before</span><b>13 of 18 platforms</b></div><div class="now"><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M10.5 6.3A10 10 0 0 1 12 6c6.5 0 10 6 10 6a17 17 0 0 1-3.2 3.7M6.6 6.6C3.8 8.4 2 12 2 12s3.5 6 10 6c1.4 0 2.6-.3 3.7-.7"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></i><span>Public now</span><b><em class="hl">None</em>, 18 months running</b></div></div>
+<div class="art-wrap">
+  <aside class="rail"><h5>In this story</h5><nav><a href="#c1" class="on">The situation</a><a href="#c2">What was public</a><a href="#c3">What we did</a><a href="#c4">What changed</a><a href="#c5">In their words</a></nav>
+    <div class="by"><img src="logo/official/cdl-lock-icon.png" alt=""><div>Names withheld at the customer's request.<br><span style="color:var(--muted-2);font-size:12.5px">Every figure here is from their reports.</span></div></div></aside>
+  <article class="art">
+    <h2 id="c1" style="margin-top:0">The situation</h2>
+    <p class="lead"><em class="hl">Two competitors turned up at the same mill</em> within eighteen months. The second time, the mill's sales manager mentioned it in passing, as if it were a compliment.</p>
+    <p>The importer sells private-label apparel through its own site and two big-box accounts. Its edge was a mill in Tamil Nadu that most of its category had never heard of, and a five-year relationship that got it priority on capacity. By early 2025, two direct competitors were buying from the same mill. Nobody had leaked anything. The mill's name was on every bill of lading, and <em class="hl key">every bill of lading was public</em>.</p>
+    <figure><div class="photo"><img src="photography/01-hero/cdl-hero-03-ship-overhead.jpg" alt=""></div><figcaption>About 320 containers a year, every one of them a public record until March 2025.</figcaption></figure>
+    <h2 id="c2">What was public</h2>
+    <p>We ran the lookup the way anyone would, across the 18 platforms we check. <em class="hl">Thirteen of them showed the company.</em> Between them: every supplier, every product code, and the monthly cadence going back to 2019.</p>
+    <figure><div class="paper">
+  <div class="ph-head"><img src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"><div class="ph-meta"><b>Exposure report</b><span>Feb 2025 · before</span></div></div>
+  <div class="ph-block"><div class="ph-kicker">Prepared for</div><div class="ph-title">An apparel importer, two entities</div><div class="ph-sub">18 platforms checked · name withheld</div><div class="ph-pill">13 of 18 platforms showed their records</div></div>
+  <div class="ps"><h4>What was public <em>2,310 records · 6 suppliers named · 22 product codes</em></h4>
+    <table><tr><th>Platform</th><th>Records</th><th>Latest</th><th class="r">Suppliers named</th></tr>
+    <tr><td><span class="plg" style="--c:#004E66"><img src="platform-logos/importyeti-mark.png" alt=""><b>ImportYeti</b></span></td><td>790</td><td>Jan 2025</td><td class="r">6</td></tr><tr><td><span class="plg" style="--c:#D6002A"><b>Panjiva</b></span></td><td>764</td><td>Jan 2025</td><td class="r">6</td></tr><tr><td><span class="plg" style="--c:#0A7EF1"><img class="wide" src="platform-logos/importgenius.svg" alt="Import Genius"></span></td><td>756</td><td>Dec 2024</td><td class="r">5</td></tr><tr><td style="color:var(--muted-2)">10 more platforms showing</td><td></td><td></td><td></td></tr></table></div>
+  <div class="ps"><h4>Names found <em>11</em></h4><p style="font-size:13px;margin-top:6px;color:var(--muted)">Two legal entities, a DBA, and eight spellings the factories used on bills of lading. The customer knew about four of them.</p></div>
+  <div class="ph-foot"><span><b>Customs Data Lock</b> · Details changed to protect the company</span><span>Page 1 of 3</span></div>
+</div><figcaption>Before. The first page of their exposure report, February 2025.</figcaption></figure>
+    <p>The detail that mattered most was the names. The customer had filed protection itself once, two years earlier, under the two legal entities. <em class="hl key">It had lapsed quietly</em>, and it had <em class="hl key">never covered the eight spellings</em> the factories actually used on the paperwork. Records under those names had never stopped.</p>
+    <h2 id="c3">What we did</h2>
+    <p><em class="hl">Nothing changed about how they ship.</em> No broker calls, no forwarder changes, no paperwork on their side beyond a five-minute form.</p>
+    <div class="steps4"><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></i><b>01 Enroll</b>One form. Two entities, the four names they knew, and a work email.</div><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></i><b>02 Protect</b>We found the other seven names and put the protection in place under all eleven. <em class="hl">Confirmed in 36 hours.</em></div><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg></i><b>03 Monitor</b>Every month we check all 18 platforms under every name and send the report.</div><div><i class="gi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></i><b>04 Maintain</b>Renewal happens on the calendar, not in someone's inbox. It renewed once already.</div></div>
+    <h2 id="c4">What changed</h2>
+    <p>Records already published stayed published, as they always do. <em class="hl">New shipments stopped appearing from the first sailing after protection.</em> The April 2025 check was the first with nothing new under any of the eleven names. <em class="hl">Every check since has said the same thing.</em></p>
+    <figure><div class="paper">
+  <div class="ph-head"><img src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"><div class="ph-meta"><b>Monitoring report</b><span>September 2026 · after</span></div></div>
+  <div class="ph-block"><div class="ph-kicker">Prepared for</div><div class="ph-title">An apparel importer, two entities</div><div class="ph-sub">Issued 07 Sep 2026 · 2 entities · 11 names · 18 platforms</div><div class="ph-pill">546 days of continuous coverage · 0 gaps</div></div>
+  <div class="ps"><h4>Checks this year <em>9 of 12 complete</em></h4><div class="cal"><div class="cm"><span class="mo">Jan</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">06 Jan</span></div><div class="cm"><span class="mo">Feb</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">03 Feb</span></div><div class="cm"><span class="mo">Mar</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">04 Mar</span></div><div class="cm"><span class="mo">Apr</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">06 Apr</span></div><div class="cm"><span class="mo">May</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">05 May</span></div><div class="cm"><span class="mo">Jun</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">03 Jun</span></div><div class="cm"><span class="mo">Jul</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">06 Jul</span></div><div class="cm"><span class="mo">Aug</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">04 Aug</span></div><div class="cm"><span class="mo">Sep</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">07 Sep</span></div><div class="cm due"><span class="mo">Oct</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">due</span></div><div class="cm due"><span class="mo">Nov</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">due</span></div><div class="cm due"><span class="mo">Dec</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><span class="dt">due</span></div></div><p style="font-size:12.5px;color:var(--muted-2);margin-top:10px">Nothing new under any of the 11 names since the April 2025 check.</p></div>
+  <div class="ph-foot"><span><b>Customs Data Lock</b> · Confidential · Prepared for the named account only</span><span>Page 1 of 1</span></div>
+</div><figcaption>After. Their September 2026 monitoring report, the one their ops manager files away each month.</figcaption></figure>
+    <p>A year and a half later, the mill has not seen a third competitor. That is not something we can prove is because of us, and we will not claim it. What we can prove is on the report above: <em class="hl key">eleven names, eighteen platforms, nothing new, every month.</em></p>
+    <figure><div class="photo"><img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt=""></div><figcaption>Nothing about the operation changed. Only who can read it.</figcaption></figure>
+    <h2 id="c5">In their words</h2>
+    <p class="quote">"Fast, clear, and it simply works. Our new shipments stopped appearing and we get proof every month. I file the report and forget about it until the next one."<small>Logistics manager at the importer. Quoted with permission, name withheld.</small></p>
+    <h3>The timeline</h3>
+    <ul class="timeline"><li class="ic"><i class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></i><b>DAY 0 · 18 FEB 2025</b>Free exposure check requested from the site.</li><li class="ic"><i class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg></i><b>DAY 1</b>Exposure report and quote sent. Eleven names found, four of them new to the customer.</li><li class="ic"><i class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></i><b>DAY 3 · 12 MAR 2025</b>Protection confirmed under all eleven names.</li><li class="ic"><i class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg></i><b>APR 2025</b>First monthly check with nothing new.</li><li class="ic"><i class="gi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></i><b>MAR 2026</b>Renewed automatically. No email needed.</li><li class="today ic"><i class="gi" style="color:var(--coral);border-color:var(--coral)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></i><b>SEP 2026</b>Eighteenth consecutive clean check.</li></ul>
+  </article>
+</div>
+<div class="art-cta"><div class="gate reveal"><div><h2>Sound familiar?</h2><p>We will look your company up the same way and send you the report. One business day, no obligation.</p></div><a class="pill pill-light" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a></div></div>
+<section class="related"><h2>Keep reading</h2><div class="posts"><a class="post reveal" href="#"><div class="ph"><img src="photography/01-hero/cdl-hero-03-ship-overhead.jpg" alt=""></div><div class="body"><div class="kind">Case study</div><h3>A skincare brand, 90 days after launch, three copycats on the market.</h3><p>What the product codes gave away, and what the next launch looked like with protection in place.</p><div class="meta"><span>Case study</span></div></div></a><a class="post reveal" href="CDL-post-demo-r4.html"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#4878A0"/><rect x="118" y="112" width="150" height="86" rx="6" fill="#F4F4F2" transform="rotate(-4 193 155)"/>
    <path d="M136 132v50M162 130v50M188 128v50M214 127v50M240 126v50" stroke="#4878A0" stroke-width="6" stroke-linecap="round"/>
-   <circle cx="248" cy="118" r="46" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M282 152l38 40" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M228 104c8-12 22-16 34-12" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/></svg></div>
-      <div class="body">
-        <div class="kind">The lookup · Featured</div>
-        <h2>The 30-Second Lookup: what anyone can learn about a $40M importer before their coffee cools</h2>
-        <p>We open a free trade platform, type one company name, and narrate what appears: the mill, the port, the monthly cadence, the new product code. Then we ask who else is looking.</p>
-        <div class="meta"><span>7 min read</span><span>September 2026</span></div>
-        <a class="pill pill-dark" href="CDL-post-demo-r4.html">Read the post</a>
-      </div>
-    </article>
-
-    <div class="posts" id="posts">
-      <a class="post reveal" href="#" data-cat="expose"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#4878A0"/><rect x="118" y="112" width="150" height="86" rx="6" fill="#F4F4F2" transform="rotate(-4 193 155)"/>
-   <path d="M136 132v50M162 130v50M188 128v50M214 127v50M240 126v50" stroke="#4878A0" stroke-width="6" stroke-linecap="round"/>
-   <circle cx="248" cy="118" r="46" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M282 152l38 40" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M228 104c8-12 22-16 34-12" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/></svg></div><div class="body"><div class="kind">The lookup</div><h3>Your restock schedule is public. Here's what a competitor does with it.</h3><p>A 26-day cadence, visible to anyone, is a calendar for undercutting you.</p><div class="meta"><span>5 min</span><span>Sept 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="expose"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#3A6590"/><g transform="translate(400 0) scale(-1 1)"><rect x="118" y="112" width="150" height="86" rx="6" fill="#F4F4F2" transform="rotate(-4 193 155)"/>
-   <path d="M136 132v50M162 130v50M188 128v50M214 127v50M240 126v50" stroke="#3A6590" stroke-width="6" stroke-linecap="round"/>
-   <circle cx="248" cy="118" r="46" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M282 152l38 40" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M228 104c8-12 22-16 34-12" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/></g></svg></div><div class="body"><div class="kind">The lookup</div><h3>We looked up 50 supplement brands. 46 of their supplier lists were one search away.</h3><p>Original research, one vertical, one afternoon.</p><div class="meta"><span>6 min</span><span>Sept 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="expose"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#4878A0"/><rect x="118" y="112" width="150" height="86" rx="6" fill="#F4F4F2" transform="rotate(-4 193 155)"/>
-   <path d="M136 132v50M162 130v50M188 128v50M214 127v50M240 126v50" stroke="#4878A0" stroke-width="6" stroke-linecap="round"/>
-   <circle cx="248" cy="118" r="46" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M282 152l38 40" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M228 104c8-12 22-16 34-12" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/></svg></div><div class="body"><div class="kind">The lookup</div><h3>Anatomy of a knockoff: from public shipping record to copycat listing in 90 days</h3><p>The skincare launch, step by step, from the first container to the third copy.</p><div class="meta"><span>8 min</span><span>Aug 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="fraud"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#F04D4D"/><path d="M140 62h104l34 34v128H140z" fill="#F4F4F2" transform="rotate(3 210 150)"/>
-   <path d="M244 62v34h34" fill="none" stroke="#F04D4D" stroke-width="6" stroke-linejoin="round" transform="rotate(3 210 150)"/>
-   <path d="M164 128h70M164 152h96M164 176h58" stroke="#F04D4D" stroke-width="6" stroke-linecap="round"/>
-   <path d="M262 40v96c0 22-18 36-38 30-16-5-22-24-12-36" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M262 40l10 12M262 40l-10 12" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="body"><div class="kind">Fraud</div><h3>The invoice looked real because the shipment was real</h3><p>How supplier impersonation starts with public data, and the week it tends to arrive.</p><div class="meta"><span>6 min</span><span>Aug 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="fraud"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#DC4040"/><g transform="translate(400 0) scale(-1 1)"><path d="M140 62h104l34 34v128H140z" fill="#F4F4F2" transform="rotate(3 210 150)"/>
-   <path d="M244 62v34h34" fill="none" stroke="#DC4040" stroke-width="6" stroke-linejoin="round" transform="rotate(3 210 150)"/>
-   <path d="M164 128h70M164 152h96M164 176h58" stroke="#DC4040" stroke-width="6" stroke-linecap="round"/>
-   <path d="M262 40v96c0 22-18 36-38 30-16-5-22-24-12-36" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M262 40l10 12M262 40l-10 12" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div><div class="body"><div class="kind">Fraud</div><h3>A fraud checklist for importers who wire money overseas</h3><p>Nine questions your accounts payable team can ask before the wire goes out.</p><div class="meta"><span>4 min</span><span>Aug 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="strategy"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#AEBBD0"/><path d="M80 176h240" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M200 176l-34 60h68z" fill="#F4F4F2"/>
-   <rect x="102" y="120" width="70" height="42" rx="4" fill="#F4F4F2"/><path d="M114 128v26M132 128v26M150 128v26" stroke="#AEBBD0" stroke-width="5" stroke-linecap="round"/>
-   <circle cx="262" cy="150" r="14" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="286" cy="150" r="14" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="274" cy="126" r="14" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-   <path d="M200 176v-64" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/></svg></div><div class="body"><div class="kind">Leverage</div><h3>Your supplier knows what you pay their other customers. So does everyone else.</h3><p>Why the negotiation is over before you sit down.</p><div class="meta"><span>5 min</span><span>Aug 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="strategy"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#C9D3E0"/><g transform="translate(400 0) scale(-1 1)"><path d="M80 176h240" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M200 176l-34 60h68z" fill="#F4F4F2"/>
-   <rect x="102" y="120" width="70" height="42" rx="4" fill="#F4F4F2"/><path d="M114 128v26M132 128v26M150 128v26" stroke="#C9D3E0" stroke-width="5" stroke-linecap="round"/>
-   <circle cx="262" cy="150" r="14" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="286" cy="150" r="14" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="274" cy="126" r="14" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-   <path d="M200 176v-64" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/></g></svg></div><div class="body"><div class="kind">Leverage</div><h3>The launch you telegraphed: how new products leak months before the ad campaign</h3><p>A new product code is a press release nobody meant to send.</p><div class="meta"><span>5 min</span><span>Jul 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="trust"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#ECECE9"/><path d="M200 44l92 34v66c0 58-40 90-92 104-52-14-92-46-92-104V78z" fill="#FFFFFF" stroke="#1D395B" stroke-width="6" stroke-linejoin="round"/>
-   <path d="M160 150l28 28 54-58" fill="none" stroke="#1D395B" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="286" cy="76" r="24" fill="#FFFFFF"/><path d="M272 76h28M286 62v28" stroke="#ECECE9" stroke-width="5" stroke-linecap="round"/></svg></div><div class="body"><div class="kind">Trust and legal</div><h3>Is your supply chain a trade secret? Then why is it on a free website?</h3><p>The question general counsel asks once, then never stops asking.</p><div class="meta"><span>6 min</span><span>Jul 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="lapse"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#1D395B"/><rect x="98" y="70" width="164" height="150" rx="8" fill="#4878A0"/><rect x="98" y="70" width="164" height="34" rx="8" fill="#F4F4F2" opacity=".9"/>
-   <path d="M126 54v30M234 54v30" stroke="#F4F4F2" stroke-width="7" stroke-linecap="round"/>
-   <g stroke="#1D395B" stroke-width="4" stroke-linecap="round"><path d="M120 130h20M156 130h20M192 130h20M228 130h20M120 160h20M156 160h20M228 160h20M120 190h20M156 190h20M192 190h20"/></g>
-   <circle cx="202" cy="160" r="18" fill="none" stroke="#1D395B" stroke-width="6"/>
-   <path d="M284 92h48M284 208h48M290 94l36 56-36 56M326 94l-36 56 36 56" fill="none" stroke="#F4F4F2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/><path d="M308 176l-12 22h24z" fill="#4878A0"/></svg></div><div class="body"><div class="kind">Renewal</div><h3>Protected in 2022, public in 2024: the quiet way importers lose their coverage</h3><p>Nobody cancelled anything. Somebody left. That was enough.</p><div class="meta"><span>5 min</span><span>Jul 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="lapse"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#152C49"/><g transform="translate(400 0) scale(-1 1)"><rect x="98" y="70" width="164" height="150" rx="8" fill="#4878A0"/><rect x="98" y="70" width="164" height="34" rx="8" fill="#F4F4F2" opacity=".9"/>
-   <path d="M126 54v30M234 54v30" stroke="#F4F4F2" stroke-width="7" stroke-linecap="round"/>
-   <g stroke="#152C49" stroke-width="4" stroke-linecap="round"><path d="M120 130h20M156 130h20M192 130h20M228 130h20M120 160h20M156 160h20M228 160h20M120 190h20M156 190h20M192 190h20"/></g>
-   <circle cx="202" cy="160" r="18" fill="none" stroke="#152C49" stroke-width="6"/>
-   <path d="M284 92h48M284 208h48M290 94l36 56-36 56M326 94l-36 56 36 56" fill="none" stroke="#F4F4F2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/><path d="M308 176l-12 22h24z" fill="#4878A0"/></g></svg></div><div class="body"><div class="kind">Renewal</div><h3>What the Free Exposure Check actually checks</h3><p>Every step, every platform, and what we send back, so there are no surprises.</p><div class="meta"><span>4 min</span><span>Jul 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="vertical"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#2E5A87"/><path d="M96 158h208l-22 42H118z" fill="#F4F4F2"/><rect x="150" y="128" width="30" height="30" fill="#F4F4F2"/><rect x="186" y="118" width="30" height="40" fill="#F4F4F2"/><rect x="222" y="132" width="30" height="26" fill="#F4F4F2"/>
-   <path d="M64 216c20-14 40-14 60 0s40 14 60 0 40-14 60 0 40 14 60 0 40-14 56 0" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M92 244c20-14 40-14 60 0s40 14 60 0 40-14 60 0 40 14 60 0" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" opacity=".7"/></svg></div><div class="body"><div class="kind">By industry</div><h3>Why specialty food importers guard their suppliers like recipes</h3><p>The relationship is the product. The record gives it away.</p><div class="meta"><span>5 min</span><span>Jun 2026</span></div></div></a>
-      <a class="post reveal" href="#" data-cat="vertical"><div class="ph"><svg class="tile " viewBox="0 0 400 280" role="img" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><rect width="400" height="280" fill="#4878A0"/><g transform="translate(400 0) scale(-1 1)"><path d="M96 158h208l-22 42H118z" fill="#F4F4F2"/><rect x="150" y="128" width="30" height="30" fill="#F4F4F2"/><rect x="186" y="118" width="30" height="40" fill="#F4F4F2"/><rect x="222" y="132" width="30" height="26" fill="#F4F4F2"/>
-   <path d="M64 216c20-14 40-14 60 0s40 14 60 0 40-14 60 0 40 14 60 0 40-14 56 0" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M92 244c20-14 40-14 60 0s40 14 60 0 40-14 60 0 40 14 60 0" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" opacity=".7"/></g></svg></div><div class="body"><div class="kind">By industry</div><h3>Amazon private label in 2026: your listing tells them what sells, your records tell them how to make it</h3><p>Two public documents, one complete business plan.</p><div class="meta"><span>6 min</span><span>Jun 2026</span></div></div></a>
-    </div>
-    <div class="empty" id="empty">Nothing in this category yet.</div>
-
-    <div class="gate reveal">
-      <div><h2>The Importer Exposure Report</h2><p>The platform map, the anatomy of a company page, the four readers, and how protection lapses. Free, as a PDF.</p></div>
-      <a class="pill pill-light" href="CDL-data-demo-r4.html">Get the report</a>
-    </div>
-  </div>
-</section>
-
-<section class="closing" id="cta" data-frame="03-closing">
-  <div class="shell">
-    <h2 class="reveal">See what your competitors can see.</h2>
-    <p class="reveal">One business day, no obligation. Your quote comes back with the results.</p>
-    <a class="pill pill-lg pill-coral reveal" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a>
-  </div>
-</section>
-
+   <circle cx="248" cy="118" r="46" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M282 152l38 40" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M228 104c8-12 22-16 34-12" fill="none" stroke="#152C49" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/></svg></div><div class="body"><div class="kind">The lookup</div><h3>The 30-Second Lookup: what anyone can learn about a $40M importer before their coffee cools.</h3><p>We open a free trade platform, type one company name, and narrate what appears.</p><div class="meta"><span>7 min</span></div></div></a><a class="post reveal" href="#"><div class="ph"><img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt=""></div><div class="body"><div class="kind">Case study</div><h3>The protection that lapsed: four weeks from private to public again.</h3><p>A food importer whose filing expired without a word. What the month looked like, and the fix.</p><div class="meta"><span>Case study</span></div></div></a></div></section>
+<script>(function(){ const links=[...document.querySelectorAll('.rail nav a')]; if(!links.length) return; const heads=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean); const set=()=>{ let cur=0; heads.forEach((h,i)=>{ if(h.getBoundingClientRect().top < innerHeight*.35) cur=i; }); links.forEach((a,i)=>a.classList.toggle('on', i===cur)); }; addEventListener('scroll', set, {passive:true}); set(); })();</script>
+<section class="closing" id="cta" data-frame="03-closing"><div class="shell"><h2 class="reveal">See what your competitors can see.</h2><p class="reveal">One business day, no obligation. Your quote comes back with the results.</p><a class="pill pill-lg pill-coral reveal" href="CDL-check-demo-r4.html">Run your Free Exposure Check</a></div></section>
 </main>
 <footer class="foot" id="footer" data-frame="04-footer">
   <div class="shell">
