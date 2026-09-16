@@ -1,1 +1,19 @@
 .DS_Store
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Secrets - never commit. Broad on purpose: editors love to save
+# .env.txt, .env copy, .env.save and similar next to the real one.
+.env*
+!.env.example
+
+# Generated from prototype/ by scripts/extract-prototype.mjs
+# (the whole directory is generated - `npm run build` runs extract first)
+app/_prototype/
+public/_prototype/
+
+# Vercel
+.vercel

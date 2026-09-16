@@ -1,0 +1,25 @@
+/*
+ * Deliberately almost empty. Every prototype page carries its own complete
+ * stylesheet, scoped to its own `.pg-<slug>` wrapper, so anything defined here
+ * risks fighting a design decision that was already made. Only the document
+ * chrome the pages assumed they owned lives here.
+ */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* The design is light throughout. Without this, a visitor whose OS is in dark
+   mode gets a black canvas wherever nothing else paints - on overscroll, or in
+   any gap below the wrapper. */
+:root {
+  color-scheme: light;
+  background: #f4f4f2;
+}
+
+/* Each page's original `body` rules now land on its wrapper, so the wrapper has
+   to behave like the document body did: fill the viewport and paint the ground. */
+[class^='pg-'] {
+  min-height: 100vh;
+}
