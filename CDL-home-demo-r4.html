@@ -71,7 +71,7 @@ button, input { font: inherit; }
 .topbar { position: sticky; top: 0; z-index: 50; background: rgba(244,244,242,.86); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
 .topbar.stuck { border-bottom-color: var(--line); }
 .nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 68px; gap: 16px; }
-.nav-logo { height: 38px; width: auto; display: block; }
+.nav-logo { height: 38px; width: auto; display: block; transition: height .25s var(--ease); }
 /* the logo is a link home: a soft hover so it reads as clickable */
 .topbar a[aria-label="Customs Data Lock home"] { display: inline-flex; align-items: center; padding: 6px 10px; margin-left: -10px; border-radius: 12px; transition: background-color .2s var(--ease), transform .2s var(--ease); }
 .topbar a[aria-label="Customs Data Lock home"]:hover, .topbar a[aria-label="Customs Data Lock home"]:focus-visible { background: var(--card-2); transform: translateY(-1px); outline: none; }
@@ -175,6 +175,7 @@ button, input { font: inherit; }
 .topbar.over .nav-links a:hover, .topbar.over .nav-login:hover { background: rgba(255,255,255,.14); }
 .topbar.over .nav-toggle { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.35); color: var(--white); }
 .topbar .nav-logo.rev { display: none; }
+.topbar.over .nav-logo { height: 50px; }
 .topbar.over .nav-logo.rev { display: block; } .topbar.over .nav-logo.std { display: none; }
 .topbar.over.open { background: rgba(21,44,73,.96); }
 .topbar.over.open .nav-links { border-top-color: rgba(255,255,255,.18); }
@@ -314,6 +315,7 @@ main { position: relative; }
 .routes .legend span { display: inline-flex; align-items: center; gap: 8px; }
 .routes .legend i { width: 22px; height: 3px; border-radius: 2px; background: var(--coral); }
 .routes .legend i.us { width: 10px; height: 10px; border-radius: 50%; background: var(--indigo); }
+.routes .legend i.out { background: var(--gray-blue); }
 .routes .stage { position: relative; height: 680px; }
 .routes .stage canvas { outline: none; }
 .routes #globe { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
@@ -332,12 +334,71 @@ main { position: relative; }
 
 /* stakes: photo card + reader list */
 .stakes-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: stretch; margin-top: 44px; }
-.stakes-photo { border-radius: var(--r-card); overflow: hidden; background: var(--indigo); min-height: 560px; position: relative; }
+.stakes-photo { border-radius: var(--r-card); overflow: hidden; background: var(--indigo); min-height: 500px; position: relative; }
 .stakes-photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; filter: saturate(.8); opacity: .95; transition: opacity .35s var(--ease); }
-.stakes-photo img[hidden] { display: block; opacity: 0; }
+.stakes-photo img[hidden] { display: block; opacity: 0 !important; }
+.clumps { position: absolute; inset: 0; background: radial-gradient(110% 80% at 45% 30%, #6e6257 0%, #726659 55%, #796c5e 100%); }
+.clumps::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 40% at 50% 96%, rgba(0,0,0,.28), transparent 70%); }
+.clumps .cl { position: absolute; left: var(--x); top: var(--y); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--coral); font-weight: 600; z-index: 3; }
+.clumps .ct { position: absolute; left: var(--x); top: var(--y); width: 26%; aspect-ratio: 92 / 54; box-sizing: border-box; background: var(--white); border-radius: 12px; box-shadow: 0 14px 30px rgba(20,18,16,.38), 0 2px 6px rgba(20,18,16,.18); display: flex; align-items: center; justify-content: center; padding: 12px 16px; transform: rotate(var(--r)); z-index: 2; }
+.clumps .ct img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.stakes-photo .clumps .cap { z-index: 4; left: auto; right: 24px; bottom: 20px; max-width: 34%; text-align: right; }
+.mails { position: absolute; inset: 0; background: radial-gradient(110% 80% at 45% 30%, #6e6257 0%, #726659 55%, #796c5e 100%); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 28px 22px; align-items: center; }
+.mails::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 40% at 50% 96%, rgba(0,0,0,.28), transparent 70%); }
+.mail { position: relative; background: var(--white); border-radius: 10px; box-shadow: 0 14px 30px rgba(20,18,16,.38), 0 2px 6px rgba(20,18,16,.18); overflow: hidden; font-size: 11px; line-height: 16px; color: var(--text); }
+.mail .mh { padding: 12px 13px 10px; border-bottom: 1px solid var(--line); background: #FAFAF8; }
+.mail .mrow { display: flex; gap: 8px; } .mail .k { width: 40px; flex: none; color: var(--muted-2); } .mail .v { color: var(--muted); overflow-wrap: anywhere; } .mail .v b { color: var(--text); font-weight: 600; }
+.mail .mb { padding: 12px 13px 14px; } .mail .mb p { margin: 0 0 8px; color: var(--muted); } .mail .mb p b { color: var(--text); font-weight: 600; }
+.mail table { width: 100%; border-collapse: collapse; margin: 4px 0 10px; } .mail td { padding: 3px 0; border-bottom: 1px solid var(--line); } .mail td:first-child { color: var(--muted-2); width: 42%; } .mail td:last-child { font-weight: 500; }
+.mail u { text-decoration: none; }
+.mail .mis { position: relative; display: inline-block; }
+/* option A: hand-drawn circle */
+.hl-circle .mis::after { content: ""; position: absolute; inset: -8px -11px -7px -10px; border: 2px solid var(--coral); border-radius: 58% 42% 62% 48% / 70% 58% 66% 52%; transform: rotate(-3deg); pointer-events: none; }
+/* option B: marker highlight */
+.hl-marker .mis { background: linear-gradient(transparent 12%, rgba(240,77,77,.32) 12%, rgba(240,77,77,.32) 92%, transparent 92%); padding: 0 3px; margin: 0 -3px; border-radius: 2px; }
+.hl-marker .mis u { color: var(--coral); font-weight: 700; }
+/* option C: coral letters + callout tag */
+.hl-tag .mis u { color: var(--coral); font-weight: 700; border-bottom: 2px solid var(--coral); }
+.hl-tag .mail.fake .mh { position: relative; }
+.hl-tag .mail.fake .mh::after { content: "one letter off"; position: absolute; right: 10px; top: 8px; background: var(--coral); color: var(--white); font-size: 10px; font-weight: 600; letter-spacing: .02em; padding: 3px 8px; border-radius: 999px; box-shadow: 0 4px 10px rgba(240,77,77,.35); }
+.hl-tag .mail.fake .mh::before { content: ""; position: absolute; right: 44px; top: 30px; width: 14px; height: 14px; border-left: 2px solid var(--coral); border-bottom: 2px solid var(--coral); transform: rotate(45deg) skew(-8deg); }
+/* option D: framed fake card */
+.hl-frame .mail.fake { box-shadow: 0 0 0 2.5px var(--coral), 0 14px 30px rgba(20,18,16,.38); }
+.hl-frame .mail.fake::after { content: "Look again"; position: absolute; top: -11px; right: 12px; background: var(--coral); color: var(--white); font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 999px; }
+.hl-frame .mail.fake { overflow: visible; }
+
+.mails.one { grid-template-columns: minmax(0, 88%); justify-content: center; padding: 30px 22px; }
+.mail.cust { font-size: 12.5px; line-height: 19px; overflow: visible; box-shadow: 0 0 0 2.5px var(--coral), 0 14px 30px rgba(20,18,16,.38); }
+.mail.cust .mh { padding: 13px 15px 11px; } .mail.cust .mb { padding: 14px 15px 16px; } .mail.cust .mb p { margin-bottom: 10px; }
+.mail.cust::after { content: "From your public record"; position: absolute; top: -11px; right: 14px; background: var(--coral); color: var(--white); font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 999px; }
+.mail.cust .mis { display: inline; font-weight: 600; color: var(--text); text-decoration: underline; text-decoration-color: var(--coral); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.chatwrap, .sheetwrap { position: absolute; inset: 0; background: radial-gradient(110% 80% at 45% 30%, #6e6257 0%, #726659 55%, #796c5e 100%); display: grid; place-items: center; padding: 28px 24px; }
+.chatwrap::before, .sheetwrap::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 40% at 50% 96%, rgba(0,0,0,.28), transparent 70%); }
+.chat { position: relative; width: 86%; background: var(--white); border-radius: 12px; box-shadow: 0 14px 30px rgba(20,18,16,.38), 0 2px 6px rgba(20,18,16,.18); padding: 0 0 8px; font-size: 12.5px; line-height: 18px; }
+.chat .ch { display: flex; align-items: baseline; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); } .chat .ch b { font-weight: 600; } .chat .ch span { color: var(--muted-2); font-size: 11.5px; }
+.cm2 { display: flex; gap: 10px; padding: 10px 16px 4px; } .cm2 > div b { font-weight: 600; font-size: 12px; display: block; margin-bottom: 1px; } .cm2 p { color: var(--muted); margin: 0; }
+.av2 { flex: none; width: 28px; height: 28px; border-radius: 8px; background: var(--indigo); color: var(--white); font-style: normal; font-weight: 600; font-size: 11px; display: flex; align-items: center; justify-content: center; } .av2.b { background: var(--gray-blue); }
+.chat u, .sheet u { text-decoration: underline; text-decoration-color: var(--coral); text-decoration-thickness: 2px; text-underline-offset: 3px; font-weight: 600; color: var(--text); }
+.sheet { position: relative; width: 92%; background: var(--white); border-radius: 6px; box-shadow: 0 14px 30px rgba(20,18,16,.38), 0 2px 6px rgba(20,18,16,.18); padding: 18px 20px 16px; font-size: 12px; line-height: 17px; }
+.sheet .sh { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--indigo); padding-bottom: 8px; margin-bottom: 10px; } .sheet .sk { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--coral); font-weight: 600; } .sheet .sh b { font-weight: 600; font-size: 12px; }
+.sheet table { width: 100%; border-collapse: collapse; } .sheet th { text-align: left; font-weight: 500; color: var(--muted-2); font-size: 10.5px; padding: 4px 6px; border-bottom: 1px solid var(--line); } .sheet td { padding: 7px 6px; border-bottom: 1px solid var(--line); color: var(--muted); }
+.sheet tr.you td { color: var(--text); background: #FFF6F6; } .sheet tr.you td:first-child { font-weight: 600; } .sheet tr.you td:last-child { color: var(--coral); font-weight: 600; }
+.sheet .note { margin: 10px 0 0; font-size: 10.5px; color: var(--muted-2); }
+.mails.hl-frame .mail.fake::after { display: none; }
+.mails { padding-top: 54px; }
+.mail::before { position: absolute; top: -24px; left: 2px; font-size: 12px; font-weight: 600; letter-spacing: .01em; color: var(--white); text-shadow: 0 1px 6px rgba(0,0,0,.35); }
+.mail.real::before { content: "Real supplier"; }
+.mail.fake::before { content: "Fake supplier"; }
+.mail { overflow: visible; }
+.mail .mh { position: relative; }
+.mail .ptr { position: absolute; left: 96px; top: -34px; display: flex; align-items: flex-start; gap: 2px; color: var(--coral); pointer-events: none; }
+.mail .ptr svg { width: 40px; height: 34px; }
+.mail .ptr em { font-style: normal; font-size: 11px; font-weight: 600; white-space: nowrap; margin-top: -4px; }
+.stakes-photo [data-for][hidden] { display: block; opacity: 0 !important; pointer-events: none; }
+
 .stakes-photo .cap { position: absolute; left: 24px; bottom: 22px; right: 24px; color: var(--white); font-size: 14px; line-height: 20px; text-shadow: 0 1px 8px rgba(0,0,0,.35); z-index: 2; }
 .stakes-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,30,50,0) 55%, rgba(20,30,50,.55) 100%); }
-.readers { display: flex; flex-direction: column; justify-content: space-between; padding: 8px 0; }
+.readers { display: flex; flex-direction: column; justify-content: flex-start; gap: 20px; padding: 8px 0; }
 .readers .label { font-size: 13px; color: var(--coral); font-weight: 500; margin-bottom: 14px; }
 .rlist { list-style: none; }
 .rlist button { appearance: none; background: none; border: 0; display: flex; align-items: center; gap: 12px; font-size: 32px; line-height: 40px; letter-spacing: -0.03em; font-weight: 500; color: var(--muted-2); cursor: pointer; padding: 4px 0; text-align: left; transition: color .2s ease; }
@@ -345,7 +406,7 @@ main { position: relative; }
 .rlist button[aria-selected="true"] { color: var(--text); }
 .rlist button .arrow { width: 22px; opacity: 0; transform: translateX(-6px); transition: opacity .2s ease, transform .2s ease; }
 .rlist button[aria-selected="true"] .arrow { opacity: 1; transform: none; }
-.rpanel { display: none; margin-top: 28px; }
+.rpanel { display: none; margin-top: 0; }
 .rpanel.on { display: block; }
 .rpanel h3 { font-size: 22px; line-height: 29px; letter-spacing: -0.025em; margin-bottom: 10px; }
 .rpanel p { color: var(--muted); font-size: 17px; line-height: 27px; max-width: 520px; }
@@ -552,8 +613,8 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <nav class="nav-links" id="navLinks">
-      <a href="CDL-home-demo-r4.html#how">How it works</a>
       <a href="CDL-home-demo-r4.html#stakes">Why it matters</a>
+      <a href="CDL-home-demo-r4.html#how">How it works</a>
       <div class="nav-dd" id="navDd">
         <button class="nav-dd-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navDdMenu">Resources <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="nav-dd-menu" id="navDdMenu" role="menu">
@@ -586,7 +647,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <input id="company" type="text" name="company" placeholder="Your company's legal name" autocomplete="organization">
       <button class="pill pill-dark" type="submit">See your exposure</button>
     </form>
-    <p class="check-note reveal">Free, one business day, no obligation. Or <a class="tlink" href="CDL-data-demo-r4.html#contact">talk to an expert</a>.</p>
+    <p class="check-note reveal">Free, within a week, no obligation. Or <a class="tlink" href="CDL-data-demo-r4.html#contact">talk to an expert</a>.</p>
 
     <div class="pstrip reveal" id="pstrip" aria-label="Where your records are published today">
       <div class="ptrack" id="ptrack">
@@ -606,7 +667,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <div class="pcard-head">
         <div>
           <h2>The Free Exposure Check</h2>
-          <p>What the public platforms show about your company, in one business day.</p>
+          <p>What the public platforms show about your company, within a week.</p>
         </div>
         <a class="pill pill-light" href="#check">See what's public about you</a>
       </div>
@@ -628,8 +689,8 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   <div class="shell">
     <div class="reveal">
       <h2>Tracked from the moment <span class="pop">it ships.</span></h2>
-      <p>Every container that leaves a foreign port for the United States becomes a public record on arrival. Supplier, volume, product, port. These are the routes.</p>
-      <div class="legend" aria-hidden="true"><span><i></i> Shipments into the U.S.</span><span><i class="us"></i> U.S. ports of entry</span></div>
+      <p>Every container that leaves a foreign port for the United States becomes a public record on arrival. Supplier, volume, product, port. What leaves the U.S. is tracked the same way. These are the routes.</p>
+      <div class="legend" aria-hidden="true"><span><i></i> Shipments into the U.S.</span><span><i class="out"></i> Shipments out of the U.S.</span><span><i class="us"></i> U.S. ports of entry</span></div>
       <ol class="ports-legend" id="portLegend" hidden></ol>
       <div class="globe-hint" id="globeHint" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 11a1.5 1.5 0 0 1 3 0v3.5a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3.6 14a1.5 1.5 0 0 1 2.4-1.8L9 15"/></svg><span>Hover a port to see how many containers arrive there every day.</span></div>
     </div>
@@ -642,23 +703,52 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 <section class="sec" id="stakes" data-chapter="2" data-chapter-label="Who reads it" data-frame="03-stakes">
   <div class="shell">
     <div class="narrow center">
-      <h2 class="sec-h reveal">Four people would find your record very useful.</h2>
+      <h2 class="sec-h reveal">Who wants your shipping records.</h2>
           </div>
     <div class="stakes-grid">
       <div class="stakes-photo reveal">
-        <img src="photography/01-hero/cdl-hero-03-ship-overhead.jpg" alt="Container ship seen from above" data-for="0">
-        <img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt="Port cranes in fog" data-for="1" hidden>
-        <img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt="Container terminal yard in fog" data-for="2" hidden>
-        <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt="Container terminal at blue hour" data-for="3" hidden>
+        <div class="clumps" data-for="0" role="img" aria-label="Logos of nine athletic apparel brands"><div class="clump"><i class="ct" style="--x:7%;--y:14%;--r:-2deg"><img src="logos/competitors/nike.png" alt="nike"></i><i class="ct" style="--x:37%;--y:14%;--r:1.5deg"><img src="logos/competitors/lululemon.png" alt="lululemon"></i><i class="ct" style="--x:67%;--y:14%;--r:-1deg"><img src="logos/competitors/alo.png" alt="alo"></i><i class="ct" style="--x:7%;--y:40%;--r:2deg"><img src="logos/competitors/underarmour.png" alt="underarmour"></i><i class="ct" style="--x:37%;--y:40%;--r:-1.5deg"><img src="logos/competitors/adidas.png" alt="adidas"></i><i class="ct" style="--x:67%;--y:40%;--r:1deg"><img src="logos/competitors/puma.png" alt="puma"></i><i class="ct" style="--x:7%;--y:66%;--r:-1deg"><img src="logos/competitors/newbalance.png" alt="newbalance"></i><i class="ct" style="--x:37%;--y:66%;--r:1.5deg"><img src="logos/competitors/on.png" alt="on"></i><i class="ct" style="--x:67%;--y:66%;--r:-2deg"><img src="logos/competitors/asics.png" alt="asics"></i></div></div>
+        <div class="mails hl-frame hl-circle" data-for="1" hidden role="img" aria-label="Two identical invoice emails, one from the real supplier and one from a lookalike whose company name is spelled slightly differently"><div class="mail real">
+  <div class="mh"><div class="mrow"><span class="k">From</span><span class="v"><b>Your Supplier Co.</b> &lt;billing@yoursupplier.com&gt;</span></div><div class="mrow"><span class="k">To</span><span class="v">payables@yourcompany.com</span></div><div class="mrow"><span class="k">Subject</span><span class="v">Invoice 4471 · June shipment</span></div></div>
+  <div class="mb"><p>Hi Dana,</p><p>Please find invoice 4471 for the June shipment, 2 x 40ft, landed Long Beach 14 Jun. Terms net 30 as agreed.</p>
+    <table><tr><td>Invoice</td><td>4471</td></tr><tr><td>Shipment</td><td>2 x 40ft · Long Beach · 14 Jun</td></tr><tr><td>Amount</td><td>$48,600.00</td></tr><tr><td>Due</td><td>14 Jul</td></tr><tr><td>Remit to</td><td>Account ending 2231</td></tr></table>
+    <p>Thanks as always,<br><b>Your Supplier Co.</b><br>Accounts team</p></div></div><div class="mail fake">
+  <div class="mh"><span class="ptr"><svg viewBox="0 0 40 34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M36 3 C 30 3, 14 4, 8 26"/><path d="M4 20 L8 27 L14 24"/></svg><em>one letter off</em></span><div class="mrow"><span class="k">From</span><span class="v"><b>Your <span class="mis">Supp<u>il</u>er</span> Co.</b> &lt;billing@yoursuppiler.com&gt;</span></div><div class="mrow"><span class="k">To</span><span class="v">payables@yourcompany.com</span></div><div class="mrow"><span class="k">Subject</span><span class="v">Invoice 4471 · June shipment</span></div></div>
+  <div class="mb"><p>Hi Dana,</p><p>Please find invoice 4471 for the June shipment, 2 x 40ft, landed Long Beach 14 Jun. Terms net 30 as agreed.</p>
+    <table><tr><td>Invoice</td><td>4471</td></tr><tr><td>Shipment</td><td>2 x 40ft · Long Beach · 14 Jun</td></tr><tr><td>Amount</td><td>$48,600.00</td></tr><tr><td>Due</td><td>14 Jul</td></tr><tr><td>Remit to</td><td>Account ending 2231</td></tr></table>
+    <p>Thanks as always,<br><b>Your <span class="mis">Supp<u>il</u>er</span> Co.</b><br>Accounts team</p></div></div></div>
+        <img src="photography/web/cdl-08-copycat-starbucks.jpg" alt="Two near identical products side by side on a shelf" data-for="2" hidden>
+        <div class="mails one" data-for="3" hidden role="img" aria-label="An email from your customer's procurement team quoting your public shipping record back to you in a price negotiation">
+<div class="mail cust">
+  <div class="mh"><div class="mrow"><span class="k">From</span><span class="v"><b>Procurement, Your Customer Inc.</b> &lt;procurement@yourcustomer.com&gt;</span></div><div class="mrow"><span class="k">To</span><span class="v">marcus@yourcompany.com</span></div><div class="mrow"><span class="k">Subject</span><span class="v">Pricing review ahead of the October renewal</span></div></div>
+  <div class="mb"><p>Hi Marcus,</p>
+    <p>Before we renew we did some homework. The public shipping records show about <span class="mis">320 containers</span> into Long Beach last year, all from <span class="mis">one mill</span>, so we have a fair idea of your cost and we can see there is <span class="mis">no second source</span>.</p>
+    <p>On that basis we would like a 12% reduction on the current schedule, effective with the renewal. Happy to walk through it this week.</p>
+    <p>Regards,<br><b>Director of Procurement</b><br>Your Customer Inc.</p></div>
+</div></div>
+        <div class="chatwrap" data-for="3" data-variant="chat" hidden role="img" aria-label="An internal chat at your customer, working out their negotiating position from your public shipping record">
+<div class="chat"><div class="ch"><b># sourcing</b><span>Your Customer Inc.</span></div>
+  <div class="cm2"><i class="av2">JR</i><div><b>Jordan R.</b><p>Pulled their shipping records before the call. <u>About 320 containers</u> into Long Beach last year, <u>all from one mill</u>.</p></div></div>
+  <div class="cm2"><i class="av2 b">KL</i><div><b>Kim L.</b><p>So <u>no second source</u>. What are we paying against that?</p></div></div>
+  <div class="cm2"><i class="av2">JR</i><div><b>Jordan R.</b><p>Same schedule as last year. I will ask for <u>12% off</u> and hold at 8.</p></div></div>
+  <div class="cm2"><i class="av2 b">KL</i><div><b>Kim L.</b><p>Do it. They cannot walk.</p></div></div>
+</div></div><div class="sheetwrap" data-for="3" data-variant="sheet" hidden role="img" aria-label="Your customer's printed supplier review sheet with your company as the row, built from your public shipping record">
+<div class="sheet"><div class="sh"><span class="sk">Supplier review · Q3</span><b>Your Customer Inc. · Procurement</b></div>
+  <table><tr><th>Supplier</th><th>Annual volume</th><th>Sources</th><th>Second source</th><th>Position</th></tr>
+  <tr class="you"><td>Your Company LLC</td><td><u>~320 containers</u></td><td><u>One mill</u></td><td><u>None</u></td><td>Ask 12%, settle 8%</td></tr>
+  <tr><td>Supplier B</td><td>110 containers</td><td>Two mills</td><td>Yes</td><td>Hold</td></tr>
+  <tr><td>Supplier C</td><td>40 containers</td><td>One mill</td><td>Yes</td><td>Hold</td></tr></table>
+  <p class="note">Source: public shipping records, pulled 3 Sep. Volumes are FEU equivalents for the trailing 12 months.</p>
+</div></div>
               </div>
       <div class="readers reveal">
         <div>
-          <div class="label">Who is reading your record</div>
-          <ul class="rlist" role="tablist" aria-label="Who is reading your record">
-            <li><button role="tab" id="t0" aria-selected="true" aria-controls="p0"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>A competitor</button></li>
-            <li><button role="tab" id="t1" aria-selected="false" aria-controls="p1"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>A copycat</button></li>
-            <li><button role="tab" id="t2" aria-selected="false" aria-controls="p2"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>A fraudster</button></li>
-            <li><button role="tab" id="t3" aria-selected="false" aria-controls="p3"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>The buyer across the table</button></li>
+          <div class="label">Four ways it gets used</div>
+          <ul class="rlist" role="tablist" aria-label="Who wants your shipping records">
+            <li><button role="tab" id="t0" aria-selected="true" aria-controls="p0"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Competitors</button></li>
+            <li><button role="tab" id="t2" aria-selected="false" aria-controls="p2"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Invoice fraud</button></li>
+            <li><button role="tab" id="t1" aria-selected="false" aria-controls="p1"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Copycat products</button></li>
+            <li><button role="tab" id="t3" aria-selected="false" aria-controls="p3"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Your own customers</button></li>
           </ul>
         </div>
         <div>
@@ -666,17 +756,18 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
             <h3>Ten years of supplier relationships, readable in ten seconds.</h3>
             <p>Your record names the mill, the port, and how much you buy. That is everything a competitor needs to ask for the same terms.</p>
           </div>
-          <div class="rpanel" role="tabpanel" id="p1" aria-labelledby="t1" hidden>
-            <h3>Your product code and your factory are a build sheet.</h3>
-            <p>New codes appear the moment you import something new, so a launch is visible months before your marketing.</p>
-          </div>
           <div class="rpanel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
             <h3>A fake invoice works when the details are real.</h3>
             <p>Your supplier, a real shipment, and the week it lands are all public. That is enough to get a wire sent.</p>
           </div>
+          <div class="rpanel" role="tabpanel" id="p1" aria-labelledby="t1" hidden>
+            <h3>Your product code and your factory are a build sheet.</h3>
+            <p>New codes appear the moment you import something new, so a launch is visible months before your marketing.</p>
+            <div class="nums"><div><b>32 million</b><span>counterfeit items seized by U.S. Customs in fiscal 2024, worth $5.4 billion at retail</span></div><div><b>+39%</b><span>more than the year before</span></div></div>
+          </div>
           <div class="rpanel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
             <h3>Your volumes are your leverage. They are also public.</h3>
-            <p>The other side can see how much you ship, how often, and whether you have a second source.</p>
+            <p>The customer you are negotiating with can see how much you ship, how often, and whether you have a second source. That is their leverage at the next price review.</p>
           </div>
         </div>
       </div>
@@ -709,7 +800,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 <section class="sec" id="how" data-chapter="4" data-chapter-label="How it stops" data-frame="05-process" style="padding-top: 0;">
   <div class="shell">
     <div class="narrow center">
-      <h2 class="sec-h reveal">Live in days. Protected for years.</h2>
+      <h2 class="sec-h reveal">Start today. Protect your future.</h2>
       <p class="sec-p reveal">Nothing changes about how you ship. We handle the protection and the upkeep.</p>
     </div>
     <div class="flow reveal" id="flow">
@@ -721,9 +812,9 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
         <li><button class="node" role="tab" id="n3" aria-selected="false" aria-controls="s3" data-i="3"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="num">04</span><span class="ttl">Maintain</span></button></li>
       </ol>
       <div class="detail">
-        <div class="stepd on" role="tabpanel" id="s0" aria-labelledby="n0"><b>1 business day.</b> Tell us the legal entities you import under and the names on your shipments. One form.</div>
-        <div class="stepd" role="tabpanel" id="s1" aria-labelledby="n1" hidden><b>Confirmed in as little as 24 hours.</b> We put a federal confidentiality protection in place for every entity and name we cover, and we maintain it.</div>
-        <div class="stepd" role="tabpanel" id="s2" aria-labelledby="n2" hidden><b>Monthly, with proof.</b> Every month we check 18+ public platforms for anything new under your names and send you the result.</div>
+        <div class="stepd on" role="tabpanel" id="s0" aria-labelledby="n0"><b>One form.</b> Tell us the legal entities you import under and the names on your shipments. Your quote comes back within a week.</div>
+        <div class="stepd" role="tabpanel" id="s1" aria-labelledby="n1" hidden><b>Confirmed in as little as 24 hours, and within a week.</b> We put a federal confidentiality protection in place for every entity and name we cover, and we maintain it.</div>
+        <div class="stepd" role="tabpanel" id="s2" aria-labelledby="n2" hidden><b>We keep watching.</b> We watch 18+ public platforms under your names. If anything ever shows up, we handle it and tell you.</div>
         <div class="stepd" role="tabpanel" id="s3" aria-labelledby="n3" hidden><b>Never lapses.</b> Renewal is automatic. Protection that quietly expires puts everything back in public view within weeks.</div>
       </div>
     </div>
@@ -737,7 +828,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
     <div class="stats" id="stats">
       <div class="stat reveal" tabindex="0"><div class="lab">Customs experience</div><div class="n"><span class="odo" data-value="10">10</span><span class="suf">+ years</span></div><i class="rule"></i><div class="sub">Working inside the import process, not around it.</div></div>
       <div class="stat reveal" tabindex="0"><div class="lab">Shipments protected</div><div class="n"><span class="odo" data-value="15000">15,000</span><span class="suf">+</span></div><i class="rule"></i><div class="sub">Records that never reached a public platform.</div></div>
-      <div class="stat reveal" tabindex="0"><div class="lab">Platforms blocked</div><div class="n"><span class="odo" data-value="18">18</span><span class="suf">+</span></div><i class="rule"></i><div class="sub">Checked every month, with proof sent to you.</div></div>
+      <div class="stat reveal" tabindex="0"><div class="lab">Platforms blocked</div><div class="n"><span class="odo" data-value="18">18</span><span class="suf">+</span></div><i class="rule"></i><div class="sub">Watched under every name you ship under.</div></div>
     </div>
   </div>
 </section>
@@ -749,7 +840,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
     <div class="qcard reveal">
       <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt="" width="1920" height="1084">
       <div class="in">
-        <blockquote>“Fast, clear, and it simply works. Our new shipments stopped appearing and we get proof every month.”</blockquote>
+        <blockquote>“Fast, clear, and it simply works. Our new shipments stopped appearing, and they have stayed gone.”</blockquote>
         <div class="who"><b>Logistics Manager</b>Consumer goods importer. Name withheld.</div>
         <a class="pill pill-ghost" href="CDL-blog-demo-r4.html">Read the stories</a>
       </div>
@@ -765,9 +856,9 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <h2 class="sec-h reveal">Three ways it goes wrong. All of them avoidable.</h2>
     </div>
     <div class="stories">
-      <div class="story reveal"><div class="ph"><img src="photography/01-hero/cdl-hero-04-cranes-fog.jpg" alt=""><div class="band">Apparel importer</div><div class="n">18 months</div></div><div class="cap"><b>Supplier poached.</b> Two competitors at the same mill within 18 months.</div></div>
-      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt=""><div class="band">Skincare brand</div><div class="n">90 days</div></div><div class="cap"><b>Product copied.</b> Three copycats on the market within 90 days of launch.</div></div>
-      <div class="story reveal"><div class="ph"><img src="photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg" alt=""><div class="band">The protection that lapsed</div><div class="n">4 weeks</div></div><div class="cap"><b>Protection lapsed.</b> Nobody renewed it. Records were back on every platform within four weeks.</div></div>
+      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-story-apparel-lululemon-crop2.jpg" alt="Two identical gray sweatshirts, one with the Lululemon logo and one with a copycat logo"><div class="band">Apparel importer</div><div class="n">18 months</div></div><div class="cap"><b>Supplier poached.</b> Two competitors at the same mill within 18 months.</div></div>
+      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-story-skincare-cerave.jpg" alt="A CeraVe lotion bottle with two copycat bottles behind it"><div class="band">Skincare brand</div><div class="n">90 days</div></div><div class="cap"><b>Product copied.</b> Three copycats on the market within 90 days of product launch.</div></div>
+      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-36-empty-berth.jpg" alt=""><div class="band">The protection that lapsed</div><div class="n">4 weeks</div></div><div class="cap"><b>Protection lapsed.</b> Nobody renewed it. Records were back on every platform within four weeks.</div></div>
     </div>
     <p class="stories-note reveal">Illustrative scenarios. No customer is named, which is the point.</p>
   </div>
@@ -779,8 +870,8 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   <div class="shell arrive">
     <div class="quay-slot" id="quaySlot" aria-hidden="true"></div>
     <div class="arrive-copy">
-      <h2 class="reveal">Your records made it here.<br>Your competitors did not.</h2>
-      <p class="reveal">One business day, no obligation. Your quote comes back with the results.</p>
+      <h2 class="reveal">Protect the record before the ship docks.<br>After that, it is public.</h2>
+      <p class="reveal">Within a week, no obligation. Your quote comes back with the results.</p>
       <form class="check reveal" action="CDL-check-demo-r4.html" method="get" style="margin-left:0">
         <label class="sr" for="company2">Your company's legal name</label>
         <input id="company2" type="text" name="company" placeholder="Your company's legal name" autocomplete="organization">
@@ -918,7 +1009,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
         } else if (done) { p.lit.setAttribute('stroke', 'var(--indigo)'); p.lit.style.opacity = .55; }
         else { p.lit.style.opacity = 0; }
       });
-      if (auto && now - lastAuto > 3200) { lastAuto = now; select((active + 1) % nodes.length, false); }
+      if (auto && now - lastAuto > 6000) { lastAuto = now; select((active + 1) % nodes.length, false); }
       if (!reduce) requestAnimationFrame(frame);
     }
     let lastAuto = performance.now();
@@ -954,7 +1045,12 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       { name: 'Seattle / Tacoma', lat: 47.58, lng: -122.35, side: 'nw', teu: 3340733, basis: 'total TEUs, 2024', src: 'Northwest Seaport Alliance' },
       { name: 'Miami', lat: 25.77, lng: -80.18, side: 'se', teu: 824203, basis: 'loaded TEUs, 2023', src: 'BTS Port Performance 2026' } ];
     const ROUTES = [ ['Shanghai', 31.23, 121.47, 0], ['Shenzhen', 22.54, 114.06, 0], ['Busan', 35.1, 129.04, 4], ['Ho Chi Minh City', 10.78, 106.7, 0], ['Mumbai', 19.08, 72.88, 1], ['Rotterdam', 51.95, 4.14, 1], ['Hamburg', 53.55, 9.99, 2], ['Santos', -23.96, -46.33, 5], ['Manzanillo', 19.05, -104.32, 3], ['Valencia', 39.46, -0.33, 2], ['Ningbo', 29.87, 121.55, 0], ['Kaohsiung', 22.62, 120.28, 4] ];
-    const arcs = ROUTES.map(r => ({ startLat: r[1], startLng: r[2], endLat: US[r[3]].lat, endLng: US[r[3]].lng, label: r[0] + ' → ' + US[r[3]].name }));
+    // exports: the same idea in reverse. U.S. port -> foreign port, drawn in gray-blue.
+    const EXPORTS = [ [0, 'Shanghai', 31.23, 121.47], [4, 'Busan', 35.1, 129.04], [0, 'Tokyo', 35.62, 139.78], [1, 'Rotterdam', 51.95, 4.14], [2, 'Hamburg', 53.55, 9.99], [3, 'Santos', -23.96, -46.33], [1, 'Mumbai', 19.08, 72.88], [4, 'Vancouver', 49.29, -123.11], [1, 'Montreal', 45.50, -73.55], [3, 'Veracruz', 19.2, -96.13] ];
+    const CA = [];
+    const arcs = ROUTES.map(r => ({ kind: 'in', startLat: r[1], startLng: r[2], endLat: US[r[3]].lat, endLng: US[r[3]].lng, label: r[0] + ' → ' + US[r[3]].name }))
+      .concat(EXPORTS.map(([u, n, la, ln]) => ({ kind: 'out', startLat: US[u].lat, startLng: US[u].lng, endLat: la, endLng: ln, label: US[u].name + ' → ' + n })));
+    const OUT_COL = ['rgba(72,120,160,.15)', '#6FA6D6'], IN_COL = ['rgba(240,77,77,.05)', '#FF6B6B'];
     let hovered = null; const card = document.getElementById('portCard'); const stage = el.parentElement; let mouse = { x: 0, y: 0 };
     // hover by screen distance to each port (generous 30px target), not by hitting the tiny dot
     let lastNear = null;
@@ -978,11 +1074,11 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
     const g = Globe({ animateIn: !isStatic })(el)
       .width(w()).height(h()).backgroundColor('rgba(0,0,0,0)')
       .showGlobe(true).showAtmosphere(false)
-      .arcsData(arcs).arcColor(() => ['rgba(240,77,77,.05)', '#FF6B6B']).arcAltitudeAutoScale(.4).arcStroke(.7)
+      .arcsData(arcs).arcColor(d => d.kind === 'out' ? OUT_COL : IN_COL).arcAltitudeAutoScale(.4).arcStroke(.7)
       .arcDashLength(.18).arcDashGap(.9).arcDashInitialGap(() => Math.random()).arcDashAnimateTime(() => reduce ? 0 : 3200 + Math.random() * 1600).arcLabel(d => d.label)
-      .pathsData(arcs.map(a => [[a.startLat, a.startLng], [a.endLat, a.endLng]])).pathColor(() => 'rgba(240,77,77,.22)').pathStroke(.3).pathPointAlt(() => .001).pathResolution(2)
+      .pathsData(arcs.map(a => ({ kind: a.kind, pts: [[a.startLat, a.startLng], [a.endLat, a.endLng]] }))).pathPoints('pts').pathColor(p => p.kind === 'out' ? 'rgba(72,120,160,.55)' : 'rgba(240,77,77,.22)').pathStroke(.3).pathPointAlt(() => .001).pathResolution(2)
       .ringsData(US).ringLat('lat').ringLng('lng').ringColor(() => t => `rgba(240,77,77,${.9 * (1 - t)})`).ringMaxRadius(2.2).ringPropagationSpeed(1.2).ringRepeatPeriod(1600).ringAltitude(.012)
-      .pointsData(US).pointLat('lat').pointLng('lng').pointColor(() => '#1D395B').pointAltitude(.012).pointRadius(.4).pointLabel(() => '')
+      .pointsData(US.concat(CA)).pointLat('lat').pointLng('lng').pointColor(d => d.ca ? '#4878A0' : '#1D395B').pointAltitude(.012).pointRadius(d => d.ca ? .3 : .4).pointLabel(() => '')
       ;
     const portsMode = qs.get('ports') || 'd';
     if (portsMode === 'a') { // big 3D labels on the surface
@@ -1143,20 +1239,22 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 
   const tabs = [...document.querySelectorAll('.rlist button')];
   const panels = [...document.querySelectorAll('.rpanel')];
-  const photos = [...document.querySelectorAll('.stakes-photo img')];
+  (function(){ const v = qs.get('cust'); document.querySelectorAll('.stakes-photo [data-for="3"]').forEach(el => { const isVar = el.hasAttribute('data-variant'); if (isVar ? el.dataset.variant !== v : !!v) el.remove(); }); })();
+  const photos = [...document.querySelectorAll('.stakes-photo [data-for]')];
   function select(i) {
     tabs.forEach((t, j) => t.setAttribute('aria-selected', i === j));
     panels.forEach((p, j) => { p.classList.toggle('on', i === j); p.hidden = i !== j; });
     photos.forEach((ph, j) => ph.hidden = i !== j);
   }
   tabs.forEach((t, i) => { t.addEventListener('click', () => select(i)); t.addEventListener('keydown', e => { if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); const n = (i + (e.key === 'ArrowDown' ? 1 : -1) + tabs.length) % tabs.length; select(n); tabs[n].focus(); } }); });
+  const hl = qs.get('hl'); if (hl) { const m = document.querySelector('.mails[data-for="1"]'); if (m) { m.className = 'mails hl-' + hl; } }
   const tabParam = qs.get('tab'); if (tabParam) select(Math.max(0, Math.min(tabs.length - 1, +tabParam)));
 
   // hero variant: ?hero=photo&img=cranes|bluehour|warehouse|ship wraps the hero copy in a full-bleed photo
   (function(){
     const v = qs.get('hero') || 'photo'; if (v !== 'photo') return;
     const hero = document.getElementById('hero'); hero.classList.add('full'); const hl = qs.get('hl') || 'c'; hero.dataset.hl = hl;
-    const imgs = { cranes: 'photography/01-hero/cdl-hero-04-cranes-fog.jpg', bluehour: 'photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg', warehouse: 'photography/web/cdl-vertical-01-food-warehouse.jpg', ship: 'photography/01-hero/cdl-hero-03-ship-overhead.jpg', yard: 'photography/01-hero/cdl-hero-02-terminal-yard-fog.jpg' };
+    const imgs = { cranes: 'photography/web/cdl-05-crane-from-below.jpg', bluehour: 'photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg', warehouse: 'photography/web/cdl-04-warehouse-receiving-door.jpg', ship: 'photography/web/cdl-01-approach-to-port.jpg', yard: 'photography/web/cdl-02-terminal-yard-fog.jpg' };
     const src = imgs[qs.get('img')] || imgs.bluehour;
     const shell = hero.querySelector('.shell');
     const bleed = document.createElement('div'); bleed.className = 'bleed'; bleed.innerHTML = `<img src="${src}" alt="">`;

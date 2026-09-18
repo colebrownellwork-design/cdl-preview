@@ -53,7 +53,7 @@ button, input, textarea, select { font: inherit; }
 .topbar { position: sticky; top: 0; z-index: 50; background: rgba(244,244,242,.86); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
 .topbar.stuck { border-bottom-color: var(--line); }
 .nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 68px; gap: 16px; }
-.nav-logo { height: 38px; width: auto; display: block; }
+.nav-logo { height: 38px; width: auto; display: block; transition: height .25s var(--ease); }
 /* the logo is a link home: a soft hover so it reads as clickable */
 .topbar a[aria-label="Customs Data Lock home"] { display: inline-flex; align-items: center; padding: 6px 10px; margin-left: -10px; border-radius: 12px; transition: background-color .2s var(--ease), transform .2s var(--ease); }
 .topbar a[aria-label="Customs Data Lock home"]:hover, .topbar a[aria-label="Customs Data Lock home"]:focus-visible { background: var(--card-2); transform: translateY(-1px); outline: none; }
@@ -126,6 +126,7 @@ body[data-only] main > :not(.keep), body[data-only] > :not(main):not(.keep) { di
 .topbar.over .nav-links a:hover, .topbar.over .nav-login:hover { background: rgba(255,255,255,.14); }
 .topbar.over .nav-toggle { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.35); color: var(--white); }
 .topbar .nav-logo.rev { display: none; }
+.topbar.over .nav-logo { height: 50px; }
 .topbar.over .nav-logo.rev { display: block; } .topbar.over .nav-logo.std { display: none; }
 .topbar.over.open { background: rgba(21,44,73,.96); }
 .topbar.over .nav-dd-btn { color: var(--white); }
@@ -323,8 +324,8 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
     <nav class="nav-links" id="navLinks">
-      <a href="CDL-home-demo-r4.html#how">How it works</a>
       <a href="CDL-home-demo-r4.html#stakes">Why it matters</a>
+      <a href="CDL-home-demo-r4.html#how">How it works</a>
       <div class="nav-dd" id="navDd">
         <button class="nav-dd-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="navDdMenu" aria-current="page">Resources <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
         <div class="nav-dd-menu" id="navDdMenu" role="menu">
@@ -424,7 +425,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       </a>
       <a class="pick" href="CDL-check-demo-r4.html">
         <div class="pick-ph"><img src="photography/web/cdl-vertical-01-food-warehouse.jpg" alt=""></div>
-        <div class="pick-body"><div class="kind">The check</div><h3>Your page, by name</h3><p>We look your company up across every platform and send you what is visible today, with your quote. One business day.</p><span class="pick-cta">See what's public about you</span></div>
+        <div class="pick-body"><div class="kind">The check</div><h3>Your page, by name</h3><p>We look your company up across every platform and send you what is visible today, with your quote. Within a week.</p><span class="pick-cta">See what's public about you</span></div>
       </a>
     </div>
   </div>
@@ -434,11 +435,11 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   <div class="shell split">
     <div>
       <h2 class="reveal">Ask a person.</h2>
-      <p class="sub reveal">You hear back from someone at Customs Data Lock, not a sequence. Usually the same business day.</p>
+      <p class="sub reveal">You hear back from someone at Customs Data Lock, not a sequence. Usually within a week.</p>
       <ul class="ways reveal">
         <li><span>Email</span><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li>
         <li><span>Hours</span><div>Monday to Friday, 9 to 5 Eastern</div></li>
-        <li><span>Quotes</span><div>Come with the <a href="CDL-check-demo-r4.html">Free Exposure Check</a>, usually the same day</div></li>
+        <li><span>Quotes</span><div>Come with the <a href="CDL-check-demo-r4.html">Free Exposure Check</a>, usually within a week</div></li>
         <li><span>Brokers, counsel</span><div>Ask for the vendor pack or an NDA. Both are ready.</div></li>
       </ul>
     </div>
@@ -459,7 +460,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <div class="done" aria-live="polite">
         <div class="tick"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
         <h2>Got it.</h2>
-        <p>Thanks, <b id="cdoneName"></b>. Someone will reply to <b id="cdoneEmail"></b>, usually the same business day.</p>
+        <p>Thanks, <b id="cdoneName"></b>. Someone will reply to <b id="cdoneEmail"></b>, usually within a week.</p>
       </div>
     </div>
   </div>
