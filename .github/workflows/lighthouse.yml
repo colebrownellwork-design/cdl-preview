@@ -1,0 +1,31 @@
+name: Lighthouse
+
+# Runs Lighthouse on every pull request and on pushes to main. Fails the check when a page
+# gets slower than the budgets in lighthouserc.json, so a merge cannot quietly regress load time.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.14.x
+      - name: Run Lighthouse (3 runs per page, static server from this checkout)
+        run: lhci autorun
+      - name: Keep the HTML reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci
+          retention-days: 30

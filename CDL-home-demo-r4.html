@@ -13,7 +13,7 @@
 :root {
   --indigo: #1D395B; --gray-blue: #4878A0; --coral: #F04D4D; --light-gray-blue: #AEBBD0; --black: #0A1217; --white: #fff;
   --ground: #F4F4F2; --card: #FFFFFF; --card-2: #ECECE9; --deep: #152C49;
-  --line: #E3E3DF; --text: #1D395B; --muted: #6B7280; --muted-2: #9AA1AB; --text-data: #D8E2F0; --dark-muted: #AEBBD0;
+  --line: #E3E3DF; --text: #1D395B; --muted: #5B6675; --muted-2: #7D8693; --text-data: #D8E2F0; --dark-muted: #AEBBD0;
   --confirmed: #2F855A;
   --r-card: 24px; --r-pill: 999px;
   --shadow-card: 0 1px 2px rgba(20,30,50,.04), 0 12px 32px -12px rgba(20,30,50,.10);
@@ -502,7 +502,7 @@ main { position: relative; }
 .foot-in { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
 .foot .logo { height: 34px; width: auto; margin-bottom: 14px; }
 .foot p { color: var(--muted); max-width: 320px; line-height: 22px; }
-.foot h4 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.foot h3 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
 .foot ul { list-style: none; }
 .foot li { margin-bottom: 8px; }
 .foot li a { text-decoration: none; color: var(--muted); }
@@ -694,7 +694,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <ol class="ports-legend" id="portLegend" hidden></ol>
       <div class="globe-hint" id="globeHint" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V6a1.5 1.5 0 0 1 3 0v5"/><path d="M12 10.5V9a1.5 1.5 0 0 1 3 0v2"/><path d="M15 11a1.5 1.5 0 0 1 3 0v3.5a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-2.7L3.6 14a1.5 1.5 0 0 1 2.4-1.8L9 15"/></svg><span>Hover a port to see how many containers arrive there every day.</span></div>
     </div>
-    <div class="stage"><div id="globe" aria-label="Globe showing shipping routes into the United States"></div><div class="portcard" id="portCard" role="tooltip" hidden><div class="pc-name"></div><div class="pc-n"></div><div class="pc-l">containers a day, on average</div><div class="pc-sub"></div><div class="pc-src"></div></div><div class="fallback" id="globeFallback">Interactive globe needs WebGL.</div></div>
+    <div class="stage"><div id="globe" role="img" aria-label="Globe showing shipping routes into the United States"></div><div class="portcard" id="portCard" role="tooltip" hidden><div class="pc-name"></div><div class="pc-n"></div><div class="pc-l">containers a day, on average</div><div class="pc-sub"></div><div class="pc-src"></div></div><div class="fallback" id="globeFallback">Interactive globe needs WebGL.</div></div>
   </div>
 </section>
 
@@ -707,7 +707,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
           </div>
     <div class="stakes-grid">
       <div class="stakes-photo reveal">
-        <div class="clumps" data-for="0" role="img" aria-label="Logos of nine athletic apparel brands"><div class="clump"><i class="ct" style="--x:7%;--y:14%;--r:-2deg"><img src="logos/competitors/nike.png" alt="nike"></i><i class="ct" style="--x:37%;--y:14%;--r:1.5deg"><img src="logos/competitors/lululemon.png" alt="lululemon"></i><i class="ct" style="--x:67%;--y:14%;--r:-1deg"><img src="logos/competitors/alo.png" alt="alo"></i><i class="ct" style="--x:7%;--y:40%;--r:2deg"><img src="logos/competitors/underarmour.png" alt="underarmour"></i><i class="ct" style="--x:37%;--y:40%;--r:-1.5deg"><img src="logos/competitors/adidas.png" alt="adidas"></i><i class="ct" style="--x:67%;--y:40%;--r:1deg"><img src="logos/competitors/puma.png" alt="puma"></i><i class="ct" style="--x:7%;--y:66%;--r:-1deg"><img src="logos/competitors/newbalance.png" alt="newbalance"></i><i class="ct" style="--x:37%;--y:66%;--r:1.5deg"><img src="logos/competitors/on.png" alt="on"></i><i class="ct" style="--x:67%;--y:66%;--r:-2deg"><img src="logos/competitors/asics.png" alt="asics"></i></div></div>
+        <div class="clumps" data-for="0" role="img" aria-label="Logos of nine athletic apparel brands"><div class="clump"><i class="ct" style="--x:7%;--y:14%;--r:-2deg"><img src="logos/competitors/nike.png" alt="nike" loading="lazy" decoding="async"></i><i class="ct" style="--x:37%;--y:14%;--r:1.5deg"><img src="logos/competitors/lululemon.png" alt="lululemon" loading="lazy" decoding="async"></i><i class="ct" style="--x:67%;--y:14%;--r:-1deg"><img src="logos/competitors/alo.png" alt="alo" loading="lazy" decoding="async"></i><i class="ct" style="--x:7%;--y:40%;--r:2deg"><img src="logos/competitors/underarmour.png" alt="underarmour" loading="lazy" decoding="async"></i><i class="ct" style="--x:37%;--y:40%;--r:-1.5deg"><img src="logos/competitors/adidas.png" alt="adidas" loading="lazy" decoding="async"></i><i class="ct" style="--x:67%;--y:40%;--r:1deg"><img src="logos/competitors/puma.png" alt="puma" loading="lazy" decoding="async"></i><i class="ct" style="--x:7%;--y:66%;--r:-1deg"><img src="logos/competitors/newbalance.png" alt="newbalance" loading="lazy" decoding="async"></i><i class="ct" style="--x:37%;--y:66%;--r:1.5deg"><img src="logos/competitors/on.png" alt="on" loading="lazy" decoding="async"></i><i class="ct" style="--x:67%;--y:66%;--r:-2deg"><img src="logos/competitors/asics.png" alt="asics" loading="lazy" decoding="async"></i></div></div>
         <div class="mails hl-frame hl-circle" data-for="1" hidden role="img" aria-label="Two identical invoice emails, one from the real supplier and one from a lookalike whose company name is spelled slightly differently"><div class="mail real">
   <div class="mh"><div class="mrow"><span class="k">From</span><span class="v"><b>Your Supplier Co.</b> &lt;billing@yoursupplier.com&gt;</span></div><div class="mrow"><span class="k">To</span><span class="v">payables@yourcompany.com</span></div><div class="mrow"><span class="k">Subject</span><span class="v">Invoice 4471 · June shipment</span></div></div>
   <div class="mb"><p>Hi Dana,</p><p>Please find invoice 4471 for the June shipment, 2 x 40ft, landed Long Beach 14 Jun. Terms net 30 as agreed.</p>
@@ -717,7 +717,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   <div class="mb"><p>Hi Dana,</p><p>Please find invoice 4471 for the June shipment, 2 x 40ft, landed Long Beach 14 Jun. Terms net 30 as agreed.</p>
     <table><tr><td>Invoice</td><td>4471</td></tr><tr><td>Shipment</td><td>2 x 40ft · Long Beach · 14 Jun</td></tr><tr><td>Amount</td><td>$48,600.00</td></tr><tr><td>Due</td><td>14 Jul</td></tr><tr><td>Remit to</td><td>Account ending 2231</td></tr></table>
     <p>Thanks as always,<br><b>Your <span class="mis">Supp<u>il</u>er</span> Co.</b><br>Accounts team</p></div></div></div>
-        <img src="photography/web/cdl-08-copycat-starbucks.jpg" alt="Two near identical products side by side on a shelf" data-for="2" hidden>
+        <img src="photography/web/cdl-08-copycat-starbucks.jpg" alt="Two near identical products side by side on a shelf" data-for="2" hidden loading="lazy" decoding="async">
         <div class="mails one" data-for="3" hidden role="img" aria-label="An email from your customer's procurement team quoting your public shipping record back to you in a price negotiation">
 <div class="mail cust">
   <div class="mh"><div class="mrow"><span class="k">From</span><span class="v"><b>Procurement, Your Customer Inc.</b> &lt;procurement@yourcustomer.com&gt;</span></div><div class="mrow"><span class="k">To</span><span class="v">marcus@yourcompany.com</span></div><div class="mrow"><span class="k">Subject</span><span class="v">Pricing review ahead of the October renewal</span></div></div>
@@ -745,10 +745,10 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
         <div>
           <div class="label">Four ways it gets used</div>
           <ul class="rlist" role="tablist" aria-label="Who wants your shipping records">
-            <li><button role="tab" id="t0" aria-selected="true" aria-controls="p0"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Competitors</button></li>
-            <li><button role="tab" id="t2" aria-selected="false" aria-controls="p2"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Invoice fraud</button></li>
-            <li><button role="tab" id="t1" aria-selected="false" aria-controls="p1"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Copycat products</button></li>
-            <li><button role="tab" id="t3" aria-selected="false" aria-controls="p3"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Your own customers</button></li>
+            <li role="presentation"><button role="tab" id="t0" aria-selected="true" aria-controls="p0"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Competitors</button></li>
+            <li role="presentation"><button role="tab" id="t2" aria-selected="false" aria-controls="p2"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Invoice fraud</button></li>
+            <li role="presentation"><button role="tab" id="t1" aria-selected="false" aria-controls="p1"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Copycat products</button></li>
+            <li role="presentation"><button role="tab" id="t3" aria-selected="false" aria-controls="p3"><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Your own customers</button></li>
           </ul>
         </div>
         <div>
@@ -806,10 +806,10 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
     <div class="flow reveal" id="flow">
       <svg class="beams" id="beams" aria-hidden="true"></svg>
       <ol class="nodes" role="tablist" aria-label="How it works">
-        <li><button class="node" role="tab" id="n0" aria-selected="true" aria-controls="s0" data-i="0"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></span><span class="num">01</span><span class="ttl">Enroll</span></button></li>
-        <li><button class="node" role="tab" id="n1" aria-selected="false" aria-controls="s1" data-i="1"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1 1 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="num">02</span><span class="ttl">Protect</span></button></li>
-        <li><button class="node" role="tab" id="n2" aria-selected="false" aria-controls="s2" data-i="2"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg></span><span class="num">03</span><span class="ttl">Monitor</span></button></li>
-        <li><button class="node" role="tab" id="n3" aria-selected="false" aria-controls="s3" data-i="3"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="num">04</span><span class="ttl">Maintain</span></button></li>
+        <li role="presentation"><button class="node" role="tab" id="n0" aria-selected="true" aria-controls="s0" data-i="0"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></span><span class="num">01</span><span class="ttl">Enroll</span></button></li>
+        <li role="presentation"><button class="node" role="tab" id="n1" aria-selected="false" aria-controls="s1" data-i="1"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1 1 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="num">02</span><span class="ttl">Protect</span></button></li>
+        <li role="presentation"><button class="node" role="tab" id="n2" aria-selected="false" aria-controls="s2" data-i="2"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg></span><span class="num">03</span><span class="ttl">Monitor</span></button></li>
+        <li role="presentation"><button class="node" role="tab" id="n3" aria-selected="false" aria-controls="s3" data-i="3"><span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="num">04</span><span class="ttl">Maintain</span></button></li>
       </ol>
       <div class="detail">
         <div class="stepd on" role="tabpanel" id="s0" aria-labelledby="n0"><b>One form.</b> Tell us the legal entities you import under and the names on your shipments. Your quote comes back within a week.</div>
@@ -838,7 +838,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 <section id="quote" data-frame="04-quote" style="padding-bottom: 96px;">
   <div class="shell">
     <div class="qcard reveal">
-      <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt="" width="1920" height="1084">
+      <img src="photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg" alt="" width="1920" height="1084" loading="lazy" decoding="async">
       <div class="in">
         <blockquote>“Fast, clear, and it simply works. Our new shipments stopped appearing, and they have stayed gone.”</blockquote>
         <div class="who"><b>Logistics Manager</b>Consumer goods importer. Name withheld.</div>
@@ -856,9 +856,9 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <h2 class="sec-h reveal">Three ways it goes wrong. All of them avoidable.</h2>
     </div>
     <div class="stories">
-      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-story-apparel-lululemon-crop2.jpg" alt="Two identical gray sweatshirts, one with the Lululemon logo and one with a copycat logo"><div class="band">Apparel importer</div><div class="n">18 months</div></div><div class="cap"><b>Supplier poached.</b> Two competitors at the same mill within 18 months.</div></div>
-      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-story-skincare-cerave.jpg" alt="A CeraVe lotion bottle with two copycat bottles behind it"><div class="band">Skincare brand</div><div class="n">90 days</div></div><div class="cap"><b>Product copied.</b> Three copycats on the market within 90 days of product launch.</div></div>
-      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-36-empty-berth.jpg" alt=""><div class="band">The protection that lapsed</div><div class="n">4 weeks</div></div><div class="cap"><b>Protection lapsed.</b> Nobody renewed it. Records were back on every platform within four weeks.</div></div>
+      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-story-apparel-lululemon-crop2.jpg" alt="Two identical gray sweatshirts, one with the Lululemon logo and one with a copycat logo" loading="lazy" decoding="async"><div class="band">Apparel importer</div><div class="n">18 months</div></div><div class="cap"><b>Supplier poached.</b> Two competitors at the same mill within 18 months.</div></div>
+      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-story-skincare-cerave.jpg" alt="A CeraVe lotion bottle with two copycat bottles behind it" loading="lazy" decoding="async"><div class="band">Skincare brand</div><div class="n">90 days</div></div><div class="cap"><b>Product copied.</b> Three copycats on the market within 90 days of product launch.</div></div>
+      <div class="story reveal"><div class="ph"><img src="photography/web/cdl-36-empty-berth.jpg" alt="" loading="lazy" decoding="async"><div class="band">The protection that lapsed</div><div class="n">4 weeks</div></div><div class="cap"><b>Protection lapsed.</b> Nobody renewed it. Records were back on every platform within four weeks.</div></div>
     </div>
     <p class="stories-note reveal">Illustrative scenarios. No customer is named, which is the point.</p>
   </div>
@@ -890,9 +890,9 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
         <img class="logo" src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock">
         <p>Your shipment records stop appearing on public trade platforms.</p>
       </div>
-      <div><h4>Product</h4><ul><li><a href="#how">How it works</a></li><li><a href="#check">Free Exposure Check</a></li><li><a href="CDL-pricing-demo-r4.html">Pricing</a></li></ul></div>
-      <div><h4>Resources</h4><ul><li><a href="CDL-testimonials-demo-r4.html">Stories</a></li><li><a href="CDL-blog-demo-r4.html">Blog</a></li><li><a href="CDL-faq-demo-r4.html">FAQ</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="CDL-data-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
+      <div><h3>Product</h3><ul><li><a href="#how">How it works</a></li><li><a href="#check">Free Exposure Check</a></li><li><a href="CDL-pricing-demo-r4.html">Pricing</a></li></ul></div>
+      <div><h3>Resources</h3><ul><li><a href="CDL-testimonials-demo-r4.html">Stories</a></li><li><a href="CDL-blog-demo-r4.html">Blog</a></li><li><a href="CDL-faq-demo-r4.html">FAQ</a></li></ul></div>
+      <div><h3>Company</h3><ul><li><a href="CDL-data-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
     </div>
     <div class="legal">
       <span>© 2026 Customs Data Lock LLC</span>
@@ -901,7 +901,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   </div>
 </footer>
 
-<script src="https://unpkg.com/globe.gl@2.34.3/dist/globe.gl.min.js"></script>
+<!-- globe.gl is loaded on demand when the routes section nears the viewport (see the globe loader below) -->
 <script>
 (function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1035,7 +1035,19 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   })();
 
   // routes globe (globe.gl): transparent dotted globe, a few coral shipments into the U.S., slow sway centred on the U.S.
-  (function(){ try {
+  
+  // globe loader: fetch the 3D library only when the routes section is about a viewport away, or right away for static frames
+  (function(){
+    const sec = document.getElementById('routes'); if (!sec) return;
+    let started = false;
+    const start = (e) => { if (started) return; started = true; window.__globeTrigger = e && e.type ? e.type : (e && e.length ? 'intersect' : 'direct'); const go = () => { const sc = document.createElement('script'); sc.src = 'https://unpkg.com/globe.gl@2.34.3/dist/globe.gl.min.js'; sc.onload = () => window.__initGlobe && window.__initGlobe(); sc.onerror = () => { const f = document.getElementById('globeFallback'); if (f) f.style.display = 'flex'; if (window.__globeReveal) window.__globeReveal(); }; document.head.appendChild(sc); }; if (isStatic || !('requestIdleCallback' in window)) go(); else requestIdleCallback(go, { timeout: 1500 }); };
+    if (isStatic || qs.get('globe') === 'now' || !('IntersectionObserver' in window)) return start();
+    // first sign of a person (scroll, pointer, key, touch) or the section coming into view, whichever is first
+    const once = { once: true, passive: true }; ['pointermove', 'pointerdown', 'touchstart', 'keydown', 'wheel'].forEach(ev => addEventListener(ev, start, once));
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); start(es); } }, { threshold: 0.4 });  // the section sits just under the hero, so wait until a good part of it is on screen
+    io.observe(sec);
+  })();
+window.__initGlobe = function(){ try {
     const el = document.getElementById('globe'); if (!el || typeof Globe === 'undefined') { const f = document.getElementById('globeFallback'); if (f) f.style.display = 'flex'; return; }
     const US = [
       { name: 'Los Angeles / Long Beach', lat: 33.74, lng: -118.25, side: 'sw', teu: 10816420, basis: 'loaded TEUs, 2023, both ports', src: 'BTS Port Performance 2026' },
@@ -1123,7 +1135,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
     addEventListener('resize', () => g.width(w()).height(h()));
     const pp = qs.get('port'); if (pp !== null) { mouse = { x: stage.clientWidth * .52, y: stage.clientHeight * .42 }; showPort(US[+pp]); }
   } catch (e) { const f = document.getElementById('globeFallback'); if (f) f.style.display = 'flex'; if (window.__globeReveal) window.__globeReveal(); }
-  })();
+  };
 
   // shipping line: an SVG route down the left margin with a stop per chapter; the coral marker rides it with scroll
   (function(){
@@ -1257,7 +1269,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
     const imgs = { cranes: 'photography/web/cdl-05-crane-from-below.jpg', bluehour: 'photography/01-hero/cdl-hero-01-terminal-blue-hour.jpg', warehouse: 'photography/web/cdl-04-warehouse-receiving-door.jpg', ship: 'photography/web/cdl-01-approach-to-port.jpg', yard: 'photography/web/cdl-02-terminal-yard-fog.jpg' };
     const src = imgs[qs.get('img')] || imgs.bluehour;
     const shell = hero.querySelector('.shell');
-    const bleed = document.createElement('div'); bleed.className = 'bleed'; bleed.innerHTML = `<img src="${src}" alt="">`;
+    const bleed = document.createElement('div'); bleed.className = 'bleed'; bleed.innerHTML = `<img src="${src}" alt="" loading="lazy" decoding="async">`;
     const inner = document.createElement('div'); inner.className = 'shell hin';
     const h1el = shell.querySelector('h1'); if (['b','c','e'].includes(hl)) { const last = h1el.querySelector('.w:last-child'); if (last) last.classList.add('pop'); } inner.appendChild(h1el);
     const line2 = document.createElement('p'); line2.className = 'line2'; line2.textContent = 'We make it private.'; inner.appendChild(line2);
