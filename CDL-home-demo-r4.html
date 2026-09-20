@@ -7,8 +7,13 @@
 <script>document.documentElement.className += ' js';</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFWNOITd.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/geistmono/v6/or3nQ6H-1_WfwkMZI_qYFrcdmhHkjko.woff2">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+@font-face { font-family: "Geist Fallback"; src: local("Arial"); size-adjust: 108.64%; ascent-override: 92.5%; descent-override: 27.15%; line-gap-override: 0%; }
+@font-face { font-family: "Geist Mono Fallback"; src: local("Courier New"); size-adjust: 99.98%; ascent-override: 100.52%; descent-override: 29.5%; line-gap-override: 0%; }
+
 /* CDL homepage, round 4 (Sana baseline), 2026-09-08. Tokens from 04-site globals.css; the ground is warmed to Sana's off-white. */
 :root {
   --indigo: #1D395B; --gray-blue: #4878A0; --coral: #F04D4D; --light-gray-blue: #AEBBD0; --black: #0A1217; --white: #fff;
@@ -18,8 +23,8 @@
   --r-card: 24px; --r-pill: 999px;
   --shadow-card: 0 1px 2px rgba(20,30,50,.04), 0 12px 32px -12px rgba(20,30,50,.10);
   --shadow-float: 0 2px 4px rgba(16,32,56,.08), 0 24px 48px -16px rgba(16,32,56,.30);
-  --font-sans: "Geist", "Segoe UI", Arial, sans-serif;
-  --font-mono: "Geist Mono", Consolas, "Courier New", monospace;
+  --font-sans: "Geist", "Geist Fallback", "Segoe UI", Arial, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", Consolas, "Courier New", monospace;
   --ease: cubic-bezier(.4,0,.2,1);
   color-scheme: light;
 }
