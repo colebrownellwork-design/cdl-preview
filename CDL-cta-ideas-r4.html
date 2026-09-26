@@ -499,6 +499,7 @@ html.ocean-loud .oc-c .band-edge { stroke: var(--light-gray-blue); stroke-width:
 /* d: shimmer */
 .oc-d .glow { fill: url(#shimGrad); }
 .oc-d .fine path { fill: none; stroke: var(--line); stroke-width: 1; opacity: .4; }
+section[id], [data-anchor] { scroll-margin-top: 76px; }
 </style>
 <style>
 body { background: var(--ground); }
@@ -614,4 +615,11 @@ body { background: var(--ground); }
     <form class="cta-check"><input placeholder="Your company's legal name"><button class="pill pill-coral" type="button">See your exposure</button></form>
   </div>
 </section>
+<script>
+// anchor settle: a hash jump lands before photos, fonts and the globe placeholder have their final height, so the target
+// drifts down the page. Re-align to the target once the layout has settled.
+(function(){ const go = () => { const id = decodeURIComponent(location.hash.slice(1)); if (!id) return; const el = document.getElementById(id); if (!el) return; const top = el.getBoundingClientRect().top + scrollY - 76; window.scrollTo({ top: Math.max(0, top), behavior: 'instant' }); };
+  if (location.hash) { addEventListener('load', () => { go(); setTimeout(go, 400); setTimeout(go, 1200); if (document.fonts) document.fonts.ready.then(go); }); }
+  addEventListener('hashchange', () => setTimeout(go, 50)); })();
+</script>
 </body></html>

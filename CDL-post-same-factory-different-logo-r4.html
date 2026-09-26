@@ -60,7 +60,7 @@ button, input { font: inherit; }
 .nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 68px; gap: 16px; }
 .nav-logo { height: 38px; width: auto; display: block; transition: height .25s var(--ease); }
 /* the logo is a link home: a soft hover so it reads as clickable */
-.topbar a[aria-label="Customs Data Lock home"] { display: inline-flex; align-items: center; padding: 6px 10px; margin-left: -10px; border-radius: 12px; transition: background-color .2s var(--ease), transform .2s var(--ease); }
+.topbar a[aria-label="Customs Data Lock home"] { display: inline-flex; align-items: center; justify-self: start; width: max-content; padding: 6px 12px; margin-left: -12px; border-radius: var(--r-pill); transition: background-color .2s var(--ease), transform .2s var(--ease); }
 .topbar a[aria-label="Customs Data Lock home"]:hover, .topbar a[aria-label="Customs Data Lock home"]:focus-visible { background: var(--card-2); transform: translateY(-1px); outline: none; }
 .topbar a[aria-label="Customs Data Lock home"]:active { transform: translateY(0); }
 .topbar.over a[aria-label="Customs Data Lock home"]:hover, .topbar.over a[aria-label="Customs Data Lock home"]:focus-visible { background: rgba(255,255,255,.14); }
@@ -307,6 +307,7 @@ img.skel-src.on { opacity: 1; }
 .art .tl2 { list-style: none; margin: 22px 0 0; padding: 0; border-left: 2px solid var(--line); } .art .tl2 li { position: relative; padding: 0 0 18px 22px; font-size: 16px; line-height: 24px; }
 .art .tl2 li::before { content: ""; position: absolute; left: -7px; top: 7px; width: 12px; height: 12px; border-radius: 50%; background: var(--indigo); border: 2.5px solid var(--ground); } .art .tl2 li b { display: block; font-size: 12.5px; color: var(--muted); font-family: var(--font-mono); letter-spacing: .06em; }
 @media (max-width: 720px) { .art .fact { grid-template-columns: 1fr; } }
+section[id], [data-anchor] { scroll-margin-top: 76px; }
 </style>
 <style>
 /* page skeleton: an outline of the page paints first, so the site is never blank while it loads; the real nav sits above it and stays usable */
@@ -356,7 +357,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
         <div class="nav-dd-menu" id="navDdMenu" role="menu">
           <a role="menuitem" href="CDL-testimonials-demo-r4.html"><b>Testimonials</b><span>What importers say. Names withheld.</span></a>
           <a role="menuitem" href="CDL-faq-demo-r4.html"><b>FAQ</b><span>Answered in the first sentence.</span></a>
-          <a role="menuitem" href="CDL-data-demo-r4.html"><b>The Exposure Report</b><span>Free report on who reads your record.</span></a>
+          <a role="menuitem" href="CDL-check-demo-r4.html"><b>Free Exposure Check</b><span>Free report on who reads your record.</span></a>
           <a role="menuitem" href="CDL-blog-demo-r4.html" aria-current="page"><b>Blog</b><span>Field notes on public trade data.</span></a>
         </div>
       </div>
@@ -412,7 +413,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <div><img class="logo" src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"><p>Your shipment records stop appearing on public trade platforms.</p></div>
       <div><h3>Product</h3><ul><li><a href="CDL-home-demo-r4.html#how">How it works</a></li><li><a href="CDL-check-demo-r4.html">Free Exposure Check</a></li><li><a href="CDL-pricing-demo-r4.html">Pricing</a></li></ul></div>
       <div><h3>Resources</h3><ul><li><a href="CDL-testimonials-demo-r4.html">Stories</a></li><li><a href="CDL-blog-demo-r4.html">Blog</a></li><li><a href="CDL-faq-demo-r4.html">FAQ</a></li></ul></div>
-      <div><h3>Company</h3><ul><li><a href="CDL-data-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
+      <div><h3>Company</h3><ul><li><a href="CDL-check-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
     </div>
     <div class="legal"><span>© 2026 Customs Data Lock LLC</span><span>Privacy practiced on this site: no chat widgets, no tracking pixels, no cookie banners to dismiss.</span></div>
   </div>
@@ -502,6 +503,13 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   btns.forEach(b => b.addEventListener('click', () => { btns.forEach(x => x.setAttribute('aria-pressed', x === b)); const f = b.dataset.f; let n = 0; posts.forEach(p => { const show = f === 'all' || p.dataset.cat === f; p.classList.toggle('hide', !show); if (show) n++; }); empty.classList.toggle('on', n === 0); }));
   const pf = qs.get('cat'); if (pf) { const b = btns.find(x => x.dataset.f === pf); if (b) b.click(); }
 })();
+</script>
+<script>
+// anchor settle: a hash jump lands before photos, fonts and the globe placeholder have their final height, so the target
+// drifts down the page. Re-align to the target once the layout has settled.
+(function(){ const go = () => { const id = decodeURIComponent(location.hash.slice(1)); if (!id) return; const el = document.getElementById(id); if (!el) return; const top = el.getBoundingClientRect().top + scrollY - 76; window.scrollTo({ top: Math.max(0, top), behavior: 'instant' }); };
+  if (location.hash) { addEventListener('load', () => { go(); setTimeout(go, 400); setTimeout(go, 1200); if (document.fonts) document.fonts.ready.then(go); }); }
+  addEventListener('hashchange', () => setTimeout(go, 50)); })();
 </script>
 </body>
 </html>

@@ -68,7 +68,7 @@ button, input { font: inherit; }
 .nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 68px; gap: 16px; }
 .nav-logo { height: 38px; width: auto; display: block; transition: height .25s var(--ease); }
 /* the logo is a link home: a soft hover so it reads as clickable */
-.topbar a[aria-label="Customs Data Lock home"] { display: inline-flex; align-items: center; padding: 6px 10px; margin-left: -10px; border-radius: 12px; transition: background-color .2s var(--ease), transform .2s var(--ease); }
+.topbar a[aria-label="Customs Data Lock home"] { display: inline-flex; align-items: center; justify-self: start; width: max-content; padding: 6px 12px; margin-left: -12px; border-radius: var(--r-pill); transition: background-color .2s var(--ease), transform .2s var(--ease); }
 .topbar a[aria-label="Customs Data Lock home"]:hover, .topbar a[aria-label="Customs Data Lock home"]:focus-visible { background: var(--card-2); transform: translateY(-1px); outline: none; }
 .topbar a[aria-label="Customs Data Lock home"]:active { transform: translateY(0); }
 .topbar.over a[aria-label="Customs Data Lock home"]:hover, .topbar.over a[aria-label="Customs Data Lock home"]:focus-visible { background: rgba(255,255,255,.14); }
@@ -141,7 +141,7 @@ button, input { font: inherit; }
 /* photo band */
 .band { position: relative; margin-top: -68px; background: var(--deep); overflow: hidden; }
 .band img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8); }
-.band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,44,73,.35) 0%, rgba(21,44,73,.45) 50%, rgba(21,44,73,.85) 100%); }
+.band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(29,57,91,.55) 0%, rgba(29,57,91,.7) 55%, rgba(21,44,73,.96) 100%); }
 .band .bin { position: relative; z-index: 2; }
 @media (max-width: 960px) { .band { margin-top: -64px; } }
 
@@ -158,15 +158,6 @@ button, input { font: inherit; }
 .phero h1 { color: var(--white); }
 .phero .sub { color: rgba(255,255,255,.82); } .phero .sub b { color: var(--white); }
 .phero .funnel { margin-top: -150px; position: relative; z-index: 3; }
-/* entity map */
-.emap { display: flex; justify-content: center; gap: 8px; margin: 22px 0 6px; min-height: 52px; }
-.emap i { width: 40px; height: 40px; border-radius: 10px; background: var(--ground); border: 1px solid var(--line); display: inline-flex; align-items: center; justify-content: center; color: var(--gray-blue); opacity: 0; transform: scale(.7); transition: opacity .35s var(--ease), transform .45s cubic-bezier(.22,1.2,.36,1), background-color .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease); }
-.emap i.on { opacity: 1; transform: none; }
-.emap i svg { width: 18px; height: 18px; opacity: 0; transform: translateY(4px); transition: opacity .3s var(--ease) .15s, transform .3s var(--ease) .15s; }
-.emap.locked i.on { background: var(--indigo); border-color: var(--indigo); color: var(--white); }
-.emap.locked i.on svg { opacity: 1; transform: none; }
-.emap i.q { font-style: normal; font-weight: 600; color: var(--muted-2); }
-.emap .lbl { align-self: center; font-size: 13px; color: var(--muted); margin-left: 6px; }
 @media (max-width: 960px) { .phero .band .bin { padding: 110px 16px 160px; } .phero .funnel { margin-top: -120px; } }
 
 /* funnel card */
@@ -181,8 +172,11 @@ button, input { font: inherit; }
 .q.on { display: block; }
 .q h2 { font-size: 34px; line-height: 40px; letter-spacing: -0.035em; }
 .q p { color: var(--muted); font-size: 16px; margin-top: 8px; }
+.q p.why b { color: var(--text); font-weight: 600; }
+.qskip { display: block; appearance: none; background: none; border: 0; padding: 0; margin-top: 16px; font: inherit; font-size: 14px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; } .qskip:hover { color: var(--text); }
 .chips { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 28px; }
 .chip { appearance: none; text-align: left; background: var(--ground); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; cursor: pointer; font-size: 17px; font-weight: 500; color: var(--text); transition: border-color .15s ease, background-color .15s ease, transform .08s ease; }
+.chips > .chip:nth-child(odd):last-child { grid-column: 1 / -1; justify-self: center; width: calc(50% - 6px); }
 .chip small { display: block; font-size: 13.5px; font-weight: 400; color: var(--muted); margin-top: 3px; line-height: 19px; }
 .chip:hover { border-color: var(--light-gray-blue); background: var(--white); transform: translateY(-1px); }
 .chip[aria-pressed="true"] { border-color: var(--indigo); background: var(--white); box-shadow: inset 0 0 0 1px var(--indigo); }
@@ -197,6 +191,14 @@ button, input { font: inherit; }
 .cal.plats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
 .cal.plats .cm { display: flex; align-items: center; justify-content: space-between; height: auto; min-height: 0; padding: 5px 8px; }
 .cal.plats .cm .mo { font-size: 11.5px; font-weight: 500; color: var(--text); text-transform: none; letter-spacing: 0; }
+.plans-sec { background: var(--card-2); }
+.plans-sec .sec-p { color: var(--muted); }
+.tier { position: relative; border-top: 4px solid var(--indigo); }
+.tier[data-tier="multi"] { border-top-color: var(--gray-blue); } .tier[data-tier="enterprise"] { border-top-color: var(--deep); }
+.tier .gi { width: 44px; height: 44px; border-radius: 12px; background: rgba(29,57,91,.07); color: var(--indigo); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; } .tier .gi svg { width: 22px; height: 22px; }
+.tier[data-tier="multi"] .gi { color: var(--gray-blue); } .tier[data-tier="enterprise"] .gi { background: rgba(21,44,73,.08); color: var(--deep); }
+.tier .lab { color: var(--coral); font-weight: 500; }
+.tier .pill { background: var(--indigo); color: var(--white); border-color: var(--indigo); } .tier .pill:hover { background: var(--deep); }
 .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
 .tier { background: var(--card); border-radius: 20px; padding: 28px 28px 26px; box-shadow: var(--shadow-card); display: flex; flex-direction: column; min-height: 250px; }
 .tier.rec { outline: 2px solid var(--indigo); }
@@ -344,6 +346,11 @@ button, input { font: inherit; }
 
 /* closing */
 .closing { padding: 100px 0 110px; text-align: center; }
+.closing.photo { position: relative; overflow: hidden; background: var(--deep); padding: 130px 0 140px; }
+.closing.photo .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.7); opacity: .55; }
+.closing.photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(21,44,73,.55), rgba(21,44,73,.85)); }
+.closing.photo .shell { position: relative; z-index: 2; }
+.closing.photo h2 { color: var(--white); } .closing.photo p { color: rgba(255,255,255,.8); }
 .closing h2 { font-size: 56px; line-height: 60px; letter-spacing: -0.04em; max-width: 760px; margin: 0 auto; }
 .closing p { color: var(--muted); font-size: 18px; line-height: 28px; max-width: 520px; margin: 18px auto 30px; }
 @media (max-width: 720px) { .closing h2 { font-size: 38px; line-height: 42px; } }
@@ -390,6 +397,7 @@ img.skel-src.on { opacity: 1; }
 .ring.skel svg { opacity: 0; }
 @media (max-width: 720px) { .skel-wall .skel-col:nth-child(n+2) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .skel::after, .skel-lines i::after, .skel-num::after, .skel-globe::after { animation: none; } }
+section[id], [data-anchor] { scroll-margin-top: 76px; }
 </style>
 <style>
 /* page skeleton: an outline of the page paints first, so the site is never blank while it loads; the real nav sits above it and stays usable */
@@ -440,7 +448,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
         <div class="nav-dd-menu" id="navDdMenu" role="menu">
           <a role="menuitem" href="CDL-testimonials-demo-r4.html"><b>Testimonials</b><span>What importers say. Names withheld.</span></a>
           <a role="menuitem" href="CDL-faq-demo-r4.html"><b>FAQ</b><span>Answered in the first sentence.</span></a>
-          <a role="menuitem" href="CDL-data-demo-r4.html"><b>The Exposure Report</b><span>Free report on who reads your record.</span></a>
+          <a role="menuitem" href="CDL-check-demo-r4.html"><b>Free Exposure Check</b><span>Free report on who reads your record.</span></a>
           <a role="menuitem" href="CDL-blog-demo-r4.html"><b>Blog</b><span>Field notes on public trade data.</span></a>
         </div>
       </div>
@@ -461,7 +469,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   <div class="band"><img class="bg" src="photography/web/cdl-02-terminal-yard-fog.jpg" alt="" width="1920" height="1084">
     <div class="shell bin">
       <h1 class="rise" id="h1"><span class="w">Pricing</span> <span class="w">built</span> <span class="w">for</span> <span class="w">you.</span></h1>
-      <p class="sub reveal"><b>Quoted by coverage.</b> Three questions, then your quote.</p>
+      <p class="sub reveal"><b>Quoted by coverage.</b> Four quick questions, then your quote.</p>
     </div>
   </div>
   <div class="shell">
@@ -473,37 +481,28 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
         </div>
 
         <div class="q on" data-q="0">
-          <h2>How many legal entities do you import under?</h2>
-          <p>Every legal name your shipments arrive under counts as one.</p>
-          <div class="emap" id="emap" aria-hidden="true"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></i><span class="lbl" id="emapLbl"></span></div>
-          <div class="chips" role="group" aria-label="Number of entities">
-            <button class="chip" type="button" data-v="1">One<small>A single importing company</small></button>
-            <button class="chip" type="button" data-v="2-5">Two to five<small>Related companies, brands or subsidiaries</small></button>
-            <button class="chip" type="button" data-v="6+">Six or more<small>A group, a portfolio, or many brands</small></button>
-            <button class="chip" type="button" data-v="unsure">Not sure<small>We will find out for you</small></button>
-          </div>
+          <h2>What do you mostly import?</h2>
+          <p class="why"><b>Why we ask.</b> It tells us who is most likely reading your record.</p>
+          <div class="chips" role="group" aria-label="What do you mostly import"><button class="chip" type="button" data-v="consumer">Consumer goods and apparel</button><button class="chip" type="button" data-v="food">Food and beverage</button><button class="chip" type="button" data-v="industrial">Industrial and parts</button><button class="chip" type="button" data-v="electronics">Electronics</button><button class="chip" type="button" data-v="other">Something else</button></div>
+          <button class="qskip" type="button" data-skip>Not sure? Skip this, we find it in the check.</button>
         </div>
-
         <div class="q" data-q="1">
-          <h2>Roughly how many shipments a year?</h2>
-          <p>A rough number is fine. It tells us how much is exposed.</p>
-          <div class="chips" role="group" aria-label="Shipments per year">
-            <button class="chip" type="button" data-v="lt50">Under 50</button>
-            <button class="chip" type="button" data-v="50-500">50 to 500</button>
-            <button class="chip" type="button" data-v="500+">More than 500</button>
-            <button class="chip" type="button" data-v="unsure">Not sure</button>
-          </div>
+          <h2>How many legal entities import?</h2>
+          <p class="why"><b>Why we ask.</b> Each entity is protected separately, so this sets the scope.</p>
+          <div class="chips" role="group" aria-label="How many legal entities import"><button class="chip" type="button" data-v="1">One<small>A single importing company</small></button><button class="chip" type="button" data-v="2-5">Two to five<small>Related companies, brands or subsidiaries</small></button><button class="chip" type="button" data-v="6+">Six or more<small>A group, a portfolio, or many brands</small></button></div>
+          <button class="qskip" type="button" data-skip>Not sure? Skip this, we find it in the check.</button>
         </div>
-
         <div class="q" data-q="2">
-          <h2>Do your shipments arrive under other names or spellings?</h2>
-          <p>Brands, DBAs, subsidiaries, or a spelling a forwarder uses on some filings.</p>
-          <div class="chips" role="group" aria-label="Other names">
-            <button class="chip" type="button" data-v="none">No, just the one<small>One legal name on every filing</small></button>
-            <button class="chip" type="button" data-v="few">Yes, one or two<small>A brand or a DBA alongside the main entity</small></button>
-            <button class="chip" type="button" data-v="many">Yes, several<small>A group of companies or brands</small></button>
-            <button class="chip" type="button" data-v="unsure">Not sure<small>We will find every name and spelling in the check</small></button>
-          </div>
+          <h2>Roughly how many shipments a year?</h2>
+          <p class="why"><b>Why we ask.</b> Volume is what a competitor reads first, and it sets how much we watch.</p>
+          <div class="chips" role="group" aria-label="Roughly how many shipments a year"><button class="chip" type="button" data-v="lt50">Under 50</button><button class="chip" type="button" data-v="50-500">50 to 500</button><button class="chip" type="button" data-v="500-2000">500 to 2,000</button><button class="chip" type="button" data-v="2000+">More than 2,000</button></div>
+          <button class="qskip" type="button" data-skip>Not sure? Skip this, we find it in the check.</button>
+        </div>
+        <div class="q" data-q="3">
+          <h2>How many other names or spellings do you ship under?</h2>
+          <p class="why"><b>Why we ask.</b> Every name is covered, and the count is part of the quote.</p>
+          <div class="chips" role="group" aria-label="How many other names or spellings do you ship under"><button class="chip" type="button" data-v="none">Just the one<small>One legal name on every filing</small></button><button class="chip" type="button" data-v="few">A few<small>A brand, a DBA, or a forwarder's spelling</small></button><button class="chip" type="button" data-v="many">Many<small>A group of companies or brands</small></button></div>
+          <button class="qskip" type="button" data-skip>Not sure? Skip this, we find it in the check.</button>
         </div>
 
         <!-- results -->
@@ -514,7 +513,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
               <h2>Standard</h2>
               <p class="for">One importing entity, every name variation it ships under, protected and watched.</p>
               <div class="price"><b>Quoted within a week. Protected within a week of your order.</b>Run the Free Exposure Check, your quote comes back with the results, and protection is in place within a week of your order.</div>
-              <div class="acts"><a class="pill pill-lg pill-coral" href="CDL-check-demo-r4.html?plan=standard">Get your quote</a><a class="tlink" href="CDL-data-demo-r4.html#contact" data-expert>Talk to an expert</a></div>
+              <div class="acts"><a class="pill pill-lg pill-coral" href="CDL-check-demo-r4.html?plan=standard">Get your quote</a><a class="tlink" href="CDL-check-demo-r4.html#contact" data-expert>Talk to an expert</a></div>
               <form class="expert" hidden data-expert-form><div class="ef-row"><label><span>Your name</span><input type="text" name="name" autocomplete="name"></label><label><span>Work email</span><input type="email" name="email" autocomplete="email"></label></div><label><span>What would you like to talk through?</span><textarea name="note" rows="3"></textarea></label><div class="ef-acts"><button class="pill pill-dark pill-sm" type="submit">Send</button><span class="ef-note">We reply within a week. Your answers above come with it.</span></div></form>
             </div>
             <div>
@@ -535,7 +534,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
               <h2>Multi-Entity</h2>
               <p class="for">Two to five related entities, onboarded together, watched together, renewed together.</p>
               <div class="price"><b>Proposal within a week. Protected within a week of your order.</b>One annual number for the whole group, valid for 30 days. Every entity is protected within a week of your order.</div>
-              <div class="acts"><a class="pill pill-lg pill-coral" href="CDL-check-demo-r4.html?plan=multi">Get your proposal</a><a class="tlink" href="CDL-data-demo-r4.html#contact" data-expert>Talk to an expert</a></div>
+              <div class="acts"><a class="pill pill-lg pill-coral" href="CDL-check-demo-r4.html?plan=multi">Get your proposal</a><a class="tlink" href="CDL-check-demo-r4.html#contact" data-expert>Talk to an expert</a></div>
               <form class="expert" hidden data-expert-form><div class="ef-row"><label><span>Your name</span><input type="text" name="name" autocomplete="name"></label><label><span>Work email</span><input type="email" name="email" autocomplete="email"></label></div><label><span>What would you like to talk through?</span><textarea name="note" rows="3"></textarea></label><div class="ef-acts"><button class="pill pill-dark pill-sm" type="submit">Send</button><span class="ef-note">We reply within a week. Your answers above come with it.</span></div></form>
             </div>
             <div>
@@ -556,7 +555,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
               <h2>Enterprise</h2>
               <p class="for">Six or more entities, high volume, or procurement and reporting needs of your own.</p>
               <div class="price"><b>Custom proposal on an annual agreement.</b>A scope call, a signed-off entity map, then the proposal and vendor pack. Protection follows the agreement.</div>
-              <div class="acts"><a class="pill pill-lg pill-coral" href="CDL-check-demo-r4.html?plan=enterprise">Schedule a consultation</a><a class="tlink" href="CDL-data-demo-r4.html#contact" data-expert>Talk to an expert</a></div>
+              <div class="acts"><a class="pill pill-lg pill-coral" href="CDL-check-demo-r4.html?plan=enterprise">Schedule a consultation</a><a class="tlink" href="CDL-check-demo-r4.html#contact" data-expert>Talk to an expert</a></div>
               <form class="expert" hidden data-expert-form><div class="ef-row"><label><span>Your name</span><input type="text" name="name" autocomplete="name"></label><label><span>Work email</span><input type="email" name="email" autocomplete="email"></label></div><label><span>What would you like to talk through?</span><textarea name="note" rows="3"></textarea></label><div class="ef-acts"><button class="pill pill-dark pill-sm" type="submit">Send</button><span class="ef-note">We reply within a week. Your answers above come with it.</span></div></form>
             </div>
             <div>
@@ -607,74 +606,23 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   </div>
 </section>
 
-<!-- 02 WHAT EVERYONE GETS: the coverage story, one illustration, four beats -->
-<section class="sec cov" id="includes" data-frame="02-includes">
-  <div class="shell">
-    <div class="narrow center">
-      <h2 class="sec-h reveal">Whatever your answers, this part is the same.</h2>
-      <p class="sec-p reveal">This is the confirmation you receive once protection is in place.</p>
-    </div>
-    <div class="cov-wrap">
-      <div class="cov-stage" id="covStage" aria-hidden="true">
-        <div class="paper" id="paper">
-          <div class="paper-in" id="paperIn">
-            <div class="ph-head"><img src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"><div class="ph-meta"><b>Protection confirmation</b><span>March 2026 · Ref YC-2026-03</span></div></div>
-            <div class="ph-block"><div class="ph-kicker">Prepared for</div><div class="ph-title">Your Company LLC</div><div class="ph-sub">Issued 12 Mar 2026 · Account owner copy · 3 entities · 18 platforms watched</div><div class="ph-pill cov-days"><span id="covDays">546</span>&nbsp;days of continuous coverage · 0 gaps</div></div>
-            <section class="ps" data-s="0"><h4>Protected entities <em>3 active</em></h4>
-              <table><tr><td>Your Company LLC</td><td>Active</td><td>since 12 Mar 2025</td></tr><tr><td>Your Brand Inc</td><td>Active</td><td>since 12 Mar 2025</td></tr><tr><td>Your Trading Co.</td><td>Active</td><td>since 04 Jun 2025</td></tr></table>
-            </section>
-            <section class="ps" data-s="1"><h4>Names covered <em>10 variations</em></h4>
-              <p>Every spelling your shipments arrive under, grouped by entity. All covered, and any new one we find is added.</p>
-              <div class="nm-grid"><div class="nm-col"><div class="nm-ent">Your Company LLC</div><ul><li class="nv" style="--i:0"><i></i>YOUR COMPANY</li><li class="nv" style="--i:1"><i></i>Your Co. LLC</li><li class="nv" style="--i:2"><i></i>Your Company Inc</li><li class="nv" style="--i:3"><i></i>YOUR COMPANY L.L.C</li></ul></div><div class="nm-col"><div class="nm-ent">Your Brand Inc</div><ul><li class="nv" style="--i:0"><i></i>Your Brand</li><li class="nv" style="--i:1"><i></i>YOUR BRAND INC</li><li class="nv" style="--i:2"><i></i>Your Brand, Inc.</li></ul></div><div class="nm-col"><div class="nm-ent">Your Trading Co.</div><ul><li class="nv" style="--i:0"><i></i>Your Trading</li><li class="nv" style="--i:1"><i></i>Your Trading Company</li><li class="nv" style="--i:2"><i></i>YOUR TRADING CO</li></ul></div></div>
-            </section>
-            <section class="ps" data-s="2"><h4>Platforms watched <em>18</em></h4>
-              <p>We keep watching every one of these under every name above. If anything ever appears, we handle it and let you know.</p>
-              <div class="cal plats" id="cal"><div class="cm done" style="--i:0"><span class="mo">ImportYeti</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:1"><span class="mo">Panjiva</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:2"><span class="mo">Import Genius</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:3"><span class="mo">ImportKey</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:4"><span class="mo">Trademo</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:5"><span class="mo">Datamyne</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:6"><span class="mo">Volza</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:7"><span class="mo">Tradesparq</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:8"><span class="mo">ImportInfo</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:9"><span class="mo">Seair</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:10"><span class="mo">Zauba</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:11"><span class="mo">Tridge</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:12"><span class="mo">ShipmentLink</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:13"><span class="mo">PortExaminer</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:14"><span class="mo">USImportData</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:15"><span class="mo">Manifest DB</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:16"><span class="mo">Bill of Lading DB</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div><div class="cm done" style="--i:17"><span class="mo">Export Genius</span><i class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i></div></div>
-            </section>
-            <section class="ps" data-s="3"><h4>Renewal <em>Automatic</em></h4>
-              <p>One line, no gaps. Renewal happens on the calendar, not in someone's inbox.</p>
-              <div class="tl" id="tl">
-                <div class="tl-track"><div class="tl-line" id="tlLine"></div><div class="tl-today" style="--x:76%"><span>Today</span></div></div>
-                <div class="tl-marks">
-                  <div class="tl-m" style="--x:0%;--i:0"><i></i><b>Protected</b><span>12 Mar 2025</span></div>
-                  <div class="tl-m down" style="--x:22%;--i:1"><i></i><b>Contact changed</b><span>Aug 2025 · coverage unaffected</span></div>
-                  <div class="tl-m" style="--x:50%;--i:2"><i></i><b>Renewed</b><span>12 Mar 2026 · automatic</span></div>
-                  <div class="tl-m next" style="--x:100%;--i:3"><i></i><b>Renews</b><span>12 Mar 2027 · scheduled</span></div>
-                </div>
-              </div>
-              <p class="quiet">If a renewal ever needed you, we would write to you 60 days ahead. It does not.</p>
-            </section>
-            <div class="ph-foot"><span><b>Customs Data Lock</b> · Confidential · Prepared for the named account only</span><span>YC-2026-03 · Page 1 of 1</span></div>
-          </div>
-        </div>
-      </div>
-      <ol class="beats" id="beats">
-        <li class="beat" data-beat="0"><div class="num">01</div><h3>Protection, maintained</h3><p>A federal confidentiality protection we file and keep in force for every entity you import under.</p></li>
-        <li class="beat" data-beat="1"><div class="num">02</div><h3>Every name you ship under</h3><p>Every name you give us is covered, and every new spelling we find gets added.</p></li>
-        <li class="beat" data-beat="2"><div class="num">03</div><h3>We keep watching</h3><p>We watch 18+ public platforms under your names. If anything ever shows up, we handle it and tell you.</p></li>
-        <li class="beat" data-beat="3"><div class="num">04</div><h3>Automatic renewal</h3><p>Protection that quietly expires puts everything back in public view within weeks. Ours renews itself, and the confirmation shows the date.</p></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
 <!-- 03 PLANS -->
-<section class="sec" id="plans" data-frame="03-plans" style="padding-top: 0;">
+<section class="sec plans-sec" id="plans" data-frame="03-plans">
   <div class="shell">
     <div class="narrow center">
       <h2 class="sec-h reveal">Three plans. One question decides.</h2>
       <p class="sec-p reveal">How many legal entities do you import under?</p>
     </div>
     <div class="tiers">
-      <div class="tier reveal" data-tier="standard"><div class="lab">One entity</div><h3>Standard</h3><p>One importing company, every name it ships under.</p><div class="how"><b>Quoted within a week</b> with your Exposure Check.</div><a class="pill pill-light" href="CDL-check-demo-r4.html?plan=standard">Get your quote</a></div>
-      <div class="tier reveal" data-tier="multi"><div class="lab">Two to five entities</div><h3>Multi-Entity</h3><p>Related companies onboarded, watched and renewed as one.</p><div class="how"><b>Proposal within a week</b>, one annual number.</div><a class="pill pill-light" href="CDL-check-demo-r4.html?plan=multi">Get your proposal</a></div>
-      <div class="tier reveal" data-tier="enterprise"><div class="lab">Six or more</div><h3>Enterprise</h3><p>Groups, portfolios and brands with procurement needs of their own.</p><div class="how"><b>Custom proposal</b> on an annual agreement.</div><a class="pill pill-light" href="CDL-check-demo-r4.html?plan=enterprise">Schedule a consultation</a></div>
+      <div class="tier reveal" data-tier="standard"><i class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></i><div class="lab">One entity</div><h3>Standard</h3><p>One importing company, every name it ships under.</p><div class="how"><b>Quoted within a week</b> with your Exposure Check.</div><a class="pill pill-light" href="CDL-check-demo-r4.html?plan=standard">Get your quote</a></div>
+      <div class="tier reveal" data-tier="multi"><i class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 8h2M13 8h2M9 12h2M13 12h2M9 16h2M13 16h2"/></svg></i><div class="lab">Two to five entities</div><h3>Multi-Entity</h3><p>Related companies onboarded, watched and renewed as one.</p><div class="how"><b>Proposal within a week</b>, one annual number.</div><a class="pill pill-light" href="CDL-check-demo-r4.html?plan=multi">Get your proposal</a></div>
+      <div class="tier reveal" data-tier="enterprise"><i class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 20a5 5 0 0 1 6-4.5"/></svg></i><div class="lab">Six or more</div><h3>Enterprise</h3><p>Groups, portfolios and brands with procurement needs of their own.</p><div class="how"><b>Custom proposal</b> on an annual agreement.</div><a class="pill pill-light" href="CDL-check-demo-r4.html?plan=enterprise">Schedule a consultation</a></div>
     </div>
   </div>
 </section>
 
 <!-- 04 FAQ MINI -->
-<section class="sec" id="faq" data-frame="04-faq" style="padding-top: 0;">
+<section class="sec" id="faq" data-frame="04-faq" style="padding-top: 80px; padding-bottom: 72px;">
   <div class="shell">
     <div class="narrow center">
       <h2 class="sec-h reveal">Questions about quoting</h2>
@@ -689,7 +637,8 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
 </section>
 
 <!-- 05 CLOSING -->
-<section class="closing" id="cta" data-frame="05-closing">
+<section class="closing photo" id="cta" data-frame="05-closing">
+  <img class="bg" src="photography/web/cdl-36-empty-berth.jpg" alt="" loading="lazy" decoding="async">
   <div class="shell">
     <h2 class="reveal">Your quote comes with your exposure.</h2>
     <p class="reveal">Pick a plan above or let the check pick it for you. Either way, within a week, no obligation.</p>
@@ -705,7 +654,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
       <div><img class="logo" src="logo/official/cdl-logo-dark-for-light-bg.png" alt="Customs Data Lock"><p>Your shipment records stop appearing on public trade platforms.</p></div>
       <div><h3>Product</h3><ul><li><a href="CDL-home-demo-r4.html#how">How it works</a></li><li><a href="CDL-check-demo-r4.html">Free Exposure Check</a></li><li><a href="#">Pricing</a></li></ul></div>
       <div><h3>Resources</h3><ul><li><a href="CDL-testimonials-demo-r4.html">Stories</a></li><li><a href="CDL-blog-demo-r4.html">Blog</a></li><li><a href="CDL-faq-demo-r4.html">FAQ</a></li></ul></div>
-      <div><h3>Company</h3><ul><li><a href="CDL-data-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
+      <div><h3>Company</h3><ul><li><a href="CDL-check-demo-r4.html#contact">Contact</a></li><li><a href="mailto:services@customsdatalock.com">services@customsdatalock.com</a></li><li><a href="#">Log in</a></li></ul></div>
     </div>
     <div class="legal"><span>© 2026 Customs Data Lock LLC</span><span>Privacy practiced on this site: no chat widgets, no tracking pixels, no cookie banners to dismiss.</span></div>
   </div>
@@ -727,39 +676,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   if (h1) { h1.querySelectorAll('.w').forEach((w, i) => w.style.transitionDelay = (i * 60) + 'ms'); setTimeout(() => h1.classList.add('in'), 40); if (isStatic) h1.classList.add('in'); }
   setTimeout(() => document.querySelectorAll('.reveal, .rise').forEach(e => e.classList.add('in')), 4000);
 
-  // coverage story: the confirmation letter scrolls to the section the reader is on, and that section fills in as they watch:
-  // each row types its name, then its status and date appear. Once a section has filled it stays filled.
-  (function(){
-    const paper = document.getElementById('paperIn'); if (!paper) return;
-    const beats = [...document.querySelectorAll('.beat')], secs = [...document.querySelectorAll('.ps')];
-    const rows = sec => [...sec.querySelectorAll('tr')];
-    if (!isStatic && !reduce) secs.forEach(sec => rows(sec).forEach(r => { const c = r.querySelector('td'); r.dataset.text = c.textContent; c.textContent = ''; r.classList.add('pend'); }));
-    let cur = -1; const filled = new Set(); let timers = [];
-    function fill(sec) {
-      if (filled.has(sec)) return; filled.add(sec);
-      const rs = rows(sec); let i = 0;
-      const next = () => { if (i >= rs.length) { sec.classList.add('filled'); return; } const r = rs[i++], c = r.querySelector('td'), text = r.dataset.text; r.classList.remove('pend'); r.classList.add('typing'); let k = 0;
-        const type = () => { if (k <= text.length) { c.textContent = text.slice(0, k++); timers.push(setTimeout(type, 28 + Math.random() * 30)); } else { r.classList.remove('typing'); r.classList.add('done'); timers.push(setTimeout(next, 260)); } };
-        type(); };
-      timers.push(setTimeout(next, 250));
-    }
-    let lastB = -1;
-    function setBeat(b) {
-      beats.forEach((el, i) => el.classList.toggle('on', i === b)); secs.forEach((s, i) => s.classList.toggle('on', i === b));
-      const y = b === 0 ? 0 : Math.max(0, secs[b].offsetTop - 110); paper.style.transform = `translateY(${-y}px)`;
-      if (b !== cur) { cur = b; if (!isStatic && !reduce) fill(secs[b]); }
-      const cal = document.querySelectorAll('#cal .cm');
-      if (b >= 2) { if (isStatic) document.getElementById('cal').classList.add('nomo'); if (lastB < 2 || isStatic) cal.forEach(c => c.classList.add('on')); } else cal.forEach(c => c.classList.remove('on'));
-      const days = document.getElementById('covDays'), c27 = document.getElementById('tl');
-      if (b === 3) { if (isStatic) c27.classList.add('nomo'); if (lastB !== 3 && !isStatic && !reduce) { const s0 = performance.now(); (function up(n){ const p = Math.min((n - s0) / 1200, 1); days.textContent = Math.round((1 - Math.pow(1 - p, 3)) * 546); if (p < 1) requestAnimationFrame(up); })(s0); } else days.textContent = '546'; }
-      lastB = b;
-    }
-    if (isStatic || reduce) secs.forEach(s => { rows(s).forEach(r => r.classList.add('done')); s.classList.add('filled'); document.querySelectorAll('.nv').forEach(n => n.style.transition = 'none'); });
-    const sec = document.getElementById('includes');
-    function upd() { if (sec.getBoundingClientRect().top > innerHeight * .8) return; const focus = innerHeight * .55; let b = 0; beats.forEach((el, i) => { if (el.getBoundingClientRect().top < focus) b = i; }); setBeat(b); }
-    const st = qs.get('beat'); if (st !== null) { setBeat(+st); if (isStatic) return; }
-    onScroll(upd);
-  })();
+
 
   // skeletons: images, numbers and cards show their shape until the real thing is ready (?skeleton=1 freezes them for review)
   (function(){
@@ -823,16 +740,7 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   addEventListener('keydown', e => { if (e.key === 'Escape' && bar.classList.contains('open')) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
   document.addEventListener('click', e => { if (bar.classList.contains('open') && !bar.contains(e.target)) { bar.classList.remove('open'); tog.setAttribute('aria-expanded', 'false'); } });
 
-  // entity map: hover a chip to preview how many entities, select to lock them
-  (function(){
-    const map = document.getElementById('emap'); if (!map) return; const tiles = [...map.querySelectorAll('i')], lbl = document.getElementById('emapLbl');
-    const shape = { '1': [1, 'one entity'], '2-5': [4, 'a small group'], '6+': [9, 'a portfolio'], 'unsure': [3, 'we will find out'] };
-    const show = (v, locked) => { const [n, text] = shape[v] || [0, '']; tiles.forEach((el, i) => { el.classList.toggle('on', i < n); el.classList.toggle('q', v === 'unsure'); el.style.transitionDelay = (i * 40) + 'ms'; }); map.classList.toggle('locked', !!locked); lbl.textContent = text; };
-    const q1 = document.querySelector('.q[data-q="0"]'); let sel = null;
-    q1.querySelectorAll('.chip').forEach(c => { c.addEventListener('mouseenter', () => show(c.dataset.v, false)); c.addEventListener('focus', () => show(c.dataset.v, false)); c.addEventListener('click', () => { sel = c.dataset.v; show(sel, true); }); });
-    q1.addEventListener('mouseleave', () => { if (sel) show(sel, true); else show('', false); });
-    const pre = qs.get('emap'); if (pre) show(pre, qs.get('locked') === '1');
-  })();
+
 
   // funnel
   const steps = [...document.querySelectorAll('.q')];
@@ -840,21 +748,21 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   const fBar = document.getElementById('fBar'), fBack = document.getElementById('fBack');
   const fAdjust = document.getElementById('fAdjust'), fSummary = document.getElementById('fSummary'), fRestart = document.getElementById('fRestart');
   const unsureCard = document.getElementById('unsureCard');
-  const answers = [null, null, null];
-  const labels = { '1': 'one entity', '2-5': 'two to five entities', '6+': 'six or more entities', 'unsure': 'not sure', 'lt50': 'under 50 shipments', '50-500': '50 to 500 shipments', '500+': '500+ shipments', 'none': 'one name', 'few': 'a couple of other names', 'many': 'several other names', 'me': 'you decide', 'team': 'a small team decides', 'procure': 'procurement or legal involved' };
+  const answers = [null, null, null, null, null];  // industry, entities, shipments, names, procurement
+  const labels = { 'consumer': 'consumer goods', 'food': 'food and beverage', 'industrial': 'industrial', 'electronics': 'electronics', 'other': 'other goods', '500-2000': '500 to 2,000 shipments', '2000+': '2,000+ shipments', 'procure': 'procurement or legal involved', '1': 'one entity', '2-5': 'two to five entities', '6+': 'six or more entities', 'unsure': 'not sure', 'lt50': 'under 50 shipments', '50-500': '50 to 500 shipments', '500+': '500+ shipments', 'none': 'one name', 'few': 'a few other names', 'many': 'many other names', 'me': 'you decide', 'team': 'a small team decides', 'procure': 'procurement or legal involved' };
   let cur = 0;
   function route() {
-    const [ents, ships, names] = answers;
-    if (ents === 'unsure') return 'unsure';
+    const [ind, ents, ships, names, proc] = answers;
+    if (!ents) return 'unsure';
     if (ents === '6+' || names === 'many') return 'enterprise';
-    if (ents === '2-5' || names === 'few' || ships === '500+') return 'multi';
+    if (ents === '2-5' || names === 'few' || ships === '2000+') return 'multi';
     return 'standard';
   }
   function show(i) {
     cur = i;
     steps.forEach((s, j) => s.classList.toggle('on', i === j));
     results.forEach(r => r.classList.remove('on'));
-    fBar.style.width = ((i + 1) / 3 * 100) + '%';
+    fBar.style.width = ((i + 1) / 4 * 100) + '%';
     fBack.hidden = i === 0; fAdjust.hidden = true; unsureCard.hidden = false;
   }
   function finish() {
@@ -866,12 +774,16 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
     fAdjust.hidden = false; unsureCard.hidden = (r === 'unsure');
     if (!isStatic) document.getElementById('funnel').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   }
-  steps.forEach((s, i) => s.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
-    s.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === c));
-    answers[i] = c.dataset.v;
-    const next = () => { if (i === 0 && (c.dataset.v === 'unsure' || c.dataset.v === '6+')) { answers[1] = answers[2] = null; finish(); } else if (i < 2) show(i + 1); else finish(); };
-    isStatic ? next() : setTimeout(next, 220);
-  })));
+  // step order: industry, entities, shipments, names
+  const advance = (i) => { if (i < 3) show(i + 1); else finish(); };
+  steps.forEach((s, i) => {
+    s.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+      s.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === c));
+      answers[i] = c.dataset.v;
+      isStatic ? advance(i) : setTimeout(() => advance(i), 220);
+    }));
+    const sk = s.querySelector('[data-skip]'); if (sk) sk.addEventListener('click', () => { s.querySelectorAll('.chip').forEach(x => x.removeAttribute('aria-pressed')); answers[i] = null; advance(i); });
+  });
 
   // talk to an expert: opens a short form inside the result card, carrying the funnel answers
   document.querySelectorAll('[data-expert]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const f = a.closest('.plan').querySelector('[data-expert-form]'); f.hidden = !f.hidden; if (!f.hidden) { const t = f.querySelector('textarea'); if (!t.value) t.value = 'My answers: ' + (fSummary.textContent || '') + '. '; f.querySelector('input').focus(); } }));
@@ -880,9 +792,16 @@ html.skel-fast .pskel, html.skel-fast .skel-img, html.skel-fast .skel-lines, htm
   fRestart.addEventListener('click', () => { document.querySelectorAll('.chip').forEach(x => x.removeAttribute('aria-pressed')); answers.fill(null); show(0); });
   // frame states: ?state=standard|multi|enterprise|unsure|q2
   const st = qs.get('state');
-  if (st === 'q2') show(1); else if (st === 'q3') show(2);
-  else if (st) { answers[0] = { standard: '1', multi: '2-5', enterprise: '6+', unsure: 'unsure' }[st]; if (st === 'standard') { answers[1] = '50-500'; answers[2] = 'none'; } if (st === 'multi') { answers[1] = '50-500'; answers[2] = 'few'; } finish(); }
+  if (st === 'q2') show(1); else if (st === 'q3') show(2); else if (st === 'q4') show(3);
+  else if (st) { answers[0] = 'consumer'; answers[1] = { standard: '1', multi: '2-5', enterprise: '6+', unsure: null }[st]; if (st === 'standard') { answers[2] = '50-500'; answers[3] = 'none'; } if (st === 'multi') { answers[2] = '50-500'; answers[3] = 'few'; } if (st === 'enterprise') { answers[2] = '2000+'; answers[3] = 'many'; } finish(); }
 })();
+</script>
+<script>
+// anchor settle: a hash jump lands before photos, fonts and the globe placeholder have their final height, so the target
+// drifts down the page. Re-align to the target once the layout has settled.
+(function(){ const go = () => { const id = decodeURIComponent(location.hash.slice(1)); if (!id) return; const el = document.getElementById(id); if (!el) return; const top = el.getBoundingClientRect().top + scrollY - 76; window.scrollTo({ top: Math.max(0, top), behavior: 'instant' }); };
+  if (location.hash) { addEventListener('load', () => { go(); setTimeout(go, 400); setTimeout(go, 1200); if (document.fonts) document.fonts.ready.then(go); }); }
+  addEventListener('hashchange', () => setTimeout(go, 50)); })();
 </script>
 </body>
 </html>
